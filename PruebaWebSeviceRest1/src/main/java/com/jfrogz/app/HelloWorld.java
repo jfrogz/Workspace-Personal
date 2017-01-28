@@ -1,13 +1,12 @@
 package com.jfrogz.app;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 
 
 @Path("/hello")
+
 public class HelloWorld {
 
     @GET
@@ -18,5 +17,14 @@ public class HelloWorld {
 
         return Response.status(200).entity(output).build();
 
+    }
+
+    @POST
+    @Path("/pruebajson")
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    public Response pruebaJson (DatosPrueba datosPrueba){
+        String output = "El nombre ingresado es: " + datosPrueba.nombre;
+        return Response.status(200).entity(output).build();
     }
 }
