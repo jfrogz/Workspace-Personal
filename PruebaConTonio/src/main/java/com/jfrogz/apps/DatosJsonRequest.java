@@ -1,5 +1,6 @@
 package com.jfrogz.apps;
 
+<<<<<<< HEAD
 import javax.ws.rs.Path;
 import java.util.List;
 
@@ -24,6 +25,11 @@ public class DatosJsonRequest {
     public void setListFrutas(List<Frutas> listFrutas) {
         this.listFrutas = listFrutas;
     }
+=======
+public class DatosJsonRequest {
+
+    private String mensaje;
+>>>>>>> ServiciosRest
 
     public String getMensaje() {
         return mensaje;

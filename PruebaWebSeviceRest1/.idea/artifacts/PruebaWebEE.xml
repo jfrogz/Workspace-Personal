@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="PruebaWebEE">
+    <output-path>$PROJECT_DIR$/classes/artifacts/PruebaWebEE</output-path>
+    <root id="root">
+      <element id="artifact" artifact-name="PruebaWebSeviceRest1:war exploded" />
+    </root>
+  </artifact>
+</component>
