@@ -1,10 +1,6 @@
 package com.jfrogz.apps;
 
 import javax.ejb.Stateless;
-<<<<<<< HEAD
-=======
-import javax.mail.internet.ContentType;
->>>>>>> ServiciosRest
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,17 +21,12 @@ public class HolaMundo {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public DatosJsonResponse setMessage (DatosJsonRequest datosJsonRequest){
-<<<<<<< HEAD
         // String output = "Mensaje del Get: " + datosJson.getMensaje();
-=======
-       // String output = "Mensaje del Get: " + datosJson.getMensaje();
->>>>>>> ServiciosRest
         DatosJsonResponse datosJsonResponse = new DatosJsonResponse();
         datosJsonResponse.setMensaje(datosJsonRequest.getMensaje());
         return datosJsonResponse;
     }
 
-<<<<<<< HEAD
     @POST
     @Path("/frutas")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -47,6 +38,4 @@ public class HolaMundo {
         return datosJsonResponse;
     }
 
-=======
->>>>>>> ServiciosRest
 }
