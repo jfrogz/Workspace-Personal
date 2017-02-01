@@ -3,10 +3,7 @@ package com.jfrogz.apps;
 import com.jfrogz.response.AutomovilResponse;
 import com.jfrogz.response.Response;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -52,6 +49,23 @@ public class ServicioRest1 {
         automovilResponse.setFabricante(fabricante);
         automovilResponse.setModelo(modelo);
         automovilResponse.setAnio(anio);
+        return automovilResponse;
+    }
+
+    @Path("/car/{fabricante}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public AutomovilResponse getAutomovil2 (@PathParam("fabricante") String fabricante,
+                                            @MatrixParam("modelo") String modelo,
+                                            @MatrixParam("anio") int anio){
+        AutomovilResponse automovilResponse = new AutomovilResponse();
+        automovilResponse.setFabricante(fabricante);
+        automovilResponse.setModelo(modelo);
+        Integer integer = Integer.valueOf(anio);
+
+        if(integer != null) {
+            automovilResponse.setAnio(anio);
+        }
         return automovilResponse;
     }
 

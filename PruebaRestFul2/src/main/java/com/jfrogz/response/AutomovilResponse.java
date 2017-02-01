@@ -5,6 +5,8 @@ package com.jfrogz.response;
  */
 public class AutomovilResponse {
     private String fabricante;
+
+
     private String modelo;
     private int anio;
 
