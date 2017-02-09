@@ -6,7 +6,7 @@ import com.jfrogz.services.response.CarroResponse;
 /**
  * Created by Fernando Robles on 02/02/2017.
  */
-public class Carro {
+public abstract class Carro {
 
     private String fabricante;
     private String modelo;
