@@ -1,8 +1,8 @@
 package concursantes;
 
-/**
- * Created by Fernando Robles on 09/02/2017.
- */
+import org.springframework.stereotype.Component;
+
+@Component("poema")
 public class Soneto implements Poema {
     public void recitar() {
         String sonetoPasionSorJuana = "Hombres necios que acusáis\n" +

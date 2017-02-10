@@ -1,10 +1,10 @@
 package concursantes;
 
-/**
- * Created by Fernando Robles on 09/02/2017.
- */
+import org.springframework.stereotype.Component;
+
+@Component("solei")
 public class Malabarista implements Concursante {
-    private int pelotas = 5;
+    private int pelotas = 10;
 
     public Malabarista() {
     }

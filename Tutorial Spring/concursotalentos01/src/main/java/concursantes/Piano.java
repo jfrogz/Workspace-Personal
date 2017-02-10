@@ -1,8 +1,8 @@
 package concursantes;
 
-/**
- * Created by Fernando Robles on 09/02/2017.
- */
+import org.springframework.stereotype.Component;
+
+@Component
 public class Piano implements Instrumento {
 
     public void tocar() {
