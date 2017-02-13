@@ -1,27 +1,22 @@
 package concursantes;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by Fernando Robles on 13/02/2017.
  */
 @Component
+@Aspect
 public class Audiencia {
-    /*
-    public void sentarse(){
-        System.out.println("El show está por comenzar, favor de tomar asiento...");
-    }
-    public void apagarCelulares(){
-        System.out.println("Favor de apagar celulares...");
-    }
-    public void aplaudir(){
-        System.out.println("El show ha terminado, clap clap clap");
-    }
-    public void devolucion (){
-        System.out.println("El show fue terrible, se devoleran las entradas");
-    }*/
 
+    @Pointcut("execution(* concursantes.Concursante.ejecutar(..))")
+    public void ejecutarShow(){}
+
+    @Around("ejecutarShow()")
     public void monitorearShow(ProceedingJoinPoint joinPoint){
         try{
             System.out.println("El show esta por comenzar, favor de tomar asiento...");
