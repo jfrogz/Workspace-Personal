@@ -34,6 +34,7 @@
         </property>
     </bean>
 
+    <!--
     <aop:config>
         <aop:aspect ref="audiencia">
             <aop:pointcut expression="execution(* concursantes.Concursante.ejecutar())" id="show"/>
@@ -43,5 +44,12 @@
             <aop:after-throwing pointcut-ref="show" method="devolucion"/>
         </aop:aspect>
     </aop:config>
+-->
 
+    <aop:config>
+        <aop:aspect ref="audiencia">
+            <aop:pointcut id="show" expression="execution(* concursantes.Concursante.ejecutar(..))"/>
+            <aop:around method="monitorearShow" pointcut-ref="show"/>
+        </aop:aspect>
+    </aop:config>
 </beans>
