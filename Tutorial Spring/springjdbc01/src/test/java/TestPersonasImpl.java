@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -101,10 +102,8 @@ public class TestPersonasImpl {
     }
 
     @Test
-    public void debaeriaActualizarPersona ()
-    {
-        try
-        {
+    public void debaeriaActualizarPersona() {
+        try {
             System.out.println();
             logger.info("Inicio del test deberiaActualizarPersona");
             int idPersona = 1;
@@ -126,9 +125,43 @@ public class TestPersonasImpl {
             logger.info("Persona modificada (id= " + idPersona
                     + "): " + persona);
             logger.info("Fin del test deberiamosActualizarPersona");
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             logger.error("Error JDBC", e);
+        }
+    }
+
+    @Test
+    public void deberiaEliminarPersona() {
+        try {
+            System.out.println();
+            logger.info("Inicio del test deberiaEliminarPersona");
+            //Buscamos eliminar la persona con id = 2
+            long idPersona = 2;
+            Persona persona = personaDao.findPersona(idPersona);
+            logger.info("Persona a eliminar (id=" + idPersona + "): " +  persona);
+
+            //Eliminamos la persona recuperada
+            personaDao.deletePersona(persona);
+            Persona personaDelete = personaDao.findPersona(idPersona);
+
+            //Deberia de regresar nullo al buscar la persona 2
+            assertNull(personaDelete);
+
+            //Imprimimos todo el objeto
+            logger.info("Nuevo listado de personas:");
+            List<Persona> personas = personaDao.findAllPersonas();
+            int contadorPersonas =0;
+            for (Persona persona2 : personas){
+                logger.info("Persona: " + persona2);
+                contadorPersonas++;
+            }
+            //Segun el número de personas recuperadas, deberia ser el mismo de la tabla
+            assertEquals(contadorPersonas, personaDao.contadorPersonas());
+            logger.info("Fin del test deberiaEliminarPersona");
+            personaDao.insertPersona(persona);
+
+        } catch (Exception e) {
+            logger.error("Error en JDBC", e);
         }
     }
 }

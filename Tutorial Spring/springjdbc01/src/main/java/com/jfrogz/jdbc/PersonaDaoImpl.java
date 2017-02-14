@@ -50,7 +50,8 @@ public class PersonaDaoImpl implements PersonaDao {
     }
 
     public void deletePersona(Persona persona) {
-
+        SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(persona);
+        this.namedParameterJdbcTemplate.update(SQL_DELETE_PERSONA, parameterSource);
     }
 
     public Persona findPersona(long idPersona) {
