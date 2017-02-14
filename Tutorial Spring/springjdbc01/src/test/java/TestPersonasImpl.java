@@ -3,6 +3,7 @@ import com.jfrogz.jdbc.PersonaDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +41,22 @@ public class TestPersonasImpl {
             logger.error("Error JBDC", e);
         }
     }
+
+    @Test
+    public void testContarPersonasPorNombre(){
+        try{
+            System.out.println();
+            logger.info("Inicio del test Contar Personas por nombre");
+            String nombre ="Juan";
+            Persona personaEjemplo = new Persona();
+            personaEjemplo.setNombre(nombre);
+            int noPersonasEncontradas = personaDao.contadorPersonasPorNombre(personaEjemplo);
+            logger.info("Número de personas encontradas por nombre " + nombre + ": " + noPersonasEncontradas);
+            assertEquals(2, noPersonasEncontradas);
+            logger.info("Fin del test Contar Persona por nombre");
+        }catch (Exception e){
+            logger.error("Error JDBC", e);
+        }
+    }
+
 }

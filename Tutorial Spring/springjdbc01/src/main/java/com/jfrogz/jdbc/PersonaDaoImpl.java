@@ -4,7 +4,9 @@ import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +14,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
-public class PeronsaDaoImpl implements PersonaDao {
+public class PersonaDaoImpl implements PersonaDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private JdbcTemplate jdbcTemplate;
 
@@ -59,7 +61,13 @@ public class PeronsaDaoImpl implements PersonaDao {
     }
 
     public int contadorPersonasPorNombre(Persona persona) {
-        return 0;
+        String sql = "SELECT count(*) from PERSONA WHERE nombre= :nombre";
+        /*Permite evitar crear un MAP de parametros y utilizar directamente el objecto persona
+        los atributos que coincidan con el nombre de los parametros por nombre del query
+        seran utilizados y proporcionados como atributos al query */
+        SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(persona);
+        //unicamente retorna un valor el método queryForInt
+        return this.namedParameterJdbcTemplate.queryForInt(sql, namedParameters);
     }
 
     public int contadorPersonas() {
