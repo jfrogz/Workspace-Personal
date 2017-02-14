@@ -17,6 +17,16 @@ import java.util.List;
 
 @Repository
 public class PersonaDaoImpl implements PersonaDao {
+    /*Query con Parámetros por nombre, omitimos la PK ya que es autoincrementable*/
+    private static final String SQL_INSERT_PERSONA = "insert into persona (nombre, ape_paterno, ape_materno, email) values (:nombre, :apePaterno, :apeMaterno, :email)";
+    /*Query con Parámetros por indice ... values (?,?,?,?,?)
+      Query con Parámetros por nombre ... values (:nombre, :apePaterno....)
+     */
+    private static final String SQL_UPDATE_PERSONA = "UPDATE PERSONA SET nombre = :nombre, ape_paterno = :apePaterno, ape_materno=apeMaterno, email=:email";
+    private static final String SQL_DELETE_PERSONA = "DELETE FROM PERSONA WHERE id_persona=:idPersona";
+    private static final String SQL_SELECT_PERSONA = "SELECT id_persona, nombre, ape_paterno, ape_materno, email from PERSONA";
+    //Parametro por indice
+    private static final String SQL_SELECT_PERSONA_BY_ID = SQL_SELECT_PERSONA + " WHERE id_persona= ?";
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private JdbcTemplate jdbcTemplate;
 
@@ -29,20 +39,9 @@ public class PersonaDaoImpl implements PersonaDao {
         this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
-    /*Query con Parámetros por nombre, omitimos la PK ya que es autoincrementable*/
-    private static final String SQL_INSERT_PERSONA = "insert into persona (nombre, ape_paterno, email) values (:nombre, :apePaterno, :apeMaterno)";
-    /*Query con Parámetros por indice ... values (?,?,?,?,?)
-      Query con Parámetros por nombre ... values (:nombre, :apePaterno....)
-     */
-    private static final String SQL_UPDATE_PERSONA = "UPDATE PERSONA SET nombre = :nombre, ape_paterno = :apePaterno, ape_materno=apeMaterno, email=:email";
-    private static final String SQL_DELETE_PERSONA = "DELETE FROM PERSONA WHERE id_persona=:idPersona";
-    private static final String SQL_SELECT_PERSONA = "SELECT id_persona, nombre, ape_paterno, ape_materno, email from PERSONA";
-    //Parametro por indice
-    private static final String SQL_SELECT_PERSONA_BY_ID = SQL_SELECT_PERSONA + " WHERE id_persona= ?";
-
-
     public void insertPersona(Persona persona) {
-
+        SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(persona);
+        this.namedParameterJdbcTemplate.update(SQL_INSERT_PERSONA, parameterSource);
     }
 
     public void updatePersona(Persona persona) {
@@ -89,6 +88,12 @@ public class PersonaDaoImpl implements PersonaDao {
     }
 
     public Persona getPersonaByEmail(Persona persona) {
-        return null;
+        String sql = "SELECT * FROM PERSONA WHERE email = ?";
+        SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(persona);
+        /*Si no tiene el objeto RowMapper, se puede utilizar la siguiente
+        linea para crear este objeto*/
+        //RowMapper<Persona> personaRowMapper = ParameterizedBeanPropertyRowMapper.newInstance(Persona.class);
+
+        return this.jdbcTemplate.queryForObject(sql, new PersonaRowMapper(),persona.getEmail());
     }
 }

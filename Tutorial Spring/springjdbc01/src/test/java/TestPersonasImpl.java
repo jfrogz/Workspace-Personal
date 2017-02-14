@@ -73,4 +73,33 @@ public class TestPersonasImpl {
             logger.error("Error JDBC", e);
         }
     }
+
+    @Test
+    public void deberiaInsertarPersona () {
+        try {
+            System.out.println();
+            logger.info("Inicio del test deberiamosInsertarPersona");
+            //El script de datos tiene 3 registros
+            logger.info("Contador de personas: " + personaDao.contadorPersonas());
+            assertEquals(3, personaDao.contadorPersonas());
+            Persona persona = new Persona();
+            persona.setNombre("Gabriela");
+            persona.setApePaterno("Romero");
+            persona.setApeMaterno("Lopez");
+            persona.setEmail("azulaikoo@gmail.com");
+            logger.info("Se procede a insertar un elemento");
+            personaDao.insertPersona(persona);
+            logger.info("Finaliza la inserccion un elemento");
+            //Recuperamos a la persona recien insertada por su email
+            logger.info("Se comienza la busqueda por email");
+            persona = personaDao.getPersonaByEmail(persona);
+            logger.info("Persona insertada: " + persona);
+
+            //Beberia haber ya cuatro personas
+            //assertEquals(4, personaDao.contadorPersonas());
+            logger.info("Fin del test deberiaInsertarPersona");
+        } catch (Exception e) {
+            logger.error("Error JDBC", e);
+        }
+    }
 }
