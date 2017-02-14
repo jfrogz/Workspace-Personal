@@ -22,7 +22,7 @@ public class PersonaDaoImpl implements PersonaDao {
     /*Query con Parámetros por indice ... values (?,?,?,?,?)
       Query con Parámetros por nombre ... values (:nombre, :apePaterno....)
      */
-    private static final String SQL_UPDATE_PERSONA = "UPDATE PERSONA SET nombre = :nombre, ape_paterno = :apePaterno, ape_materno=apeMaterno, email=:email";
+    private static final String SQL_UPDATE_PERSONA = "UPDATE PERSONA SET nombre = :nombre, ape_paterno = :apePaterno, ape_materno=:apeMaterno, email=:email WHERE id_persona=:idPersona";
     private static final String SQL_DELETE_PERSONA = "DELETE FROM PERSONA WHERE id_persona=:idPersona";
     private static final String SQL_SELECT_PERSONA = "SELECT id_persona, nombre, ape_paterno, ape_materno, email from PERSONA";
     //Parametro por indice
@@ -45,7 +45,8 @@ public class PersonaDaoImpl implements PersonaDao {
     }
 
     public void updatePersona(Persona persona) {
-
+        SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(persona);
+        this.namedParameterJdbcTemplate.update(SQL_UPDATE_PERSONA, parameterSource);
     }
 
     public void deletePersona(Persona persona) {
