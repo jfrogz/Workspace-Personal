@@ -14,7 +14,7 @@ public class PersonaRowMapper implements RowMapper<Persona> {
          /*Ceración del objeto persona por cada
         registro encontrado en el resultset*/
         Persona persona = new Persona();
-        persona.setIdPersona(resultSet.getLong("idPersona"));
+        persona.setIdPersona(resultSet.getLong("id_Persona"));
         persona.setNombre(resultSet.getString("nombre"));
         persona.setApePaterno(resultSet.getString("ape_paterno"));
         persona.setApeMaterno(resultSet.getString("ape_materno"));

@@ -2,6 +2,7 @@ package com.jfrogz.jdbc;
 
 import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -9,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
+import sun.invoke.empty.Empty;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -52,7 +54,18 @@ public class PersonaDaoImpl implements PersonaDao {
     }
 
     public Persona findPersona(long idPersona) {
-        return null;
+        Persona persona = null;
+        try {
+            //Utilizamos la clase PersonaRowMapper
+            persona = jdbcTemplate.queryForObject(SQL_SELECT_PERSONA_BY_ID, new PersonaRowMapper(), idPersona);
+        } catch (EmptyResultDataAccessException e) {
+            persona = null;
+        }
+        return persona;
+        /*Esta es otra forma de utilizar la clase PersonaRowMapper
+        BeanPropertyRowMapper<Persona> personaRowMapper =  BeanPropertyRowMapper.newInstance(Persona.class)
+        return jdbcTemplate.queryForObject(SQL_SELECT_PERSONA_BY_ID, personaRowMapper, idPersona);
+         */
     }
 
     public List<Persona> findAllPersonas() {

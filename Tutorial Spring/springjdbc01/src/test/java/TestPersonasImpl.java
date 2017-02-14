@@ -59,4 +59,18 @@ public class TestPersonasImpl {
         }
     }
 
+    @Test
+    public void testEncontrarPersonaPorId(){
+        try{
+            System.out.println();
+            logger.info("Inicio del test Encontrar Persona por Id");
+            int idPersona =1;
+            Persona persona = personaDao.findPersona(idPersona);
+            assertEquals("Admin", persona.getNombre());
+            logger.info("Persona recuperada (id=" + idPersona + "): " + persona);
+            logger.info("Fin del test testEncontrarPersonasPorId");
+        }catch(Exception e){
+            logger.error("Error JDBC", e);
+        }
+    }
 }
