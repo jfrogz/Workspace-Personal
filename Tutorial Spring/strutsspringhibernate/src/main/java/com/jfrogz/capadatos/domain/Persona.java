@@ -23,6 +23,10 @@ public class Persona {
 
     private String email;
 
+    public Persona(long idPersona){
+       this.idPersona = idPersona;
+    }
+
     public Persona() {
     }
 
