@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+        "http://struts.apache.org/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+    <action-mappings>
+        <action path="/inicio" parameter="metodo" type="org.springframework.web.struts.DelegatingActionProxy"
+                validate="false">
+            <forward name="listar" path="/WEB-INF/pages/listarPersonas.jsp"/>
+        </action>
+    </action-mappings>
+
+    <!--
+    <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+        <set-property property="contextConfigLocation"
+                      value="/WEB-INF/classes/applicationContext.xml, /WEB-INF/classes/datasource-test.xml"/>
+    </plug-in>
+    -->
+    <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+        <set-property property="contextConfigLocation" value="applicationContext.xml, datasource-test.xml"/>
+    </plug-in>
+
+
+</struts-config>
