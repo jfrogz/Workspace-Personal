@@ -1,5 +1,6 @@
 package com.jfrogz.controller;
 
+import com.jfrogz.model.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public class ExampleController {
     //@RequestMapping(value = "/exampleString", method = RequestMethod.GET)
     @GetMapping("/exampleString")
     public String exampleString(Model model) {
-        model.addAttribute("name", "Fernando Robles");
+        model.addAttribute("person", new Person("Adair", 11));
         return EXAMPLE_VIEW;
     }
 
@@ -23,7 +24,7 @@ public class ExampleController {
     @GetMapping("/exampleMAV")
     public ModelAndView exampleMAV(){
         ModelAndView andView = new ModelAndView(EXAMPLE_VIEW);
-        andView.addObject("name", "Fernando Robles Guzmán");
+        andView.addObject("person", new Person("Jennifer", 9));
         return andView;
     }
 }
