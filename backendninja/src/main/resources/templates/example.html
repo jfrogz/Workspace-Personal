@@ -5,7 +5,21 @@
     <title>Hello</title>
 </head>
 <body>
-<h1>Hello <span th:text="${person.name}"></span>!!!!</h1>
-<h3>Your age is:  <span th:text="${person.age}"></span>!!!!</h3>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>NAME</th>
+        <th>AGE</th>
+    </tr>
+    </thead>
+    <tbody th:each="person : ${people}">
+    <tr>
+        <th th:text="${person.name}"></th>
+        <th th:text="${person.age}"></th>
+    </tr>
+    </tbody>
+</table>
+</body>
 </body>
 </html>
