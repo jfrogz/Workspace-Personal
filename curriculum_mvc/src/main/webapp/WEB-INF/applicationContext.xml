@@ -14,4 +14,26 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
  	<context:component-scan base-package="com.jfrogz" />
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/static/**" location="/static/" />
+
+	<bean id="sobreMiVar" class="com.jfrogz.Indentity.Generales">
+		<property name="nombreCompleto" value="Juan Fernando Robles Guzmán"/>
+		<property name="carrera" value="Ing. Ciencias de  la computación"/>
+		<property name="sobreMi" value="Actualmente me encuentro desarrollando software, aplicando todo el conocimiento que he adquirido y al mismo tiempo estoy aprendiendo cosas nuevas he interesantes.  Ahora estoy en busca de nuevos retos laborales, en los cuales pueda explotar todo mi potencial.  No dude en ponerse en contacto conmigo si desea saber más acerca de mis habilidades y aspiraciones profesionales."/>
+		<property name="escuchandoOfertas" value="true"/>
+		<property name="empleado" value="false"/>
+		<property name="telefonos">
+			<list value-type="com.jfrogz.Indentity.Telefono">
+				<bean class="com.jfrogz.Indentity.Telefono">
+					<property name="numero" value="(222)5-66-11-66"/>
+					<property name="descripcion" value="Celular"/>
+					<property name="nombreIcon" value="glyphicon glyphicon-phone"/>
+				</bean>
+				<bean class="com.jfrogz.Indentity.Telefono">
+					<property name="numero" value="(222)2-42-58-02"/>
+					<property name="descripcion" value="Recados"/>
+					<property name="nombreIcon" value="glyphicon glyphicon-phone-alt"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
 </beans>
