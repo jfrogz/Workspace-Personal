@@ -19,7 +19,8 @@ public class HomeController {
     public ModelAndView curriculum (){
             logger.info("Comienza la solicitud del curriculum");
             ModelAndView andView = new ModelAndView("curriculum");
-            andView.addObject("nombre", "fernando");
+            andView.addObject("nombre", "Fernando Robles Guzmán");
+            andView.addObject("carrera", "Ing. Ciencias de la Computación");
        return andView;
     }
 
