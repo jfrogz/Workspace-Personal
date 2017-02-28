@@ -61,10 +61,10 @@ img.thumbnail {
 	}
 }
 body {
-	background: url("../img/662f863c-d224-4088-9d9e-82b65e0114d6.png");
+	background: url("../img/backgroundFinal.png");
 	background-color: rgba(137,166,231, 0.9);/*
     background-color: rgba(140,232,242, 0.9);*/
-    background-image: url("../img/662f863c-d224-4088-9d9e-82b65e0114d6.png");
+    background-image: url("../img/backgroundFinal.png");
     background-repeat: repeat;
     background-attachment: scroll;
     background-position: 0% 0%;
