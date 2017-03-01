@@ -37,8 +37,7 @@
     <div class="row">
         <aside class="col-md-3">
             <a href="#" class="thumb pull-left">
-                <img class="img-thumbnail img-responsive img-circle " src="/static/img/Personal Foto.jpg"
-                     alt="widowmaker">
+                <img class="img-thumbnail img-responsive img-circle " src= "${datosGen.pathFotoPerfil}">
             </a>
             <div>
                 <h4>Contacto</h4>
@@ -46,7 +45,7 @@
                     <div class="btn-group btn-group-md btn-group-justified" role="group">
                         <a href="#" class="btn btn-block btn-primary glyphicon glyphicon-envelope"
                            data-toggle="modal"></a>
-                        <a hr ef="#ventana1" class="btn btn-block btn-primary glyphicon glyphicon-phone"
+                        <a href="#venPhone" class="btn btn-block btn-primary glyphicon glyphicon-phone"
                            data-toggle="modal"></a>
                         <a href="#" class="btn btn-block btn-primary glyphicon glyphicon-earphone"
                            aria-hidden="true"></a>
@@ -55,7 +54,7 @@
                     </div>
                 </div>
                 <!-- Contacto -->
-                <div class="modal fade" id="ventana1">
+                <div class="modal fade" id="venPhone">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
@@ -65,7 +64,7 @@
                                     <%
                                         List<Telefono> list = generales.getTelefonos();
                                         for (Telefono telefono : list) {
-                                            out.print("<div class=\"panel panel-primary\">\n" +
+                                            out.print("<div class=\"panel panel-primary active\">\n" +
                                                     "<div class=\"panel-heading\">" + telefono.getDescripcion() + "</div>\n" +
                                                     "<div class=\"panel-body\">" +
                                                     "<span class=\"text-success " + telefono.getNombreIcon() + "\">" + telefono.getNumero() + "</span></div>\n" +
@@ -155,38 +154,38 @@
                                 List<Trabajo> trabajos = generales.getTrabajos();
                                 for (Trabajo trabajo : trabajos) {
                                     parrafos = trabajo.getActividades().split("  ");
-                                    String actividadesFormato ="";
+                                    String actividadesFormato = "";
                                     for (String parrafo : parrafos) {
                                         actividadesFormato += "<p>" + parrafo + "</p>";
                                     }
 
 
                                     out.print("<div class=\"panel panel-primary\">\n" +
-                                            "<div class=\"panel-heading\" role=\"tab\" id=\"heading"+trabajo.getCodigo()+"\">\n" +
+                                            "<div class=\"panel-heading\" role=\"tab\" id=\"heading" + trabajo.getCodigo() + "\">\n" +
                                             "<h4 class=\"panel-title\">\n" +
-                                            "<a href=\"#collapse"+trabajo.getCodigo()+"\" data-toggle=\"collapse\" data-parent=\"#accordion1\">\n" +
-                                            ""+trabajo.getEmpresa()+"<span class=\"badge pull-right\">"+trabajo.getFechaInicial()+" ~ "+trabajo.getFechaFinal()+"</span></a></h4>\n" +
+                                            "<a href=\"#collapse" + trabajo.getCodigo() + "\" data-toggle=\"collapse\" data-parent=\"#accordion1\">\n" +
+                                            "" + trabajo.getEmpresa() + "<span class=\"badge pull-right\">" + trabajo.getFechaInicial() + " ~ " + trabajo.getFechaFinal() + "</span></a></h4>\n" +
                                             "</div>\n" +
-                                            "<div id=\"collapse"+trabajo.getCodigo()+"\" class=\"panel-collapse collapse\">\n" +
+                                            "<div id=\"collapse" + trabajo.getCodigo() + "\" class=\"panel-collapse collapse\">\n" +
                                             "<div class=\"panel-body\">\n" +
                                             "<div class=\"media\">\n" +
-                                            "<div class=\"media-left media-middle hidden-xs hidden-md\"><a href=\"#\"><img src=\""+trabajo.getUbicacionImagen()+"\" width=\"150\" alt=\"\"> \n" +
+                                            "<div class=\"media-left media-middle hidden-xs hidden-md\"><a href=\"#\"><img src=\"" + trabajo.getUbicacionImagen() + "\" width=\"150\" alt=\"\"> \n" +
                                             "</a></div>\n" +
                                             "<div class=\"media-body\">\n" +
                                             "<div role=\"tabpanel\">\n" +
                                             "<ul class=\"nav nav-tabs\" role=\"tablist\">\n" +
-                                            "<li role=\"presentation\" class=\"active\"><a href=\"#"+trabajo.getCodigo()+"Actividades\" aria-controls=\""+trabajo.getCodigo()+"Actividades\" data-toggle=\"tab\" role=\"tab\">Actividades</a></li>\n" +
-                                            "<li role=\"presentation\"><a href=\"#"+trabajo.getCodigo()+"Herramientas\" aria-controls=\""+trabajo.getCodigo()+"Herramientas\" data-toggle=\"tab\" role=\"tab\">Software Utilizado</a></li>\n" +
-                                            "<li role=\"presentation\"><a href=\"#"+trabajo.getCodigo()+"Contacto\" aria-controls=\""+trabajo.getCodigo()+"Contacto\" data-toggle=\"tab\" role=\"tab\">Contacto</a></li>\n" +
+                                            "<li role=\"presentation\" class=\"active\"><a href=\"#" + trabajo.getCodigo() + "Actividades\" aria-controls=\"" + trabajo.getCodigo() + "Actividades\" data-toggle=\"tab\" role=\"tab\">Actividades</a></li>\n" +
+                                            "<li role=\"presentation\"><a href=\"#" + trabajo.getCodigo() + "Herramientas\" aria-controls=\"" + trabajo.getCodigo() + "Herramientas\" data-toggle=\"tab\" role=\"tab\">Software Utilizado</a></li>\n" +
+                                            "<li role=\"presentation\"><a href=\"#" + trabajo.getCodigo() + "Contacto\" aria-controls=\"" + trabajo.getCodigo() + "Contacto\" data-toggle=\"tab\" role=\"tab\">Contacto</a></li>\n" +
                                             "</ul>\n" +
                                             "<div class=\"tab-content\">\n" +
-                                            "<div role=\"tabpanel\" class=\"tab-pane active\" id=\""+trabajo.getCodigo()+"Actividades\">\n" +
+                                            "<div role=\"tabpanel\" class=\"tab-pane active\" id=\"" + trabajo.getCodigo() + "Actividades\">\n" +
                                             "\n" +
-                                            "<h3>"+trabajo.getPuesto()+"</h3>\n" +
+                                            "<h3>" + trabajo.getPuesto() + "</h3>\n" +
                                             actividadesFormato +
                                             "</div>\n" +
                                             "<!-- Herramientas a utilizar -->\n" +
-                                            "<div role=\"tabpanel\" class=\"tab-pane\" id=\""+trabajo.getCodigo()+"Herramientas\">\n" +
+                                            "<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + trabajo.getCodigo() + "Herramientas\">\n" +
                                             "<h3>Software Utilizado  </h3>\n" +
                                             "<ul class=\"list-group\">\n" +
                                             "<li class=\"list-group-item list-group-item-warning\">NETBEANS, IREPORT</li>\n" +
@@ -194,7 +193,7 @@
                                             "</ul>\n" +
                                             "</div>\n" +
                                             "\n" +
-                                            "<div role=\"tabpanel\" class=\"tab-pane\" id=\""+trabajo.getCodigo()+"Contacto\">\n" +
+                                            "<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + trabajo.getCodigo() + "Contacto\">\n" +
                                             "<h3>Contacto</h3>\n" +
                                             "<p></p>\n" +
                                             "</div>\n" +

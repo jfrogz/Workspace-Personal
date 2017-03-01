@@ -7,7 +7,7 @@ import java.util.List;
 
 @Component("sobreMiVar")
 public class Generales {
-
+    private String pathFotoPerfil;
     private String nombreCompleto;
     private String carrera;
     private String sobreMi;
@@ -18,6 +18,13 @@ public class Generales {
     @Autowired
     private List<Trabajo> trabajos;
 
+    public String getPathFotoPerfil() {
+        return pathFotoPerfil;
+    }
+
+    public void setPathFotoPerfil(String pathFotoPerfil) {
+        this.pathFotoPerfil = pathFotoPerfil;
+    }
 
     public List<Trabajo> getTrabajos() {
         return trabajos;
