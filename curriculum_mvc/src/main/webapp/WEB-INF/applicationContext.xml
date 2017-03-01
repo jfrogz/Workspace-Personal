@@ -20,7 +20,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="carrera" value="Ing. Ciencias de  la computación"/>
 		<property name="sobreMi" value="Actualmente me encuentro desarrollando software, aplicando todo el conocimiento que he adquirido y al mismo tiempo estoy aprendiendo cosas nuevas he interesantes.  Ahora estoy en busca de nuevos retos laborales, en los cuales pueda explotar todo mi potencial.  No dude en ponerse en contacto conmigo si desea saber más acerca de mis habilidades y aspiraciones profesionales."/>
 		<property name="escuchandoOfertas" value="true"/>
-		<property name="empleado" value="false"/>
+		<property name="empleado" value="true"/>
 		<property name="telefonos">
 			<list value-type="com.jfrogz.Indentity.Telefono">
 				<bean class="com.jfrogz.Indentity.Telefono">
@@ -38,11 +38,58 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="trabajos">
 			<list value-type="com.jfrogz.Indentity.Trabajo">
 				<bean class="com.jfrogz.Indentity.Trabajo">
+					<property name="codigo" value="sngular"/>
 					<property name="empresa" value="SNGULAR"/>
-					<property name="puesto" value="Desarrollador JAVA"/>
-					<property name="actividades" value="Se crean aplicaciones y servicios WEB asi tambien como el mantenimiento de estos y otros productos previamente adquiridos."/>
-					<property name="fechaInicial" value="6 de Enero de 2017"/>
+					<property name="puesto" value="Desarrollador de aplicaciones JAVA"/>
+					<property name="actividades" value="Entre mis actividades se encuentra la creación y mantenimiento de aplicaciones WEB, web  services."/>
+					<property name="fechaInicial" value="06/01/2017"/>
 					<property name="fechaFinal" value=""/>
+					<property name="ubicacionImagen" value="/static/img/sngular.png"/>
+				</bean>
+				<bean class="com.jfrogz.Indentity.Trabajo">
+					<property name="codigo" value="pcs"/>
+					<property name="empresa" value="PCS"/>
+					<property name="puesto" value="Desarrollador JAVA SENIOR"/>
+					<property name="actividades" value="Las actividades principales en esta empresa consistían en crear scripts en lenguaje SQL para cargar reglas de negocio que el software principal utiliza  que eran requeridas por la empresa. Se realizaba desarrollo y pruebas en diferentes ambientes de maqueta, organizaba documentación utilizando diferentes herramientas web proporcionadas por el cliente.  Para el desarrollo, mantenimiento y preguntas en general se mantenía una comunicación con personas de diferentes áreas.  Además mis actividades incluían la administración parcial de los requerimientos conociendo algunos rubros de esta área del proceso.  Mi disponibilidad involucraba algunas actividades fuera de horario, así como la entrega a producción (ventanas de mantenimiento) en altas horas de la noche."/>
+					<property name="fechaInicial" value="11/07/2016 "/>
+					<property name="fechaFinal" value="05/01/2017"/>
+					<property name="ubicacionImagen" value="/static/img/pcs.png"/>
+				</bean>
+				<bean class="com.jfrogz.Indentity.Trabajo">
+					<property name="codigo" value="genco"/>
+					<property name="empresa" value="GENCO CONSULTING"/>
+					<property name="puesto" value="Desarrollador de aplicaciones JAVA"/>
+					<property name="actividades" value="Las actividades principales en esta empresa consistían en dar mantenimiento a una aplicación web la cual su funcionalidad era la de administrar personal y calcular sus respectivas nóminas. Dentro del software utilizado se encuentra JDeveloper usando el framework ADF. Para realizar dicha tarea de mantenimiento se modificaba la base de datos que era administrada en una aplicación ORACLE versión 11 G."/>
+					<property name="fechaInicial" value="04/04/2016"/>
+					<property name="fechaFinal" value="29/06/2016"/>
+					<property name="ubicacionImagen" value="/static/img/Logo_Genco.jpg"/>
+				</bean>
+				<bean class="com.jfrogz.Indentity.Trabajo">
+					<property name="codigo" value="Tsystems"/>
+					<property name="empresa" value="T-SYSTEMS MÉXICO"/>
+					<property name="puesto" value="TESTER"/>
+					<property name="actividades" value="Se realizan pruebas a diferentes aplicaciones tanto web como de escritorio, entre las pruebas que se realizaron son las siguientes:  •	Pruebas Unitarias  •	Pruebas de Caja negra  •	Pruebas funcionales."/>
+					<property name="fechaInicial" value="01/07/2015"/>
+					<property name="fechaFinal" value="29/01/2016"/>
+					<property name="ubicacionImagen" value="/static/img/tsystems4.jpg"/>
+				</bean>
+				<bean class="com.jfrogz.Indentity.Trabajo">
+				<property name="codigo" value="vw"/>
+				<property name="empresa" value="VOLKSWAGEN MÉXICO"/>
+				<property name="puesto" value="Consultor JAVA Junior"/>
+				<property name="actividades" value="Se trabajo en un equipo desarrollando un software standalone con la tecnología de JavaFX que sirve como interfaz entre el usuario y una báscula. Se registran pesos y son almacenados en una base de datos (SQL Server) usando Hibernate y se muestran los reportes generados con iReport."/>
+				<property name="fechaInicial" value="19/01/2015"/>
+				<property name="fechaFinal" value="19/04/2015"/>
+				<property name="ubicacionImagen" value="/static/img/vw.jpg"/>
+			</bean>
+				<bean class="com.jfrogz.Indentity.Trabajo">
+					<property name="codigo" value="not48"/>
+					<property name="empresa" value="NOTARIA PUBLICA NO. 48"/>
+					<property name="puesto" value="Auxiliar, Desarrollador de software"/>
+					<property name="actividades" value="Se desarrollaron diferentes aplicativos, en su mayoría de escritorio que satisficieron las necesidades que en ese momento se tenían.  Mis actividades en esta empresa eran variadas pero en general mis servicios consistían en resolver problemas en la mayoría de las áreas de la empresa."/>
+						<property name="fechaInicial" value="21/02/2006"/>
+					<property name="fechaFinal" value="17/01/2015"/>
+					<property name="ubicacionImagen" value="/static/img/notaria2.jpg"/>
 				</bean>
 			</list>
 		</property>

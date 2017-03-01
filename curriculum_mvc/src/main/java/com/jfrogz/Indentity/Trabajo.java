@@ -7,12 +7,21 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Trabajo {
+    private String codigo;
     private String empresa;
     private String puesto;
     private String actividades;
     private String ubicacionImagen;
     private String fechaInicial;
     private String fechaFinal;
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
     public String getFechaInicial() {
         return fechaInicial;
