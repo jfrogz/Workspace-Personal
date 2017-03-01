@@ -1,7 +1,7 @@
-<%@ page import="javax.swing.*" %>
 <%@ page import="com.jfrogz.Indentity.Generales" %>
-<%@ page import="java.util.List" %>
 <%@ page import="com.jfrogz.Indentity.Telefono" %>
+<%@ page import="com.jfrogz.Indentity.Trabajo" %>
+<%@ page import="java.util.List" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
@@ -46,7 +46,7 @@
                     <div class="btn-group btn-group-md btn-group-justified" role="group">
                         <a href="#" class="btn btn-block btn-primary glyphicon glyphicon-envelope"
                            data-toggle="modal"></a>
-                        <a href="#ventana1" class="btn btn-block btn-primary glyphicon glyphicon-phone"
+                        <a hr ef="#ventana1" class="btn btn-block btn-primary glyphicon glyphicon-phone"
                            data-toggle="modal"></a>
                         <a href="#" class="btn btn-block btn-primary glyphicon glyphicon-earphone"
                            aria-hidden="true"></a>
@@ -149,366 +149,104 @@
                     <div role="tabpanel" class="tab-pane active" id="ExpLaboral">
                         <!-- Acordeon -->
                         <br>
-                        <div class="panel-group" id="accordion" role="tablist">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading" role="tab" id="heading1">
-                                    <h4 class="panel-title">
-                                        <a href="#collapseGenco" data-toggle="collapse" data-parent="#accordion">
-                                            GENCO CONSULTING<span class="badge pull-right">04 ABRIL 2016 ~  </span></a>
-                                    </h4>
-                                </div>
-                                <div id="collapseGenco" class="panel-collapse collapse in">
-                                    <div class="panel-body">
-                                        <div class="media">
-                                            <div class="media-left media-middle hidden-xs hidden-md"><a
-                                                    href="#"><img
-                                                    src="/static/img/Logo_Genco.jpg" alt="">
-                                            </a></div>
-                                            <div class="media-body">
-                                                <div role="tabpanel">
-                                                    <ul class="nav nav-tabs" role="tablist">
-                                                        <li role="presentation" class="active"><a
-                                                                href="#secGencoActividades"
-                                                                aria-controls="secGencoActividades"
-                                                                data-toggle="tab"
-                                                                role="tab">Actividades</a></li>
-                                                        <li role="presentation"><a href="#secGencoHerramientas"
-                                                                                   aria-controls="secGencoHerramientas"
-                                                                                   data-toggle="tab" role="tab">Software
-                                                            Utilizado</a></li>
-                                                        <li role="presentation"><a href="#secGencoContacto"
-                                                                                   aria-controls="secGencoContacto"
-                                                                                   data-toggle="tab"
-                                                                                   role="tab">Contacto</a></li>
-                                                    </ul>
-                                                    <div class="tab-content">
-                                                        <div role="tabpanel" class="tab-pane active"
-                                                             id="secGencoActividades">
+                        <div class="panel-group" id="accordion1" role="tablist">
 
-                                                            <h3>Consultor / Desarrollador de aplicaciones WEB</h3>
-                                                            <p>La actividad era la de dar mantenimiento a una
-                                                                aplicación
-                                                                dedicada al cálculo de una nómina, este software
-                                                                está
-                                                                desarrollando en JAVA utilizando el framework ADF,
-                                                                tecnologías propias de ORACLE.</p>
-                                                            <p>El mantenimiento consisitia en realizar pruebas
-                                                                dinamicas
-                                                                para detectar los issues que posteriormente
-                                                                reparaba, en
-                                                                algunos otros casos se generaban requerimientos los
-                                                                cuales tenia de implementar, programando la base de
-                                                                datos que se almacena con la tecnología ORACLE y su
-                                                                respectiva lógica y vista.</p>
-                                                        </div>
-                                                        <div role="tabpanel" class="tab-pane"
-                                                             id="secGencoHerramientas">
-                                                            <h3>Software Utilizado </h3>
-                                                            <ul class="list-group">
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    JDEVELOPER, VISUAL STUDIO, ECLIPSE, NETBEANS
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-default">
-                                                                    ORACLE DATA BASE, SQL SERVER
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    ADF
-                                                                    FRAMEWORK
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-default">
-                                                                    NAVICAT, SQL DEVELOPER
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    TRELLO
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-default">
-                                                                    GIT,
-                                                                    GIT HUB, BITBUCKET
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    JAVA, C#
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div role="tabpanel" class="tab-pane" id="secGencoContacto">
-                                                            <h3>Contacto</h3>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-primary">
-                                <div class="panel-heading" role="tab" id="heading1">
-                                    <h4 class="panel-title">
-                                        <a href="#collapseTSystems" data-toggle="collapse" data-parent="#accordion">
-                                            T-SYSTEMS MÉXICO<span
-                                                class="badge pull-right">01 JULIO 2015 ~ 29 ENERO 2016</span></a>
-                                    </h4>
-                                </div>
-                                <div id="collapseTSystems" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <div class="media">
-                                            <div class="media-left media-middle hidden-xs hidden-md"><a
-                                                    href="#"><img
-                                                    src="/static/img/tsystems4.jpg" alt="">
-                                            </a></div>
-                                            <div class="media-body">
-                                                <div role="tabpanel">
-                                                    <ul class="nav nav-tabs" role="tablist">
-                                                        <li role="presentation" class="active"><a
-                                                                href="#secTSysmtesActividades"
-                                                                aria-controls="secTSysmtesActividades"
-                                                                data-toggle="tab"
-                                                                role="tab">Actividades</a></li>
-                                                        <li role="presentation"><a href="#secTSystemsHerramientas"
-                                                                                   aria-controls="secTSystemsHerramientas"
-                                                                                   data-toggle="tab" role="tab">Software
-                                                            Utilizado</a></li>
-                                                        <li role="presentation"><a href="#secTSystemsContacto"
-                                                                                   aria-controls="secTSystemsContacto"
-                                                                                   data-toggle="tab"
-                                                                                   role="tab">Contacto</a></li>
-                                                    </ul>
-                                                    <div class="tab-content">
-                                                        <div role="tabpanel" class="tab-pane active"
-                                                             id="secTSysmtesActividades">
-
-                                                            <h3>Tester de aplicaciones WEB</h3>
-                                                            <p>Se me contrata como tester de aplicaciones web, en la
-                                                                empresa se me capacita con herramientas dedicadas a
-                                                                realizar pruebas de software tales como HP LOAD
-                                                                RUNNER,
-                                                                SILK, SILK MANAGER, con las cuales realizamos
-                                                                diferentes
-                                                                tipos de pruebas como: Pruebas de performance,
-                                                                pruebas
-                                                                de caja negra, pruebas funcionales, etc.</p>
-                                                            <p>En algun momento se me transfiere al area de
-                                                                desarrollo
-                                                                en el cual se me encomienda realizar pruebas
-                                                                tempranas,
-                                                                es decir, realizar pruebas del software antes de
-                                                                mandarlo al area de pruebas, esto con el fin de
-                                                                minimizar los issues, entregar un producto de mejor
-                                                                calidad y en menor tiempo.</p>
-                                                            <p>Todos los días en el DAILY SCRUM reportaba todos los
-                                                                issues detectatos en el transcurso del día anterior,
-                                                                issues corregidos y cerrados.</p>
-                                                            <p>Entre otras actividades tambien estuve apoyando en el
-                                                                área de calidad en donde verificaba que los nuevos
-                                                                requerimientos que se nos pedian no estuvieran fuera
-                                                                del
-                                                                sprint acordado. Revisaba que tuvieramos las reglas
-                                                                de
-                                                                negocio que se requerian para armar el módulo
-                                                                solicitado.</p>
-                                                        </div>
-                                                        <div role="tabpanel" class="tab-pane"
-                                                             id="secTSystemsHerramientas">
-                                                            <h3>Software Utilizado </h3>
-                                                            <ul class="list-group">
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    VISUAL STUDIO, SILK, SILK CENTRAL, HP LOAD
-                                                                    RUNNER,
-                                                                    ISSUE TRACKER
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-default">
-                                                                    SQL
-                                                                    SERVER
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    SQL
-                                                                    SERVER MANAGER STUDIO
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-default">
-                                                                    SCRUM
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    C#
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div role="tabpanel" class="tab-pane"
-                                                             id="secTSystemsContacto">
-                                                            <h3>Contacto</h3>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-primary">
-                                <div class="panel-heading" role="tab" id="heading1">
-                                    <h4 class="panel-title">
-                                        <a href="#collapseVW" data-toggle="collapse" data-parent="#accordion">
-                                            VOLKSWAGEN MÉXICO<span class="badge pull-right">19 ENERO 2015 ~ 19 ABRIL 2015</span></a>
-                                    </h4>
-                                </div>
-                                <div id="collapseVW" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <div class="media">
-                                            <div class="media-left media-middle hidden-xs hidden-md"><a
-                                                    href="#"><img
-                                                    src="img/vw.jpg" alt="">
-                                            </a></div>
-                                            <div class="media-body">
-                                                <div role="tabpanel">
-                                                    <ul class="nav nav-tabs" role="tablist">
-                                                        <li role="presentation" class="active"><a
-                                                                href="#secVWActividades"
-                                                                aria-controls="secVWActividades" data-toggle="tab"
-                                                                role="tab">Actividades</a></li>
-                                                        <li role="presentation"><a href="#secVWHerramientas"
-                                                                                   aria-controls="secVWHerramientas"
-                                                                                   data-toggle="tab" role="tab">Software
-                                                            Utilizado</a></li>
-                                                        <li role="presentation"><a href="#secVWContacto"
-                                                                                   aria-controls="secVWContacto"
-                                                                                   data-toggle="tab"
-                                                                                   role="tab">Contacto</a></li>
-                                                    </ul>
-                                                    <div class="tab-content">
-                                                        <div role="tabpanel" class="tab-pane active"
-                                                             id="secVWActividades">
-
-                                                            <h3>Desarrollador de aplicaciones JAVA</h3>
-                                                            <p>Se desarrollo un software standalone usando la
-                                                                tecnología
-                                                                JavaFX que sirve como interfaz entre el usuario y
-                                                                una
-                                                                báscula industrial.</p>
-                                                            <p>Su funcionalidad consisitia en registrar el peso
-                                                                total de
-                                                                los camiones que entraban y salian con material, el
-                                                                software hacia los calculos de los pesos de material
-                                                                que
-                                                                se compraban y vendian generando asi un ticket de
-                                                                entrada y uno de salida para calcular los montos y
-                                                                poder
-                                                                facturar, estos datos son almacenados en una base de
-                                                                datos desarrollada en SQL Server.</p>
-                                                            <p>Un framework utilizado fue Hibernate que fue
-                                                                utilizado
-                                                                como una de las capas MVC de la arquitectura.
-                                                            <p>
-                                                        </div>
-                                                        <div role="tabpanel" class="tab-pane"
-                                                             id="secVWHerramientas">
-                                                            <h3>Software Utilizado </h3>
-                                                            <ul class="list-group">
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    NETBEANS, IREPORT
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-default">
-                                                                    SQL
-                                                                    SERVER
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    HIBERNATE FRAMEWORK
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-default">
-                                                                    SVN,
-                                                                    TORTOISE
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    JAVA, JAVA FX, CSS3
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-default">
-                                                                    SCRUM
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    SONAR QUBE, MAVEN,
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div role="tabpanel" class="tab-pane" id="secVWContacto">
-                                                            <h3>Contacto</h3>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-primary">
-                                <div class="panel-heading" role="tab" id="heading1">
-                                    <h4 class="panel-title">
-                                        <a href="#collapseN48" data-toggle="collapse" data-parent="#accordion">
-                                            NOTARIA PUBLICA NO. 48<span class="badge pull-right">21 FEBRERO 2006 ~ 17 ENERO 2015</span></a>
-                                    </h4>
-                                </div>
-                                <div id="collapseN48" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <div class="media">
-                                            <div class="media-left media-middle hidden-xs hidden-md"><a
-                                                    href="#"><img
-                                                    src="img/notaria.jpg" alt="">
-                                            </a></div>
-                                            <div class="media-body">
-                                                <div role="tabpanel">
-                                                    <ul class="nav nav-tabs" role="tablist">
-                                                        <li role="presentation" class="active"><a
-                                                                href="#secN48Actividades"
-                                                                aria-controls="secN48Actividades" data-toggle="tab"
-                                                                role="tab">Actividades</a></li>
-                                                        <li role="presentation"><a href="#secN48Herramientas"
-                                                                                   aria-controls="secN48Herramientas"
-                                                                                   data-toggle="tab" role="tab">Software
-                                                            Utilizado</a></li>
-                                                        <li role="presentation"><a href="#secN48Contacto"
-                                                                                   aria-controls="secN48Contacto"
-                                                                                   data-toggle="tab"
-                                                                                   role="tab">Contacto</a></li>
-                                                    </ul>
-                                                    <div class="tab-content">
-                                                        <div role="tabpanel" class="tab-pane active"
-                                                             id="secN48Actividades">
-                                                            ${descripcionNot}
-                                                        </div>
-                                                        <div role="tabpanel" class="tab-pane"
-                                                             id="secN48Herramientas">
-                                                            <h3>Software Utilizado </h3>
-                                                            <ul class="list-group">
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    VISUAL STUDIO, ECLIPSE, NETBEANS, CRISTAL
-                                                                    REPORT,
-                                                                    IREPORT
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-default">
-                                                                    SQL
-                                                                    SERVER, MYSQL, ACCESS
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    SPRING, HIBERNATE
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-default">
-                                                                    MYSQL WORKBENCH, SQL SERVER MANAGER STUDIO
-                                                                </li>
-                                                                <li class="list-group-item list-group-item-warning">
-                                                                    JAVA, C#, CSS 3, HTML
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div role="tabpanel" class="tab-pane" id="secN48Contacto">
-                                                            <h3>Contacto</h3>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <%
+                                List<Trabajo> trabajos = generales.getTrabajos();
+                                for (Trabajo trabajo : trabajos) {
+                                    out.print("<div class=\"panel panel-primary\">\n" +
+                                            " <div class=\"panel-heading\" role=\"tab\">\n" +
+                                            "     <h4 class=\"panel-title\">\n" +
+                                            "         <a href=\"#collapseGenco\" data-toggle=\"collapse\" data-parent=\"#accordion\">\n" +
+                                            "             "+trabajo.getEmpresa()+"<span class=\"badge pull-right\">"+trabajo.getFechaInicial()
+                                            + " ~  " + trabajo.getFechaFinal()+"</span></a>\n" +
+                                            "     </h4>\n" +
+                                            " </div>\n" +
+                                            " <div id=\"collapseGenco\" class=\"panel-collapse collapse in\">\n" +
+                                            "     <div class=\"panel-body\">\n" +
+                                            "         <div class=\"media\">\n" +
+                                            "             <div class=\"media-left media-middle hidden-xs hidden-md\"><a\n" +
+                                            "                     href=\"#\"><img\n" +
+                                            "                     src=\"/static/img/Logo_Genco.jpg\" alt=\"\">\n" +
+                                            "             </a></div>\n" +
+                                            "             <div class=\"media-body\">\n" +
+                                            "                 <div role=\"tabpanel\">\n" +
+                                            "                     <ul class=\"nav nav-tabs\" role=\"tablist\">\n" +
+                                            "                         <li role=\"presentation\" class=\"active\"><a\n" +
+                                            "                                 href=\"#secGencoActividades\"\n" +
+                                            "                                 aria-controls=\"secGencoActividades\"\n" +
+                                            "                                 data-toggle=\"tab\"\n" +
+                                            "                                 role=\"tab\">Actividades</a></li>\n" +
+                                            "                         <li role=\"presentation\"><a href=\"#secGencoHerramientas\"\n" +
+                                            "                                                    aria-controls=\"secGencoHerramientas\"\n" +
+                                            "                                                    data-toggle=\"tab\" role=\"tab\">Software\n" +
+                                            "                             Utilizado</a></li>\n" +
+                                            "                         <li role=\"presentation\"><a href=\"#secGencoContacto\"\n" +
+                                            "                                                    aria-controls=\"secGencoContacto\"\n" +
+                                            "                                                    data-toggle=\"tab\"\n" +
+                                            "                                                    role=\"tab\">Contacto</a></li>\n" +
+                                            "                     </ul>\n" +
+                                            "                     <div class=\"tab-content\">\n" +
+                                            "                         <div role=\"tabpanel\" class=\"tab-pane active\"\n" +
+                                            "                              id=\"secGencoActividades\">\n" +
+                                            "                                  <h3>Consultor / Desarrollador de aplicaciones WEB</h3>\n" +
+                                            "                                  <p>La actividad era la de dar mantenimiento a una\n" +
+                                            "                                      aplicación\n" +
+                                            "                                      dedicada al cálculo de una nómina, este software\n" +
+                                            "                                      está\n" +
+                                            "                                      desarrollando en JAVA utilizando el framework ADF,\n" +
+                                            "                                      tecnologías propias de ORACLE.</p>\n" +
+                                            "                                  <p>El mantenimiento consisitia en realizar pruebas\n" +
+                                            "                                      dinamicas\n" +
+                                            "                                      para detectar los issues que posteriormente\n" +
+                                            "                                      reparaba, en\n" +
+                                            "                                      algunos otros casos se generaban requerimientos los\n" +
+                                            "                                      cuales tenia de implementar, programando la base de\n" +
+                                            "                                      datos que se almacena con la tecnología ORACLE y su\n" +
+                                            "                                      respectiva lógica y vista.</p>\n" +
+                                            "                              </div>\n" +
+                                            "                              <div role=\"tabpanel\" class=\"tab-pane\"\n" +
+                                            "                                   id=\"secGencoHerramientas\">\n" +
+                                            "                                  <h3>Software Utilizado </h3>\n" +
+                                            "                                  <ul class=\"list-group\">\n" +
+                                            "                                      <li class=\"list-group-item list-group-item-warning\">\n" +
+                                            "                                          JDEVELOPER, VISUAL STUDIO, ECLIPSE, NETBEANS\n" +
+                                            "                                      </li>\n" +
+                                            "                                      <li class=\"list-group-item list-group-item-default\">\n" +
+                                            "                                          ORACLE DATA BASE, SQL SERVER\n" +
+                                            "                                      </li>\n" +
+                                            "                                      <li class=\"list-group-item list-group-item-warning\">\n" +
+                                            "                                          ADF\n" +
+                                            "                                          FRAMEWORK\n" +
+                                            "                                      </li>\n" +
+                                            "                                      <li class=\"list-group-item list-group-item-default\">\n" +
+                                            "                                          NAVICAT, SQL DEVELOPER\n" +
+                                            "                                      </li>\n" +
+                                            "                                      <li class=\"list-group-item list-group-item-warning\">\n" +
+                                            "                                          TRELLO\n" +
+                                            "                                      </li>\n" +
+                                            "                                      <li class=\"list-group-item list-group-item-default\">\n" +
+                                            "                                          GIT,\n" +
+                                            "                                          GIT HUB, BITBUCKET\n" +
+                                            "                                      </li>\n" +
+                                            "                                      <li class=\"list-group-item list-group-item-warning\">\n" +
+                                            "                                          JAVA, C#\n" +
+                                            "                                      </li>\n" +
+                                            "                                  </ul>\n" +
+                                            "                              </div>\n" +
+                                            "                              <div role=\"tabpanel\" class=\"tab-pane\" id=\"secGencoContacto\">\n" +
+                                            "                                  <h3>Contacto</h3>\n" +
+                                            "                                  <p></p>\n" +
+                                            "                              </div>\n" +
+                                            "                          </div>\n" +
+                                            "                      </div>\n" +
+                                            "                  </div>\n" +
+                                            "              </div>\n" +
+                                            "          </div>\n" +
+                                            "      </div>\n" +
+                                            "  </div>");
+                                }
+                            %>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="Formacion">

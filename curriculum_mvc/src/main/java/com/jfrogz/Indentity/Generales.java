@@ -1,12 +1,11 @@
 package com.jfrogz.Indentity;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component ("sobreMiVar")
+@Component("sobreMiVar")
 public class Generales {
 
     private String nombreCompleto;
@@ -14,6 +13,19 @@ public class Generales {
     private String sobreMi;
     private boolean escuchandoOfertas;
     private boolean empleado;
+    @Autowired
+    private List<Telefono> telefonos;
+    @Autowired
+    private List<Trabajo> trabajos;
+
+
+    public List<Trabajo> getTrabajos() {
+        return trabajos;
+    }
+
+    public void setTrabajos(List<Trabajo> trabajos) {
+        this.trabajos = trabajos;
+    }
 
     public List<Telefono> getTelefonos() {
         return telefonos;
@@ -22,9 +34,6 @@ public class Generales {
     public void setTelefonos(List<Telefono> telefonos) {
         this.telefonos = telefonos;
     }
-
-    @Autowired
-    private List<Telefono> telefonos;
 
     public boolean isEmpleado() {
         return empleado;

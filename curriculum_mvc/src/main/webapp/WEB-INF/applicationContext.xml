@@ -35,5 +35,16 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 				</bean>
 			</list>
 		</property>
+		<property name="trabajos">
+			<list value-type="com.jfrogz.Indentity.Trabajo">
+				<bean class="com.jfrogz.Indentity.Trabajo">
+					<property name="empresa" value="SNGULAR"/>
+					<property name="puesto" value="Desarrollador JAVA"/>
+					<property name="actividades" value="Se crean aplicaciones y servicios WEB asi tambien como el mantenimiento de estos y otros productos previamente adquiridos."/>
+					<property name="fechaInicial" value="6 de Enero de 2017"/>
+					<property name="fechaFinal" value=""/>
+				</bean>
+			</list>
+		</property>
 	</bean>
 </beans>
