@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Jumbotron</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../src/css/estilos.css">
+</head>
+<body>
+
+<div class="jumbotron jumbotron-frog hidden-xs hidden-sm">
+    <div class="container">
+        <h1 class="titulo-blog">Notaría Publica No 48</h1>
+    </div>
+</div>
+<div class="container">
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle dropdown-toggle" aria-haspopup="true" data-toggle="collapse" data-target="#navegacion">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand">Notaría Publica 48</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navegacion">
+                <ul class="nav navbar-nav" role="tablist">
+                    <li class="active"><a href="#secAcerca" aria-controls="seccion2" data-toggle="tab" role="tab">Acerca de</a></li>
+                    <li><a href="#secServicios" aria-controls="seccion2" data-toggle="tab" role="tab">Servicios</a></li>
+                    <li><a href="#secRequisitos" aria-controls="seccion2" data-toggle="tab" role="tab">Requisitos</a></li>
+                    <li><a href="#secExperiencia" aria-controls="seccion2" data-toggle="tab" role="tab">Experiencia</a></li>
+                    <li><a href="#secUbicacion" aria-controls="seccion2" data-toggle="tab" role="tab">Ubicación</a></li>
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+    <section class="main container">
+
+        <div role="tabpanel">
+            <ul class="nav nav-tabs hidden-xs hidden-sm" role="tablist">
+                <li role="presentation" class="active"><a href="#secAcerca" aria-controls="seccion1" data-toggle="tab"
+                                                          role="tab">Acerca de</a></li>
+                <li role="presentation"><a href="#secServicios" aria-controls="seccion2" data-toggle="tab" role="tab">Servicios</a>
+                </li>
+                <li role="presentation"><a href="#secRequisitos" aria-controls="seccion3" data-toggle="tab" role="tab">Requisitos</a>
+                </li>
+                <li role="presentation"><a href="#secExperiencia" aria-controls="seccion3" data-toggle="tab" role="tab">Experiencia</a>
+                </li>
+                <li role="presentation"><a href="#secUbicacion" aria-controls="seccion3" data-toggle="tab" role="tab">Ubicacion</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="secAcerca">
+                    <h3>Acerca de</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="secServicios">
+                    <h3>Servicios</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="secRequisitos">
+                    <h3>Requisitos</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="secExperiencia">
+                    <h3>Experiencia</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="secUbicacion">
+                    <h3>Ubicación</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script src="../src/js/jquery-1.12.4.min.js"></script>
+<script src="../src/js/bootstrap.min.js"></script>
+</body>
+</html>

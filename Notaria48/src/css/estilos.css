@@ -1,0 +1,37 @@
+body {
+    background-attachment: scroll;
+    background-position: 0% 0%;
+    background-clip: border-box;
+    background-origin: padding-box;
+    background-size: auto auto;
+    /*padding-top: 70px;*/
+}
+
+section.main.container {
+    margin-top: 65px;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.jumbotron-frog {
+    background: rgba(109, 204, 181, 0.9);
+    color:#fff;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}
+
+.jumbotron .titulo-blog {
+    font-size: 50px;
+}
+
+/* MEdia Querie*/
+@media screen and (max-width: 768px) {
+    .post .thumb {
+        width: 100%;
+        margin-bottom: 20px;
+        margin-right: 0;
+    }
+}
