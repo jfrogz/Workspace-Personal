@@ -36,12 +36,13 @@
 <section class="main container">
     <div class="row">
         <aside class="col-md-3">
-            <a href="#" class="thumb pull-left">
+            <div class="row">
+            <a href="#" class="col-md-12 col-xs-4 col-sm-4 thumb pull-left">
                 <img class="img-thumbnail img-responsive img-circle " src= "${datosGen.pathFotoPerfil}">
             </a>
-            <div>
+            <div class="col-md-12 col-xs-8 col-sm-8">
                 <h4>Contacto</h4>
-                <div class="btn-toolbar">
+                <div class=" btn-toolbar">
                     <div class="btn-group btn-group-md btn-group-justified" role="group">
                         <a href="#" class="btn btn-block btn-primary glyphicon glyphicon-envelope"
                            data-toggle="modal"></a>
@@ -107,8 +108,8 @@
                         %>  Disponible</h4>
                     </div>
                 </div>
-                <!-- Sobre mi -->
-                <div class="panel panel-primary  hidden-xs ">
+                <!-- Sobre mi hidden-xs-->
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">Sobre mi</h3>
                     </div>
@@ -124,6 +125,8 @@
                     </div>
                 </div>
             </div>
+            </div>
+
         </aside>
         <section class="posts col-md-9">
             <br>
