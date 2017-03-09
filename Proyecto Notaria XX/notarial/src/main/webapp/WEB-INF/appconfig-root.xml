@@ -13,4 +13,9 @@
 
     <context:property-placeholder location="classpath:application.properties"/>
 
+    <bean id="usuario" class="com.jfrogz.identity.Usuario">
+        <property name="nombre" value="Aiko Robles Romero"/>
+    </bean>
+
+
 </beans>
