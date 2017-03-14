@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
-public class PersonaServiceImp implements PersonaServiceRemote {
+public class PersonaServiceImp implements PersonaServiceRemote, PersonaService {
 
     public List<Persona> listarPersonas() {
         List<Persona> personas = new ArrayList<Persona>();
