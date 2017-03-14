@@ -9,22 +9,32 @@ public class Persona implements Serializable {
     private String nombre;
     private String apePaerno;
     private String apeMaterno;
+    private String email;
     private String telefono;
 
     public Persona() {
 
     }
 
-    public Persona(int idPersona, String nombre, String apePaerno, String apeMaterno, String telefono) {
+    public Persona(int idPersona, String nombre, String apePaerno, String apeMaterno, String email, String telefono) {
         this.idPersona = idPersona;
         this.nombre = nombre;
         this.apePaerno = apePaerno;
         this.apeMaterno = apeMaterno;
+        this.email = email;
         this.telefono = telefono;
     }
 
     public int getIdPersona() {
         return idPersona;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setIdPersona(int idPersona) {
