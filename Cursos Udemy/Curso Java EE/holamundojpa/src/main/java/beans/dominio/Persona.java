@@ -26,6 +26,22 @@ public class Persona {
     @Column(nullable = true, length = 45)
     private String telefono;
 
+    public Persona(String nombre, String apePaterno, String apeMaterno, String email, String telefono) {
+        this.nombre = nombre;
+        this.apePaterno = apePaterno;
+        this.apeMaterno = apeMaterno;
+        this.email = email;
+        this.telefono = telefono;
+    }
+
+    public void Persona() {
+
+    }
+
+    public void Persona(Integer idPersona) {
+        this.idPersona = idPersona;
+    }
+
     public Integer getIdPersona() {
         return idPersona;
     }
