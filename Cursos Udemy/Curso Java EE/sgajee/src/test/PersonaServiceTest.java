@@ -19,7 +19,7 @@ public class PersonaServiceTest {
                 .lookup("java:global/classes/PersonaServiceImp!com.jfrogz.sga.servicio.PersonaService");
     }
 
-    @Test
+    //@Test
     public void testEJBPersonaService ()
     {
         System.out.println("Iniciando test EJB PersonaService");

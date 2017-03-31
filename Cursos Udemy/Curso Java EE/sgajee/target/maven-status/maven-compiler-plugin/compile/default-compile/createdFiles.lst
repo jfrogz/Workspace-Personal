@@ -1,0 +1,5 @@
+com\jfrogz\sga\cliente\ClientePersonaService.class
+com\jfrogz\sga\servicio\PersonaService.class
+com\jfrogz\sga\servicio\PersonaServiceRemote.class
+com\jfrogz\sga\servicio\PersonaServiceImp.class
+com\jfrogz\sga\domain\Persona.class

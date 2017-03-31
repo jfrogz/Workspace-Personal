@@ -1,0 +1,11 @@
+manejoTransacciones\TestManejoTransacciones.class
+apiCriteria\TestApiCriteria.class
+ciclovida\TestActualizarObjeto.class
+test\UsuarioServiceTest.class
+ciclovida\TestEliminarObjeto.class
+ciclovida\TestPersistirObjeto.class
+test\PersonaServiceTest.class
+ciclovida\TestActualizarObjetoSesionLarga.class
+ciclovida\TestEncontrarObjeto.class
+jpql\TestJPQL.class
+persistenciaCascada\TestPersistenciaCascada.class
