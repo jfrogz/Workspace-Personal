@@ -28,4 +28,13 @@ public class TipoCambio {
     public void setValor(String valor) {
         this.valor = valor;
     }
+
+    @Override
+    public String toString() {
+        return "TipoCambio{" +
+                "deUnidad='" + deUnidad + '\'' +
+                ", aUnidad='" + aUnidad + '\'' +
+                ", valor='" + valor + '\'' +
+                '}';
+    }
 }

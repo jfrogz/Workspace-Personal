@@ -1,56 +1,122 @@
 package com.jfrogz.identities;
 
+import com.tunyk.currencyconverter.BankUaCom;
+import com.tunyk.currencyconverter.api.Currency;
+import com.tunyk.currencyconverter.api.CurrencyConverter;
+import com.tunyk.currencyconverter.api.CurrencyConverterException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ScrapingYahoo {
-    public static final String url = "https://finance.yahoo.com/connection/currency-converter-cache?date=";
+    public static final String urlDate = "https://finance.yahoo.com/connection/currency-converter-cache?date=";
+    public static final String urlParam = "https://es.finance.yahoo.com/divisas/conversor/?bypass=true#from=%s;to=%s;amt=1";
     public static String[] palabrasAQuitar = {"<head>", "</head>", "<body>", "</body>", "<html>", "</html>", "/**/YAHOO.Finance.CurrencyConverter.addConversionRates(", ");", " "};
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws ParseException, MalformedURLException, CurrencyConverterException {
 
-    ScrapingYahoo scrapingYahoo = new ScrapingYahoo();
-    scrapingYahoo.listTipoCambio(new Date());
+        SimpleDateFormat d = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = d.parse("18-04-2017");
+        ScrapingYahoo scrapingYahoo = new ScrapingYahoo();
+
+        List<TipoCambio> tipoCambios = scrapingYahoo.listTipoCambio(date);
+        for (TipoCambio tipoCambio : tipoCambios) {
+            System.out.println(tipoCambio);
+        }
+        System.out.println(scrapingYahoo.obtenTipoDeCambio(date));
+
+
+        /*Ocupamos el WS, lamentablemente no hay conversion para MXN*/
+//        CurrencyConverter currencyConverter = new BankUaCom(Currency.USD, Currency.UAH);
+//        Float aFloat = currencyConverter.convertCurrency(1.0f);
+//        System.out.println(aFloat + "");
+
+        TipoCambio tipoCambio = scrapingYahoo.ObtenTipoDeCambio(PaisCambio.USD, PaisCambio.MXN);
+
 
     }
 
-    public void listTipoCambio(Date date) {
+    public TipoCambio ObtenTipoDeCambio(PaisCambio from, PaisCambio to) {
+        String urlPage = String.format(urlParam, from, to);
+
+        // Compruebo si me da un 200 al hacer la petición
+        if (getStatusConnectionCode(urlPage) == 200) {
+
+            // Obtengo el HTML de la web en un objeto Document2
+            Document document = getHtmlDocument(urlPage);
+
+            // Busco todas las historias de meneame que estan dentro de:
+            //Elements entradas = document.select("a[href] p");
+            Elements entradas = document.select("");
+
+
+            // Paseo cada una de las entradas
+            for (Element elem : entradas) {
+                String comandoP = elem.select("p").text();
+                System.out.println("\nTitulo: " + comandoP);
+            }
+
+        } else {
+            System.out.println("El Status Code no es OK es: " + getStatusConnectionCode(urlPage));
+        }
+        return null;
+}
+
+    public TipoCambio obtenTipoDeCambio(Date date) {
+        List<TipoCambio> tipoCambios = listTipoCambio(date);
+        for (TipoCambio tipoCambio : tipoCambios) {
+            if (tipoCambio.getaUnidad().equals("MXN"))
+                return tipoCambio;
+        }
+        return null;
+    }
+
+    public List<TipoCambio> listTipoCambio(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-        String urlTemp = url + simpleDateFormat.format(date);
+        String urlTemp = urlDate + simpleDateFormat.format(date);
+        List<TipoCambio> tipoCambios = new ArrayList<TipoCambio>();
+
         if (getStatusConnectionCode(urlTemp) == 200) {
 
             JSONObject jsonObject = new JSONObject(getStringJson(urlTemp));
             JSONArray jsonArray = jsonObject.getJSONObject("list").getJSONArray("resources");
 
             for (int i = 0; i < jsonArray.length(); i++) {
+                TipoCambio tipoCambio = new TipoCambio();
+
                 JSONObject jsonObj = jsonArray.getJSONObject(i).getJSONObject("resource").getJSONObject("fields");
-                System.out.println(jsonObj.getString("price"));
-                System.out.println(jsonObj.getString("symbol").replace("=X", ""));
-                System.out.println(jsonObj.toString());
+                tipoCambio.setDeUnidad("USD");
+                tipoCambio.setaUnidad(jsonObj.getString("symbol").replace("=X", ""));
+                tipoCambio.setValor(jsonObj.getString("price"));
+                tipoCambios.add(tipoCambio);
             }
         } else {
             System.out.println("El Status Code no es OK es: " + getStatusConnectionCode(urlTemp));
         }
+        return tipoCambios;
     }
 
     private String getStringJson(String url1) {
         // Obtengo el HTML de la web en un objeto Document
         Document document = getHtmlDocument(url1);
-        System.out.println("El contenido de lo obtenido es: " + document);
         //Obtenemos el json que se va a consultar.
         String jsonmod = document.toString();
         for (String palabra : palabrasAQuitar) {
             jsonmod = jsonmod.replace(palabra, "");
         }
         jsonmod = jsonmod.trim();
-        System.out.println("Contenido modificado: " + jsonmod);
         return jsonmod;
     }
 
