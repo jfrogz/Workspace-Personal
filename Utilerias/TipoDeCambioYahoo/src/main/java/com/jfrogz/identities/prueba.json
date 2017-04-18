@@ -1,0 +1,1463 @@
+{
+  "list": {
+    "meta": {
+      "type": "resource-list",
+      "start": 0,
+      "count": 132
+    },
+    "resources": [
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3.6721",
+            "symbol": "AED=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "67.205",
+            "symbol": "AFN=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "127",
+            "symbol": "ALL=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.7327",
+            "symbol": "ANG=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "15.188",
+            "symbol": "ARS=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.32642",
+            "symbol": "AUD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.79",
+            "symbol": "AWG=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.954",
+            "symbol": "BBD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "80.95",
+            "symbol": "BDT=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.8232",
+            "symbol": "BGN=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "0.3742",
+            "symbol": "BHD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1670",
+            "symbol": "BIF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1",
+            "symbol": "BMD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.3996",
+            "symbol": "BND=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "6.86",
+            "symbol": "BOB=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3.1235",
+            "symbol": "BRL=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "0.99316",
+            "symbol": "BSD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "10.5615",
+            "symbol": "BWP=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.9624",
+            "symbol": "BZD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.32425",
+            "symbol": "CAD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1347",
+            "symbol": "CDF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.00205",
+            "symbol": "CHF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "652.4",
+            "symbol": "CLP=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "6.8909",
+            "symbol": "CNY=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "2870.43",
+            "symbol": "COP=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "544.66",
+            "symbol": "CRC=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "0.97148",
+            "symbol": "CUP=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "103.4",
+            "symbol": "CVE=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "25.0207",
+            "symbol": "CZK=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "177.72",
+            "symbol": "DJF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "6.97048",
+            "symbol": "DKK=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "41.26",
+            "symbol": "DOP=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "109.79",
+            "symbol": "DZD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "18.126",
+            "symbol": "EGP=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "22.7",
+            "symbol": "ETB=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "0.93715",
+            "symbol": "EUR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "2.0812",
+            "symbol": "FJD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "0.79682",
+            "symbol": "GBP=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "4.22",
+            "symbol": "GHS=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "44.05",
+            "symbol": "GMD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "9070",
+            "symbol": "GNF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "7.149",
+            "symbol": "GTQ=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "196.62",
+            "symbol": "GYD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "7.77026",
+            "symbol": "HKD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3",
+            "symbol": "HNL=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "6.9705",
+            "symbol": "HRK=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "67.337",
+            "symbol": "HTG=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "292.809",
+            "symbol": "HUF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "13277",
+            "symbol": "IDR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3.63374",
+            "symbol": "ILS=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "64.5",
+            "symbol": "INR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1180",
+            "symbol": "IQD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "32438",
+            "symbol": "IRR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "110.51",
+            "symbol": "ISK=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "128.049",
+            "symbol": "JMD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "0.7071",
+            "symbol": "JOD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "108.902",
+            "symbol": "JPY=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "101.52",
+            "symbol": "KES=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3991",
+            "symbol": "KHR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "461.4",
+            "symbol": "KMF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1133.43",
+            "symbol": "KRW=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "0.30455",
+            "symbol": "KWD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "0.81444",
+            "symbol": "KYD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "311.98",
+            "symbol": "KZT=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "8200",
+            "symbol": "LAK=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1511.9",
+            "symbol": "LBP=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "152.13",
+            "symbol": "LKR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "92",
+            "symbol": "LRD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "13.49",
+            "symbol": "LSL=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.4",
+            "symbol": "LYD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "10.0242",
+            "symbol": "MAD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "19.027",
+            "symbol": "MDL=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3185",
+            "symbol": "MGA=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "57.35",
+            "symbol": "MKD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1338.7",
+            "symbol": "MMK=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "7.8156",
+            "symbol": "MOP=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "358",
+            "symbol": "MRO=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "34.01",
+            "symbol": "MUR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "15.17",
+            "symbol": "MVR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "711",
+            "symbol": "MWK=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "18.5546",
+            "symbol": "MXN=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "4.425",
+            "symbol": "MYR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "65.82",
+            "symbol": "MZN=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "13.49",
+            "symbol": "NAD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "315",
+            "symbol": "NGN=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "29.41",
+            "symbol": "NIO=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "8.54094",
+            "symbol": "NOK=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "101.89",
+            "symbol": "NPR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.42988",
+            "symbol": "NZD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "0.38358",
+            "symbol": "OMR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "0.97619",
+            "symbol": "PAB=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3.2535",
+            "symbol": "PEN=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3.277",
+            "symbol": "PGK=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "49.283",
+            "symbol": "PHP=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "104.65",
+            "symbol": "PKR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3.98027",
+            "symbol": "PLN=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "5398.2",
+            "symbol": "PYG=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3.6383",
+            "symbol": "QAR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "4.2275",
+            "symbol": "RON=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "115.415",
+            "symbol": "RSD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "56.6216",
+            "symbol": "RUB=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "810",
+            "symbol": "RWF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3.7457",
+            "symbol": "SAR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "12.737",
+            "symbol": "SCR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "6.6292",
+            "symbol": "SDG=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "8.97069",
+            "symbol": "SEK=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "1.39499",
+            "symbol": "SGD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "7455",
+            "symbol": "SLL=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "549",
+            "symbol": "SOS=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "22670",
+            "symbol": "STD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "8.5219",
+            "symbol": "SVC=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "13.49",
+            "symbol": "SZL=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "34.386",
+            "symbol": "THB=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3.41",
+            "symbol": "TMT=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "2.3513",
+            "symbol": "TND=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3.647",
+            "symbol": "TRY=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "6.7419",
+            "symbol": "TTD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "30.371",
+            "symbol": "TWD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "2230",
+            "symbol": "TZS=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "26.85",
+            "symbol": "UAH=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3576.7",
+            "symbol": "UGX=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "28.42",
+            "symbol": "UYU=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "3645",
+            "symbol": "UZS=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "9.97",
+            "symbol": "VEF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "22670",
+            "symbol": "VND=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "618.7",
+            "symbol": "XAF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "2.6882",
+            "symbol": "XCD=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "612",
+            "symbol": "XOF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "111.8",
+            "symbol": "XPF=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "250",
+            "symbol": "YER=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "13.4618",
+            "symbol": "ZAR=X",
+            "type": "currency"
+          }
+        }
+      },
+      {
+        "resource": {
+          "classname": "Quote",
+          "fields": {
+            "date": "2017-04-13",
+            "price": "9.45",
+            "symbol": "ZMW=X",
+            "type": "currency"
+          }
+        }
+      }
+    ]
+  }
+}
