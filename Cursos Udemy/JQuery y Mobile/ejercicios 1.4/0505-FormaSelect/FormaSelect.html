@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Forma Inicio</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+<div data-role="page">
+	<div data-role="header"><h1>Llenar el formulario</h1></div>
+	<div data-role="content">
+    	<form action="formulario.php" method="post" data-ajax="false">
+        <label>Escriba su nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <label>Escriba su mail:</label>
+        <input type="email" id="email" name="email">
+        <label>Escriba su comentario:</label>
+        <textarea id="comentario" name="comentario"></textarea>
+        <label>Rango:</label>
+        <input type="range" min="1" max="120" id="edad" name="edad" value="18">
+        <fieldset data-role="controlgroup">
+        	<legend>Selecciona lo idiomas que hablas:</legend>
+            <input type="checkbox" id="idiomas" name="espanol">
+            <label for="espanol">Español</label>
+            <input type="checkbox" id="idiomas" name="ingles">
+            <label for="ingles">Inglés</label>
+            <input type="checkbox" id="idiomas" name="frances">
+            <label for="frances">Francés</label>
+        </fieldset>
+        
+        <label for="suscribe">¿Quieres recibir nuestro boletin?</label>
+        <select name="suscribe" id="suscribe" data-role="slider">
+        	<option>Si</option>
+            <option>No</option>
+        </select>
+        <br>
+        <label for="gps">¿Quieres compartir tu localización?</label>
+        <select name="gps" id="gps" data-role="slider">
+        	<option>On</option>
+            <option>Off</option>
+        </select>
+        </form>
+        
+        <label for="musica">Selecciona tu música</label>
+        <select id="musica" name="musica" data-native-menu="true">
+        	<option data-placeholder="true">Selecciona tus gustos musicales</option>
+        	<option value="1">Rock clásico</option>
+            <option value="2">Rock pesado</option>
+            <option value="3">Salsa</option>
+            <option value="4">Reguetón</option>
+            <option value="5">Clásica</option>
+        </select>
+        
+        <label for="pais">País de origen</label>
+        <select id="pais" name="pais" data-native-menu="true">
+        <optgroup label="América del norte">
+        	<option value="0">Canadá</option>
+        	<option value="1">Estados Unidos</option>
+            <option value="2">México</option>
+        </optgroup>
+        <optgroup label="Centroamérica">
+        	<option value="3">Guatemala</option>
+        	<option value="4">El Salvador</option>
+            <option value="5">Costa Rica</option>
+        </optgroup>
+        <optgroup label="El Caribe">
+        	<option value="6">Rep. Dominicana</option>
+        	<option value="7">Cuba</option>
+            <option value="8">Puerto Rico</option>
+        </optgroup>
+        <optgroup label="Sudamérica">
+        	<option value="9">Argentina</option>
+        	<option value="10">Colombia</option>
+            <option value="11">Chile</option>
+        </optgroup>
+        </select>
+    </div>
+    <div data-role="footer"><h4>Todos los derechos reservados</h4></div>
+</div>
+</body>
+</html>

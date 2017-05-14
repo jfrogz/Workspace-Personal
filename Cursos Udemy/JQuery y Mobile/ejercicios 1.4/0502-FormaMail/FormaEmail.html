@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Forma Inicio</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+<div data-role="page">
+	<div data-role="header"><h1>Llenar el formulario</h1></div>
+	<div data-role="content">
+    	<form action="formulario.php" method="post" data-ajax="false">
+        <label>Escriba su nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <label>Escriba su mail:</label>
+        <input type="email" id="email" name="email">
+        <label>Escriba su comentario:</label>
+        <textarea id="comentario" name="comentario"></textarea>
+        <label>Rango:</label>
+        <input type="range" min="1" max="120" id="edad" name="edad" value="18">
+        </form>
+    </div>
+    <div data-role="footer"><h4>Todos los derechos reservados</h4></div>
+</div>
+</body>
+</html>

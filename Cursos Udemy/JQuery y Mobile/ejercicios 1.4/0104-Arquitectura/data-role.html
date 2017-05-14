@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Arquitectura JQM</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page" id="primera">
+	<div data-role="header">
+    	<h1>Hola, cara de bola</h1>
+    </div>
+	<div data-role="content">
+    	<p>this is sparta!!!</p>
+        <p><a href="#segunda">Segunda página</a></p>
+    </div>
+    <div data-role="footer">
+    	<p>Esto es un pie de página</p>
+    </div>
+</div>
+<div data-role="page" id="segunda">
+	<div data-role="header">
+    	<h1>Segunda página</h1>
+    </div>
+	<div data-role="content">
+    	<p>Esto también es Esparta</p>
+        <p><a href="#primera">Primera página</a></p>
+    </div>
+    <div data-role="footer">
+    	<p>Aqui estuvieron los 300...</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Transiciones</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page" id="primera">
+	<div data-role="header">
+    	<h1>Hola, cara de bola</h1>
+    </div>
+	<div data-role="content">
+    	<p>this is sparta!!!</p>
+        <p><a href="#segunda" data-transition="fade">fade</a></p>
+        <p><a href="#segunda" data-transition="flip">flip</a></p>
+        <p><a href="#segunda" data-transition="pop">pop</a></p>
+        <p><a href="#segunda" data-transition="slide">slide</a></p>
+        <p><a href="#segunda" data-transition="slidedown">slide down</a></p>
+        <p><a href="#segunda" data-transition="slideup">slide up</a></p>
+    </div>
+    <div data-role="footer">
+    	<p>Esto es un pie de página</p>
+    </div>
+</div>
+<div data-role="page" id="segunda">
+	<div data-role="header">
+    	<h1>Segunda página</h1>
+    </div>
+	<div data-role="content">
+    	<p>Esto también es Esparta</p>
+        <p><a href="#primera" data-transition="fade">fade</a></p>
+    </div>
+    <div data-role="footer">
+    	<p>Aqui estuvieron los 300...</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Marcador de tenis 03</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+<div data-role="page" id="pagina1">
+	<div data-role="header"><h1>Tres sets sin ventaja</h1></div>
+	<div data-role="content">
+    	<form>
+        	<label for="nombre1">Jugador 1</label>
+            <input id="nombre1" type="text" name="nombre1">
+            <p>vs.</p>
+            <label for="nombre2">Jugador 2</label>
+            <input id="nombre2" type="text" name="nombre2">
+            <p>&nbsp;</p>
+            <a href="#pagina2" data-role="button">Inicia juego</a>
+        </form>
+    </div>
+    <div data-role="header"><h4>Todos los derechos reservados</h4></div>
+</div>
+<div data-role="page" id="pagina2">
+	<div data-role="header"><h1>Saque</h1></div>
+	<div data-role="content">
+    	<table>
+        	<tr>
+            <td><img src="../imagenes/bolaNaranja.png" id="marca11"></td>
+            <td><div id="jugador11">Jugador1</div></td>
+			<td><div id="puntos11">0</div></td>
+			<td><div id="juegos11">0</div></td>
+			<td><div id="set11">0</div></td>
+            </tr>
+            
+            <tr>
+            <td><img src="" id="marca21"></td>
+            <td><div id="jugador21">Jugador2</div></td>
+			<td><div id="puntos21">0</div></td>
+			<td><div id="juegos21">0</div></td>
+			<td><div id="set21">0</div></td>
+            </tr>
+        </table>
+        <form>
+        	<fieldset data-role="controlgroup">
+            	<button id="saque">Primer saque</button>
+                <input type="radio" name="saque1" id="s1" value="1">
+                <label for="s1">Primer saque</label>
+                <input type="radio" name="saque1" id="ace1" value="2">
+                <label for="ace1">Ace 1er saque</label>
+                <input type="radio" name="saque1" id="falta1" value="3">
+                <label for="falta1">Falta 1er saque</label>
+            </fieldset>
+            
+            <fieldset data-role="controlgroup">
+            	<button id="saque">Segundo saque</button>
+                <input type="radio" name="saque2" id="s2" value="4">
+                <label for="s2">Segundo saque</label>
+                <input type="radio" name="saque2" id="ace2" value="5">
+                <label for="ace2">Ace 2do saque</label>
+                <input type="radio" name="saque2" id="falta2" value="6">
+                <label for="falta2">Doble saque</label>
+            </fieldset>
+        </form>
+    </div>
+    <div data-role="header"><h4>Todos los derechos reservados</h4></div>
+</div>
+<div data-role="page" id="pagina3">
+	<div data-role="header"><h1>Juego</h1></div>
+	<div data-role="content">
+    	
+    </div>
+    <div data-role="header"><h4>Todos los derechos reservados</h4></div>
+</div>
+<div data-role="page" id="pagina4">
+	<div data-role="header"><h1>Resultado</h1></div>
+	<div data-role="content">
+    	
+    </div>
+    <div data-role="header"><h4>Todos los derechos reservados</h4></div>
+</div>
+</body>
+</html>
