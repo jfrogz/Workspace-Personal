@@ -1,0 +1,138 @@
+{
+  "importe1": [
+    {
+      "importe": ""
+    },
+    {
+      "cantidad": ""
+    },
+    {
+      "valor_unitario": ""
+    },
+    {
+      "moneda": ""
+    }
+  ],
+  "importe2": [
+    {
+      "importe": ""
+    },
+    {
+      "base": ""
+    },
+    {
+      "tasa_cuota": ""
+    },
+    {
+      "moneda": ""
+    }
+  ],
+  "importe3": [
+    {
+      "importe": ""
+    },
+    {
+      "base": ""
+    },
+    {
+      "tasa_cuota": ""
+    },
+    {
+      "moneda": ""
+    }
+  ],
+  "importe4": [
+    {
+      "importe": ""
+    },
+    {
+      "cantidad": ""
+    },
+    {
+      "valor_unitario": ""
+    },
+    {
+      "moneda": ""
+    }
+  ],
+  "importe5": [
+    {
+      "impuestos": [
+        {
+          "impuesto": "",
+          "importe": ""
+        },
+        ....,
+        {
+          "impuesto": "",
+          "importe": ""
+        }
+      ]
+    },
+    {
+      "moneda": ""
+    },
+    {
+      "sumandos": [
+        {
+          "cantidad": "",
+          "impuesto": ""
+        },
+        {
+          "cantidad": "",
+          "impuesto": ""
+        },
+        .....,
+        {
+          "cantidad": "",
+          "impuesto": ""
+        }
+      ]
+    }
+  ],
+  "importe6": [
+    {
+      "impuestos": [
+        {
+          "importe": "",
+          "impuesto": "",
+          "tasa_cuota": "",
+          "tipo_factor": ""
+        },
+        {
+          "importe": "",
+          "impuesto": "",
+          "tasa_cuota": "",
+          "tipo_factor": ""
+        },
+        .....
+        {
+          "importe": "",
+          "impuesto": "",
+          "tasa_cuota": "",
+          "tipo_factor": ""
+        }
+      ]
+    },
+    {
+      "moneda": ""
+    },
+    {
+      "sumandos": [
+        {
+          "cantidad": "",
+          "impuesto": ""
+        },
+        {
+          "cantidad": "",
+          "impuesto": ""
+        },
+        .....,
+        {
+          "cantidad": "",
+          "impuesto": ""
+        }
+      ]
+    }
+  ]
+}
