@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="master.xml">
+   
+    <changeSet id="1" author="dzmppdw">
+      <sqlFile path="src/main/resources/database/ddl_inicial.sql" encoding="UTF-8" endDelimiter=";"/>
+   </changeSet>
+
+    <changeSet id="2" author="dzm152z">
+        <!-- Seguridad -->
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="1"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Seguridad"/>
+            <column name="ORDERHINT" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="2"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Usuarios"/>
+            <column name="ORDERHINT" value="2"/>
+            <column name="PARENT_ID" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="3"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Perfiles"/>
+            <column name="ORDERHINT" value="3"/>
+            <column name="PARENT_ID" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="4"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Funciones por Perfil"/>
+            <column name="ORDERHINT" value="4"/>
+            <column name="PARENT_ID" value="1"/>
+        </insert>
+
+        <!-- Catálogos -->
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="5"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Catálogos"/>
+            <column name="ORDERHINT" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="6"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Clientes y proveedores"/>
+            <column name="ORDERHINT" value="2"/>
+            <column name="PARENT_ID" value="5"/>
+        </insert>
+        
+        <!-- Configuración -->
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="7"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Configuración"/>
+            <column name="ORDERHINT" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="8"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Configurar Puerto"/>
+            <column name="ORDERHINT" value="2"/>
+            <column name="PARENT_ID" value="7"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="9"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Perfil de la empresa"/>
+            <column name="ORDERHINT" value="3"/>
+            <column name="PARENT_ID" value="7"/>
+        </insert>
+
+        <!-- Operación -->
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="10"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Operación"/>
+            <column name="ORDERHINT" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="11"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Movimientos Proveedores"/>
+            <column name="ORDERHINT" value="2"/>
+            <column name="PARENT_ID" value="10"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="12"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Movimientos Clientes"/>
+            <column name="ORDERHINT" value="3"/>
+            <column name="PARENT_ID" value="10"/>
+        </insert>
+
+        <!-- Reportes -->
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="13"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Reportes"/>
+            <column name="ORDERHINT" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="14"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Reporte de movimientos"/>
+            <column name="ORDERHINT" value="2"/>
+            <column name="PARENT_ID" value="13"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="15"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Generar Ticket de Entrada"/>
+            <column name="ORDERHINT" value="3"/>
+            <column name="PARENT_ID" value="13"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="16"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Generar Ticket de Salida"/>
+            <column name="ORDERHINT" value="4"/>
+            <column name="PARENT_ID" value="14"/>
+        </insert>
+    </changeSet>
+   
+</databaseChangeLog>

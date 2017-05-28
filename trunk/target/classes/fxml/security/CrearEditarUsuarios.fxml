@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefWidth="500" styleClass="fondo" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <BorderPane>
+           <top>
+               <HBox>
+                   <children>
+                       <Label fx:id="errorMessageLabel" prefWidth="500" styleClass="errorMessage" textAlignment="JUSTIFY" wrapText="true" />
+                   </children>
+               </HBox>
+           </top>
+           <center>
+               <GridPane prefHeight="375.0" prefWidth="476.0">
+                   <children>
+                       <Label fx:id="lbUsuario" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="FieldLabelReq,AlignCenterRight" GridPane.rowIndex="1" />
+                       <Label fx:id="lbNombre" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="FieldLabelReq,AlignCenterRight" GridPane.rowIndex="2" />
+                       <Label fx:id="lbApPaterno" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="FieldLabelReq,AlignCenterRight" GridPane.rowIndex="3" />
+                       <Label fx:id="lbApMaterno" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="FieldLabel,AlignCenterRight" GridPane.rowIndex="4" />
+                       <Label fx:id="lbCorreo" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="FieldLabel,AlignCenterRight" GridPane.rowIndex="5" />
+                       <Label fx:id="lbEstatus" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="FieldLabel,AlignCenterRight" GridPane.rowIndex="6" />
+                       <TextField fx:id="txtUsuario" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                       <Label fx:id="lbUsuarioEdicion" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                       <TextField fx:id="txtNombreUsuario" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                       <TextField fx:id="txtApellidoPat" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                       <TextField fx:id="txtApellidoMat" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                       <TextField fx:id="txtCorreo" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                       <CheckBox fx:id="chxEstatusUsuario" lineSpacing="7.0" mnemonicParsing="false" selected="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                       <Label fx:id="id" styleClass="FieldLabelReq,AlignCenterRight" GridPane.halignment="RIGHT" />
+                       <Label fx:id="idEtiqueta" styleClass="FieldLabelReq,AlignCenterRight" GridPane.columnIndex="2" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" styleClass="AlignCenterCenter" GridPane.columnSpan="3" GridPane.rowIndex="7">
+                     <children>
+                            <Button fx:id="btnGuardar" mnemonicParsing="false" styleClass="botones" />
+                            <Button fx:id="btnCancelar" mnemonicParsing="false" styleClass="botones" />
+                     </children>
+                  </HBox>
+                   </children>
+                   <columnConstraints>
+                       <ColumnConstraints hgrow="NEVER" maxWidth="195.0" minWidth="100.0" prefWidth="142.0" />
+                  <ColumnConstraints hgrow="NEVER" maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
+                       <ColumnConstraints hgrow="NEVER" maxWidth="425.0" minWidth="300.0" prefWidth="324.0" />
+                  <ColumnConstraints hgrow="NEVER" maxWidth="526.0" minWidth="10.0" prefWidth="47.0" />
+                   </columnConstraints>
+                   <rowConstraints>
+                       <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                       <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                       <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                       <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                       <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                       <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                       <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                       <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                   </rowConstraints>
+               </GridPane>
+           </center>
+           <bottom>
+               <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+               </GridPane>
+           </bottom>
+       </BorderPane>
+   </children>
+</AnchorPane>

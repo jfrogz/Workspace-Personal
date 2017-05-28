@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>mx.vw.swf</groupId>
+  <artifactId>sms</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>sms</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.weld.se</groupId>
+      <artifactId>weld-se</artifactId>
+      <version>2.2.6.Final</version>
+    </dependency>
+      <dependency>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+          <version>4.2.0.Final</version>
+      </dependency>
+      <dependency>
+          <groupId>mx.vw.fwk</groupId>
+          <artifactId>fwk-core</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <version>1.3.170</version>
+      </dependency>
+      <dependency>
+          <groupId>com.microsoft.sqlserver</groupId>
+          <artifactId>sqljdbc4</artifactId>
+          <version>4.0</version>
+      </dependency>
+      <dependency>
+          <groupId>io.datafx</groupId>
+          <artifactId>core</artifactId>
+          <version>8.0</version>
+      </dependency>
+      <dependency>
+          <groupId>io.datafx</groupId>
+          <artifactId>flow</artifactId>
+          <version>8.0</version>
+      </dependency>
+      <dependency>
+          <groupId>io.datafx</groupId>
+          <artifactId>crud</artifactId>
+          <version>8.0</version>
+      </dependency>
+  </dependencies>
+    <profiles>
+        <profile>
+            <id>INTEGRATION</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-maven-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <configuration>
+                            <changeLogFile>src\main\resources\database\integra.xml</changeLogFile>
+                            <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+                            <url>jdbc:sqlserver://10.148.9.222:1433</url>
+                            <username>usSMS</username>
+                            <password>@sms@*2015!</password>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+<<<<<<< .mine
+   <repositories>
+=======
+    <repositories>
+
+        <!--
+>>>>>>> .r3536
+        <repository>
+            <id>repo</id>
+            <url>http://10.148.10.195/archiva/repository/internal/</url>
+             <releases>
+                      <enabled>true</enabled>
+                      <updatePolicy>never</updatePolicy>
+                  </releases>
+                  <snapshots>
+                      <enabled>true</enabled>
+                      <updatePolicy>never</updatePolicy>
+                  </snapshots> 
+        </repository>
+        -->
+    </repositories>
+
+</project>

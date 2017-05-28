@@ -1,0 +1,25 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.service;
+
+import mx.vw.swf.fwk.model.FwkCatContent;
+import mx.vw.swf.fwk.dao.FwkCatContentDAO;
+import mx.vw.swf.fwk.model.EntityManagerHelper;
+
+/**
+ *
+ * @author fox1yij
+ */
+public class ActualizarDatosPuertoService {
+
+    FwkCatContentDAO contentDAO = new FwkCatContentDAO();
+    
+    public FwkCatContent ActualizarDatosPuerto (FwkCatContent entity)
+    {
+        
+        return contentDAO.update(entity);
+    }
+}

@@ -1,0 +1,54 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.*;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@Entity
+@Table(name = "SEG_PERMISO_PERFIL", schema = "dbo", catalog = "SMS")
+@IdClass(SegPermisoPerfilEntityPK.class)
+public class SegPermisoPerfilEntity {
+    private int idPerfil;
+    private int idPermiso;
+
+    @Id
+    @Column(name = "IdPerfil")
+    public int getIdPerfil() {
+        return idPerfil;
+    }
+
+    public void setIdPerfil(int idPerfil) {
+        this.idPerfil = idPerfil;
+    }
+
+    @Id
+    @Column(name = "IdPermiso")
+    public int getIdPermiso() {
+        return idPermiso;
+    }
+
+    public void setIdPermiso(int idPermiso) {
+        this.idPermiso = idPermiso;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SegPermisoPerfilEntity that = (SegPermisoPerfilEntity) o;
+
+        if (idPerfil != that.idPerfil) return false;
+        if (idPermiso != that.idPermiso) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = idPerfil;
+        result = 31 * result + idPermiso;
+        return result;
+    }
+}

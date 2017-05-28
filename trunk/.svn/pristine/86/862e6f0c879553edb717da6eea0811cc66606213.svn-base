@@ -1,0 +1,116 @@
+package mx.vw.swf.cdi;
+
+import java.util.List;
+import jssc.*;
+import mx.vw.swf.fwk.SerialPortReader;
+import mx.vw.swf.fwk.SerialPortUtils;
+import mx.vw.swf.fwk.SerialPortWriter;
+
+/**
+ * Created by dzm152z on 25/02/2015.
+ */
+public class TestPortWrite {
+
+   /**
+    * Nombre del puerto de lectura
+    */
+   public static final String PORT_IN_NAME = "COM20";
+   /**
+    * Nombre del puerto de escritura
+    */
+   public static final String PORT_OUT_NAME = "COM21";
+   /**
+    * Variable para el puerto de entrada
+    */
+   private static SerialPort PORT_IN;
+   /**
+    * Variable para el puerto de salida
+    */
+   private static SerialPort PORT_OUT;
+
+   public static void main(String[] args) throws SerialPortException {
+      //Muestra todos los puertos seriales registrados en el sistema
+      List<String> ports = SerialPortUtils.getSerialPortsList();
+      for (String port : ports) {
+         System.out.format("\nDiscovered serial port with name: %S", port);
+      }
+      
+      
+      
+      //Abre puerto serial para lectura
+      PORT_IN = SerialPortUtils.openSerialPort(PORT_IN_NAME, 9600, 8, 1, "NONE", true);
+      System.out.format("\nIs port %S open ? %B", PORT_IN_NAME, PORT_IN.isOpened());
+      //Registra listener para el puerto serial de lectura
+      SerialPortReader portReader = new SerialPortReader(PORT_IN);
+      PORT_IN.addEventListener(portReader);
+      
+        
+      
+      //A partir de aqui solo es para prueba, escribiendo en puerto de salida
+      //Abre puerto serial para escritura
+      PORT_OUT = SerialPortUtils.openSerialPort(PORT_OUT_NAME, 9600, 7, 1, "EVEN", false);
+      System.out.format("\nIs port %S open ? %B", PORT_OUT_NAME, PORT_OUT.isOpened());
+      //Escribe una cadena y la recibe el listener
+      PORT_OUT.writeString("Hola Mundo");
+      
+//Inicia un nuevo thread que se encarga de escribir datos en puerto de salida, para fines de prueba exclusivamente
+      new SerialDataProducer(PORT_OUT).start();
+      
+//Si no se ocupan threads se deben cerrar los puertos
+//      if (PORT_IN.isOpened()) {
+//         PORT_IN.removeEventListener();
+//         PORT_IN.closePort();
+//      }
+//
+//      if (PORT_OUT.isOpened()) {
+//         PORT_OUT.closePort();
+//      }
+   }
+
+   /**
+    * Dumb thread class that simulates continuous writing to serial port. Once
+    */
+   private static class SerialDataProducer extends Thread {
+
+      private static final int SLEEP_DUR = 500;
+      private final String data = "When around one everything has become silent, solemn as a clear, starlit night,\n"
+              + " when the soul comes to be alone in the whole world, then before one there appears,\n"
+              + " not an extraordinary human being, but the eternal power itself, then the heavens open,\n"
+              + " and the I chooses itself or, more correctly, receives itself. Then the personality receives \n"
+              + "the accolade of knighthood that ennobles it for an eternity.\n "
+              + "The knight of faith is the only happy man, the heir to the finite\n"
+              + " while the knight of resignation is a stranger and an alien";
+      private final SerialPortWriter portWriter;
+
+      SerialDataProducer(SerialPort portOut) {
+         portWriter = new SerialPortWriter(portOut);
+      }
+
+      @Override
+      public void run() {
+         String[] lines = data.split("\n");
+         for (String line : lines) {
+            try {
+               Thread.sleep(SLEEP_DUR);
+               portWriter.writeData(line);
+            } catch (InterruptedException e) {
+               e.printStackTrace();
+            }
+         }
+         
+         try {
+            if (PORT_IN.isOpened()) {
+               PORT_IN.removeEventListener();
+               PORT_IN.closePort();
+            }
+
+            if (PORT_OUT.isOpened()) {
+               PORT_OUT.closePort();
+            }
+         } catch (SerialPortException e) {
+
+         }
+      }
+   }
+
+}

@@ -1,0 +1,50 @@
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.FXMLController;
+import io.datafx.controller.flow.action.LinkAction;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import mx.vw.swf.cdi.WeldJavaFXLauncher;
+import mx.vw.swf.sms.service.SMSProveedorService;
+
+import javax.inject.Inject;
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * Created by dzm152z on 08/01/2015.
+ */
+@FXMLController("/fxml/auth/login.fxml")
+public class LoginController {
+    @Inject
+    FXMLLoader fxmlLoader;
+
+    @Inject
+    SMSProveedorService smsProveedorService;
+
+    @Inject WelcomeController welcomeController;
+
+    @FXML private TextField inputUser;
+    @FXML private PasswordField inputPassword;
+
+    @FXML @LinkAction(WelcomeController.class)
+    private Button loginButton;
+
+    public void login(Event event) throws IOException {
+        System.out.println(smsProveedorService);
+        System.out.println(inputUser.getText());
+        System.out.println(inputPassword.getText());
+
+        InputStream is = null;
+
+        is = getClass().getResourceAsStream("/fxml/security/Contenedor.fxml");
+        fxmlLoader.setController(welcomeController);
+        WeldJavaFXLauncher.mainStage.setScene(new Scene((Parent) fxmlLoader.load(is)));
+    }
+}

@@ -1,0 +1,243 @@
+package mx.vw.swf.sms.controller;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.ViewFlowContext;
+import io.datafx.core.DataFXConfiguration;
+import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javax.annotation.PostConstruct;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.dao.SegUsuarioDAO;
+import mx.vw.swf.security.model.SegUsuario;
+import mx.vw.swf.sms.dao.SmsCteProvDAO;
+import mx.vw.swf.sms.model.SmsCteProv;
+import mx.vw.swf.sms.service.CrearEditarClienteProveedorService;
+import mx.vw.swf.sms.utilerias.Utilerias;
+import org.controlsfx.dialog.Dialogs;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1yij
+ */
+@ViewController("/fxml/catalogos/CrearEditarClienteProveedor.fxml")
+public class CrearEditarClienteProveedorController implements Initializable {
+
+    //labels
+    @FXML
+    private Label lblTipo;
+    @FXML
+    private Label lblID;
+    @FXML
+    private Label lblIdSAP;
+    @FXML
+    private Label lblRazonSocial;
+    @FXML
+    private Label lblNombreEmpresa;
+    @FXML
+    private Label lblClave;
+    @FXML
+    private Label lblStatus;
+    @FXML
+    private Label lblPermisoContingencia;
+    //Componentes
+    @FXML
+    private Label lblValorID;
+    @FXML
+    private TextField txtIdSap;
+    @FXML
+    private TextField txtRazonSocial;
+    @FXML
+    private TextField txtNombreEmpresa;
+    @FXML
+    private TextField txtClave;
+    @FXML
+    private CheckBox chxPermisoContingencia;
+    @FXML
+    private CheckBox chxEstatuseEntidad;
+    @FXML
+    private RadioButton rbtnCliente;
+    @FXML
+    private RadioButton rbtnProveedor;
+    @FXML
+    private Button btnAceptar;
+    @FXML
+    private Button btnCancelar;
+    
+    
+    private SmsCteProv entidadActual;
+    private SegUsuario segUsuario;
+    
+    public CrearEditarClienteProveedorController (SegUsuario segUsuario)
+    {
+        this.segUsuario = segUsuario;        
+    }
+    
+    
+    
+    @PostConstruct
+    public void postContruct() {
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        inicializarEventos();
+        inicializarControles();
+    }
+
+    private void inicializarControles() {
+        lblTipo.setText(DataFXLauncher.mensajesProperties.getProperty("Catalogos.CltsPrvs.NuevoEditar.lblTipo") + ":");
+        lblID.setText(DataFXLauncher.mensajesProperties.getProperty("Catalogos.CltsPrvs.NuevoEditar.lblID") + ":");
+        lblIdSAP.setText(DataFXLauncher.mensajesProperties.getProperty("Catalogos.CltsPrvs.NuevoEditar.lblIdSAP") + ":");
+        lblRazonSocial.setText(DataFXLauncher.mensajesProperties.getProperty("Catalogos.CltsPrvs.NuevoEditar.lblRazonSocial") + ":");
+        lblNombreEmpresa.setText(DataFXLauncher.mensajesProperties.getProperty("Catalogos.CltsPrvs.NuevoEditar.lblNombreEmpresa") + ":");
+        lblClave.setText(DataFXLauncher.mensajesProperties.getProperty("Catalogos.CltsPrvs.NuevoEditar.lblClave") + ":");
+        lblStatus.setText(DataFXLauncher.mensajesProperties.getProperty("Catalogos.CltsPrvs.NuevoEditar.lblStatus") + ":");
+        lblPermisoContingencia.setText(DataFXLauncher.mensajesProperties.getProperty("Catalogos.CltsPrvs.NuevoEditar.lblPermisoContingencia") + ":");
+        btnAceptar.setText(DataFXLauncher.mensajesProperties.getProperty("General.btnAceptar"));
+        btnCancelar.setText(DataFXLauncher.mensajesProperties.getProperty("General.btnCancelar"));
+
+        ToggleGroup group = new ToggleGroup();
+        group.getToggles().add(rbtnCliente);
+        group.getToggles().add(rbtnProveedor);
+        group.selectToggle(rbtnCliente);
+
+    }
+
+    private void inicializarEventos() {
+        chxPermisoContingencia.setSelected(false);
+        rbtnCliente.setOnAction((event) -> {
+            lblPermisoContingencia.setVisible(true);
+            chxPermisoContingencia.setVisible(true);
+            chxPermisoContingencia.setSelected(false);
+        });
+
+        rbtnProveedor.setOnAction((event) -> {
+            lblPermisoContingencia.setVisible(false);
+            chxPermisoContingencia.setVisible(false);
+        });
+
+        btnAceptar.setOnAction((event) -> accionBtnAceptar(event));
+    }
+
+    public void accionBtnAceptar(ActionEvent e) {
+        if (validaciones()) {
+            obtenerDatosDelFrame();
+            guardarActualizarEntidad ();
+            Utilerias.cerrar(e);
+        }
+    }
+
+    private boolean validaciones() {
+        boolean bandera = true;
+
+        if (txtIdSap.getText().isEmpty()) {
+            bandera = false;
+            lblIdSAP.setTextFill(Color.RED);
+        } else {
+            lblIdSAP.setTextFill(Color.BLACK);
+        }
+
+        if (txtClave.getText().isEmpty()) {
+            bandera = false;
+            lblClave.setTextFill(Color.RED);
+        } else {
+            lblClave.setTextFill(Color.BLACK);
+        }
+
+        if (txtNombreEmpresa.getText().isEmpty()) {
+            lblNombreEmpresa.setTextFill(Color.RED);
+            bandera = false;
+        } else {
+            lblNombreEmpresa.setTextFill(Color.BLACK);
+        }
+
+        if (txtRazonSocial.getText().isEmpty()) {
+            bandera = false;
+            lblRazonSocial.setTextFill(Color.RED);
+        } else {
+            lblRazonSocial.setTextFill(Color.BLACK);
+        }
+
+        if (!bandera) {
+            Dialogs.create()
+                    .owner(DataFXLauncher.primary)
+                    .title(DataFXLauncher.mensajesProperties.getProperty("Sistema.Nombre"))
+                    .masthead(DataFXLauncher.mensajesProperties.getProperty("Login.Valid.IncompleteData.Heade"))
+                    .message(DataFXLauncher.mensajesProperties.getProperty("Login.Valid.IncompleteData.Message"))
+                    .showWarning();
+        }
+        return bandera;
+    }
+
+    private void obtenerDatosDelFrame() {
+        if (entidadActual == null) {
+            entidadActual = new SmsCteProv();
+        }
+
+        entidadActual.setIdSap(txtIdSap.getText().trim().toUpperCase());
+        entidadActual.setRazonSocial(txtRazonSocial.getText().trim().toUpperCase());
+        entidadActual.setNombre(txtNombreEmpresa.getText().trim().toUpperCase());
+        entidadActual.setClave(txtClave.getText().trim().toUpperCase());
+        entidadActual.setEstatus(chxEstatuseEntidad.isSelected() ? Short.parseShort("1") : Short.parseShort("0"));
+        
+        
+        entidadActual.setSegUsuarioByCreatedBy(segUsuario);       
+        
+        if (rbtnProveedor.isSelected()) {
+            entidadActual.setEsProveedor(Short.parseShort("1"));
+            entidadActual.setSalidaContingencia(Short.parseShort("0"));
+        } else {
+            entidadActual.setEsProveedor(Short.parseShort("0"));
+            entidadActual.setSalidaContingencia(chxPermisoContingencia.isSelected() ? Short.parseShort("1") : Short.parseShort("0"));
+        }        
+    }
+
+    private void guardarActualizarEntidad() {
+        CrearEditarClienteProveedorService cecps = new CrearEditarClienteProveedorService();
+        
+        if(entidadActual.getId()== null || entidadActual.getId()==0)
+        { 
+            entidadActual.setCreatedOn(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+            cecps.guardarEntidad(entidadActual);
+            Dialogs.create()
+                    .owner(DataFXLauncher.primary)
+                    .title(DataFXLauncher.mensajesProperties.getProperty("Sistema.Nombre"))
+                    .masthead(DataFXLauncher.mensajesProperties.getProperty("General.Save.Header"))
+                    .message(DataFXLauncher.mensajesProperties.getProperty("General.Save.Message"))
+                    .showInformation();
+        }
+        else
+        {
+            //aO.update(entidadActual);
+        Dialogs.create()
+                    .owner(DataFXLauncher.primary)
+                    .title(DataFXLauncher.mensajesProperties.getProperty("Sistema.Nombre"))
+                    .masthead(DataFXLauncher.mensajesProperties.getProperty("General.Update.Header"))
+                    .message(DataFXLauncher.mensajesProperties.getProperty("General.Update.Message"))
+                    .showInformation();
+    }}
+}

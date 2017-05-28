@@ -1,0 +1,156 @@
+package mx.vw.swf.sms.model;
+
+import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+/**
+ * AbstractFwkCatApps entity provides the base persistence definition of the
+ * FwkCatApps entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractFwkCatApps implements java.io.Serializable {
+
+    // Fields
+
+    private Short idApp;
+    private String applicationName;
+    private Timestamp createdOn;
+    private String createdBy;
+    private Timestamp updatedOn;
+    private String updatedBy;
+    private Short status;
+    private Set<FwkLogger> fwkLoggers = new HashSet<FwkLogger>(0);
+    private Set<FwkCorreoPend> fwkCorreoPends = new HashSet<FwkCorreoPend>(0);
+    private Set<FwkCorreoTemplate> fwkCorreoTemplates = new HashSet<FwkCorreoTemplate>(
+            0);
+
+    // Constructors
+
+    /** default constructor */
+    public AbstractFwkCatApps() {
+    }
+
+    /** minimal constructor */
+    public AbstractFwkCatApps(Short idApp, String applicationName) {
+        this.idApp = idApp;
+        this.applicationName = applicationName;
+    }
+
+    /** full constructor */
+    public AbstractFwkCatApps(Short idApp, String applicationName,
+            Timestamp createdOn, String createdBy, Timestamp updatedOn,
+            String updatedBy, Short status, Set<FwkLogger> fwkLoggers,
+            Set<FwkCorreoPend> fwkCorreoPends,
+            Set<FwkCorreoTemplate> fwkCorreoTemplates) {
+        this.idApp = idApp;
+        this.applicationName = applicationName;
+        this.createdOn = createdOn;
+        this.createdBy = createdBy;
+        this.updatedOn = updatedOn;
+        this.updatedBy = updatedBy;
+        this.status = status;
+        this.fwkLoggers = fwkLoggers;
+        this.fwkCorreoPends = fwkCorreoPends;
+        this.fwkCorreoTemplates = fwkCorreoTemplates;
+    }
+
+    // Property accessors
+    @Id
+    @Column(name = "ID_APP", unique = true, nullable = false, precision = 4, scale = 0)
+    public Short getIdApp() {
+        return this.idApp;
+    }
+
+    public void setIdApp(Short idApp) {
+        this.idApp = idApp;
+    }
+
+    @Column(name = "APPLICATION_NAME", unique = true, nullable = false, length = 50)
+    public String getApplicationName() {
+        return this.applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
+    @Column(name = "CREATED_ON", length = 23)
+    public Timestamp getCreatedOn() {
+        return this.createdOn;
+    }
+
+    public void setCreatedOn(Timestamp createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    @Column(name = "CREATED_BY", length = 15)
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @Column(name = "UPDATED_ON", length = 23)
+    public Timestamp getUpdatedOn() {
+        return this.updatedOn;
+    }
+
+    public void setUpdatedOn(Timestamp updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
+    @Column(name = "UPDATED_BY", length = 15)
+    public String getUpdatedBy() {
+        return this.updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    @Column(name = "STATUS", precision = 3, scale = 0)
+    public Short getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(Short status) {
+        this.status = status;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "fwkCatApps")
+    public Set<FwkLogger> getFwkLoggers() {
+        return this.fwkLoggers;
+    }
+
+    public void setFwkLoggers(Set<FwkLogger> fwkLoggers) {
+        this.fwkLoggers = fwkLoggers;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "fwkCatApps")
+    public Set<FwkCorreoPend> getFwkCorreoPends() {
+        return this.fwkCorreoPends;
+    }
+
+    public void setFwkCorreoPends(Set<FwkCorreoPend> fwkCorreoPends) {
+        this.fwkCorreoPends = fwkCorreoPends;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "fwkCatApps")
+    public Set<FwkCorreoTemplate> getFwkCorreoTemplates() {
+        return this.fwkCorreoTemplates;
+    }
+
+    public void setFwkCorreoTemplates(Set<FwkCorreoTemplate> fwkCorreoTemplates) {
+        this.fwkCorreoTemplates = fwkCorreoTemplates;
+    }
+
+}

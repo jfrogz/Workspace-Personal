@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefWidth="500" styleClass="fondo" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <BorderPane>
+        <top>
+            <HBox>
+                <children>
+                    <Label fx:id="errorMessageLabel" styleClass="errorMessage" textAlignment="JUSTIFY" wrapText="true" prefWidth="500"/>
+                </children>
+            </HBox>
+        </top>
+        <center>
+            <GridPane>
+                <children>
+                    <Label fx:id="lbUsuario" GridPane.rowIndex="1" />
+                    <Label fx:id="lbNombre" GridPane.rowIndex="2" />
+                    <Label fx:id="lbApPaterno"  GridPane.rowIndex="3" />
+                    <Label fx:id="lbApMaterno"  GridPane.rowIndex="4" />
+                    <Label fx:id="lbCorreo"  GridPane.rowIndex="5" />
+                    <Label fx:id="lbEstatus"  GridPane.rowIndex="6" />
+                    <TextField fx:id="txtUsuario" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label fx:id="lbUsuarioEdicion" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField fx:id="txtNombreUsuario" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <TextField fx:id="txtApellidoPat" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <TextField fx:id="txtApellidoMat" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <TextField fx:id="txtCorreo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <CheckBox fx:id="chxEstatusUsuario" lineSpacing="7.0" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                    <Label fx:id="id" />
+                    <Label fx:id="idEtiqueta" GridPane.columnIndex="1" />
+                </children>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="NEVER" maxWidth="195.0" minWidth="10.0" prefWidth="159.0" />
+                    <ColumnConstraints hgrow="NEVER" maxWidth="241.0" minWidth="10.0" prefWidth="241.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+                </rowConstraints>
+            </GridPane>
+        </center>
+        <bottom>
+            <GridPane>
+                <Button fx:id="btnGuardar" mnemonicParsing="false" styleClass="botones" GridPane.columnIndex="1" />
+                <Button fx:id="btnCancelar" mnemonicParsing="false"  styleClass="botones" GridPane.columnIndex="2" />
+            </GridPane>
+        </bottom>
+    </BorderPane>
+</AnchorPane>

@@ -1,0 +1,64 @@
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.context.ActionHandler;
+import io.datafx.controller.flow.context.FlowActionHandler;
+import io.datafx.controller.util.VetoException;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import mx.com.vw.swf.exception.SWFLoginException;
+import mx.vw.swf.security.service.LoginService;
+
+import javax.naming.NamingException;
+
+/**
+ * Created by dzm152z on 08/01/2015.
+ */
+//@FXMLController("/fxml/security/Login.fxml")
+@ViewController("/fxml/security/Login.fxml")
+public class LoginController {
+
+    @FXML private TextField txtUsuario;
+    @FXML private TextField txtPassword;
+
+    @FXML //@LinkAction(WelcomeController.class)
+    private Button btnInicioUsuario;
+
+    @ActionHandler
+    FlowActionHandler actionHandler;
+
+    LoginService loginService = new LoginService();
+
+    public void login(Event event) {
+<<<<<<< .mine
+        
+        
+        System.out.println(txtUsuario.getText());
+        System.out.println(txtPassword.getText());
+=======
+        String username = txtUsuario.getText();
+        String password =  txtPassword.getText();
+        System.out.println(username + " " + password);
+        try {
+            boolean success = loginService.tryLogin(username, password);
+            System.out.print("login? " + success);
+            try {
+                if (success) {
+                    actionHandler.navigate(WelcomeController.class);
+                } else {
+                    System.out.println("Error in login. Please check your password.");
+                }
+            } catch (VetoException e) {
+                e.printStackTrace();
+            } catch (FlowException e) {
+                e.printStackTrace();
+            }
+        } catch (NamingException | SWFLoginException e) {
+            e.printStackTrace();
+        }
+>>>>>>> .r3562
+    }
+}

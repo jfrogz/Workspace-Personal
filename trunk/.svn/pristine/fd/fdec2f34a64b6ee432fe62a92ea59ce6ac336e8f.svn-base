@@ -1,0 +1,271 @@
+package mx.vw.swf.security.dao;
+
+import java.util.List;
+import java.util.logging.Level;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import mx.vw.swf.security.model.SegPerfilUsr;
+import mx.vw.swf.security.model.SegPerfilUsrId;
+import mx.vw.swf.fwk.model.EntityManagerHelper;
+
+
+/**
+ * A data access object (DAO) providing persistence and search support for
+ * SegPerfilUsr entities. Transaction control of the save(), update() and
+ * delete() operations must be handled externally by senders of these methods or
+ * must be manually added to each of these methods for data to be persisted to
+ * the JPA datastore.
+ * 
+ * @see SegPerfilUsr
+ * @author MyEclipse Persistence Tools
+ */
+public class SegPerfilUsrDAO implements ISegPerfilUsrDAO {
+    // property constants
+
+    private EntityManager getEntityManager() {
+        return EntityManagerHelper.getEntityManager();
+    }
+
+    /**
+     * Perform an initial save of a previously unsaved SegPerfilUsr entity. All
+     * subsequent persist actions of this entity should use the #update()
+     * method. This operation must be performed within the a database
+     * transaction context for the entity's data to be permanently saved to the
+     * persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#persist(Object)
+     * EntityManager#persist} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * SegPerfilUsrDAO.save(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            SegPerfilUsr entity to persist
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void save(SegPerfilUsr entity) {
+        EntityManagerHelper.log("saving SegPerfilUsr instance", Level.INFO,
+                null);
+        try {
+            EntityManagerHelper.beginTransaction();
+            getEntityManager().persist(entity);
+            EntityManagerHelper.commit();
+            EntityManagerHelper.getEntityManager().close();
+            EntityManagerHelper.log("save successful", Level.INFO, null);
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("save failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Delete a persistent SegPerfilUsr entity. This operation must be performed
+     * within the a database transaction context for the entity's data to be
+     * permanently deleted from the persistence store, i.e., database. This
+     * method uses the {@link javax.persistence.EntityManager#remove(Object)
+     * EntityManager#delete} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * SegPerfilUsrDAO.delete(entity);
+     * EntityManagerHelper.commit();
+     * entity = null;
+     * </pre>
+     * 
+     * @param entity
+     *            SegPerfilUsr entity to delete
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    @Override
+    public void delete(SegPerfilUsr entity) {
+        EntityManagerHelper.log("deleting SegPerfilUsr instance", Level.INFO, null);
+        try {
+            //EntityManagerHelper.beginTransaction();
+            entity = getEntityManager().find(SegPerfilUsr.class, entity.getId());
+            System.out.println("entity " + entity.getId());
+            getEntityManager().remove(entity);
+            EntityManagerHelper.log("delete successful", Level.INFO, null);
+            //EntityManagerHelper.commit();
+            //EntityManagerHelper.closeEntityManager();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("delete failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Persist a previously saved SegPerfilUsr entity and return it or a copy of
+     * it to the sender. A copy of the SegPerfilUsr entity parameter is returned
+     * when the JPA persistence mechanism has not previously been tracking the
+     * updated entity. This operation must be performed within the a database
+     * transaction context for the entity's data to be permanently saved to the
+     * persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
+     * operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * entity = SegPerfilUsrDAO.update(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            SegPerfilUsr entity to update
+     * @return SegPerfilUsr the persisted SegPerfilUsr entity instance, may not
+     *         be the same
+     * @throws RuntimeException
+     *             if the operation fails
+     */
+    public SegPerfilUsr update(SegPerfilUsr entity) {
+        EntityManagerHelper.log("updating SegPerfilUsr instance", Level.INFO,
+                null);
+        try {
+            SegPerfilUsr result = getEntityManager().merge(entity);
+            EntityManagerHelper.log("update successful", Level.INFO, null);
+            return result;
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("update failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    public SegPerfilUsr findById(SegPerfilUsrId id) {
+        EntityManagerHelper.log("finding SegPerfilUsr instance with id: " + id,
+                Level.INFO, null);
+        try {
+            SegPerfilUsr instance = getEntityManager().find(SegPerfilUsr.class,
+                    id);
+            return instance;
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Find all SegPerfilUsr entities with a specific property value.
+     * 
+     * @param propertyName
+     *            the name of the SegPerfilUsr property to query
+     * @param value
+     *            the property value to match
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            number of results to return.
+     * @return List<SegPerfilUsr> found by query
+     */
+    @SuppressWarnings("unchecked")
+    public List<SegPerfilUsr> findByProperty(String propertyName,
+            final Object value, final int... rowStartIdxAndCount) {
+        EntityManagerHelper.log("finding SegPerfilUsr instance with property: "
+                + propertyName + ", value: " + value, Level.INFO, null);
+        try {
+            final String queryString = "select model from SegPerfilUsr model where model."
+                    + propertyName + "= :propertyValue";
+            Query query = getEntityManager().createQuery(queryString);
+            query.setParameter("propertyValue", value);
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find by property name failed",
+                    Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Find all SegPerfilUsr entities.
+     * 
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            count of results to return.
+     * @return List<SegPerfilUsr> all SegPerfilUsr entities
+     */
+    @SuppressWarnings("unchecked")
+    public List<SegPerfilUsr> findAll(final int... rowStartIdxAndCount) {
+        EntityManagerHelper.log("finding all SegPerfilUsr instances",
+                Level.INFO, null);
+        try {
+            final String queryString = "select model from SegPerfilUsr model";
+            Query query = getEntityManager().createQuery(queryString);
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+                   
+                    return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find all failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+    
+    
+ 
+    public void deleteQuery(final Object value) {
+        EntityManagerHelper.log("deleting SegPerfilUsr instance", Level.INFO, null);
+        try {
+            EntityManagerHelper.beginTransaction();
+            final String queryString = "delete from SegPerfilUsr model where model.segUsuario.id="+value;
+            getEntityManager().createQuery(queryString).executeUpdate();
+            EntityManagerHelper.commit();
+            EntityManagerHelper.getEntityManager().close();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("delete failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<SegPerfilUsr> findUsersManagement(Object valueIdUser,
+             Object valueIdPerfil) {
+        EntityManagerHelper.log("finding SegPerfilUsr instance with property: User Id :"
+                + valueIdUser + ", Perfil Id : " + valueIdPerfil, Level.INFO, null);
+        try {
+            final String queryString = "select model from SegPerfilUsr model "
+                                     + "where model.segUsuario.id != :propertyValueUser and model.segPerfil.id=:propertyValuePerfil";
+       
+            Query query = getEntityManager().createQuery(queryString);
+            query.setParameter("propertyValueUser", valueIdUser);
+            query.setParameter("propertyValuePerfil", valueIdPerfil);
+            
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find by property name failed",
+                    Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+
+   
+}

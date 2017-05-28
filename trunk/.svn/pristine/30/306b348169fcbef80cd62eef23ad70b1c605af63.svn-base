@@ -1,0 +1,33 @@
+package mx.vw.swf.sms.model;
+
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * SegPerfil entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "SEG_PERFIL", schema = "dbo", catalog = "SMS")
+public class SegPerfil extends AbstractSegPerfil implements
+        java.io.Serializable {
+
+    // Constructors
+
+    /** default constructor */
+    public SegPerfil() {
+    }
+
+    /** minimal constructor */
+    public SegPerfil(Integer id, String perfil, Short estatus) {
+        super(id, perfil, estatus);
+    }
+
+    /** full constructor */
+    public SegPerfil(Integer id, String perfil, Short estatus,
+            Set<SegPerfilUsr> segPerfilUsrs,
+            Set<SegPermisoPerfil> segPermisoPerfils) {
+        super(id, perfil, estatus, segPerfilUsrs, segPermisoPerfils);
+    }
+
+}

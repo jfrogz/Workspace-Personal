@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="20.0" prefWidth="800.0" styleClass="BackgroundClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.vw.swf.security.controller.MenuController">
+    <bottom>
+      <BorderPane prefHeight="25.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <right>
+            <Hyperlink fx:id="lblSoftwareFactory" onAction="#irASoftwareFactory" styleClass="FooterLabel" text="Software Factory" BorderPane.alignment="CENTER" />
+         </right>
+         <left>
+            <Label fx:id="lbVersion" styleClass="FooterLabel" text="Sin versión" BorderPane.alignment="CENTER" />
+         </left>
+      </BorderPane>
+   </bottom>
+</BorderPane>

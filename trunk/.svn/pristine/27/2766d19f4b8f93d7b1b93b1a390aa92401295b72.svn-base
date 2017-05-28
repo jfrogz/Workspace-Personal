@@ -1,0 +1,84 @@
+package mx.vw.swf.security.service;
+
+import mx.vw.swf.fwk.dao.FwkActionItemDAO;
+import mx.vw.swf.fwk.model.FwkActionItem;
+import mx.vw.swf.security.model.SegPerfilUsr;
+import mx.vw.swf.security.model.SegUsuario;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Created by dzm152z on 06/03/2015.
+ */
+public class MenuService {
+    /**
+     * <p>
+     *     Given a user construct a collection of FwkActionItem for which the user has access.
+     * </p>
+     * @param segUsuario
+     * @return
+     */
+    public List<FwkActionItem> getItemsForUser(final SegUsuario segUsuario) {
+        List<FwkActionItem> visible = new ArrayList<>();
+        if (null == segUsuario || null == segUsuario.getId() || 1 != segUsuario.getEstatus().intValue()
+                || null == segUsuario.getSegPerfilUsrs() || segUsuario.getSegPerfilUsrs().isEmpty()) {
+            return visible;
+        }
+        List<FwkActionItem> allItems = new FwkActionItemDAO().findAllForRendering();
+        allItems = preserveValidItemsOnly(allItems, segUsuario.getSegPerfilUsrs(), new ArrayList<>());
+        return allItems;
+    }
+
+    /**
+     * <p>
+     *     Given a collection of profiles associated to a user, generate a collection of FwkAction items for which
+     *     the user has access taking into account the privileges of it's assigned profiles.
+     * </p>
+     * @param allItems
+     * @param segPerfilUsrs
+     * @param finalItems
+     * @return
+     */
+    private List<FwkActionItem> preserveValidItemsOnly(List<FwkActionItem> allItems, Set<SegPerfilUsr> segPerfilUsrs, List<FwkActionItem> finalItems) {
+        for (FwkActionItem parent : allItems) {
+            if (filterValidOnly(segPerfilUsrs, parent)) {
+                FwkActionItem parentClone = FwkActionItem.clone(parent);
+                finalItems.add(parentClone);
+                System.out.println("Added item " + parentClone.getUrl());
+                for (FwkActionItem child : parent.getChildren()) {
+                    if (filterValidOnly(segPerfilUsrs, child)) {
+                        parentClone.getChildren().add(child);
+                    }
+                    preserveValidItemsOnly(child.getChildren(), segPerfilUsrs, finalItems);
+                }
+            }
+        }
+        return finalItems;
+    }
+
+    /**
+     * <p>
+     *     Given a FwkActionItem, walk through all privileges for all profiles for the given user.
+     * </p>
+     * @param segPerfilUsrs
+     * @param item
+     * @return
+     *  True if and only if there is at least one privilege in all profiles for a given user,
+     *  which value matches the action item's url value.
+     */
+    private Boolean filterValidOnly(Set<SegPerfilUsr> segPerfilUsrs, FwkActionItem item) {
+        return 1 == item.getEnabled().intValue() && 1L <=
+                segPerfilUsrs.stream()
+                    .filter((s) -> {
+                        return 1 == s.getSegPerfil().getEstatus().intValue()
+                                && 1L <= s.getSegPerfil().getSegPermisoPerfils().stream()
+                                .filter((p) -> {
+                                    return 1 == p.getSegPermiso().getEstatus()
+                                            && p.getSegPermiso().getPermiso().equals(item.getUrl());
+                                })
+                                .count();
+                    }).count();
+    }
+}

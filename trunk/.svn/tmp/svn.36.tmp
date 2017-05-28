@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="90.0" prefWidth="800.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+         <right>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <center>
+                  <GridPane prefHeight="57.0" prefWidth="230.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button mnemonicParsing="false" text="Ayuda" />
+                        <Hyperlink text="Manual de Usuario" underline="true" GridPane.rowIndex="2" />
+                        <Hyperlink text="Salir" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+               </center>
+               <bottom>
+                  <Label prefHeight="14.0" prefWidth="230.0" text="(1109) - Jennifer Alexandra Romero López" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+               </bottom>
+            </BorderPane>
+         </right>
+         <top>
+            <Label alignment="CENTER" prefHeight="29.0" prefWidth="225.0" text="Scale Management System" textAlignment="CENTER" textFill="#2f59ee" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+         </top>
+         <center>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Movimientos de cliente" textAlignment="CENTER" textFill="#00c3af" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+         </center>
+         <left>
+            <GridPane prefHeight="69.0" prefWidth="187.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="110.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="171.0" minWidth="10.0" prefWidth="32.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Hyperlink fx:id="linkVolkswagen" alignment="TOP_LEFT" prefHeight="57.0" prefWidth="96.0" text="VOLKSWAGEN de México" textAlignment="CENTER" textFill="#0f9fbf" wrapText="true" GridPane.columnIndex="1">
+                     
+                  </Hyperlink>
+               </children>
+            </GridPane>
+         </left>
+   <bottom>
+      <MenuBar fx:id="welcomeMenuBar" BorderPane.alignment="CENTER" />
+   </bottom>
+      </BorderPane>

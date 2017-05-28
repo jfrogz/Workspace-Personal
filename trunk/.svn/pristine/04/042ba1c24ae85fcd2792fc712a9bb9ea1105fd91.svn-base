@@ -1,0 +1,58 @@
+package mx.vw.swf.sms.controller;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+import io.datafx.controller.ViewController;
+import javafx.fxml.FXML;
+
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+
+import javax.annotation.PostConstruct;
+import static mx.vw.swf.cdi.DataFXLauncher.getProperty;
+import static mx.vw.swf.cdi.DataFXLauncher.getSecurityProperty;
+import mx.vw.swf.security.controller.MenuController;
+import mx.vw.swf.security.model.SegPerfil;
+import mx.vw.swf.sms.utilerias.Utilerias;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1x0d
+ */
+@ViewController("/fxml/functionality/ReporteMovimientos.fxml")
+public class ReporteMovimientosController extends MenuController {
+
+ 
+    @FXML
+    private ComboBox comboPaginacion;
+    @FXML
+    private Label lbPaginacion;
+    
+
+    @PostConstruct
+    public void postConstruct() {
+
+        super.postConstruct();
+        super.setEncabezado(getProperty("ReporteMovimientos.CltsProv.Header"));
+        inicializaColumnasTabla(); 
+        lbPaginacion.setText(getProperty("General.Paginacion.lbRegistros"));
+        comboPaginacion.setItems(Utilerias.comboPaginacion());
+        comboPaginacion.getSelectionModel().select(0);
+            
+    }
+
+   
+    public void inicializaColumnasTabla() {
+      
+
+    }
+  
+   
+}

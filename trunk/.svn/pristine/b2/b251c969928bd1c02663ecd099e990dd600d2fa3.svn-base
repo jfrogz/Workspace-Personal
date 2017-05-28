@@ -1,0 +1,161 @@
+#Especificos del Sistema
+Sistema.Nombre=Scale Management System (SMS)
+
+#Generales del Sistema
+General.Logout=Cerrar sesi\u00f3n
+General.ManualUsr=Manual Usuario
+General.VersionLabel=Versi\u00f3n 
+General.SWF=Software Factory
+General.Logout.Header=Cerrar sesi\u00f3n
+General.Logout.Message=\u00bfRealmente te gustar\u00eda cerrar la sesi\u00f3n?
+
+General.Exporter.Label=Exportar informaci\u00f3n:
+General.Exporter.Path.Label=Ruta destino:
+General.Exporter.Patch.Chooser.Title=Seleccione el directorio destino
+
+General.btnAceptar=Aceptar
+General.btnCancelar=Cancelar
+General.btnLimpiar=Limpiar
+General.btnNuevo=Nuevo
+General.btnEditar=Editar
+General.btnDesactivar=Desactivar
+General.btnActivar=Activar
+General.botonGuardar=Guardar
+General.botonRegresar=Regresar
+
+
+
+
+General.Save.Header=Guardar datos
+General.Save.Message=Los datos fueron almacenados correctamente
+General.Update.Header=Actualizar datos
+General.Update.Message=Los datos fueron actualizados correctamente
+General.Campo.Requerido=El campo %S es requerido
+
+General.Paginacion.lbRegistros=Registros por P\u00e1gina
+
+General.lbSeleccione=Seleccione
+General.lbAcciones=Acciones
+General.lbEstatus=Estatus
+General.lbID=ID
+General.lbActivo=Activo
+General.lbInactivo=Inactivo
+General.lbSi=Si
+General.lbNo=No
+General.lbNo=No
+
+
+#Pantalla Acceso
+Login.Header=Acceso al Sistema
+Login.UsrLabel=Usuario
+Login.PwdLabel=Contrase\u00f1a
+
+
+Welcome.Header="Bienvenido"
+#Pantalla Acceso Validaciones
+Login.Valid.IncompleteData.Header=Datos faltantes
+Login.Valid.IncompleteData.Message=Debe proporcionar todos los datos marcados con rojo.
+Login.Valid.NoAccess.Header=No tiene acceso
+Login.Valid.NoAccess.Message=El usuario no tiene acceso al sistema, contacte al administrador para que le otorgue acceso.
+Login.Valid.Credentials.Header=Datos Incorrectos
+Login.Valid.Credentials.Message=Los datos proporcionados son incorrectos, por favor intente nuevamente.
+Login.Valid.ActiveDir.Header=No Disponible
+Login.Valid.ActiveDir.Message=Ocurri\u00f3 un error al autenticar en Active Directory.
+
+#Configuraci\u00f3n de puerto
+Puerto.Movimiento=Configuraci\u00f3n del puerto
+Puerto.lblPuerto=Puerto
+Puerto.lblBaudaje=Baudaje
+Puerto.lblBitsDeDatos=Bits de datos
+Puerto.lblBitsDeParada=Bits de parada
+Puerto.lblParidadDePuerto=Paridad de puerto
+
+
+#------Crear Editar Clientes y Proveedores 
+Catalogos.CltsPrvs.Header=Clientes y Proveedores
+Catalogos.CltsPrvs.NuevoEditar.Header.New=Nuevo Cliente / Proveedor
+Catalogos.CltsPrvs.NuevoEditar.Header.Update=Editar Cliente / Proveedor
+Catalogos.CltsPrvs.NuevoEditar.lblTipo=Tipo
+Catalogos.CltsPrvs.NuevoEditar.lblID=ID
+Catalogos.CltsPrvs.NuevoEditar.lblIdSAP=ID SAP
+Catalogos.CltsPrvs.NuevoEditar.lblRazonSocial=Raz\u00f3n Social
+Catalogos.CltsPrvs.NuevoEditar.lblNombreEmpresa=Nombre Empresa
+Catalogos.CltsPrvs.NuevoEditar.lblClave=Clave
+Catalogos.CltsPrvs.NuevoEditar.lblStatus=Activo
+Catalogos.CltsPrvs.NuevoEditar.lblPermisoContingencia=Permiso Contingencia
+Catalogos.CltsPrvs.lbClave=Clave
+Catalogos.CltsPrvs.lbEmpresa=Empresa
+Catalogos.CltsPrvs.lbClienteProveedor=Cliente/Proveedor
+Catalogos.CltsPrvs.lbSalidaContingencia=Salida Contingencia
+Catalogos.CltsPrvs.lbCliente=Cliente
+Catalogos.CltsPrvs.lbProveedor=Proveedor
+Catalogos.CltsPrvs.btnProductos=Productos
+Catalogos.CltsPrvs.Valid.Estatus.Header=Estatus de Producto
+Catalogos.CltsPrvs.Valid.Estatus.Message=\u00bfEsta seguro de cambiar el estatus del producto ?
+
+Catalogos.Perfil.Label.Perfil=Perfil
+#Movimieentos
+Movimientos.General.Entity.lblClave=Clave
+Movimientos.General.Entity.lblNombre=Nombre
+Movimientos.General.Productos.lblHeader=Productos
+Movimientos.General.Productos.lblClave=Clave
+Movimientos.General.Productos.lblNombre=Nombre
+Movimientos.General.Entradas.lblEntrada=Entradas Vigentes
+Movimientos.General.Entradas.lblFolio=Folio
+Movimientos.General.Entradas.lblPlacas=Placas
+Movimientos.General.btnNuevaEntrada=Nueva Entrada
+Movimientos.General.btnSalida=Salida
+Movimientos.General.btnReimpresion=Reimpresion
+Movimientos.General.btnCancelarTicket=Cancelar Ticket
+Movimientos.General.btnEntradaCustodia=Entrada con Custodia
+Movimientos.General.btnSalidaCustodia=Salida con Custodia
+Movimientos.General.colEntityId=Id
+Movimientos.General.colEntityClave=Clave
+Movimientos.General.colEntityNombre=Nombre
+
+
+#Catalogo Productos
+Catalogos.CltsProductos.Header=Productos de Clientes y Proveedores
+Catalogos.CltsProductos.lbProducto=Producto
+Catalogos.CltsProductos.btnAsignarProductos=Asignar Productos
+Catalogos.CltsProductos.Valid.DesAct.Header=Asignar Productos
+Catalogos.CltsProductos.Valid.DesAct.Message=Asignar Productos
+Catalogos.CltsProductos.NuevoEditar.Header.New=Nuevo Producto
+Catalogos.CltsProductos.NuevoEditar.Header.Update=Editar Producto
+
+
+#Movimientos Clientes
+Movimientos.Clientes.Header=Movimientos de Clientes
+Movimientos.Clientes.lblEntity=Clientes
+
+#Movimientos Proveedores
+Movimientos.Proveedores.Header=Movimientos de Proveedores
+Movimientos.Proveedores.lblEntity=Proveedores
+
+
+#------Catalogo de Clientes y Proveedores - tabla(columnas)
+colId=Id
+colEsProveedor=Cliente/Proveedor
+colClave=Clave
+colNombreEmpresa=Nombre
+colRazonSocial=Raz\u00f3n Social
+colIdSAP=Id SAP
+colStatus=Status
+colSalidaContingencia=Salida Contingencia
+colAcciones=Acciones
+
+
+#------Catalogo de Clientes y Proveedores
+lblClave=Clave
+lblNombreEmpresa=Empresa
+btnNuevo=Nuevo
+
+Validations.Longitud.CampoGeneral=La longitud del campo %S debe estar entre %S y %S
+Validations.Longitud.Max.CampoGeneral=La longitud m\u00e1xima del campo %S es %S
+Validations.CampoVacio=El campo %S no puede ser vac\u00edo
+Validations.Item.NoSeleccionado=No se ha seleccionado ning\u00fan elemento de la lista de %S
+Validations.OrText=Se requiere que ingreses almenos alguno de estos datos 
+Validations.OrText.O=o
+
+#longitudCampoGeneralValidacion=La longitud del campo %S debe estar entre %S y %S
+#longitudMaxCampoGeneralValidacion=La longitud m\u00e1xima del campo %S es %S

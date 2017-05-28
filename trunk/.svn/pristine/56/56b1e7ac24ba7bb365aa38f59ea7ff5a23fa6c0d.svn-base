@@ -1,0 +1,43 @@
+package mx.vw.swf.sms.model;
+
+import mx.vw.swf.security.model.SegUsuario;
+import java.sql.Timestamp;
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * SmsCteProv entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "SMS_CTE_PROV", schema = "dbo", catalog = "SMS")
+public class SmsCteProv extends AbstractSmsCteProv implements
+        java.io.Serializable {
+
+    // Constructors
+
+    /** default constructor */
+    public SmsCteProv() {
+    }
+
+    /** minimal constructor */
+    public SmsCteProv(Long id, SegUsuario segUsuarioByCreatedBy,
+            Short esProveedor, String clave, String nombre, Short estatus,
+            Short salidaContingencia, Timestamp createdOn) {
+        super(id, segUsuarioByCreatedBy, esProveedor, clave, nombre, estatus,
+                salidaContingencia, createdOn);
+    }
+
+    /** full constructor */
+    public SmsCteProv(Long id, SegUsuario segUsuarioByCreatedBy,
+            SegUsuario segUsuarioByUpdatedBy, Short esProveedor, String clave,
+            String nombre, String razonSocial, String idSap, Short estatus,
+            Short salidaContingencia, Timestamp createdOn, Timestamp updatedOn,
+            Set<SmsMovimiento> smsMovimientos,
+            Set<SmsProdCteprov> smsProdCteprovs) {
+        super(id, segUsuarioByCreatedBy, segUsuarioByUpdatedBy, esProveedor,
+                clave, nombre, razonSocial, idSap, estatus, salidaContingencia,
+                createdOn, updatedOn, smsMovimientos, smsProdCteprovs);
+    }
+
+}

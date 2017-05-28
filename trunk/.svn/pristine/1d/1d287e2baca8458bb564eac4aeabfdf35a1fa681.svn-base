@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="374.0" prefWidth="426.0" styleClass="fondo" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="176.0" layoutY="296.0" prefHeight="30.0" prefWidth="237.0" spacing="60.0">
+         <children>
+            <Button fx:id="btnGuardarUsuario" mnemonicParsing="false" styleClass="botones" text="Guardar"  onAction="#guardarUsuario" />
+            <Button fx:id="btnCerrarUsuario" mnemonicParsing="false" styleClass="botones" text="Cacelar" />
+         </children>
+      </HBox>
+      <GridPane layoutX="23.0" layoutY="46.0" prefHeight="240.0" prefWidth="380.0">
+         <children>
+            <Label text="Usuario:" GridPane.rowIndex="1" />
+            <Label text="Nombre:" GridPane.rowIndex="2" />
+            <Label text="Apellido Paterno:" GridPane.rowIndex="3" />
+            <Label text="Apellido Materno:" GridPane.rowIndex="4" />
+            <Label text="Correo Electrónico:" GridPane.rowIndex="5" />
+            <Label text="Estatus:" GridPane.rowIndex="6" />
+            <TextField fx:id="txtUsuario" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtNombreUsuario" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtApellidoPat" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtApellidoMat" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txtCorreo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <CheckBox fx:id="chxEstatusUsuario" lineSpacing="7.0" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="id" text="ID:"/>
+            <Label fx:id="idEtiqueta" text="" GridPane.columnIndex="1" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="159.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="241.0" minWidth="10.0" prefWidth="241.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>

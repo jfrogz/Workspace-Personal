@@ -1,0 +1,71 @@
+#Especificos del Sistema
+Sistema.Nombre=Scale Management System (SMS)
+
+#Generales del Sistema
+General.Logout=Salir
+General.ManualUsr=Manual Usuario
+General.VersionLabel=Versi\u00f3n 
+General.SWF=Software Factory
+
+General.btnAceptar=Aceptar
+General.btnCancelar=Cancelar
+General.btnLimpiar=Limpiar
+
+General.Save.Header=Guardar datos
+General.Save.Message=Los datos fueron almacenados correctamente
+General.Update.Header=Actualizar datos
+General.Update.Message=Los datos fueron actualizados correctamente
+
+#Pantalla Acceso
+Login.Header=Acceso al Sistema
+Login.UsrLabel=Usuario:
+Login.PwdLabel=Contrase\u00f1a:
+
+#Pantalla Acceso Validaciones
+Login.Valid.IncompleteData.Header=Datos faltantes
+Login.Valid.IncompleteData.Message=Debe proporcionar todos los datos marcados con rojo.
+Login.Valid.NoAccess.Header=No tiene acceso
+Login.Valid.NoAccess.Message=El usuario no tiene acceso al sistema, contacte al administrador para que le otorgue acceso.
+Login.Valid.Credentials.Header=Datos Incorrectos
+Login.Valid.Credentials.Message=Los datos proporcionados son incorrectos, por favor intente nuevamente.
+Login.Valid.ActiveDir.Header=No Disponible
+Login.Valid.ActiveDir.Message=Ocurri\u00f3 un error al autenticar en Active Directory.
+
+#Configuraci\u00f3n de puerto
+Puerto.Movimiento=Configuraci\u00f3n del puerto
+Puerto.lblPuerto=Puerto
+Puerto.lblBaudaje=Baudaje
+Puerto.lblBitsDeDatos=Bits de datos
+Puerto.lblBitsDeParada=Bits de parada
+Puerto.lblParidadDePuerto=Paridad de puerto
+
+
+#------Crear Editar Clientes y Proveedores 
+Catalogos.CltsPrvs.NuevoEditar.lblTipo=Tipo
+Catalogos.CltsPrvs.NuevoEditar.lblID=ID
+Catalogos.CltsPrvs.NuevoEditar.lblIdSAP=ID SAP
+Catalogos.CltsPrvs.NuevoEditar.lblRazonSocial=Raz\u00f3n Social
+Catalogos.CltsPrvs.NuevoEditar.lblNombreEmpresa=Nombre Empresa
+Catalogos.CltsPrvs.NuevoEditar.lblClave=Clave
+Catalogos.CltsPrvs.NuevoEditar.lblStatus=Activo
+Catalogos.CltsPrvs.NuevoEditar.lblPermisoContingencia=Permiso Contingencia
+
+
+
+
+#------Catalogo de Clientes y Proveedores - tabla(columnas)
+colId=Id
+colEsProveedor=Cliente/Proveedor
+colClave=Clave
+colNombreEmpresa=Nombre
+colRazonSocial=Raz\u00f3n Social
+colIdSAP=Id SAP
+colStatus=Status
+colSalidaContingencia=Salida Contingencia
+colAcciones=Acciones
+
+
+#------Catalogo de Clientes y Proveedores
+lblClave=Clave
+lblNombreEmpresa=Empresa
+btnNuevo=Nuevo

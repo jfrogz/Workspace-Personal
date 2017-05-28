@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"   fx:id="borde" xmlns="http://javafx.com/javafx/8" >
+   
+    <top>
+         <fx:include source="../configuration/HeaderTemplate.fxml"/>       
+    </top>
+    <bottom>
+        <fx:include source="../configuration/FooterTemplate.fxml"/>
+       
+    </bottom>
+    <stylesheets>
+        <!--<URL value="@../estilos.css" />
+        <URL value="@../../css/estilos.css" />-->
+    </stylesheets>
+    <center>
+        <StackPane fx:id="mainStack" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    </center>
+</BorderPane>

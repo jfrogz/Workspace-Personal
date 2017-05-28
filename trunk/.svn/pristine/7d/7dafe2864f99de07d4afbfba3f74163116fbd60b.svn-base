@@ -1,0 +1,20 @@
+package mx.vw.swf.fwk;
+
+/**
+ *
+ * @author dzmppdw
+ */
+public class Utilerias {
+   
+       public static void consoleMsg(String cMensaje, Exception e, Object theClass){
+        String cMsg = "";
+        if(theClass != null)
+            cMsg += theClass.getClass().getPackage() + theClass.getClass().getName();
+        if(cMensaje != null)
+            cMsg += cMensaje;
+        System.out.println(cMsg);
+        if(e != null)
+            e.printStackTrace();
+    }
+
+}

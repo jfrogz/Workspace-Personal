@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="90.0" prefWidth="800.0" styleClass="BackgroundClass" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.vw.swf.security.controller.MenuController">
+    
+     
+    
+    <right>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <center>
+                <GridPane prefHeight="57.0" prefWidth="230.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Hyperlink fx:id="linkManualUsuario"  styleClass="FieldLabel" text="Manual de Usuario" underline="true" GridPane.rowIndex="3" onMouseClicked="#viewFullHelp" />
+                        <Hyperlink fx:id="labelSalida"  styleClass="FieldLabel" text="Salir" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ImageView fx:id="imagenSalida" fitHeight="39.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                            <image>
+                                <Image url="img/logout.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                        <ImageView fx:id="imgAyuda" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#viewHelp">
+                            <image>
+                                <Image url="img/help.png"  />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </children>
+                </GridPane>
+            </center>
+            <bottom>
+                <Label fx:id="labelIdentificadorUsuario" prefHeight="14.0" prefWidth="230.0" styleClass="FieldData" text="(1109) - Jennifer Alexandra Romero López" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </Label>
+            </bottom>
+        </BorderPane>
+    </right>
+    <top>
+        <Label fx:id="encabezadoPrincipal" alignment="CENTER" prefHeight="29.0" prefWidth="423.0" styleClass="HeaderLabel" text="Scale Management System" textAlignment="CENTER" textFill="#2f59ee" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+    </top>
+    <center>
+        <Label fx:id="labelMovimientoActual" alignment="CENTER" contentDisplay="CENTER" styleClass="TitleLabel" text="Movimientos de cliente" textAlignment="CENTER" textFill="#0f9f8d" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+    </center>
+    <left>
+        <GridPane style="-fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="20.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="110.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="171.0" minWidth="10.0" prefWidth="32.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+            </rowConstraints>
+            <children>
+                <ImageView fx:id="imgLogo" fitHeight="34.0" fitWidth="150.0" onMouseClicked="#irAIntranet" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                    <image>
+                        <Image url="img/logoRepEmpresa.png" />
+                    </image>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+                </ImageView>
+            </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="25.0" left="25.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+        </GridPane>
+    </left>
+    <bottom>
+        <BorderPane>
+            <top>
+                <MenuBar fx:id="welcomeMenuBar" />
+            </top>
+            <bottom>
+                <Label fx:id="errorMessageLabel" styleClass="errorMessage" />
+            </bottom>
+        </BorderPane>
+    </bottom>
+</BorderPane>

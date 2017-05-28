@@ -1,0 +1,18 @@
+package mx.vw.swf.security.controller;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+
+import javax.inject.Inject;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+public class ProfileAdminController extends SWFJavaFxController {
+    @Inject
+    FXMLLoader fxmlLoader;
+
+    public void onNew(ActionEvent actionEvent) {
+
+    }
+}

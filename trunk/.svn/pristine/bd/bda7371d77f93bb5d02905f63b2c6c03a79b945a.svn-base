@@ -1,0 +1,316 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewConfiguration;
+import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.Flow;
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.context.ActionHandler;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.FlowActionHandler;
+import io.datafx.controller.flow.context.ViewFlowContext;
+import io.datafx.controller.util.VetoException;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+import javax.annotation.PostConstruct;
+import mx.vw.swf.security.model.SegUsuario;
+import mx.vw.swf.security.dao.SegUsuarioDAO;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.StageStyle;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.service.CrearEditarUsuariosService;
+import mx.vw.swf.sms.utilerias.Pantallas;
+import mx.vw.swf.sms.utilerias.Utilerias;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1x0d
+ */
+@ViewController("/fxml/security/AdministrarUsuarios.fxml")
+public class AdministrarUsuariosController extends MenuController {
+
+    @FXML
+    private TableView<SegUsuario> tablaUsuarios;
+    @FXML
+    private TableColumn<SegUsuario, String> colUsuario, colNombre, colCorreoElectronico, colEstatus;
+    @FXML
+    private TableColumn<SegUsuario, Long> colId;
+    @FXML
+    private TableColumn<SegUsuario, SegUsuario> colAcciones;
+    @FXML
+    private BorderPane borderUsuarios;
+    @FXML
+    private TextField flUsuario, flNombre;
+    @FXML
+    private Button btnNuevoUsuario;
+    @FXML
+    private Label lbEtiquetaUsuario, lbEtiquetaNombre;    
+    @FXML
+    private GridPane gridBotones;
+    private ObservableList<SegUsuario> listaUsuarios;
+    private Pagination pagination;
+    private FilteredList<SegUsuario> filteredData;
+    private SortedList<SegUsuario> sortedData;
+    @ActionHandler
+    private FlowActionHandler actionHandlerPerfil;
+    @FXMLViewFlowContext
+    ViewFlowContext viewFlowContext;
+    @FXML
+    private ComboBox comboPaginacion;
+    private int renglonesMostrar = 5;
+
+    @PostConstruct
+    public void postConstruct() {
+        super.postConstruct();
+        inicializaControles();
+        inicializaColumnasTabla();
+        inicializaColumnaAccion();
+        inicializaUsuarios();
+        inicializaAccionesFiltros();
+
+    }
+
+    public void inicializaControles() {
+        comboPaginacion.setItems(Utilerias.comboPaginacion());
+        comboPaginacion.getSelectionModel().select(0);
+        btnNuevoUsuario.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonNuevo"));
+        lbEtiquetaUsuario.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaUsuario")+":");
+        lbEtiquetaNombre.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaNombre")+":");
+
+        comboPaginacion.setOnAction((event) -> {
+            renglonesMostrar = Integer.parseInt(comboPaginacion.getValue().toString());
+            inicializaUsuarios();
+        });
+
+    }
+
+    public void inicializaColumnasTabla() {
+
+        colId.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaId"));
+        colUsuario.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaUsuario"));
+        colNombre.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaNombre"));
+        colCorreoElectronico.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaCorreo"));
+        colEstatus.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaEstatus"));
+        colAcciones.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaAcciones"));
+
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colUsuario.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
+        colCorreoElectronico.setCellValueFactory(new PropertyValueFactory<>("correoE"));
+        colEstatus.setCellValueFactory(new PropertyValueFactory<>("etiquetaEstatus"));
+
+    }
+
+    public void inicializaColumnaAccion() {
+        colAcciones.setSortable(false);
+        colAcciones.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SegUsuario, SegUsuario>, ObservableValue<SegUsuario>>() {
+            public ObservableValue<SegUsuario> call(TableColumn.CellDataFeatures<SegUsuario, SegUsuario> p) {
+                return new ReadOnlyObjectWrapper(p.getValue());
+            }
+        });
+
+        colAcciones.setCellFactory(new Callback<TableColumn<SegUsuario, SegUsuario>, TableCell<SegUsuario, SegUsuario>>() {
+            @Override
+            public TableCell<SegUsuario, SegUsuario> call(TableColumn<SegUsuario, SegUsuario> param) {
+                TableCell<SegUsuario, SegUsuario> cell = new TableCell<SegUsuario, SegUsuario>() {
+
+                    FlowActionHandler actionHandler = actionHandlerPerfil;
+                    Button editar = new Button(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonEditar"));
+                    Button perfiles = new Button(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonAsignarPerfiles"));
+                    Button desactivar = new Button();
+                    Short desactiva = 0;
+
+                    @Override
+                    public void updateItem(SegUsuario item, boolean empty) {
+                        if (item != null) {
+                            HBox botones = new HBox(editar, desactivar, perfiles);
+                            botones.setSpacing(10);
+                            setGraphic(botones);
+
+                            if (item.getEstatus() == 0) {
+                                desactivar.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonActivar"));
+                                desactiva = 1;
+                            } else {
+                                desactivar.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonDesactivar"));
+                                desactiva = 0;
+                            }
+
+                            editar.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+                                    try {
+                                        creaEditaUsuario(item, t);
+                                    } catch (FlowException ex) {
+                                        Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                }
+                            });
+                            desactivar.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+                                    item.setEstatus(desactiva);
+                                    desactivarUsuario(item);
+                                    inicializaUsuarios();
+                                }
+                            });
+                            perfiles.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+                                    try {
+                     
+                                        viewFlowContext.register("USUARIOPERFIL", item);
+                                        actionHandler.navigate(AdministrarPerfilesController.class);
+                                    } catch (VetoException | FlowException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        } else {
+                            setGraphic(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+
+    }
+
+    public void inicializaUsuarios() {
+        setListaUsuarios(FXCollections.observableArrayList(obtieneListaUsuarios()));
+        filteredData = new FilteredList<>(getListaUsuarios(), p -> true);
+        sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tablaUsuarios.comparatorProperty());
+        inicializaTablaUsuario(sortedData);
+
+    }
+
+    public void inicializaTablaUsuario(SortedList<SegUsuario> lista) {
+        renglonesMostrar = Integer.parseInt(comboPaginacion.getValue().toString());
+        borderUsuarios.setCenter(null);
+        if (lista.size() > 0) {
+            pagination = Utilerias.creaPaginacionTableView(renglonesMostrar, lista, tablaUsuarios, gridBotones);
+            borderUsuarios.setCenter(pagination);
+        } else {
+            tablaUsuarios.getItems().clear();
+            borderUsuarios.setCenter(tablaUsuarios);
+
+        }
+    }
+
+    public ObservableList<SegUsuario> obtieneListaUsuarios() {
+        List<SegUsuario> lista = new SegUsuarioDAO().findAll();
+        ObservableList<SegUsuario> listaol = FXCollections.observableArrayList();
+        for (SegUsuario item : lista) {
+            listaol.add(item);
+        }
+        return listaol;
+    }
+
+    public void inicializaAccionesFiltros() {
+
+        flUsuario.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(usuer -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (usuer.getUserId().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                }
+                return false;
+            });
+            inicializaTablaUsuario(sortedData);
+        });
+        flNombre.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(usuer -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (usuer.getNombreCompleto().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                }
+                return false;
+            });
+            inicializaTablaUsuario(sortedData);
+        });
+    }
+
+    public void desactivarUsuario(SegUsuario usuario) {
+        new CrearEditarUsuariosService().actualizaUsuario(usuario);
+    }
+
+    public void nuevoUsuario(ActionEvent event) throws FlowException {
+        creaEditaUsuario(null, event);
+    }
+
+    public void setListaUsuarios(ObservableList<SegUsuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
+    }
+
+    public ObservableList<SegUsuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public void creaEditaUsuario(SegUsuario usuario, ActionEvent ev) throws FlowException {
+        String titulo = usuario != null ? DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaEditarUsuario") : DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaNuevoUsuario");
+        Stage stage;
+
+        try {
+            CrearEditarUsuariosController controller = new CrearEditarUsuariosController();
+            controller.setUsuario(usuario);
+            controller.setAdministrarUsuarios(this);
+            stage = Utilerias.nuevaVentana(Pantallas.FXML_CREAR_EDITAR_USUARIOS, controller, titulo);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setResizable(false);
+            stage.initOwner(((Node) ev.getSource()).getScene().getWindow());
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+
+    
+
+}

@@ -1,0 +1,77 @@
+package mx.vw.swf.cdi;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+import java.io.IOException;
+import java.io.InputStream;
+import mx.vw.swf.sms.controller.ContenedorController;
+<<<<<<< .mine
+import mx.vw.swf.sms.controller.TemplateController;
+import mx.vw.swf.sms.utilerias.CargaPantallas;
+import mx.vw.swf.sms.utilerias.Pantallas;
+=======
+
+>>>>>>> .r3525
+
+/**
+ * Created by dzm152z on 08/01/2015.
+ */
+public class LoginApplicationStarter {
+    // Let's have a FXMLLoader injected automatically
+    @Inject
+    FXMLLoader fxmlLoader; 
+    @Inject
+<<<<<<< .mine
+    FXMLLoader fxmlLoader2; 
+    @Inject
+    TemplateController templateController;
+    @Inject
+    CargaPantallas cargaPantallas;
+=======
+    ContenedorController contenedorController;    
+>>>>>>> .r3525
+    
+
+    // Our CDI entry point, we just listen to an event providing the startup scene
+    public void launchJavaFXApplication(@Observes @StartupScene Stage s) {
+        InputStream is = null;
+        
+        try {
+            is = getClass().getResourceAsStream("/fxml/configuration/Template.fxml");
+            fxmlLoader.setController(templateController); 
+<<<<<<< .mine
+            
+            //cargaPantallas.cargaFxml();
+            
+=======
+>>>>>>> .r3525
+            // we just load our FXML form (including controler and so on)
+<<<<<<< .mine
+           
+          BorderPane root = (BorderPane) fxmlLoader.load(is); 
+            //root.setCenter(null);
+           // root.setCenter(cargaPantallas.cargaNodo(Pantallas.FXML_ADMIN_USUARIOS));            
+
+      
+            
+=======
+            BorderPane root = (BorderPane) fxmlLoader.load(is);             
+>>>>>>> .r3525
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/estilos.css").toExternalForm());
+            s.setTitle("SCALE MANAGMENT SYSTEM");                  
+            s.setScene(scene);
+            s.show();// let's show the scene            
+         } catch (IOException e) {
+            throw new IllegalStateException("cannot load FXML login screen", e);
+        } finally {
+            
+        }
+    }
+}

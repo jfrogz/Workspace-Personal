@@ -1,0 +1,163 @@
+package mx.vw.swf.fwk.model;
+
+import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+
+/**
+ * AbstractFwkLogger entity provides the base persistence definition of the
+ * FwkLogger entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractFwkLogger implements java.io.Serializable {
+
+    // Fields
+
+    private Long id;
+    private FwkCatApps fwkCatApps;
+    private Timestamp tsevento;
+    private Timestamp tsbasedatos;
+    private String nivel;
+    private String clase;
+    private String metodo;
+    private Long linea;
+    private String mensaje;
+    private String stacktrace;
+    private String userid;
+
+    // Constructors
+
+    /** default constructor */
+    public AbstractFwkLogger() {
+    }
+
+    /** minimal constructor */
+    public AbstractFwkLogger(Long id) {
+        this.id = id;
+    }
+
+    /** full constructor */
+    public AbstractFwkLogger(Long id, FwkCatApps fwkCatApps,
+            Timestamp tsevento, Timestamp tsbasedatos, String nivel,
+            String clase, String metodo, Long linea, String mensaje,
+            String stacktrace, String userid) {
+        this.id = id;
+        this.fwkCatApps = fwkCatApps;
+        this.tsevento = tsevento;
+        this.tsbasedatos = tsbasedatos;
+        this.nivel = nivel;
+        this.clase = clase;
+        this.metodo = metodo;
+        this.linea = linea;
+        this.mensaje = mensaje;
+        this.stacktrace = stacktrace;
+        this.userid = userid;
+    }
+
+    // Property accessors
+    @Id
+    @Column(name = "ID", unique = true, nullable = false, precision = 12, scale = 0)
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "APPS_ID")
+    public FwkCatApps getFwkCatApps() {
+        return this.fwkCatApps;
+    }
+
+    public void setFwkCatApps(FwkCatApps fwkCatApps) {
+        this.fwkCatApps = fwkCatApps;
+    }
+
+    @Column(name = "TSEVENTO", length = 23)
+    public Timestamp getTsevento() {
+        return this.tsevento;
+    }
+
+    public void setTsevento(Timestamp tsevento) {
+        this.tsevento = tsevento;
+    }
+
+    @Column(name = "TSBASEDATOS", length = 23)
+    public Timestamp getTsbasedatos() {
+        return this.tsbasedatos;
+    }
+
+    public void setTsbasedatos(Timestamp tsbasedatos) {
+        this.tsbasedatos = tsbasedatos;
+    }
+
+    @Column(name = "NIVEL", length = 10)
+    public String getNivel() {
+        return this.nivel;
+    }
+
+    public void setNivel(String nivel) {
+        this.nivel = nivel;
+    }
+
+    @Column(name = "CLASE", length = 100)
+    public String getClase() {
+        return this.clase;
+    }
+
+    public void setClase(String clase) {
+        this.clase = clase;
+    }
+
+    @Column(name = "METODO", length = 100)
+    public String getMetodo() {
+        return this.metodo;
+    }
+
+    public void setMetodo(String metodo) {
+        this.metodo = metodo;
+    }
+
+    @Column(name = "LINEA", precision = 10, scale = 0)
+    public Long getLinea() {
+        return this.linea;
+    }
+
+    public void setLinea(Long linea) {
+        this.linea = linea;
+    }
+
+    @Column(name = "MENSAJE", length = 1000)
+    public String getMensaje() {
+        return this.mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    @Column(name = "STACKTRACE", length = 4000)
+    public String getStacktrace() {
+        return this.stacktrace;
+    }
+
+    public void setStacktrace(String stacktrace) {
+        this.stacktrace = stacktrace;
+    }
+
+    @Column(name = "USERID", length = 20)
+    public String getUserid() {
+        return this.userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+}

@@ -1,0 +1,129 @@
+package mx.vw.swf.fwk.dao;
+
+import mx.vw.swf.fwk.model.FwkLogger;
+import java.util.List;
+
+/**
+ * Interface for FwkLoggerDAO.
+ * 
+ * @author MyEclipse Persistence Tools
+ */
+
+public interface IFwkLoggerDAO {
+    /**
+     * Perform an initial save of a previously unsaved FwkLogger entity. All
+     * subsequent persist actions of this entity should use the #update()
+     * method. This operation must be performed within the a database
+     * transaction context for the entity's data to be permanently saved to the
+     * persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#persist(Object)
+     * EntityManager#persist} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * IFwkLoggerDAO.save(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            FwkLogger entity to persist
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void save(FwkLogger entity);
+
+    /**
+     * Delete a persistent FwkLogger entity. This operation must be performed
+     * within the a database transaction context for the entity's data to be
+     * permanently deleted from the persistence store, i.e., database. This
+     * method uses the {@link javax.persistence.EntityManager#remove(Object)
+     * EntityManager#delete} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * IFwkLoggerDAO.delete(entity);
+     * EntityManagerHelper.commit();
+     * entity = null;
+     * </pre>
+     * 
+     * @param entity
+     *            FwkLogger entity to delete
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void delete(FwkLogger entity);
+
+    /**
+     * Persist a previously saved FwkLogger entity and return it or a copy of it
+     * to the sender. A copy of the FwkLogger entity parameter is returned when
+     * the JPA persistence mechanism has not previously been tracking the
+     * updated entity. This operation must be performed within the a database
+     * transaction context for the entity's data to be permanently saved to the
+     * persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
+     * operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * entity = IFwkLoggerDAO.update(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            FwkLogger entity to update
+     * @return FwkLogger the persisted FwkLogger entity instance, may not be the
+     *         same
+     * @throws RuntimeException
+     *             if the operation fails
+     */
+    public FwkLogger update(FwkLogger entity);
+
+    public FwkLogger findById(Long id);
+
+    /**
+     * Find all FwkLogger entities with a specific property value.
+     * 
+     * @param propertyName
+     *            the name of the FwkLogger property to query
+     * @param value
+     *            the property value to match
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            count of results to return.
+     * @return List<FwkLogger> found by query
+     */
+    public List<FwkLogger> findByProperty(String propertyName, Object value,
+            int... rowStartIdxAndCount);
+
+    public List<FwkLogger> findByNivel(Object nivel, int... rowStartIdxAndCount);
+
+    public List<FwkLogger> findByClase(Object clase, int... rowStartIdxAndCount);
+
+    public List<FwkLogger> findByMetodo(Object metodo,
+            int... rowStartIdxAndCount);
+
+    public List<FwkLogger> findByLinea(Object linea, int... rowStartIdxAndCount);
+
+    public List<FwkLogger> findByMensaje(Object mensaje,
+            int... rowStartIdxAndCount);
+
+    public List<FwkLogger> findByStacktrace(Object stacktrace,
+            int... rowStartIdxAndCount);
+
+    public List<FwkLogger> findByUserid(Object userid,
+            int... rowStartIdxAndCount);
+
+    /**
+     * Find all FwkLogger entities.
+     * 
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            count of results to return.
+     * @return List<FwkLogger> all FwkLogger entities
+     */
+    public List<FwkLogger> findAll(int... rowStartIdxAndCount);
+}

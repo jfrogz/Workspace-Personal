@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="685.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <fx:include source="../configuration/HeaderTemplate.fxml" />
+    </top>
+
+    <bottom>
+        <fx:include source="../configuration/FooterTemplate.fxml" />
+    </bottom>
+    
+    <center>        
+            <SplitPane dividerPositions="0.3" prefHeight="200.0" prefWidth="200.0">
+               <items>
+                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="470.0" prefWidth="264.0">
+                    <items>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <ScrollPane fitToHeight="true" fitToWidth="true" prefViewportHeight="192.0" prefViewportWidth="236.0">
+                                 <content>
+                                    <TableView fx:id="tablaIdentidad" editable="true" prefHeight="205.0" prefWidth="236.0" BorderPane.alignment="CENTER">
+                                       <columns>
+                                          <TableColumn fx:id="colEntityId" prefWidth="75.0" text="id" />
+                                          <TableColumn fx:id="colEntityClave" prefWidth="75.0" text="clave" />
+                                          <TableColumn fx:id="colEntityNombre" prefWidth="75.0" text="nombre" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </ScrollPane>
+                           </center>
+                           <top>
+                              <GridPane prefHeight="72.0" prefWidth="236.0" BorderPane.alignment="CENTER">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="85.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                                  <ColumnConstraints hgrow="ALWAYS" maxWidth="173.0" minWidth="10.0" prefWidth="173.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints maxHeight="25.0" minHeight="7.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="31.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="12.0" minHeight="5.0" prefHeight="6.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label fx:id="Entity_lblClave" text="clave" GridPane.rowIndex="1" />
+                                    <Label fx:id="Entity_lblNombre" text="nombre" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txtIdentityClave" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <TextField fx:id="txtIdentityNombre" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Label fx:id="Entity_lblEntidad" alignment="CENTER" contentDisplay="CENTER" prefHeight="14.0" prefWidth="219.0" text="Entidad(T)" textFill="#3532dd" GridPane.columnSpan="3">
+                                       
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                           </top>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <ScrollPane fitToHeight="true" fitToWidth="true" prefViewportHeight="192.0" prefViewportWidth="236.0">
+                                 <content>
+                                    <TableView fx:id="tablaProducto" prefHeight="235.0" prefWidth="295.0" BorderPane.alignment="CENTER">
+                                       <columns>
+                                          <TableColumn fx:id="colProductoId" prefWidth="75.0" text="Id" />
+                                          <TableColumn fx:id="colProductoClave" prefWidth="75.0" text="clave" />
+                                          <TableColumn fx:id="colProductoNombre" prefWidth="75.0" text="Nombre" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </ScrollPane>
+                           </center>
+                           <top>
+                              <GridPane prefHeight="72.0" prefWidth="236.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="Productos_lblClave" text="clave" GridPane.rowIndex="1" />
+                                    <Label fx:id="Productos_lblNombre" text="nombre" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txtProductoClave" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <TextField fx:id="txtProductoNombre" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Label fx:id="Productos_lblHeader" alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="234.0" text="Productos" textFill="#3532dd" GridPane.columnSpan="3">
+                                       
+                                    </Label>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="85.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" maxWidth="173.0" minWidth="10.0" prefWidth="173.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="20.0" minHeight="7.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="12.0" minHeight="3.0" prefHeight="3.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </top>
+                        </BorderPane>
+                    </items>
+                  </SplitPane>
+                  <SplitPane dividerPositions="0.9" orientation="VERTICAL" prefHeight="470.0" prefWidth="467.0">
+                    <items>
+                        <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                          <items>
+                              <BorderPane prefHeight="121.0" prefWidth="510.0">
+                                 <center>
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" pannable="true" prefViewportHeight="371.0" prefViewportWidth="356.0">
+                                       <content>
+                                          <TableView fx:id="tablaEntradasPendientes" prefHeight="267.0" prefWidth="459.0" BorderPane.alignment="CENTER">
+                                             <columns>
+                                                <TableColumn fx:id="colEpFolio" prefWidth="93.0" text="Folio" />
+                                                <TableColumn fx:id="colEpCliente" prefWidth="71.0" text="Entidad(T)" />
+                                                <TableColumn fx:id="colEpProducto" minWidth="9.0" prefWidth="59.0" text="Producto" />
+                                                <TableColumn fx:id="colEpPlacas" minWidth="0.0" prefWidth="56.0" text="Placas" />
+                                                <TableColumn fx:id="colEpContratoVenta" prefWidth="85.0" text="Contrato de Venta" />
+                                                <TableColumn fx:id="colEpDestino" prefWidth="20.0" text="Destino" />
+                                                <TableColumn fx:id="colEpEntrada" prefWidth="75.0" text="Hora" />
+                                                <TableColumn fx:id="colEpContingencia" prefWidth="75.0" text="Contingencia" />
+                                                <TableColumn fx:id="colEpEnviadoSAP" prefWidth="75.0" text="Enviado SAP" />
+                                             </columns>
+                                          </TableView>
+                                       </content>
+                                    </ScrollPane>
+                                 </center>
+                                 <top>
+                                    <GridPane prefHeight="72.0" prefWidth="556.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <TextField prefHeight="22.0" prefWidth="253.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                          <Label fx:id="Entradas_lblFolio" text="folio" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label fx:id="Entradas_lblPlacas" text="placas" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label fx:id="Entradas_lblEntrada" alignment="CENTER" contentDisplay="CENTER" prefHeight="14.0" prefWidth="114.0" text="entradas vigentes" textFill="#3532dd" GridPane.columnSpan="5">
+                                             
+                                          </Label>
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="26.0" minWidth="10.0" prefWidth="26.0" />
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="76.0" minWidth="10.0" prefWidth="76.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="18.0" minWidth="0.0" prefWidth="18.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="112.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="492.0" minWidth="10.0" prefWidth="346.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="35.0" minHeight="7.0" prefHeight="13.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="47.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="21.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </top>
+                              </BorderPane>
+                          </items>
+                        </SplitPane>
+                        <GridPane maxHeight="85.0" minHeight="85.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                 <children>
+                                    <Button fx:id="btnNuevaEntrada" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="36.0" prefWidth="104.0" text="nueva entrada" textAlignment="CENTER" wrapText="true" />
+                                    <Button fx:id="btnSalida" mnemonicParsing="false" prefHeight="36.0" prefWidth="104.0" text="salida" />
+                                    <Button fx:id="btnReimpresion" mnemonicParsing="false" prefHeight="36.0" prefWidth="104.0" text="reimpresión" />
+                                    <Button fx:id="btnCancelarTicket" mnemonicParsing="false" prefHeight="36.0" prefWidth="104.0" text="cancelar ticket" textAlignment="CENTER" wrapText="true" />
+                                    <Button fx:id="btnEntradaCustodia" mnemonicParsing="false" prefHeight="36.0" prefWidth="104.0" text="entrada con custodia" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true" />
+                                    <Button fx:id="btnSalidaCustodia" mnemonicParsing="false" prefHeight="36.0" prefWidth="104.0" text="salida con custodia" textAlignment="CENTER" wrapText="true" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                                 <children>
+                                    <Label prefHeight="14.0" prefWidth="62.0" text="Peso bruto" textFill="#233dff" />
+                                    <Label prefHeight="14.0" prefWidth="56.0" text="Peso Tara" textFill="#194deb" />
+                                    <Label contentDisplay="RIGHT" prefHeight="14.0" prefWidth="82.0" text="Peso Neto" textFill="#194deb" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                    </items>
+                  </SplitPane>
+               </items>
+            </SplitPane>
+    </center>
+    
+</BorderPane>

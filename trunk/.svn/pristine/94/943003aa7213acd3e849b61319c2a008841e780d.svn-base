@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <fx:include source="../fxml/configuration/HeaderTemplate.fxml" />
+    </top>
+
+    <bottom>
+        <fx:include source="../fxml/configuration/FooterTemplate.fxml" />
+    </bottom>
+   
+   <center>
+      <BorderPane maxHeight="300.0" maxWidth="440.0" minHeight="300.0" minWidth="440.0" prefHeight="300.0" prefWidth="440.0">
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="21.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="160.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="31.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="183.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="31.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="PerfilEmpresa_lblNombreEmpresa" styleClass="FieldLabel,AlignCenterRight" text="lblEmpresa" GridPane.columnIndex="1" />
+                  <Label fx:id="PerfilEmpresa_lblDireccion" styleClass="FieldLabel,AlignCenterRight" text="lblDireccion" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="PerfilEmpresa_lblCp" styleClass="FieldLabel,AlignCenterRight" text="lblCP" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="PerfilEmpresa_lblRfc" styleClass="FieldLabel,AlignCenterRight" text="lblRFC" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="PerfilEmpresa_lblTelefono" styleClass="FieldLabel,AlignCenterRight" text="lblTelefono" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="PerfilEmpresa_lblEstadoMunicipio" styleClass="FieldLabel,AlignCenterRight" text="lblEstadoMunicipio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="PerfilEmpresa_lblNombreEmpresaValue" prefHeight="14.0" prefWidth="220.0" styleClass="FieldLabel,AlignTopLeft" text="VOLKSWAGEN DE MEXICO S.A. DE C.V." GridPane.columnIndex="3" GridPane.columnSpan="2" />
+                  <Label fx:id="PerfilEmpresa_lblDireccionValue" prefHeight="14.0" prefWidth="226.0" styleClass="FieldLabel,AlignTopLeft" text="lblDireccionValue" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  <Label fx:id="PerfilEmpresa_lblEstadoMunicipioValue" prefHeight="14.0" prefWidth="222.0" styleClass="FieldLabel,AlignTopLeft" text="lblEstadoMunicipioValue" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                  <Label fx:id="PerfilEmpresa_lblCpValue" styleClass="FieldLabel,AlignTopLeft" text="lblCpValue" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Label fx:id="PerfilEmpresa_lblRfcValue" styleClass="FieldLabel,AlignTopLeft" text="lblRfcValue" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <Label fx:id="PerfilEmpresa_lblTelefonoValue" styleClass="FieldLabel,AlignTopLeft" text="lblTelefonoValue" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <Button fx:id="PerfilEmpresa_btnAceptar" mnemonicParsing="false" prefHeight="22.0" prefWidth="95.0" styleClass="botones,buttonAccept" text="Aceptar" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" />
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </center>
+   
+</BorderPane>

@@ -1,0 +1,320 @@
+package mx.vw.swf.sms.dao;
+
+import mx.vw.swf.fwk.model.EntityManagerHelper;
+import java.util.List;
+import java.util.logging.Level;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import mx.vw.swf.sms.model.SmsCteProv;
+
+/**
+ * A data access object (DAO) providing persistence and search support for
+ * SmsCteProv entities. Transaction control of the save(), update() and delete()
+ * operations must be handled externally by senders of these methods or must be
+ * manually added to each of these methods for data to be persisted to the JPA
+ * datastore.
+ * 
+ * @see SmsCteProv
+ * @author MyEclipse Persistence Tools
+ */
+public class SmsCteProvDAO implements ISmsCteProvDAO {
+    // property constants
+    public static final String ES_PROVEEDOR = "esProveedor";
+    public static final String CLAVE = "clave";
+    public static final String NOMBRE = "nombre";
+    public static final String RAZON_SOCIAL = "razonSocial";
+    public static final String ID_SAP = "idSap";
+    public static final String ESTATUS = "estatus";
+    public static final String SALIDA_CONTINGENCIA = "salidaContingencia";
+
+    private EntityManager getEntityManager() {
+        return EntityManagerHelper.getEntityManager();
+    }
+
+    /**
+     * Perform an initial save of a previously unsaved SmsCteProv entity. All
+     * subsequent persist actions of this entity should use the #update()
+     * method. This operation must be performed within the a database
+     * transaction context for the entity's data to be permanently saved to the
+     * persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#persist(Object)
+     * EntityManager#persist} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * SmsCteProvDAO.save(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            SmsCteProv entity to persist
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void save(SmsCteProv entity) {
+        EntityManagerHelper.log("saving SmsCteProv instance", Level.INFO, null);
+        try {
+            EntityManagerHelper.beginTransaction();
+            getEntityManager().persist(entity);
+            EntityManagerHelper.commit();
+            EntityManagerHelper.getEntityManager().close();
+            EntityManagerHelper.log("save successful", Level.INFO, null);
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("save failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Delete a persistent SmsCteProv entity. This operation must be performed
+     * within the a database transaction context for the entity's data to be
+     * permanently deleted from the persistence store, i.e., database. This
+     * method uses the {@link javax.persistence.EntityManager#remove(Object)
+     * EntityManager#delete} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * SmsCteProvDAO.delete(entity);
+     * EntityManagerHelper.commit();
+     * entity = null;
+     * </pre>
+     * 
+     * @param entity
+     *            SmsCteProv entity to delete
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void delete(SmsCteProv entity) {
+        EntityManagerHelper.log("deleting SmsCteProv instance", Level.INFO,
+                null);
+        try {
+            entity = getEntityManager().getReference(SmsCteProv.class,
+                    entity.getId());
+            getEntityManager().remove(entity);
+            EntityManagerHelper.log("delete successful", Level.INFO, null);
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("delete failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Persist a previously saved SmsCteProv entity and return it or a copy of
+     * it to the sender. A copy of the SmsCteProv entity parameter is returned
+     * when the JPA persistence mechanism has not previously been tracking the
+     * updated entity. This operation must be performed within the a database
+     * transaction context for the entity's data to be permanently saved to the
+     * persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
+     * operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * entity = SmsCteProvDAO.update(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            SmsCteProv entity to update
+     * @return SmsCteProv the persisted SmsCteProv entity instance, may not be
+     *         the same
+     * @throws RuntimeException
+     *             if the operation fails
+     */
+    public SmsCteProv update(SmsCteProv entity) {
+        EntityManagerHelper.log("updating SmsCteProv instance", Level.INFO,
+                null);
+        try {
+            EntityManagerHelper.beginTransaction();
+            SmsCteProv result = getEntityManager().merge(entity);
+            EntityManagerHelper.log("update successful", Level.INFO, null);
+            EntityManagerHelper.commit();
+            EntityManagerHelper.getEntityManager().close();
+            
+            return result;
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("update failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    public SmsCteProv findById(Long id) {
+        EntityManagerHelper.log("finding SmsCteProv instance with id: " + id,
+                Level.INFO, null);
+        try {
+            SmsCteProv instance = getEntityManager().find(SmsCteProv.class, id);
+            return instance;
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Find all SmsCteProv entities with a specific property value.
+     * 
+     * @param propertyName
+     *            the name of the SmsCteProv property to query
+     * @param value
+     *            the property value to match
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            number of results to return.
+     * @return List<SmsCteProv> found by query
+     */
+    @SuppressWarnings("unchecked")
+    public List<SmsCteProv> findByProperty(String propertyName,
+            final Object value, final int... rowStartIdxAndCount) {
+        EntityManagerHelper.log("finding SmsCteProv instance with property: "
+                + propertyName + ", value: " + value, Level.INFO, null);
+        try {
+            final String queryString = "select model from SmsCteProv model where model."
+                    + propertyName + "= :propertyValue";
+            Query query = getEntityManager().createQuery(queryString);
+            query.setParameter("propertyValue", value);
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find by property name failed",
+                    Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    public List<SmsCteProv> findByEsProveedor(Object esProveedor,
+            int... rowStartIdxAndCount) {
+        return findByProperty(ES_PROVEEDOR, esProveedor, rowStartIdxAndCount);
+    }
+
+    public List<SmsCteProv> findByClave(Object clave,
+            int... rowStartIdxAndCount) {
+        return findByProperty(CLAVE, clave, rowStartIdxAndCount);
+    }
+
+    public List<SmsCteProv> findByNombre(Object nombre,
+            int... rowStartIdxAndCount) {
+        return findByProperty(NOMBRE, nombre, rowStartIdxAndCount);
+    }
+
+    
+    
+
+    public List<SmsCteProv> findByEstatus(Object estatus,
+            int... rowStartIdxAndCount) {
+        return findByProperty(ESTATUS, estatus, rowStartIdxAndCount);
+    }
+
+    public List<SmsCteProv> findBySalidaContingencia(Object salidaContingencia,
+            int... rowStartIdxAndCount) {
+        return findByProperty(SALIDA_CONTINGENCIA, salidaContingencia,
+                rowStartIdxAndCount);
+    }
+    
+     public List<SmsCteProv> findByIdSap(Object idSap,
+            int... rowStartIdxAndCount) {
+            try {
+            final String queryString = "select model from SmsCteProv model where UPPER(model.idSap) =  UPPER(:propertyValueIdSap)";                                       
+                    
+            Query query = getEntityManager().createQuery(queryString);
+            query.setParameter("propertyValueIdSap", idSap);
+            
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find by property name failed",
+                    Level.SEVERE, re);
+            throw re;
+        }    }
+     
+     public List<SmsCteProv> findByRazonSocial(Object razonSocial,
+            int... rowStartIdxAndCount) {
+            try {
+            final String queryString = "select model from SmsCteProv model where UPPER(model.razonSocial) =  UPPER(:propertyValueRazonSocial)";                                       
+                    
+            Query query = getEntityManager().createQuery(queryString);
+            query.setParameter("propertyValueRazonSocial", razonSocial);
+            
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find by property name failed",
+                    Level.SEVERE, re);
+            throw re;
+        }    }
+
+    /**
+     * Find all SmsCteProv entities.
+     * 
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            count of results to return.
+     * @return List<SmsCteProv> all SmsCteProv entities
+     */
+    @SuppressWarnings("unchecked")
+    public List<SmsCteProv> findAll(final int... rowStartIdxAndCount) {
+        EntityManagerHelper.log("finding all SmsCteProv instances", Level.INFO,
+                null);
+        try {
+            final String queryString = "select model from SmsCteProv model";
+            Query query = getEntityManager().createQuery(queryString);
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find all failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+}

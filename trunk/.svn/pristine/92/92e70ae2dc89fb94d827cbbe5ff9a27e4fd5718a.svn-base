@@ -1,0 +1,14 @@
+package mx.vw.swf.cdi;
+
+import javax.enterprise.inject.Produces;
+import javax.persistence.EntityManager;
+
+/**
+ * Created by dzm152z on 22/01/2015.
+ */
+public class Resources {
+    @Produces
+    public EntityManager createEntityManager() {
+        return WeldJavaFXLauncher.emf.createEntityManager();
+    }
+}

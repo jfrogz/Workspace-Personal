@@ -1,0 +1,208 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.controller;
+
+
+import io.datafx.controller.ViewController;
+import java.net.URL;
+import java.time.Clock;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javax.annotation.PostConstruct;
+//import javax.comm.CommPortIdentifier;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.controller.MenuController;
+import mx.vw.swf.sms.model.FwkCatContent;
+import mx.vw.swf.sms.model.FwkCatContentDAO;
+import mx.vw.swf.sms.service.ActualizarDatosPuertoService;
+import org.controlsfx.dialog.Dialogs;
+
+
+
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1yij
+ */
+@ViewController("/fxml/configuration/ConfigurarPuerto.fxml")
+public class ConfigurarPuertoController extends MenuController {
+
+    /**
+     * Initializes the controller class.
+     */
+    @FXML
+    private ComboBox cbbBaudaje;
+    @FXML
+    private ComboBox cbbPuerto;
+    @FXML
+    private ComboBox cbbParidad;
+    @FXML
+    private ComboBox cbbBistDeDatos;
+    @FXML
+    private ComboBox cbbParidadDelPuerto;
+
+    @FXML
+    private Label puerto;
+    @FXML
+    private Label baudaje;
+    @FXML
+    private Label bitsDeDatos;
+    @FXML
+    private Label bitsDeParada;
+    @FXML
+    private Label paridadDePuerto;
+
+    @FXML
+    private Button btnAceptar;
+    @FXML
+    private Button btnCancelar;
+
+    @FXML
+    private void handleButtonAction_boton1(ActionEvent event) {
+        if (validation()) {
+            boolean bandera = true;
+
+            ActualizarDatosPuertoService adps = new ActualizarDatosPuertoService();
+            FwkCatContentDAO actionItemDAO = new FwkCatContentDAO();
+            List<FwkCatContent> findAll = actionItemDAO.findAll(11, 5);
+            for (FwkCatContent fwkCatContent : findAll) {
+                switch (fwkCatContent.getKeyValue()) {
+                    case "BASCULA_PUERTO":
+                        break;
+                    case "BASCULA_BAUDIOS":
+                        fwkCatContent.setDescription(cbbBaudaje.getValue().toString());
+                        bandera &= adps.ActualizarDatosPuerto(fwkCatContent).getDescription().equals(fwkCatContent.getDescription());
+                        break;
+                    case "BASCULA_BITS":
+                        fwkCatContent.setDescription(cbbBistDeDatos.getValue().toString());
+                        bandera &= adps.ActualizarDatosPuerto(fwkCatContent).getDescription().equals(fwkCatContent.getDescription());
+                        break;
+                    case "BASCULA_PARADA":
+                        fwkCatContent.setDescription(cbbParidad.getValue().toString());
+                        bandera &= adps.ActualizarDatosPuerto(fwkCatContent).getDescription().equals(fwkCatContent.getDescription());
+                        break;
+                    case "BASCULA_BITPARIDAD":
+                        fwkCatContent.setDescription(cbbParidadDelPuerto.getValue().toString());
+                        bandera &= adps.ActualizarDatosPuerto(fwkCatContent).getDescription().equals(fwkCatContent.getDescription());
+                        break;
+                }
+            }
+
+            //Cargar lista de puertos disponibles en una PC
+            Dialogs.create()
+                    .owner(DataFXLauncher.primary)
+                    .title(DataFXLauncher.mensajesProperties.getProperty("Titulo"))
+                    .masthead(DataFXLauncher.mensajesProperties.getProperty("msActualizacionCorrectaMasthead"))
+                    .message(DataFXLauncher.mensajesProperties.getProperty("msActualizacionCorrectaMastheadMessage"))
+                    .showInformation();
+        }
+    }
+
+    @PostConstruct
+    public void PostContruct() {
+        puerto.setText(DataFXLauncher.mensajesProperties.getProperty("puerto") + ":");
+        baudaje.setText(DataFXLauncher.mensajesProperties.getProperty("baudaje") + ":");
+        bitsDeParada.setText(DataFXLauncher.mensajesProperties.getProperty("bitsDeParada") + ":");
+        bitsDeDatos.setText(DataFXLauncher.mensajesProperties.getProperty("bitsDeDatos") + ":");
+        paridadDePuerto.setText(DataFXLauncher.mensajesProperties.getProperty("paridadDePuerto") + ":");
+        btnAceptar.setText(DataFXLauncher.mensajesProperties.getProperty("btnAceptar"));
+        btnCancelar.setText(DataFXLauncher.mensajesProperties.getProperty("btnCancelar"));
+
+        //Quitar linea si es una ventana pop-up
+        setMovimiento(DataFXLauncher.mensajesProperties.getProperty("confPuertoNomMovimiento"));
+
+        FwkCatContentDAO actionItemDAO = new FwkCatContentDAO();
+        List<FwkCatContent> findAll = actionItemDAO.findAll(7, 4);
+        for (FwkCatContent fwkCatContent : findAll) {
+            switch (fwkCatContent.getKeyValue()) {
+                case "BASCULA_OPC_BAUDIOS":
+                    String[] baudajeOptions = fwkCatContent.getDescription().split(",");
+                    ObservableList<String> baudiosList = FXCollections.observableArrayList(baudajeOptions);
+                    cbbBaudaje.setItems(baudiosList);
+                    break;
+                case "BASCULA_OPC_BITDATO":
+                    String[] bitDatosOptions = fwkCatContent.getDescription().split(",");
+                    ObservableList<String> bitDatosList = FXCollections.observableArrayList(bitDatosOptions);
+                    cbbBistDeDatos.setItems(bitDatosList);
+                    break;
+                case "BASCULA_OPC_BITPARA":
+                    String[] bitParadaOptions = fwkCatContent.getDescription().split(",");
+                    ObservableList<String> bitParadaList = FXCollections.observableArrayList(bitParadaOptions);
+                    cbbParidad.setItems(bitParadaList);
+                    break;
+                case "BASCULA_OPC_BITPARID":
+                    String[] bitParidadOptions = fwkCatContent.getDescription().split(",");
+                    ObservableList<String> bitParidadList = FXCollections.observableArrayList(bitParidadOptions);
+                    cbbParidadDelPuerto.setItems(bitParidadList);
+                    break;
+            }
+        }
+
+    }
+
+    private boolean validation() {
+        boolean bandera = cbbBaudaje.getValue() != null && cbbBistDeDatos.getValue() != null && cbbParidad.getValue() != null && cbbParidadDelPuerto.getValue() != null;
+
+        if (!bandera) {
+            Dialogs.create()
+                    .owner(DataFXLauncher.primary)
+                    .title(DataFXLauncher.mensajesProperties.getProperty("Titulo"))
+                    .masthead(DataFXLauncher.mensajesProperties.getProperty("msValidationMasthead"))
+                    .message(DataFXLauncher.mensajesProperties.getProperty("msValidationMessage"))
+                    .showError();
+        }
+       
+        /*Enumeration ports = CommPortIdentifier.getPortIdentifiers();
+        int count =0;
+        while (ports.hasMoreElements())
+        {
+            CommPortIdentifier curPort = (CommPortIdentifier)ports.nextElement();
+            //get only serial ports
+            System.out.println(curPort.getName() + " " + curPort.isCurrentlyOwned());
+            count++;
+        }
+        System.out.println("" +count);*/
+        
+        if (cbbBaudaje.getValue() == null) {
+            baudaje.setTextFill(Color.RED);
+        } else {
+            baudaje.setTextFill(Color.BLACK);
+        }
+        if (cbbBistDeDatos.getValue() == null) {
+            bitsDeDatos.setTextFill(Color.RED);
+        } else {
+            bitsDeDatos.setTextFill(Color.BLACK);
+        }
+        if (cbbParidad.getValue() == null) {
+            bitsDeParada.setTextFill(Color.RED);
+        } else {
+            bitsDeParada.setTextFill(Color.BLACK);
+        }
+        if (cbbParidadDelPuerto.getValue() == null) {
+            paridadDePuerto.setTextFill(Color.RED);
+        } else {
+            paridadDePuerto.setTextFill(Color.BLACK);
+        }
+        if (cbbPuerto.getValue() == null) {
+            puerto.setTextFill(Color.RED);
+        } else {
+            puerto.setTextFill(Color.BLACK);
+        }
+        return bandera;
+    }
+    
+}

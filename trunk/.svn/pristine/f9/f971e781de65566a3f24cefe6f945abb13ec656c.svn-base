@@ -1,0 +1,171 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@Entity
+@Table(name = "FWK_CAT_CONTENT", schema = "dbo", catalog = "SMS")
+public class FwkCatContentEntity {
+    private int idContent;
+    private int idApp;
+    private int idAdmin;
+    private String keyValue;
+    private String value;
+    private String description;
+    private Timestamp createdOn;
+    private String createdBy;
+    private Timestamp updatedOn;
+    private String updatedBy;
+    private Integer status;
+
+    @Id
+    @Column(name = "ID_CONTENT")
+    public int getIdContent() {
+        return idContent;
+    }
+
+    public void setIdContent(int idContent) {
+        this.idContent = idContent;
+    }
+
+    @Basic
+    @Column(name = "ID_APP")
+    public int getIdApp() {
+        return idApp;
+    }
+
+    public void setIdApp(int idApp) {
+        this.idApp = idApp;
+    }
+
+    @Basic
+    @Column(name = "ID_ADMIN")
+    public int getIdAdmin() {
+        return idAdmin;
+    }
+
+    public void setIdAdmin(int idAdmin) {
+        this.idAdmin = idAdmin;
+    }
+
+    @Basic
+    @Column(name = "KEY_VALUE")
+    public String getKeyValue() {
+        return keyValue;
+    }
+
+    public void setKeyValue(String keyValue) {
+        this.keyValue = keyValue;
+    }
+
+    @Basic
+    @Column(name = "VALUE")
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Basic
+    @Column(name = "DESCRIPTION")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Basic
+    @Column(name = "CREATED_ON")
+    public Timestamp getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Timestamp createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    @Basic
+    @Column(name = "CREATED_BY")
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @Basic
+    @Column(name = "UPDATED_ON")
+    public Timestamp getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public void setUpdatedOn(Timestamp updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
+    @Basic
+    @Column(name = "UPDATED_BY")
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    @Basic
+    @Column(name = "STATUS")
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FwkCatContentEntity that = (FwkCatContentEntity) o;
+
+        if (idAdmin != that.idAdmin) return false;
+        if (idApp != that.idApp) return false;
+        if (idContent != that.idContent) return false;
+        if (createdBy != null ? !createdBy.equals(that.createdBy) : that.createdBy != null) return false;
+        if (createdOn != null ? !createdOn.equals(that.createdOn) : that.createdOn != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (keyValue != null ? !keyValue.equals(that.keyValue) : that.keyValue != null) return false;
+        if (status != null ? !status.equals(that.status) : that.status != null) return false;
+        if (updatedBy != null ? !updatedBy.equals(that.updatedBy) : that.updatedBy != null) return false;
+        if (updatedOn != null ? !updatedOn.equals(that.updatedOn) : that.updatedOn != null) return false;
+        if (value != null ? !value.equals(that.value) : that.value != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = idContent;
+        result = 31 * result + idApp;
+        result = 31 * result + idAdmin;
+        result = 31 * result + (keyValue != null ? keyValue.hashCode() : 0);
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (createdOn != null ? createdOn.hashCode() : 0);
+        result = 31 * result + (createdBy != null ? createdBy.hashCode() : 0);
+        result = 31 * result + (updatedOn != null ? updatedOn.hashCode() : 0);
+        result = 31 * result + (updatedBy != null ? updatedBy.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
+}

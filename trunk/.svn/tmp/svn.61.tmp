@@ -1,0 +1,92 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.utilerias;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.util.Callback;
+
+/**
+ *
+ * @author fox1x0d
+ */
+public class Utilerias {
+
+    private static Pagination pagination;
+    
+    public static Pagination creaPaginacionTableView(int tamLista, int tablasPorPagina, int renglonesMostrar, ObservableList<?> lista, TableView<?> tabla) {
+        int totalPaginas = tamLista/ renglonesMostrar;  
+        int modulo=tamLista % renglonesMostrar;
+        
+        if(modulo>0)
+        {
+           totalPaginas = totalPaginas + 1; 
+        }
+        
+        pagination = new Pagination(totalPaginas, 0);         
+        pagination.setPageFactory(new Callback<Integer, Node>() {
+            @Override
+            public Node call(Integer pageIndex) {
+                if (pageIndex > tamLista / renglonesMostrar ) {
+                    return null;
+                } else {
+                    return createPage(tamLista,pageIndex,lista,tabla,tablasPorPagina,renglonesMostrar);
+                }
+            }
+        });
+        
+        return pagination;
+    }
+   
+    public static VBox createPage(int tamLista,int pageIndex, ObservableList<?> list,TableView tabla,int tablasPorPagina,int renglonesMostrar) {
+        int ultimaPagina = 0;        
+        int ultimosRenglones = tamLista % renglonesMostrar;
+        if (ultimosRenglones > 0) {
+            ultimaPagina = tamLista / renglonesMostrar;
+        } else {
+            ultimaPagina = tamLista / renglonesMostrar- 1;
+        }
+        
+        VBox box = new VBox(5);
+        int page   = pageIndex * tablasPorPagina;
+        int inicio = pageIndex * renglonesMostrar;
+
+        for (int i = page; i < page + tablasPorPagina; i++) {
+           
+            tabla.getItems().clear();
+            if ((ultimaPagina == pageIndex) && ultimosRenglones>0) {
+                tabla.setItems(FXCollections.observableArrayList(list.subList(inicio, inicio + ultimosRenglones)));
+            } else {
+                tabla.setItems(FXCollections.observableArrayList(list.subList(inicio, inicio + renglonesMostrar)));
+            }
+         
+            box.getChildren().clear();
+            box.getChildren().add(tabla);
+        }
+       
+        return box;
+   }
+    
+  public static VBox creaFiltro(String etiqueta){
+      
+         TextField text= new TextField();
+         Label label = new Label(etiqueta);
+         VBox filtro = new VBox();
+         filtro.setAlignment(Pos.CENTER);
+         filtro.getChildren().addAll(label, text);
+         filtro.setPadding(new Insets(5.0,5.0,5.0,5.0));
+         
+         return filtro;
+  }
+}

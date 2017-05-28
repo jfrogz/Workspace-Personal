@@ -1,0 +1,53 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.io.Serializable;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+public class SmsProdCteprovEntityPK implements Serializable {
+    private int idCteProv;
+    private int idProducto;
+
+    @Column(name = "IdCteProv")
+    @Id
+    public int getIdCteProv() {
+        return idCteProv;
+    }
+
+    public void setIdCteProv(int idCteProv) {
+        this.idCteProv = idCteProv;
+    }
+
+    @Column(name = "IdProducto")
+    @Id
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SmsProdCteprovEntityPK that = (SmsProdCteprovEntityPK) o;
+
+        if (idCteProv != that.idCteProv) return false;
+        if (idProducto != that.idProducto) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = idCteProv;
+        result = 31 * result + idProducto;
+        return result;
+    }
+}

@@ -1,0 +1,48 @@
+# To change this license header, choose License Headers in Project Properties.
+# To change this template file, choose Tools | Templates
+# and open the template in the editor.
+
+#Etiquetas
+etiquetaId=ID
+etiquetaUsuario=Usuario
+etiquetaNombre=Nombre
+etiquetaCorreo=Correo Electr\u00f3nico
+etiquetaEstatus=Estatus
+etiquetaAcciones=Acciones
+etiquetaPerfil=Perfil
+etiquetaFuncion=Funci\u00f3n
+etiquetaSeleccione=Seleccione
+etiquetaApPaterno= Apellido Paterno
+etiquetaApMaterno= Apellido Materno
+etiquetaNuevoUsuario= Nuevo Usuario
+etiquetaEditarUsuario= Editar Usuario
+etiquetaDescripcionPerfil=Descripci\u00f3n del Perfil
+etiquetaNuevoPerfil= Nuevo Perfil
+etiquetaEditarPerfil= Editar Perfil
+
+#Botones
+botonNuevo=Nuevo
+botonEditar=Editar
+botonActivar=Activar
+botonDesactivar=Desactivar
+botonAsignarPerfiles=Asignar Perfiles
+botonAsignarFunciones=Asignar Funciones
+botonGuardar=Guardar
+botonActualizar=Actualizar
+botonCerrar=Cerrar
+
+#Mensajes 
+msDatosVaciosMasthead=Datos vacios
+msDatosVaciosMessage=Debe completar todos los campos
+msUsuarioExistenteMasthead=Usuario existente
+msUsuarioExistenteMessage=Ya existe un registro con el mismo Usuario, intente nuevamente
+msPerfilExistenteMessage= Ya existe un registro con el mismo Perfil, intente nuevamente
+msPermisoExistenteMessage=Ya existe un registro con el mismo Permiso, intente nuevamente
+msDatosPerfilSeleccionadoMessage= No selecciono ning\u00fan perfil para asignar al usuario
+msDatosPermisoSeleccionadoMessage= No selecciono ning\u00fan permiso para asignar al perfil
+
+#Paginacion
+paginas=5,10,15,20
+
+
+

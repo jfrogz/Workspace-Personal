@@ -1,0 +1,37 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.model.SegPermiso;
+/**
+ * FXML Controller class
+ *
+ * @author fox1x0d
+ */
+@ViewController("/fxml/security/AdministrarFuncionesPerfil.fxml")
+public class AdministrarFuncionesPerfilController extends MenuController{
+
+      @PostConstruct
+    public void postConstruct() {
+      
+        EntityManager em = DataFXLauncher.emf.createEntityManager();
+        List<SegPermiso> items = em.createQuery("select id, permiso,estatus from seg_permiso")
+                                            .getResultList();
+        System.out.println(items.size());
+        for (SegPermiso row : items) {
+            
+        }
+        
+        em.clear();
+        em.close();
+    }
+    
+}

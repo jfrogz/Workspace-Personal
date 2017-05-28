@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-SMS-Liquibase-INTEGRA</actionName>
+            <displayName>SMS-Liquibase-INTEGRA</displayName>
+            <recursive>false</recursive>
+            <goals>
+                <goal>clean</goal>
+                <goal>liquibase:update</goal>
+            </goals>
+            <properties>
+                <Env.JAVA_HOME>D:\Desarrollo\Java\jdk1.8.0_25</Env.JAVA_HOME>
+            </properties>
+            <activatedProfiles>
+                <activatedProfile>INTEGRATION</activatedProfile>
+            </activatedProfiles>
+        </action>
+    </actions>

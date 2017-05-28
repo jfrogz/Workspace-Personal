@@ -1,0 +1,91 @@
+package mx.vw.swf.security.model;
+
+import java.util.List;
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.fwk.model.FwkActionItem;
+import mx.vw.swf.sms.model.SmsCteProv;
+import mx.vw.swf.sms.model.SmsMovimiento;
+import mx.vw.swf.sms.model.SmsProducto;
+
+/**
+ * SegUsuario entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "SEG_USUARIO", schema = "dbo", catalog = "SMS")
+public class SegUsuario extends AbstractSegUsuario implements
+        java.io.Serializable {
+    
+    private String nombreCompleto;
+    private String etiquetaEstatus;
+    private List<FwkActionItem> actionItems;
+    private Boolean itemActionsSet = Boolean.FALSE;
+    // Constructors
+
+    /** default constructor */
+    public SegUsuario() {
+    }
+    
+    /** minimal constructor */
+    public SegUsuario(Long id, String userId, Short estatus) {
+        super(id, userId, estatus);
+    }
+
+    /** full constructor */
+    public SegUsuario(Long id, String userId, String nombreUsuario,
+            String apPaterno, String apMaterno, String correoE, Short estatus,
+            Set<SmsProducto> smsProductosForUpdatedBy,
+            Set<SmsCteProv> smsCteProvsForCreatedBy,
+            Set<SmsMovimiento> smsMovimientosForIdUsrPesoEntrada,
+            Set<SmsMovimiento> smsMovimientosForIdUsrEnvioSap,
+            Set<SegPerfilUsr> segPerfilUsrs,
+            Set<SmsProducto> smsProductosForCreatedBy,
+            Set<SmsMovimiento> smsMovimientosForIdUsrPesoSalida,
+            Set<SmsMovimiento> smsMovimientosForIdUsrCancela,
+            Set<SmsCteProv> smsCteProvsForUpdatedBy) {
+        super(id, userId, nombreUsuario, apPaterno, apMaterno, correoE,
+                estatus, smsProductosForUpdatedBy, smsCteProvsForCreatedBy,
+                smsMovimientosForIdUsrPesoEntrada,
+                smsMovimientosForIdUsrEnvioSap, segPerfilUsrs,
+                smsProductosForCreatedBy, smsMovimientosForIdUsrPesoSalida,
+                smsMovimientosForIdUsrCancela, smsCteProvsForUpdatedBy);
+    }
+    
+    /**
+     *
+     * @return
+     */
+    @Transient
+    public String getNombreCompleto(){
+        nombreCompleto=this.getNombreUsuario()+" "+this.getApPaterno()+" "+this.getApMaterno();
+        return nombreCompleto;
+    }
+    @Transient
+    public String getEtiquetaEstatus(){        
+        if(null != this.getEstatus()){
+           etiquetaEstatus= this.getEstatus()==1?DataFXLauncher.getProperty("General.lbActivo"):DataFXLauncher.getProperty("General.lbInactivo");;
+        }
+          return etiquetaEstatus; 
+    }
+
+    @Transient
+    public List<FwkActionItem> getActionItems() {
+        return this.actionItems;
+    }
+
+    public void setActionItems(List<FwkActionItem> actionItems) {
+        this.actionItems = actionItems;
+        itemActionsSet = Boolean.TRUE;
+    }
+
+    public Boolean actionItemsSet() {
+        return itemActionsSet;
+    }
+
+    public void setItemActionsSet(Boolean itemActionsSet) {
+        this.itemActionsSet = itemActionsSet;
+    }
+}

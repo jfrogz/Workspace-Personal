@@ -1,0 +1,61 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.utilerias;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableCell;
+
+/**
+ *
+ * @author fox1x0d
+ */
+public class CheckBoxTableCell<S, T> extends TableCell<S, T> {
+
+    private final CheckBox checkBox;
+    ObservableList<T> seleccionItem;
+
+    public CheckBoxTableCell(ObservableList<T> seleccionItem) {
+
+        this.checkBox = new CheckBox();
+        this.checkBox.setAlignment(Pos.CENTER);
+        this.seleccionItem = seleccionItem;
+        setAlignment(Pos.CENTER);
+        setGraphic(checkBox);
+
+    }
+
+    @Override
+    public void updateItem(T item, boolean empty) {
+
+        super.updateItem(item, empty);
+        if (item == null) {
+            setText(null);
+            setGraphic(null);
+
+        } else {
+
+            setGraphic(checkBox);
+            checkBox.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if (checkBox.isSelected()) {
+                        seleccionItem.add(getItem());
+                    } else {
+                        seleccionItem.remove(getItem());
+                    }
+                }
+            });
+        }
+
+    }
+
+}

@@ -1,0 +1,33 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.service;
+
+import mx.vw.swf.fwk.model.EntityManagerHelper;
+import mx.vw.swf.sms.dao.SmsCteProvDAO;
+import mx.vw.swf.sms.model.SmsCteProv;
+
+/**
+ *
+ * @author fox1yij
+ */
+public class CrearEditarClienteProveedorService {
+    SmsCteProvDAO smsCteProvDAO = new SmsCteProvDAO();
+    
+    public void guardarEntidad(SmsCteProv entity)
+    {
+        EntityManagerHelper.beginTransaction();
+        smsCteProvDAO.save(entity);
+        EntityManagerHelper.commit();
+        EntityManagerHelper.closeEntityManager();
+    }
+    
+    public void actualizaClienteProveedor(SmsCteProv entity){
+        EntityManagerHelper.beginTransaction();
+        smsCteProvDAO.update(entity);
+        EntityManagerHelper.commit();
+        EntityManagerHelper.closeEntityManager();
+    }
+}

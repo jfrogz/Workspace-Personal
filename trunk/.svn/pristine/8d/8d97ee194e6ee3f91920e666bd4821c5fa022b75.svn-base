@@ -1,0 +1,31 @@
+package mx.vw.swf.sms.controller;
+
+import io.datafx.controller.ViewController;
+import javafx.scene.Node;
+import javax.annotation.PostConstruct;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.controller.MenuController;
+import mx.vw.swf.sms.functionality.controller.MovimientosController;
+
+/**
+ * Created by  fox1yij
+ */
+@ViewController("/fxml/functionality/Movimientos.fxml")
+public class MovimientosClientesController extends MovimientosController {
+
+
+    @PostConstruct
+    public void postContruct() {
+        super.Contruct();
+        inicializarVista();
+    }
+
+    private void inicializarVista() {
+        setEncabezado(DataFXLauncher.getProperty("Movimientos.Clientes.Header"));
+        Entity_lblEntidad.setText(DataFXLauncher.getProperty("Movimientos.Clientes.lblEntity"));        
+        cargarTablaIdentidades(MovimientosController.TipoEntidad.CLIENTE);
+    }
+    
+    
+
+}

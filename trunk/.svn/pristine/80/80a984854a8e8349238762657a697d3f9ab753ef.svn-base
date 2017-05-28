@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="integra.xml">
+   
+   <include file="master.xml" relativeToChangelogFile="true"/>
+   
+   <changeSet id="2" author="dzmppdw">
+      <insert tableName="FWK_CAT_APPS">
+         <column name="APPLICATION_NAME" value="SMS" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+   </changeSet>
+   
+   <changeSet id="3" author="dzmppdw">
+      <insert tableName="FWK_CAT_ADMIN">
+         <column name="ID_APP" value="1" />
+         <column name="DESCRIPTION" value="PropiedadesEmpresa" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_ADMIN">
+         <column name="ID_APP" value="1" />
+         <column name="DESCRIPTION" value="PropiedadesPuerto" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+   </changeSet>
+   
+   <changeSet id="4" author="dzmppdw">
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_NOM" />
+         <column name="VALUE" value="Empresa.Nombre" />
+         <column name="DESCRIPTION" value="VOLKSWAGEN DE MEXICO S.A. DE C.V." />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_DIR" />
+         <column name="VALUE" value="Empresa.Direccion" />
+         <column name="DESCRIPTION" value="AUTOPISTA MÉXICO - PUEBLA Km. 116" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_EDO" />
+         <column name="VALUE" value="Empresa.Estado" />
+         <column name="DESCRIPTION" value="PUEBLA" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_MUN" />
+         <column name="VALUE" value="Empresa.Municipio" />
+         <column name="DESCRIPTION" value="PUEBLA" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_CP" />
+         <column name="VALUE" value="Empresa.CodPostal" />
+         <column name="DESCRIPTION" value="72700" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_RFC" />
+         <column name="VALUE" value="Empresa.RFC" />
+         <column name="DESCRIPTION" value="VME-640813-HF6" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_TEL" />
+         <column name="VALUE" value="Empresa.Telefono" />
+         <column name="DESCRIPTION" value="230-8806" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+   </changeSet>
+   
+   <changeSet id="5" author="dzmppdw">
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_OPC_BAUDIOS" />
+         <column name="VALUE" value="Bascula.Opciones.Baudios" />
+         <column name="DESCRIPTION" value="1200,2400,4800,9600,14400,19200,28800" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_OPC_BITDATO" />
+         <column name="VALUE" value="Bascula.Opciones.BitsDatos" />
+         <column name="DESCRIPTION" value="7,8" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_OPC_BITPARA" />
+         <column name="VALUE" value="Bascula.Opciones.BitsParada" />
+         <column name="DESCRIPTION" value="1,2" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_OPC_BITPARID" />
+         <column name="VALUE" value="Bascula.Opciones.Paridad" />
+         <column name="DESCRIPTION" value="Even,Odd,Mark,Space,None" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_PUERTO" />
+         <column name="VALUE" value="Bascula.Puerto.Puerto" />
+         <column name="DESCRIPTION" value="" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_BAUDIOS" />
+         <column name="VALUE" value="Bascula.Puerto.Baudios" />
+         <column name="DESCRIPTION" value="" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_BITS" />
+         <column name="VALUE" value="Bascula.Puerto.BitsDatos" />
+         <column name="DESCRIPTION" value="" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_PARADA" />
+         <column name="VALUE" value="Bascula.Puerto.BitsParada" />
+         <column name="DESCRIPTION" value="" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_PARIDAD" />
+         <column name="VALUE" value="Bascula.Puerto.Paridad" />
+         <column name="DESCRIPTION" value="" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+   </changeSet>
+
+</databaseChangeLog>

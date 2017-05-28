@@ -1,0 +1,52 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.utilerias;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javax.inject.Inject;
+
+/**
+ *
+ * @author fox1x0d
+ */
+public class CargaPantalla extends AnchorPane{
+    
+    private  HashMap<String, Node> pantalla = new HashMap<>();
+    
+    private void addPantalla(String nombreFxml, Node node) {
+        pantalla.put(nombreFxml, node);
+    }
+
+    public Node getPantalla(String nombreFxml) {
+        return pantalla.get(nombreFxml);
+    }
+    
+     public Node cargaNodo(String nombreFxml,Object controlador) {
+        InputStream is = null;
+        try {
+            Node node = pantalla.get(nombreFxml);
+            if (node == null) {                
+                is = getClass().getResourceAsStream(nombreFxml);
+                FXMLLoader fxmlLoader=new FXMLLoader();
+                fxmlLoader.setController(controlador); 
+                node = (Parent) fxmlLoader.load(is);              
+                addPantalla(nombreFxml, node);                
+            }
+            return node;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+}

@@ -1,0 +1,13 @@
+package mx.vw.swf.sms.controller.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class SMSProveedor {
+
+    @Id
+    protected Long id;
+
+    protected String nombre;
+}

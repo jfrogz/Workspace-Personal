@@ -1,0 +1,70 @@
+package mx.vw.swf.cdi;
+
+import io.datafx.controller.flow.Flow;
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.FlowHandler;
+import io.datafx.controller.util.VetoException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import mx.vw.swf.security.controller.MenuController;
+import mx.vw.swf.sms.utilerias.ArchivoPropiedades;
+
+import javax.persistence.EntityManagerFactory;
+import java.util.Properties;
+import mx.vw.swf.security.controller.LoginController;
+import mx.vw.swf.security.controller.WelcomeController;
+import mx.vw.swf.sms.controller.ConfigurarPuertoController;
+import mx.vw.swf.sms.controller.CrearEditarClienteProveedorController;
+import mx.vw.swf.sms.controller.MovimientosClientesController;
+import mx.vw.swf.sms.controller.MovimientosProveedoresController;
+import mx.vw.swf.sms.controller.RegistroDeClientesYProveedoresController;
+import mx.vw.swf.sms.utilerias.Utilerias;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+public class DataFXLauncher extends Application {
+    
+    
+    Flow mainFlow;
+    public static EntityManagerFactory emf;
+    public static Stage primary;
+    public static Properties mensajesProperties;
+    public static Properties mensajesPropertiesSeg;
+
+
+    
+    public static void main(String[] args) throws FlowException {
+        launch(args);
+    }
+
+
+    @Override
+    public void start(Stage primaryStage) throws FlowException, VetoException {
+        ArchivoPropiedades Ap = new ArchivoPropiedades();
+        mensajesProperties =Ap.getProperties();
+        mensajesPropertiesSeg=Ap.getPropertiesSeguridad();
+        
+        //Flow flow = new Flow(LoginController.class);        
+        //Flow flow = new Flow(RegistroDeClientesYProveedoresController.class);
+        //Flow flow = new Flow(ConfigurarPuertoController.class);
+        //Flow flow = new Flow(CrearEditarClienteProveedorController.class);
+        //Flow flow = new Flow(LoginController.class);        
+        //Flow flow = new Flow(MovimientosProveedoresController.class);        
+        //Flow flow = new Flow(MovimientosClientesController.class);
+        Flow flow = new Flow(WelcomeController.class);
+        FlowHandler flowHandler = flow.createHandler();
+        StackPane stackPane = flowHandler.start();        
+        primaryStage.setScene(new Scene(stackPane));
+        primaryStage.setMaximized(true);
+        primaryStage.getScene().getStylesheets().setAll(Utilerias.class.getResource("/css/estilos.css").toExternalForm());
+        primaryStage.show();
+    }
+
+    public static String getProperty(String propertyName) {
+        String message = mensajesProperties.getProperty(propertyName);
+        return null == message ? "NA" : message;
+    }
+}

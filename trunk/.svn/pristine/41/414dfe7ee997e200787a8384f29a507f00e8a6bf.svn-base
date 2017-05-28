@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" styleClass="mainFxmlClass,AlignCenterRight" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.vw.swf.fwk.controller.ExporterController">
+   <stylesheets>
+      <URL value="@/css/estilos.css" />
+   </stylesheets>
+   <children>
+      <VBox>
+         <children>
+            <HBox styleClass="AlignCenterRight">
+               <children>
+                  <Label fx:id="exporterLabel" alignment="CENTER_RIGHT" minWidth="50.0" styleClass="FieldLabel,AlignCenterRight" text="Exportar:">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#exportView" styleClass="botones,buttonZoom" />
+                  <Separator prefWidth="10.0" visible="false" />
+                  <Button layoutX="67.0" layoutY="10.0" mnemonicParsing="false" onAction="#exportXLS" styleClass="botones,buttonXLS" />
+                  <Separator layoutX="83.0" layoutY="21.0" prefWidth="10.0" visible="false" />
+                  <Button layoutX="93.0" layoutY="10.0" mnemonicParsing="false" onAction="#exportPDF" styleClass="botones,buttonPDF" />
+                  <Separator layoutX="109.0" layoutY="10.0" prefWidth="10.0" visible="false" />
+                  <Button layoutX="119.0" layoutY="10.0" mnemonicParsing="false" onAction="#exportPrintConfigDialogs" styleClass="botones,buttonPrint" />
+               </children>
+            </HBox>
+            <Separator orientation="VERTICAL" prefHeight="3.0" visible="false" />
+            <HBox styleClass="AlignCenterRight">
+               <children>
+                  <Label fx:id="exporterPathLabel" alignment="CENTER_RIGHT" minWidth="50.0" styleClass="FieldLabel,AlignCenterRight" text="Destino:">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Separator layoutX="34.0" layoutY="10.0" prefWidth="10.0" visible="false" />
+                  <Label fx:id="exporterPathText" layoutX="10.0" layoutY="10.0" minWidth="50.0" styleClass="FieldLabel,AlignCenterRight" text="temp">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Separator prefWidth="10.0" visible="false" />
+                  <Button mnemonicParsing="false" onAction="#exporterDirChooser" styleClass="botones,buttonFolder" />
+               </children>
+            </HBox>
+            <Separator layoutX="10.0" layoutY="35.0" orientation="VERTICAL" prefHeight="3.0" visible="false" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

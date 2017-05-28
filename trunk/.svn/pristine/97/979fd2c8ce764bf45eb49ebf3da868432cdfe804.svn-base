@@ -1,0 +1,21 @@
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import java.io.Serializable;
+import javax.annotation.PostConstruct;
+import mx.vw.swf.cdi.DataFXLauncher;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+//@FXMLController("/fxml/security/Main.fxml")
+@ViewController("/fxml/security/Main.fxml")
+public class WelcomeController extends MenuController implements Serializable{
+   
+    @PostConstruct
+    public void postContruct ()
+    {
+        super.postConstruct();  
+        setEncabezado(DataFXLauncher.mensajesProperties.getProperty("Welcome.Header"));
+    }
+}

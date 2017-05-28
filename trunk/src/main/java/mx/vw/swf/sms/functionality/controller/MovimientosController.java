@@ -1,0 +1,614 @@
+package mx.vw.swf.sms.functionality.controller;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.ViewFlowContext;
+import io.datafx.controller.util.VetoException;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.StringPropertyBase;
+import javafx.beans.property.adapter.JavaBeanStringProperty;
+import javafx.beans.property.adapter.JavaBeanStringPropertyBuilder;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javax.annotation.PostConstruct;
+import mx.vw.swf.cdi.DataFXLauncher;
+import static mx.vw.swf.cdi.DataFXLauncher.getProperty;
+import mx.vw.swf.security.controller.MenuController;
+import mx.vw.swf.security.model.SegUsuario;
+import mx.vw.swf.sms.controller.RegistroDeClientesYProveedoresController;
+import mx.vw.swf.sms.dao.SmsCteProvDAO;
+import mx.vw.swf.sms.dao.SmsMovimientoDAO;
+import mx.vw.swf.sms.dao.SmsProductoDAO;
+import mx.vw.swf.sms.model.SmsCteProv;
+import mx.vw.swf.sms.model.SmsMovimiento;
+import mx.vw.swf.sms.model.SmsProdCteprov;
+import mx.vw.swf.sms.model.SmsProducto;
+import mx.vw.swf.sms.utilerias.Utilerias;
+import static mx.vw.swf.sms.utilerias.Utilerias.comboPaginacion;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1yij
+ */
+public class MovimientosController extends MenuController {
+
+    // <editor-fold defaultstate="colapsed" desc="LABELS">
+    @FXML
+    protected Label Entity_lblEntidad;
+    @FXML
+    protected Label Entity_lblClave;
+    @FXML
+    protected Label Entity_lblNombre;
+
+    @FXML
+    protected Label Productos_lblHeader;
+    @FXML
+    protected Label Productos_lblClave;
+    @FXML
+    protected Label Productos_lblNombre;
+
+    @FXML
+    protected Label Entradas_lblEntrada;
+    @FXML
+    protected Label Entradas_lblFolio;
+    @FXML
+    protected Label Entradas_lblPlacas;
+
+    @FXML
+    protected Label Entradas_lblEmpresa;
+    @FXML
+    protected Label Entradas_lblPesoBruto;
+    @FXML
+    protected Label Entradas_lblPesoTara;
+    @FXML
+    protected Label Entradas_lblPesoNeto;
+
+    @FXML
+    protected Label lblPesobrutoValue;
+    @FXML
+    protected Label lblPesoTaraValue;
+    @FXML
+    protected Label lblPesoNetoValue;
+    // </editor-fold>
+    // <editor-fold defaultstate="colapsed" desc="BOTONES">
+    //Controles
+    @FXML
+    protected Button btnNuevaEntrada;
+    @FXML
+    protected Button btnSalida;
+    @FXML
+    protected Button btnReimpresion;
+    @FXML
+    protected Button btnCancelarTicket;
+    @FXML
+    protected Button btnEntradaCustodia;
+    @FXML
+    protected Button btnSalidaCustodia;
+    //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="TABLA Y COLUMNAS">
+    @FXML
+    protected TableView<SmsCteProv> tablaIdentidad;
+    @FXML
+    protected TableColumn<SmsCteProv, Long> colEntityId;
+    @FXML
+    protected TableColumn<SmsCteProv, String> colEntityClave;
+    @FXML
+    protected TableColumn<SmsCteProv, String> colEntityNombre;
+
+    @FXML
+    protected TableView<SmsProducto> tablaProducto;
+    @FXML
+    protected TableColumn<SmsProducto, Long> colProductoId;
+    @FXML
+    protected TableColumn<SmsProducto, String> colProductoClave;
+    @FXML
+    protected TableColumn<SmsProducto, String> colProductoNombre;
+
+    @FXML
+    protected TableView<SmsMovimiento> tablaEntradasPendientes;
+    @FXML
+    protected TableColumn<SmsMovimiento, Long> colFolioEntradas;
+    @FXML
+    protected TableColumn<SmsMovimiento, String> colEntidadEntradas;
+    @FXML
+    protected TableColumn<SmsMovimiento, String> colProductoEntradas;
+    @FXML
+    protected TableColumn<SmsMovimiento, String> colPlacasEntradas;
+    @FXML
+    protected TableColumn<SmsMovimiento, String> colContratoVentaEntradas;
+    @FXML
+    protected TableColumn<SmsMovimiento, String> colDestinoEntradas;
+    @FXML
+    protected TableColumn<SmsMovimiento, Timestamp> colFechaEntradaEntradas;
+    @FXML
+    protected TableColumn<SmsMovimiento, String> colContingenciaEntradas;
+    @FXML
+    protected TableColumn<SmsMovimiento, String> colEnviadoSAPEntradas;
+
+    //</editor-fold>    
+    //<editor-fold defaultstate="collapsed" desc="CAJAS DE TEXTO textField">
+    @FXML
+    protected TextField txtIdentityClave;
+    @FXML
+    protected TextField txtIdentityNombre;
+    @FXML
+    protected TextField txtProductoClave;
+    @FXML
+    protected TextField txtProductoNombre;
+    @FXML
+    protected TextField txtEntradasFolio;
+    @FXML
+    protected TextField txtEntradasPlacas;
+    @FXML
+    protected TextField txtEntradasEmpresa;
+    //</editor-fold>    
+    //<editor-fold defaultstate="collapsed" desc="LISTAS"> 
+    private ObservableList<SmsCteProv> masterDataIdentidad = FXCollections.observableArrayList();
+    private FilteredList<SmsCteProv> filteredDataIdentidad;
+
+    private ObservableList<SmsProducto> masterDataProductos = FXCollections.observableArrayList();
+    private FilteredList<SmsProducto> filteredDataProductos;
+
+    private ObservableList<SmsMovimiento> masterDataMovimientos = FXCollections.observableArrayList();
+    private FilteredList<SmsMovimiento> filteredDataMovimientos;
+    //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="DEL SISTEMA">
+    @FXMLViewFlowContext
+    ViewFlowContext viewFlowContext;
+
+    private TipoEntidad entidadActual;
+
+    //</editor-fold>
+    @FXML
+    private ComboBox comboPaginacion;
+    @FXML
+    private Pagination paginador;
+
+    public enum TipoEntidad {
+
+        CLIENTE, PROVEEDOR
+    }
+
+    protected void Contruct() {
+
+        inicializarLabels();
+        inicializarColumnas();
+        inicializarEventos();
+        inicializarValidadores();
+        inicializarControles();
+    }
+
+    private void inicializarControles() {
+        btnNuevaEntrada.setDisable(true);
+        entidadActual = null;
+        String[] lisPaginas = DataFXLauncher.getSecurityProperty("paginas").split(",");
+        ObservableList<String> listPaginas = FXCollections.observableArrayList(lisPaginas);
+        comboPaginacion.setItems(listPaginas);
+        comboPaginacion.getSelectionModel().selectFirst();
+    }
+
+    protected void inicializarPaginador() {
+        int renglonesMostrar = Integer.parseInt(comboPaginacion.getValue().toString());
+        Utilerias.inicializaPaginador(paginador, filteredDataMovimientos, renglonesMostrar);
+        Utilerias.creaPaginaTableView(0, renglonesMostrar, filteredDataMovimientos, tablaEntradasPendientes, false);
+    }
+
+    private void inicializarLabels() {
+        System.out.println("Si se inicializan");
+        Entity_lblClave.setText(DataFXLauncher.getProperty("Movimientos.General.Entity.lblClave") + ":");
+        Entity_lblNombre.setText(DataFXLauncher.getProperty("Movimientos.General.Entity.lblNombre") + ":");
+        Productos_lblHeader.setText(DataFXLauncher.getProperty("Movimientos.General.Productos.lblHeader"));
+        Productos_lblClave.setText(DataFXLauncher.getProperty("Movimientos.General.Productos.lblClave") + ":");
+        Productos_lblNombre.setText(DataFXLauncher.getProperty("Movimientos.General.Productos.lblNombre") + ":");
+        Entradas_lblEntrada.setText(DataFXLauncher.getProperty("Movimientos.General.Entradas.lblEntrada"));
+        Entradas_lblFolio.setText(DataFXLauncher.getProperty("Movimientos.General.Entradas.lblFolio") + ":");
+        Entradas_lblPlacas.setText(DataFXLauncher.getProperty("Movimientos.General.Entradas.lblPlacas") + ":");
+
+        Entradas_lblEmpresa.setText(DataFXLauncher.getProperty("Movimientos.General.Entradas.lblEmpresa") + ":");
+        Entradas_lblPesoBruto.setText(DataFXLauncher.getProperty("Movimientos.General.Entradas.lblPesoBruto") + ":");
+        Entradas_lblPesoTara.setText(DataFXLauncher.getProperty("Movimientos.General.Entradas.lblPesoTara") + ":");
+        Entradas_lblPesoNeto.setText(DataFXLauncher.getProperty("Movimientos.General.Entradas.lblPesoNeto") + ":");
+
+        btnNuevaEntrada.setText(DataFXLauncher.getProperty("Movimientos.General.btnNuevaEntrada"));
+        btnSalida.setText(DataFXLauncher.getProperty("Movimientos.General.btnSalida"));
+        btnReimpresion.setText(DataFXLauncher.getProperty("Movimientos.General.btnReimpresion"));
+        btnCancelarTicket.setText(DataFXLauncher.getProperty("Movimientos.General.btnCancelarTicket"));
+        btnEntradaCustodia.setText(DataFXLauncher.getProperty("Movimientos.General.btnEntradaCustodia"));
+        btnSalidaCustodia.setText(DataFXLauncher.getProperty("Movimientos.General.btnSalidaCustodia"));
+
+        colEntityId.setText(DataFXLauncher.getProperty("Movimientos.General.colId"));
+        colEntityClave.setText(DataFXLauncher.getProperty("Movimientos.General.Entity.lblClave"));
+        colEntityNombre.setText(DataFXLauncher.getProperty("Movimientos.General.Entity.lblNombre"));
+
+        colProductoId.setText(DataFXLauncher.getProperty("Movimientos.General.colId"));
+        colProductoClave.setText(DataFXLauncher.getProperty("Movimientos.General.Productos.lblClave"));
+        colProductoNombre.setText(DataFXLauncher.getProperty("Movimientos.General.Productos.lblNombre"));
+
+        colFolioEntradas.setText(DataFXLauncher.getProperty("Movimientos.General.Entradas.lblFolio"));
+        colEntidadEntradas.setText(DataFXLauncher.getProperty("Movimientos.General.colEntidad"));
+        colProductoEntradas.setText(DataFXLauncher.getProperty("Movimientos.General.colProducto"));
+        colPlacasEntradas.setText(DataFXLauncher.getProperty("NuevaEntrada.lblPlaca"));
+        colContratoVentaEntradas.setText(DataFXLauncher.getProperty("NuevaEntrada.lblNumContrato"));
+        colDestinoEntradas.setText(DataFXLauncher.getProperty("NuevaEntrada.lblDestino"));
+        colFechaEntradaEntradas.setText(DataFXLauncher.getProperty("Movimientos.General.colFechaEntrada"));
+        colContingenciaEntradas.setText(DataFXLauncher.getProperty("Movimientos.General.colContingencia"));
+        colEnviadoSAPEntradas.setText(DataFXLauncher.getProperty("Movimientos.General.colEnviadosSAP"));
+
+    }
+
+    private void inicializarColumnas() {
+        colEntityId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colEntityClave.setCellValueFactory(new PropertyValueFactory<>("clave"));
+        colEntityNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+
+        colProductoId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colProductoClave.setCellValueFactory(new PropertyValueFactory<>("clave"));
+        colProductoNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+
+        colFolioEntradas.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colPlacasEntradas.setCellValueFactory(new PropertyValueFactory<>("placaVehiculo"));
+        colContratoVentaEntradas.setCellValueFactory(new PropertyValueFactory<>("factura"));
+        colDestinoEntradas.setCellValueFactory(new PropertyValueFactory<>("destino"));
+        colFechaEntradaEntradas.setCellValueFactory(new PropertyValueFactory<>("fechaEntrada"));
+        colEnviadoSAPEntradas.setCellValueFactory(new PropertyValueFactory<>("rowEnviadoASAP"));
+
+        colEntidadEntradas.setCellValueFactory(cellData -> cellData.getValue().getRowNombreEmpresa());
+        colEnviadoSAPEntradas.setCellValueFactory(cellData -> cellData.getValue().getRowEnviadoASAP());
+        colProductoEntradas.setCellValueFactory(cellData -> cellData.getValue().getRowNombreProducto());
+
+    }
+
+    private void inicializarEventos() {
+        //<editor-fold defaultstate="collapsed" desc="IDENTIDADES">
+        tablaIdentidad.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (null == newValue) {
+                tablaProducto.setItems(null);
+                tablaProducto.getSelectionModel().clearSelection();
+            } else {
+                cargarTablaProductos(newValue);
+                tablaProducto.getSelectionModel().clearSelection();
+            }
+        });
+
+        txtIdentityClave.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataIdentidad.setPredicate(entidad -> {
+                if (null == newValue || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (entidad.getClave().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        txtIdentityNombre.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataIdentidad.setPredicate(entidad -> {
+                if (null == newValue || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (entidad.getNombre().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+        //</editor-fold>    
+        //<editor-fold defaultstate="collapsed" desc="PRODUCTOS">
+        txtProductoClave.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataProductos.setPredicate(entidad -> {
+                if (null == newValue || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (entidad.getClave().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        txtProductoNombre.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataProductos.setPredicate(entidad -> {
+                if (null == newValue || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (entidad.getNombre().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        tablaProducto.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (null != newValue && !tablaProducto.getItems().isEmpty()) {
+                btnNuevaEntrada.setDisable(false);
+            } else {
+                btnNuevaEntrada.setDisable(true);
+            }
+        });
+
+        tablaProducto.setOnMouseClicked((event -> {
+            System.out.println(tablaProducto.getSelectionModel().getSelectedIndex());
+        }));
+        //</editor-fold>   
+        //<editor-fold defaultstate="collapsed" desc="ENTRADAS PENDIENTES">
+        btnNuevaEntrada.setOnAction(event -> {
+            String titulo = getProperty("NuevaEntrada.Header");
+            Stage stage;
+            SegUsuario segUsuario = (SegUsuario) viewFlowContext.getRegisteredObject("USERPRINCIPAL");
+            try {
+                NuevaEntradaController nec
+                        = new NuevaEntradaController(tablaIdentidad.getSelectionModel().getSelectedItem(),
+                                tablaProducto.getSelectionModel().getSelectedItem(), segUsuario);
+                stage = Utilerias.nuevaVentana("/fxml/functionality/NuevaEntrada.fxml", nec, titulo);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.UTILITY);
+                stage.setResizable(false);
+                stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+                nec.setStage(stage);
+                stage.showAndWait();
+                if (null != entidadActual) {
+                    actualizarTablaDeMovimientos();
+                }
+                tablaIdentidad.getSelectionModel().clearSelection();
+            } catch (IOException ex) {
+                Logger.getLogger(RegistroDeClientesYProveedoresController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        txtEntradasEmpresa.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataMovimientos.setPredicate(entidad -> {
+                if (null == newValue || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (entidad.getSmsCteProv().getNombre().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        txtEntradasFolio.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataMovimientos.setPredicate(entidad -> {
+                if (null == newValue || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (entidad.getId().toString().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+        txtEntradasPlacas.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataMovimientos.setPredicate(entidad -> {
+                if (null == newValue || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (entidad.getPlacaVehiculo().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        tablaEntradasPendientes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            actualizarCampoDePesos(newValue);
+        });
+        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="SALIDAS">
+
+        btnSalida.setOnAction(new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+                String titulo = getProperty("Movimientos.Salida.Header",
+                        entidadActual == TipoEntidad.CLIENTE ? getProperty("General.Entidad.Cliente")
+                                : getProperty("General.Entidad.Proveedor"));
+
+                SegUsuario segUsuario = (SegUsuario) viewFlowContext.getRegisteredObject("USERPRINCIPAL");
+
+                SalidaMovimientoController smc = new SalidaMovimientoController(tablaEntradasPendientes.getSelectionModel().getSelectedItem(), segUsuario);
+
+                try {
+                    Stage stage = Utilerias.nuevaVentana("/fxml/functionality/SalidaMovimiento.fxml", smc, titulo);
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.initStyle(StageStyle.UTILITY);
+                    stage.setResizable(false);
+                    stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+                    smc.setStage(stage);
+                    stage.showAndWait();
+                } catch (IOException ex) {
+                    Logger.getLogger(MovimientosController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                actualizarTablaDeMovimientos();
+                tablaEntradasPendientes.getSelectionModel().clearSelection();
+            }
+        });
+        //</editor-fold>
+
+        paginador.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                int renglonesMostrar = Integer.parseInt(comboPaginacion.getValue().toString());
+                Utilerias.creaPaginaTableView(newValue.intValue(), renglonesMostrar, filteredDataMovimientos, tablaEntradasPendientes, true);
+            }
+        });
+
+        comboPaginacion.setOnAction((event) -> {
+            actualizarTablaDeMovimientos();
+        });
+    }
+
+    private void actualizarCampoDePesos(SmsMovimiento newValue) {
+        if (null == newValue) {
+            lblPesoNetoValue.setText("");
+            lblPesoTaraValue.setText("");
+            lblPesobrutoValue.setText("");
+            btnSalida.setDisable(true);
+        } else {
+            btnSalida.setDisable(false);
+            //Peso TARA
+            if (null != newValue.getPesoTara() && 0 != newValue.getPesoTara()) {
+                lblPesoTaraValue.setText(String.format("%,10.0f Kg", newValue.getPesoTara()));
+            } else {
+                lblPesoTaraValue.setText("---");
+            }
+            //Peso NETO
+            if (null != newValue.getPesoNeto() && 0 != newValue.getPesoNeto()) {
+                lblPesoNetoValue.setText(String.format("%,10.0f Kg", newValue.getPesoNeto()));
+            } else {
+                lblPesoNetoValue.setText("---");
+            }
+            //Peso BRUTO
+            double pesoBruto = 0;
+            switch (entidadActual) {
+                case CLIENTE:
+                    if (null != newValue.getPesoSalida()) {
+                        pesoBruto = newValue.getPesoSalida();
+                    }
+                    break;
+                case PROVEEDOR:
+                    if (null != newValue.getPesoEntrada()) {
+                        pesoBruto = newValue.getPesoEntrada();
+                    }
+                    break;
+            }
+            if (pesoBruto != 0) {
+                lblPesobrutoValue.setText(String.format("%,10.0f Kg", pesoBruto));
+            } else {
+                lblPesobrutoValue.setText("---");
+            }
+        }
+    }
+
+    private void inicializarValidadores() {
+        txtIdentityNombre.addEventFilter(KeyEvent.KEY_TYPED, Utilerias.permiteLetrasNumeros());
+        txtProductoNombre.addEventFilter(KeyEvent.KEY_TYPED, Utilerias.permiteLetrasNumeros());
+        txtEntradasFolio.addEventFilter(KeyEvent.KEY_TYPED, Utilerias.permiteNumeros());
+        txtEntradasPlacas.addEventFilter(KeyEvent.KEY_TYPED, Utilerias.permiteLetrasNumeros());
+
+        Utilerias.addTextLimiter(txtIdentityClave, 50);
+        Utilerias.addTextLimiter(txtIdentityNombre, 100);
+        Utilerias.addTextLimiter(txtProductoClave, 50);
+        Utilerias.addTextLimiter(txtProductoNombre, 100);
+        Utilerias.addTextLimiter(txtEntradasFolio, 8);
+        Utilerias.addTextLimiter(txtEntradasPlacas, 7);
+
+    }
+
+    private void inicializarFiltrosIdentidades(List<SmsCteProv> listIdentidades) {
+        masterDataIdentidad = FXCollections.observableArrayList(listIdentidades);
+        filteredDataIdentidad = new FilteredList<>(masterDataIdentidad);
+        filteredDataIdentidad.setPredicate(identity -> true);
+        tablaIdentidad.setItems(filteredDataIdentidad);
+    }
+
+    private void inicializarFiltrosProductos(List<SmsProducto> listProductos) {
+        masterDataProductos = FXCollections.observableArrayList(listProductos);
+        filteredDataProductos = new FilteredList<>(masterDataProductos);
+        filteredDataProductos.setPredicate(identity -> true);
+        tablaProducto.setItems(filteredDataProductos);
+
+    }
+
+    private void inicializarFiltrosMovimientos(List<SmsMovimiento> findAll) {
+        masterDataMovimientos = FXCollections.observableArrayList(findAll);
+        filteredDataMovimientos = new FilteredList<>(masterDataMovimientos);
+        filteredDataMovimientos.setPredicate(identity -> true);
+        tablaEntradasPendientes.setItems(filteredDataMovimientos);
+    }
+
+    protected void cargarTablaIdentidades(TipoEntidad entidad) {
+        SmsCteProvDAO cteProvDAO = new SmsCteProvDAO();
+        tablaIdentidad.getItems().clear();
+        List<SmsCteProv> findAll = null;
+        cteProvDAO = new SmsCteProvDAO();
+        if (entidad == TipoEntidad.PROVEEDOR) {
+            findAll = cteProvDAO.findByProperty("esProveedor", Short.valueOf("1"));
+        } else {
+            findAll = cteProvDAO.findByProperty("esProveedor", Short.valueOf("0"));
+        }
+        inicializarFiltrosIdentidades(findAll);
+    }
+
+    private void cargarTablaProductos(SmsCteProv cteProv) {
+        if (null != cteProv) {
+            SmsCteProvDAO cteProvDAO = new SmsCteProvDAO();
+            cteProv = cteProvDAO.findById(cteProv.getId());
+            Iterator<SmsProdCteprov> iterator = cteProv.getSmsProdCteprovs().iterator();
+            ObservableList<SmsProducto> list = FXCollections.observableArrayList();
+
+            while (iterator.hasNext()) {
+                SmsProdCteprov next = iterator.next();
+                list.add(next.getSmsProducto());
+            }
+            inicializarFiltrosProductos(list);
+        }
+    }
+
+    public void actualizarTablaMovimientos(TipoEntidad entidad) {
+        entidadActual = entidad;
+        actualizarTablaDeMovimientos();
+    }
+
+    public void actualizarTablaDeMovimientos() {
+        tablaEntradasPendientes.selectionModelProperty().get().clearSelection();
+        tablaEntradasPendientes.setItems(null);
+        SmsMovimientoDAO movimientoDAO = new SmsMovimientoDAO();
+
+        List<SmsMovimiento> listResult = FXCollections.observableArrayList();
+
+        if (entidadActual == entidadActual.CLIENTE) {
+            listResult = movimientoDAO.findAllMovimientosClientes();
+        } else if (entidadActual == entidadActual.PROVEEDOR) {
+            listResult = movimientoDAO.findAllMovimientosProveedores();
+        }
+        inicializarFiltrosMovimientos(listResult);
+        inicializarPaginador();
+    }
+}

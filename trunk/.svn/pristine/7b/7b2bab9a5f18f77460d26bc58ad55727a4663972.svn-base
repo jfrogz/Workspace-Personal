@@ -1,0 +1,119 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.*;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@Entity
+@Table(name = "SEG_USUARIO", schema = "dbo", catalog = "SMS")
+public class SegUsuarioEntity {
+    private int id;
+    private String userId;
+    private String nombreUsuario;
+    private String apPaterno;
+    private String apMaterno;
+    private String correoE;
+    private short estatus;
+
+    @Id
+    @Column(name = "Id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Basic
+    @Column(name = "User_Id")
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    @Basic
+    @Column(name = "NombreUsuario")
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    @Basic
+    @Column(name = "ApPaterno")
+    public String getApPaterno() {
+        return apPaterno;
+    }
+
+    public void setApPaterno(String apPaterno) {
+        this.apPaterno = apPaterno;
+    }
+
+    @Basic
+    @Column(name = "ApMaterno")
+    public String getApMaterno() {
+        return apMaterno;
+    }
+
+    public void setApMaterno(String apMaterno) {
+        this.apMaterno = apMaterno;
+    }
+
+    @Basic
+    @Column(name = "CorreoE")
+    public String getCorreoE() {
+        return correoE;
+    }
+
+    public void setCorreoE(String correoE) {
+        this.correoE = correoE;
+    }
+
+    @Basic
+    @Column(name = "Estatus")
+    public short getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(short estatus) {
+        this.estatus = estatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SegUsuarioEntity that = (SegUsuarioEntity) o;
+
+        if (estatus != that.estatus) return false;
+        if (id != that.id) return false;
+        if (apMaterno != null ? !apMaterno.equals(that.apMaterno) : that.apMaterno != null) return false;
+        if (apPaterno != null ? !apPaterno.equals(that.apPaterno) : that.apPaterno != null) return false;
+        if (correoE != null ? !correoE.equals(that.correoE) : that.correoE != null) return false;
+        if (nombreUsuario != null ? !nombreUsuario.equals(that.nombreUsuario) : that.nombreUsuario != null)
+            return false;
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (nombreUsuario != null ? nombreUsuario.hashCode() : 0);
+        result = 31 * result + (apPaterno != null ? apPaterno.hashCode() : 0);
+        result = 31 * result + (apMaterno != null ? apMaterno.hashCode() : 0);
+        result = 31 * result + (correoE != null ? correoE.hashCode() : 0);
+        result = 31 * result + (int) estatus;
+        return result;
+    }
+}

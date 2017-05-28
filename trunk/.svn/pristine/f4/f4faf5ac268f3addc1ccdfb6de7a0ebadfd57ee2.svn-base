@@ -1,0 +1,158 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@Entity
+@Table(name = "SMS_CTE_PROV", schema = "dbo", catalog = "SMS")
+public class SmsCteProvEntity {
+    private int id;
+    private short esProveedor;
+    private String clave;
+    private String nombre;
+    private String razonSocial;
+    private String idSap;
+    private short estatus;
+    private short salidaContingencia;
+    private Timestamp createdOn;
+    private Timestamp updatedOn;
+
+    @Id
+    @Column(name = "Id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Basic
+    @Column(name = "EsProveedor")
+    public short getEsProveedor() {
+        return esProveedor;
+    }
+
+    public void setEsProveedor(short esProveedor) {
+        this.esProveedor = esProveedor;
+    }
+
+    @Basic
+    @Column(name = "Clave")
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    @Basic
+    @Column(name = "Nombre")
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Basic
+    @Column(name = "RazonSocial")
+    public String getRazonSocial() {
+        return razonSocial;
+    }
+
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+
+    @Basic
+    @Column(name = "IdSAP")
+    public String getIdSap() {
+        return idSap;
+    }
+
+    public void setIdSap(String idSap) {
+        this.idSap = idSap;
+    }
+
+    @Basic
+    @Column(name = "Estatus")
+    public short getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(short estatus) {
+        this.estatus = estatus;
+    }
+
+    @Basic
+    @Column(name = "SalidaContingencia")
+    public short getSalidaContingencia() {
+        return salidaContingencia;
+    }
+
+    public void setSalidaContingencia(short salidaContingencia) {
+        this.salidaContingencia = salidaContingencia;
+    }
+
+    @Basic
+    @Column(name = "Created_On")
+    public Timestamp getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Timestamp createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    @Basic
+    @Column(name = "Updated_On")
+    public Timestamp getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public void setUpdatedOn(Timestamp updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SmsCteProvEntity that = (SmsCteProvEntity) o;
+
+        if (esProveedor != that.esProveedor) return false;
+        if (estatus != that.estatus) return false;
+        if (id != that.id) return false;
+        if (salidaContingencia != that.salidaContingencia) return false;
+        if (clave != null ? !clave.equals(that.clave) : that.clave != null) return false;
+        if (createdOn != null ? !createdOn.equals(that.createdOn) : that.createdOn != null) return false;
+        if (idSap != null ? !idSap.equals(that.idSap) : that.idSap != null) return false;
+        if (nombre != null ? !nombre.equals(that.nombre) : that.nombre != null) return false;
+        if (razonSocial != null ? !razonSocial.equals(that.razonSocial) : that.razonSocial != null) return false;
+        if (updatedOn != null ? !updatedOn.equals(that.updatedOn) : that.updatedOn != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (int) esProveedor;
+        result = 31 * result + (clave != null ? clave.hashCode() : 0);
+        result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
+        result = 31 * result + (razonSocial != null ? razonSocial.hashCode() : 0);
+        result = 31 * result + (idSap != null ? idSap.hashCode() : 0);
+        result = 31 * result + (int) estatus;
+        result = 31 * result + (int) salidaContingencia;
+        result = 31 * result + (createdOn != null ? createdOn.hashCode() : 0);
+        result = 31 * result + (updatedOn != null ? updatedOn.hashCode() : 0);
+        return result;
+    }
+}

@@ -1,0 +1,212 @@
+package mx.vw.swf.sms.model;
+
+import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+/**
+ * AbstractSmsCteProv entity provides the base persistence definition of the
+ * SmsCteProv entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractSmsCteProv implements java.io.Serializable {
+
+    // Fields
+
+    private Long id;
+    private SegUsuario segUsuarioByCreatedBy;
+    private SegUsuario segUsuarioByUpdatedBy;
+    private Short esProveedor;
+    private String clave;
+    private String nombre;
+    private String razonSocial;
+    private String idSap;
+    private Short estatus;
+    private Short salidaContingencia;
+    private Timestamp createdOn;
+    private Timestamp updatedOn;
+    private Set<SmsMovimiento> smsMovimientos = new HashSet<SmsMovimiento>(0);
+    private Set<SmsProdCteprov> smsProdCteprovs = new HashSet<SmsProdCteprov>(0);
+
+    // Constructors
+
+    /** default constructor */
+    public AbstractSmsCteProv() {
+    }
+
+    /** minimal constructor */
+    public AbstractSmsCteProv(Long id, SegUsuario segUsuarioByCreatedBy,
+            Short esProveedor, String clave, String nombre, Short estatus,
+            Short salidaContingencia, Timestamp createdOn) {
+        this.id = id;
+        this.segUsuarioByCreatedBy = segUsuarioByCreatedBy;
+        this.esProveedor = esProveedor;
+        this.clave = clave;
+        this.nombre = nombre;
+        this.estatus = estatus;
+        this.salidaContingencia = salidaContingencia;
+        this.createdOn = createdOn;
+    }
+
+    /** full constructor */
+    public AbstractSmsCteProv(Long id, SegUsuario segUsuarioByCreatedBy,
+            SegUsuario segUsuarioByUpdatedBy, Short esProveedor, String clave,
+            String nombre, String razonSocial, String idSap, Short estatus,
+            Short salidaContingencia, Timestamp createdOn, Timestamp updatedOn,
+            Set<SmsMovimiento> smsMovimientos,
+            Set<SmsProdCteprov> smsProdCteprovs) {
+        this.id = id;
+        this.segUsuarioByCreatedBy = segUsuarioByCreatedBy;
+        this.segUsuarioByUpdatedBy = segUsuarioByUpdatedBy;
+        this.esProveedor = esProveedor;
+        this.clave = clave;
+        this.nombre = nombre;
+        this.razonSocial = razonSocial;
+        this.idSap = idSap;
+        this.estatus = estatus;
+        this.salidaContingencia = salidaContingencia;
+        this.createdOn = createdOn;
+        this.updatedOn = updatedOn;
+        this.smsMovimientos = smsMovimientos;
+        this.smsProdCteprovs = smsProdCteprovs;
+    }
+
+    // Property accessors
+    @Id
+    @Column(name = "Id", unique = true, nullable = false, precision = 10, scale = 0)
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Created_By", nullable = false)
+    public SegUsuario getSegUsuarioByCreatedBy() {
+        return this.segUsuarioByCreatedBy;
+    }
+
+    public void setSegUsuarioByCreatedBy(SegUsuario segUsuarioByCreatedBy) {
+        this.segUsuarioByCreatedBy = segUsuarioByCreatedBy;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Updated_By")
+    public SegUsuario getSegUsuarioByUpdatedBy() {
+        return this.segUsuarioByUpdatedBy;
+    }
+
+    public void setSegUsuarioByUpdatedBy(SegUsuario segUsuarioByUpdatedBy) {
+        this.segUsuarioByUpdatedBy = segUsuarioByUpdatedBy;
+    }
+
+    @Column(name = "EsProveedor", nullable = false)
+    public Short getEsProveedor() {
+        return this.esProveedor;
+    }
+
+    public void setEsProveedor(Short esProveedor) {
+        this.esProveedor = esProveedor;
+    }
+
+    @Column(name = "Clave", unique = true, nullable = false, length = 50)
+    public String getClave() {
+        return this.clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    @Column(name = "Nombre", nullable = false, length = 100)
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Column(name = "RazonSocial", length = 200)
+    public String getRazonSocial() {
+        return this.razonSocial;
+    }
+
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+
+    @Column(name = "IdSAP", unique = true, length = 50)
+    public String getIdSap() {
+        return this.idSap;
+    }
+
+    public void setIdSap(String idSap) {
+        this.idSap = idSap;
+    }
+
+    @Column(name = "Estatus", nullable = false)
+    public Short getEstatus() {
+        return this.estatus;
+    }
+
+    public void setEstatus(Short estatus) {
+        this.estatus = estatus;
+    }
+
+    @Column(name = "SalidaContingencia", nullable = false)
+    public Short getSalidaContingencia() {
+        return this.salidaContingencia;
+    }
+
+    public void setSalidaContingencia(Short salidaContingencia) {
+        this.salidaContingencia = salidaContingencia;
+    }
+
+    @Column(name = "Created_On", nullable = false, length = 23)
+    public Timestamp getCreatedOn() {
+        return this.createdOn;
+    }
+
+    public void setCreatedOn(Timestamp createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    @Column(name = "Updated_On", length = 23)
+    public Timestamp getUpdatedOn() {
+        return this.updatedOn;
+    }
+
+    public void setUpdatedOn(Timestamp updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "smsCteProv")
+    public Set<SmsMovimiento> getSmsMovimientos() {
+        return this.smsMovimientos;
+    }
+
+    public void setSmsMovimientos(Set<SmsMovimiento> smsMovimientos) {
+        this.smsMovimientos = smsMovimientos;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "smsCteProv")
+    public Set<SmsProdCteprov> getSmsProdCteprovs() {
+        return this.smsProdCteprovs;
+    }
+
+    public void setSmsProdCteprovs(Set<SmsProdCteprov> smsProdCteprovs) {
+        this.smsProdCteprovs = smsProdCteprovs;
+    }
+
+}

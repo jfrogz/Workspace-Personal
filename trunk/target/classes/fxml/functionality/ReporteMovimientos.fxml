@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <fx:include source="../configuration/HeaderTemplate.fxml" />
+    </top>
+
+    <bottom>
+        <fx:include source="../configuration/FooterTemplate.fxml" />
+    </bottom>
+    
+    <center>
+
+        <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+            <top>
+                <GridPane fx:id="gridInformacion">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="6.0" minHeight="6.0" prefHeight="6.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="6.0" minHeight="6.0" prefHeight="6.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="6.0" minHeight="6.0" prefHeight="6.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="6.0" minHeight="6.0" prefHeight="6.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="6.0" minHeight="6.0" prefHeight="6.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <HBox alignment="CENTER_LEFT" GridPane.rowIndex="6">
+                     <children>
+                        <Label fx:id="lbFolio" styleClass="FieldLabel,AlignCenterLeft" text="Folio" />
+                        <Separator orientation="VERTICAL" prefHeight="5.0" prefWidth="72.0" visible="false" />
+                        <Label fx:id="lbIdSap" styleClass="FieldLabel,AlignCenterLeft" text="ID Sap" />
+                        <Separator orientation="VERTICAL" prefHeight="5.0" prefWidth="60.0" visible="false" />
+                        <Label fx:id="lbClave" styleClass="FieldLabel,AlignCenterLeft" text="Clave" />
+                        <Separator orientation="VERTICAL" prefHeight="5.0" prefWidth="68.0" visible="false" />
+                        <Label fx:id="lbNombre" styleClass="FieldLabel,AlignCenterLeft" text="Nombre" />
+                        <Separator orientation="VERTICAL" prefHeight="5.0" prefWidth="139.0" visible="false" />
+                        <Label fx:id="lbMaterial" styleClass="FieldLabel,AlignCenterLeft" text="Material" />
+                     </children>
+                        </HBox>
+                        <HBox prefHeight="101.0" prefWidth="306.0" styleClass="AlignCenterRight" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                            <children>
+                                <fx:include source="../fwk/Exporter.fxml" />
+                            </children>
+                            <GridPane.margin>
+                                <Insets bottom="105.0" />
+                            </GridPane.margin>
+                        </HBox>
+                        <Label fx:id="filtrarLabel" styleClass="FieldLabel,AlignCenterLeft" />                
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="533.0">
+                           <children>
+                              <Label fx:id="lbFechaDe" styleClass="FieldLabel,AlignCenterLeft" text="Fecha De:" />
+                              <Separator orientation="VERTICAL" prefHeight="5.0" visible="false" />
+                              <DatePicker />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
+                              <Label fx:id="lbFechaHasta" styleClass="FieldLabel,AlignCenterLeft" text="Fecha Hasta:" />
+                              <Separator orientation="VERTICAL" prefHeight="5.0" visible="false" />
+                              <DatePicker />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                     <children>
+                        <RadioButton fx:id="rdTodos" mnemonicParsing="false" styleClass="FieldLabel,AlignCenterLeft" text="Todos" />
+                        <Separator orientation="VERTICAL" prefHeight="20.0" prefWidth="50.0" styleClass="FieldLabel,AlignCenterLeft" visible="false" />
+                        <RadioButton fx:id="rdClientes" mnemonicParsing="false" styleClass="FieldLabel,AlignCenterLeft"  text="Clientes" />
+                        <Separator orientation="VERTICAL" prefHeight="20.0" prefWidth="50.0" styleClass="FieldLabel,AlignCenterLeft" visible="false" />
+                        <RadioButton fx:id="rdProveedores" mnemonicParsing="false" styleClass="FieldLabel,AlignCenterLeft" text="Proveedores" />
+                     </children>
+                  </HBox>
+                  <HBox GridPane.columnSpan="3" GridPane.rowIndex="8">
+                     <children>
+                        <TextField fx:id="flFolio" prefHeight="22.0" prefWidth="100.0" />
+                        <Separator orientation="VERTICAL" prefHeight="5.0" visible="false" />
+                        <TextField prefWidth="100.0" />
+                        <Separator orientation="VERTICAL" prefHeight="5.0" visible="false" />
+                        <TextField prefWidth="95.0" />
+                        <Separator orientation="VERTICAL" prefHeight="5.0" visible="false" />
+                        <TextField />
+                        <Separator orientation="VERTICAL" prefHeight="5.0" visible="false" />
+                        <TextField />
+                     </children>
+                  </HBox>                  
+                    </children>
+                    <BorderPane.margin>
+                        <Insets left="15.0" right="15.0" />
+                    </BorderPane.margin>
+                </GridPane>
+      
+            </top>
+            <padding>
+                <Insets bottom="10.0" top="10.0" />
+            </padding>
+            <center>
+                <BorderPane fx:id="" BorderPane.alignment="CENTER">
+                    <padding>
+                        <Insets bottom="10.0" left="15.0" right="15.0" />
+                    </padding>
+               <center>
+               
+                        <TableView id="tablaDatos" fx:id="tablaDatos" BorderPane.alignment="CENTER">
+                              <columns>
+                                <TableColumn fx:id="colFolio"  prefWidth="200.0"/>
+                                <TableColumn fx:id="colIdSap" minWidth="-1.0" prefWidth="50.0"/>
+                                <TableColumn fx:id="colCteProv" minWidth="-1.0" prefWidth="50.0"/>                 
+                                <TableColumn fx:id="colClave" minWidth="-1.0" prefWidth="50.0"/> 
+                                <TableColumn fx:id="colNombre" minWidth="-1.0" prefWidth="50.0"/>
+                                <TableColumn fx:id="colPlaca" minWidth="-1.0" prefWidth="50.0"/>
+                                <TableColumn fx:id="colMaterial" minWidth="-1.0" prefWidth="50.0"/>
+                                <TableColumn fx:id="colEntrada" minWidth="-1.0" prefWidth="200.0"/>
+                                <TableColumn fx:id="colSalida" minWidth="-1.0" prefWidth="200.0"/>
+                                <TableColumn fx:id="colPesoBruto" minWidth="-1.0" prefWidth="50.0"/>
+                                <TableColumn fx:id="colTara" minWidth="-1.0" prefWidth="50.0"/>
+                                <TableColumn fx:id="colPesoNeto" minWidth="-1.0" prefWidth="50.0"/>               
+                                
+                            </columns>   
+                        </TableView>
+                        
+               </center>  
+                </BorderPane>
+            </center>
+         <bottom>
+            <BorderPane prefHeight="14.0" prefWidth="830.0" BorderPane.alignment="CENTER">
+               <center>
+                  <Pagination fx:id="paginador" prefHeight="200.0" BorderPane.alignment="CENTER" />
+               </center>
+               <right>
+                  <HBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="286.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="lbPaginacion" styleClass="FieldLabel" text="Label" />
+                        <Separator orientation="VERTICAL" prefHeight="5.0" visible="false" />
+                         <ComboBox fx:id="comboPaginacion" nodeOrientation="LEFT_TO_RIGHT" />
+                     </children>
+                  </HBox>
+               </right>
+               <BorderPane.margin>
+                  <Insets left="15.0" right="15.0" top="6.0" />
+               </BorderPane.margin>
+               <left>
+                  <HBox prefHeight="200.0" prefWidth="286.0" BorderPane.alignment="CENTER" />
+               </left>
+            </BorderPane>
+         </bottom>
+        </BorderPane>
+    </center>
+</BorderPane>

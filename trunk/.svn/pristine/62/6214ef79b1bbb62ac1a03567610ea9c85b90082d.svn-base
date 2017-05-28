@@ -1,0 +1,161 @@
+package mx.vw.swf.sms.model;
+
+import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+/**
+ * AbstractFwkCatContent entity provides the base persistence definition of the
+ * FwkCatContent entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractFwkCatContent implements java.io.Serializable {
+
+    // Fields
+
+    private Long idContent;
+    private Short idApp;
+    private Short idAdmin;
+    private String keyValue;
+    private String value;
+    private String description;
+    private Timestamp createdOn;
+    private String createdBy;
+    private Timestamp updatedOn;
+    private String updatedBy;
+    private Short status;
+
+    // Constructors
+
+    /** default constructor */
+    public AbstractFwkCatContent() {
+    }
+
+    /** minimal constructor */
+    public AbstractFwkCatContent(Long idContent, Short idApp, Short idAdmin) {
+        this.idContent = idContent;
+        this.idApp = idApp;
+        this.idAdmin = idAdmin;
+    }
+
+    /** full constructor */
+    public AbstractFwkCatContent(Long idContent, Short idApp, Short idAdmin,
+            String keyValue, String value, String description,
+            Timestamp createdOn, String createdBy, Timestamp updatedOn,
+            String updatedBy, Short status) {
+        this.idContent = idContent;
+        this.idApp = idApp;
+        this.idAdmin = idAdmin;
+        this.keyValue = keyValue;
+        this.value = value;
+        this.description = description;
+        this.createdOn = createdOn;
+        this.createdBy = createdBy;
+        this.updatedOn = updatedOn;
+        this.updatedBy = updatedBy;
+        this.status = status;
+    }
+
+    // Property accessors
+    @Id
+    @Column(name = "ID_CONTENT", unique = true, nullable = false, precision = 18, scale = 0)
+    public Long getIdContent() {
+        return this.idContent;
+    }
+
+    public void setIdContent(Long idContent) {
+        this.idContent = idContent;
+    }
+
+    @Column(name = "ID_APP", nullable = false, precision = 4, scale = 0)
+    public Short getIdApp() {
+        return this.idApp;
+    }
+
+    public void setIdApp(Short idApp) {
+        this.idApp = idApp;
+    }
+
+    @Column(name = "ID_ADMIN", nullable = false, precision = 4, scale = 0)
+    public Short getIdAdmin() {
+        return this.idAdmin;
+    }
+
+    public void setIdAdmin(Short idAdmin) {
+        this.idAdmin = idAdmin;
+    }
+
+    @Column(name = "KEY_VALUE", length = 25)
+    public String getKeyValue() {
+        return this.keyValue;
+    }
+
+    public void setKeyValue(String keyValue) {
+        this.keyValue = keyValue;
+    }
+
+    @Column(name = "VALUE", length = 50)
+    public String getValue() {
+        return this.value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Column(name = "DESCRIPTION", length = 250)
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Column(name = "CREATED_ON", length = 23)
+    public Timestamp getCreatedOn() {
+        return this.createdOn;
+    }
+
+    public void setCreatedOn(Timestamp createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    @Column(name = "CREATED_BY", length = 15)
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @Column(name = "UPDATED_ON", length = 23)
+    public Timestamp getUpdatedOn() {
+        return this.updatedOn;
+    }
+
+    public void setUpdatedOn(Timestamp updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
+    @Column(name = "UPDATED_BY", length = 15)
+    public String getUpdatedBy() {
+        return this.updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    @Column(name = "STATUS", precision = 3, scale = 0)
+    public Short getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(Short status) {
+        this.status = status;
+    }
+
+}

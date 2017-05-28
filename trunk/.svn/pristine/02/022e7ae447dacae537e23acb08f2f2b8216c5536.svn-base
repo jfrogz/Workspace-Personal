@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="594.0" prefWidth="1200.0" stylesheets="@../../css/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+            <TableView id="tablaUsuario" fx:id="tablaPerfiles" layoutX="40.0" layoutY="154.0" prefHeight="397.0" prefWidth="1117.0">
+              <columns>
+                <TableColumn fx:id="selecciones" minWidth="0.0" prefWidth="100.0" text="Seleccione" />
+                <TableColumn fx:id="id" prefWidth="75.0" text="ID" />                  
+                <TableColumn fx:id="perfil" minWidth="0.0" prefWidth="150.0" text="Perfil" />                
+                <TableColumn fx:id="estatus" minWidth="0.0" prefWidth="151.0" text="Status" />
+              </columns>    
+            </TableView>
+      <GridPane layoutX="33.0" layoutY="44.0" prefHeight="54.0" prefWidth="760.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="0.0" prefWidth="107.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="484.0" minWidth="10.0" prefWidth="109.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="524.0" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="flIdPerfil" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="flPerfil" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label styleClass="txtEtiquetas" text="ID:" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <padding>
+                  <Insets left="13.0" />
+               </padding>
+            </Label>
+            <Label styleClass="txtEtiquetas" text="Perfil:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label styleClass="txtEtiquetas" text="Usuario:">
+               <padding>
+                  <Insets left="13.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="txtIdNombreUsuario" disable="true" editable="false" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+         </children>
+      </GridPane>
+      <Button fx:id="btnNuevoPerfil" layoutX="42.0" layoutY="116.0" mnemonicParsing="false" styleClass="botones" text="Nuevo" />
+      <Button fx:id="btnAsignarPerfilUsuario" layoutX="40.0" layoutY="561.0" mnemonicParsing="false" styleClass="botones" text="Asignar Perfiles" />
+         </children>
+</AnchorPane>

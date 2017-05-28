@@ -1,0 +1,235 @@
+package mx.vw.swf.sms.functionality.controller;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+import io.datafx.controller.ViewController;
+import java.net.URL;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.AbstractList;
+import java.util.AbstractSet;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.Set;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javax.annotation.PostConstruct;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.controller.MenuController;
+import mx.vw.swf.security.dao.SegUsuarioDAO;
+import mx.vw.swf.security.model.SegUsuario;
+import mx.vw.swf.sms.dao.SmsCteProvDAO;
+import mx.vw.swf.sms.dao.SmsProdCteprovDAO;
+import mx.vw.swf.sms.dao.SmsProductoDAO;
+import mx.vw.swf.sms.model.SmsCteProv;
+import mx.vw.swf.sms.model.SmsProdCteprov;
+import mx.vw.swf.sms.model.SmsProdCteprovId;
+import mx.vw.swf.sms.model.SmsProducto;
+import mx.vw.swf.sms.service.CrearEditarClienteProveedorService;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1yij
+ */
+public class MovimientosController extends MenuController {
+
+    // <editor-fold defaultstate="colapsed" desc="LABELS">
+    @FXML
+    protected Label Entity_lblEntidad;
+    @FXML
+    protected Label Entity_lblClave;
+    @FXML
+    protected Label Entity_lblNombre;
+
+    @FXML
+    protected Label Productos_lblHeader;
+    @FXML
+    protected Label Productos_lblClave;
+    @FXML
+    protected Label Productos_lblNombre;
+
+    @FXML
+    protected Label Entradas_lblEntrada;
+    @FXML
+    protected Label Entradas_lblFolio;
+    @FXML
+    protected Label Entradas_lblPlacas;
+    // </editor-fold>
+    // <editor-fold defaultstate="colapsed" desc="BOTONES">
+    //Controles
+    @FXML
+    protected Button btnNuevaEntrada;
+    @FXML
+    protected Button btnSalida;
+    @FXML
+    protected Button btnReimpresion;
+    @FXML
+    protected Button btnCancelarTicket;
+    @FXML
+    protected Button btnEntradaCustodia;
+    @FXML
+    protected Button btnSalidaCustodia;
+    //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="TABLA Y COLUMNAS">
+    @FXML
+    protected TableView<SmsCteProv> tablaIdentidad;
+    @FXML
+    protected TableColumn<SmsCteProv, Long> colEntityId;
+    @FXML
+    protected TableColumn<SmsCteProv, String> colEntityClave;
+    @FXML
+    protected TableColumn<SmsCteProv, String> colEntityNombre;
+
+    @FXML
+    protected TableView<SmsProducto> tablaProducto;
+    @FXML
+    protected TableColumn<SmsProducto, Long> colProductoId;
+    @FXML
+    protected TableColumn<SmsProducto, String> colProductoClave;
+    @FXML
+    protected TableColumn<SmsProducto, String> colProductoNombre;
+
+    //</editor-fold>    
+    //<editor-fold defaultstate="collapsed" desc="CAJAS DE TEXTO textField">
+    @FXML
+    protected TextField txtIdentityClave;
+    @FXML
+    protected TextField txtIdentityNombre;
+    @FXML
+    protected TextField txtProductoClave;
+    @FXML
+    protected TextField txtProductoNombre;
+    //</editor-fold>
+
+    private FilteredList<SmsCteProv> filteredData;
+    private SortedList<SmsCteProv> sortedData;
+
+    public enum TipoEntidad {
+
+        CLIENTE, PROVEEDOR
+    }
+
+    protected void Contruct() {
+        inicializarLabels();
+        inicializarColumnas();
+        inicializarEventos();
+        inicializarFiltros();
+
+        inicializarFiltros();
+    }
+
+    private void inicializarLabels() {
+        System.out.println("Si se inicializan");
+        Entity_lblClave.setText(DataFXLauncher.getProperty("Movimientos.General.Entity.lblClave") + ":");
+        Entity_lblNombre.setText(DataFXLauncher.getProperty("Movimientos.General.Entity.lblNombre") + ":");
+        Productos_lblHeader.setText(DataFXLauncher.getProperty("Movimientos.General.Productos.lblHeader"));
+        Productos_lblClave.setText(DataFXLauncher.getProperty("Movimientos.General.Productos.lblClave") + ":");
+        Productos_lblNombre.setText(DataFXLauncher.getProperty("Movimientos.General.Productos.lblNombre") + ":");
+        Entradas_lblEntrada.setText(DataFXLauncher.getProperty("Movimientos.General.Entradas.lblEntrada"));
+        Entradas_lblFolio.setText(DataFXLauncher.getProperty("Movimientos.General.Entradas.lblFolio") + ":");
+        Entradas_lblPlacas.setText(DataFXLauncher.getProperty("Movimientos.General.Entradas.lblPlacas") + ":");
+
+        btnNuevaEntrada.setText(DataFXLauncher.getProperty("Movimientos.General.btnNuevaEntrada"));
+        btnSalida.setText(DataFXLauncher.getProperty("Movimientos.General.btnSalida"));
+        btnReimpresion.setText(DataFXLauncher.getProperty("Movimientos.General.btnReimpresion"));
+        btnCancelarTicket.setText(DataFXLauncher.getProperty("Movimientos.General.btnCancelarTicket"));
+        btnEntradaCustodia.setText(DataFXLauncher.getProperty("Movimientos.General.btnEntradaCustodia"));
+        btnSalidaCustodia.setText(DataFXLauncher.getProperty("Movimientos.General.btnSalidaCustodia"));
+
+        colEntityId.setText(DataFXLauncher.getProperty("Movimientos.General.colEntityId"));
+        colEntityClave.setText(DataFXLauncher.getProperty("Movimientos.General.colEntityClave"));
+        colEntityNombre.setText(DataFXLauncher.getProperty("Movimientos.General.colEntityNombre"));
+    }
+
+    private void inicializarColumnas() {
+        colEntityId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colEntityClave.setCellValueFactory(new PropertyValueFactory<>("clave"));
+        colEntityNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+
+        colProductoId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colProductoClave.setCellValueFactory(new PropertyValueFactory<>("clave"));
+        colProductoNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+
+    }
+
+    private void inicializarEventos() {
+        tablaIdentidad.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                cargarTablaProductos(tablaIdentidad.getSelectionModel().selectedItemProperty().get());
+            }
+        });
+
+        txtIdentityClave.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(entidad -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (entidad.getClave().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+    }
+
+    private void inicializarFiltros() {
+        filteredData = new FilteredList<>(tablaIdentidad.getItems(), p -> {
+            return true;
+        });
+        sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tablaIdentidad.comparatorProperty());
+    }
+
+    protected void cargarTablaIdentidades(TipoEntidad entidad) {
+        SmsCteProvDAO cteProvDAO = new SmsCteProvDAO();
+        tablaIdentidad.getItems().clear();
+        List<SmsCteProv> findAll = null;
+        cteProvDAO = new SmsCteProvDAO();
+
+        if (entidad == TipoEntidad.PROVEEDOR) {
+            findAll = cteProvDAO.findByProperty("esProveedor", Short.valueOf("1"));
+        } else {
+            findAll = cteProvDAO.findByProperty("esProveedor", Short.valueOf("0"));
+        }
+        tablaIdentidad.setItems(FXCollections.observableArrayList(findAll));
+    }
+
+    private void cargarTablaProductos(SmsCteProv cteProv) {
+        tablaProducto.getItems().clear();
+
+        if (null != cteProv) {
+            
+            Iterator<SmsProdCteprov> iterator = cteProv.getSmsProdCteprovs().iterator();
+            ObservableList<SmsProducto> list = FXCollections.observableArrayList();
+
+            while (iterator.hasNext()) {                
+                SmsProdCteprov next = iterator.next();               
+                list.add(next.getSmsProducto());
+            }
+            tablaProducto.setItems(list);
+        }
+    }
+
+}

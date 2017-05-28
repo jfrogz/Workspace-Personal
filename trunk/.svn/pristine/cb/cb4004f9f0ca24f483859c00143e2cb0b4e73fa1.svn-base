@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="integra.xml">
+   
+   <include file="master.xml" relativeToChangelogFile="true"/>
+   
+   <changeSet id="2" author="dzmppdw">
+      <insert tableName="FWK_CAT_APPS">
+         <column name="APPLICATION_NAME" value="SMS" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+   </changeSet>
+   
+   <changeSet id="3" author="dzmppdw">
+      <insert tableName="FWK_CAT_ADMIN">
+         <column name="ID_APP" value="1" />
+         <column name="DESCRIPTION" value="PropiedadesEmpresa" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_ADMIN">
+         <column name="ID_APP" value="1" />
+         <column name="DESCRIPTION" value="PropiedadesPuerto" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+   </changeSet>
+   
+   <changeSet id="4" author="dzmppdw">
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_NOM" />
+         <column name="VALUE" value="Empresa.Nombre" />
+         <column name="DESCRIPTION" value="VOLKSWAGEN DE MEXICO S.A. DE C.V." />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_DIR" />
+         <column name="VALUE" value="Empresa.Direccion" />
+         <column name="DESCRIPTION" value="AUTOPISTA MÉXICO - PUEBLA Km. 116" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_EDO" />
+         <column name="VALUE" value="Empresa.Estado" />
+         <column name="DESCRIPTION" value="PUEBLA" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_MUN" />
+         <column name="VALUE" value="Empresa.Municipio" />
+         <column name="DESCRIPTION" value="PUEBLA" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_CP" />
+         <column name="VALUE" value="Empresa.CodPostal" />
+         <column name="DESCRIPTION" value="72700" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_RFC" />
+         <column name="VALUE" value="Empresa.RFC" />
+         <column name="DESCRIPTION" value="VME-640813-HF6" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="1" />
+         <column name="KEY_VALUE" value="PROP_EMP_TEL" />
+         <column name="VALUE" value="Empresa.Telefono" />
+         <column name="DESCRIPTION" value="230-8806" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+   </changeSet>
+   
+    <changeSet id="5" author="dzmppdw">
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_OPC_BAUDIOS" />
+         <column name="VALUE" value="Bascula.Opciones.Baudios" />
+         <column name="DESCRIPTION" value="1200,2400,4800,9600,14400,19200,28800" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_OPC_BITDATO" />
+         <column name="VALUE" value="Bascula.Opciones.BitsDatos" />
+         <column name="DESCRIPTION" value="7,8" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_OPC_BITPARA" />
+         <column name="VALUE" value="Bascula.Opciones.BitsParada" />
+         <column name="DESCRIPTION" value="1,2" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_OPC_BITPARID" />
+         <column name="VALUE" value="Bascula.Opciones.Paridad" />
+         <column name="DESCRIPTION" value="Even,Odd,Mark,Space,None" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_PUERTO" />
+         <column name="VALUE" value="Bascula.Puerto.Puerto" />
+         <column name="DESCRIPTION" value="" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_BAUDIOS" />
+         <column name="VALUE" value="Bascula.Puerto.Baudios" />
+         <column name="DESCRIPTION" value="" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_BITS" />
+         <column name="VALUE" value="Bascula.Puerto.BitsDatos" />
+         <column name="DESCRIPTION" value="" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_PARADA" />
+         <column name="VALUE" value="Bascula.Puerto.BitsParada" />
+         <column name="DESCRIPTION" value="" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="2" />
+         <column name="KEY_VALUE" value="BASCULA_PARIDAD" />
+         <column name="VALUE" value="Bascula.Puerto.Paridad" />
+         <column name="DESCRIPTION" value="" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+   </changeSet>
+   
+   <changeSet id="6" author="dzmppdw">
+      <insert tableName="FWK_CAT_ADMIN">
+         <column name="ID_APP" value="1" />
+         <column name="DESCRIPTION" value="PropiedadesSistema" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+   </changeSet>
+   
+   <changeSet id="7" author="dzmppdw">
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="3" />
+         <column name="KEY_VALUE" value="SIS_VERSION" />
+         <column name="VALUE" value="Sistema.Version" />
+         <column name="DESCRIPTION" value="1.0.00" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="3" />
+         <column name="KEY_VALUE" value="SIS_URL_VW" />
+         <column name="VALUE" value="Sistema.Url.VW" />
+         <column name="DESCRIPTION" value="http://vw.com.mx" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+      <insert tableName="FWK_CAT_CONTENT">
+         <column name="ID_APP" value="1" />
+         <column name="ID_ADMIN" value="3" />
+         <column name="KEY_VALUE" value="SIS_URL_SWF" />
+         <column name="VALUE" value="Sistema.Url.SWF" />
+         <column name="DESCRIPTION" value="http://portalvwm.vwm.na.vwg/web/servicios-ti/fabrica-de-software" />
+         <column name="CREATED_BY" value="dzmppdw"/>
+         <column name="STATUS" value="1" />
+      </insert>
+   </changeSet>
+   
+   <changeSet id="8" author="dzmppdw">
+      <sql>
+         IF OBJECT_ID (N'dbo.NUM_SISTEMA', N'FN') IS NOT NULL 
+            DROP FUNCTION dbo.NUM_SISTEMA;
+      </sql>
+               
+      <createProcedure>
+         <![CDATA[
+CREATE FUNCTION NUM_SISTEMA (
+	@NOMBRE_SISTEMA varchar(20)
+) RETURNS INTEGER
+AS
+BEGIN
+   DECLARE @NumSistema INTEGER;
+
+   SELECT @NumSistema = ID_APP FROM FWK_CAT_APPS WHERE UPPER(APPLICATION_NAME) = UPPER(@NOMBRE_SISTEMA);
+   IF (@NumSistema IS NULL)
+     SET @NumSistema = 0;
+   RETURN @NumSistema;
+END;
+         ]]>
+      </createProcedure>
+   </changeSet>
+   
+   <changeSet id="9" author="dzmppdw">
+      <sql>
+         IF OBJECT_ID (N'dbo.NUM_CATALOGO', N'FN') IS NOT NULL 
+            DROP FUNCTION dbo.NUM_CATALOGO;
+      </sql>
+               
+      <createProcedure>
+         <![CDATA[
+CREATE FUNCTION NUM_CATALOGO (
+   @NOMBRE_SISTEMA varchar(20), 
+   @NOMBRE_CATALOGO varchar(100)
+) RETURNS INTEGER
+AS
+BEGIN
+   DECLARE @NumCatalogo INTEGER;
+   DECLARE @NumSistema INTEGER;
+   
+   SELECT @NumSistema = dbo.NUM_SISTEMA(@NOMBRE_SISTEMA);
+
+   SELECT @NumCatalogo = ID_ADMIN FROM FWK_CAT_ADMIN 
+                         WHERE ID_APP = @NumSistema AND UPPER(DESCRIPTION) = UPPER(@NOMBRE_CATALOGO);
+   IF (@NumCatalogo IS NULL)
+     SET @NumCatalogo = 0;
+   RETURN @NumCatalogo;
+END;
+         ]]>
+      </createProcedure>
+   </changeSet>
+   
+   <changeSet id="10" author="dzmppdw">
+      <createView viewName="CAT_PARAMETRO" replaceIfExists="true">
+SELECT Id_Content as Id,
+	   Id_App as idApp,
+	   Id_Admin as idAdmin,
+       Key_Value as keyValue,
+       Value as valor,
+       Description as descripcion,
+       Status as activo
+FROM FWK_CAT_CONTENT
+WHERE FWK_CAT_CONTENT.Id_App = dbo.NUM_SISTEMA('SMS')
+         AND FWK_CAT_CONTENT.Id_Admin = dbo.NUM_CATALOGO('SMS','PropiedadesSistema')
+      </createView>
+      
+      <createView viewName="CAT_PROP_EMPRESA" replaceIfExists="true">
+SELECT Id_Content as Id,
+	   Id_App as idApp,
+	   Id_Admin as idAdmin,
+       Key_Value as keyValue,
+       Value as valor,
+       Description as descripcion,
+       Status as activo
+FROM FWK_CAT_CONTENT
+WHERE FWK_CAT_CONTENT.Id_App = dbo.NUM_SISTEMA('SMS')
+  AND FWK_CAT_CONTENT.Id_Admin = dbo.NUM_CATALOGO('SMS','PropiedadesEmpresa')
+      </createView>
+      
+      <createView viewName="CAT_PUERTO" replaceIfExists="true">
+SELECT Id_Content as Id,
+	   Id_App as idApp,
+	   Id_Admin as idAdmin,
+       Key_Value as keyValue,
+       Value as valor,
+       Description as descripcion,
+       Status as activo
+FROM FWK_CAT_CONTENT
+WHERE FWK_CAT_CONTENT.Id_App = dbo.NUM_SISTEMA('SMS')
+  AND FWK_CAT_CONTENT.Id_Admin = dbo.NUM_CATALOGO('SMS','PropiedadesPuerto')
+      </createView>
+   </changeSet>
+
+    <changeSet id="10" author="dzm152z">
+        <dropForeignKeyConstraint baseTableName="SMS_PROD_CTEPROV" constraintName="FK_SMS_PROD_CTEPROV_SMS_CTE_PROV"/>
+        <dropForeignKeyConstraint baseTableName="SMS_MOVIMIENTO" constraintName="FK_SMS_MOVIMIENTO_SMS_CTE_PROV"/>
+        <dropPrimaryKey tableName="SMS_CTE_PROV"/>
+        <dropColumn tableName="SMS_CTE_PROV" columnName="ID"/>
+        <addColumn tableName="SMS_CTE_PROV">
+            <column name="ID" autoIncrement="true" type="NUMERIC(10)"/>
+        </addColumn>
+        <addPrimaryKey tableName="SMS_CTE_PROV" columnNames="ID" constraintName="PK_SMS_CTE_PROV"/>
+        <addForeignKeyConstraint baseTableName="SMS_PROD_CTEPROV" baseColumnNames="IdCteProv" constraintName="FK_SMS_PROD_CTEPROV_SMS_CTE_PROV"
+                                 referencedTableName="SMS_CTE_PROV" referencedColumnNames="ID"/>
+        <addForeignKeyConstraint baseTableName="SMS_MOVIMIENTO" baseColumnNames="IdCteProveedor" constraintName="FK_SMS_MOVIMIENTO_SMS_CTE_PROV"
+                                 referencedTableName="SMS_CTE_PROV" referencedColumnNames="ID"/>
+    </changeSet>
+    <changeSet id="11" author="dzm152z">
+        <!-- Seguridad -->
+        <delete tableName="FWK_ACTION_ITEM"/>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="1"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Seguridad"/>
+            <column name="URL" value="security/Seguridad"/>
+            <column name="ORDERHINT" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="2"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Seguridad.Usuarios"/>
+            <column name="ORDERHINT" value="2"/>
+            <column name="ICONURL" value="mx.vw.swf.security.controller.AdministrarUsuariosController"/>
+            <column name="URL" value="security/AdministrarUsuarios"/>
+            <column name="PARENT_ID" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="3"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Seguridad.Perfiles"/>
+            <column name="ORDERHINT" value="3"/>
+            <column name="ICONURL" value="mx.vw.swf.security.controller.mx.vw.swf.security.controller.AdministrarPerfilesController"/>
+            <column name="URL" value="security/AdministrarPerfiles"/>
+            <column name="PARENT_ID" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="4"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Seguridad.Funciones"/>
+            <column name="ORDERHINT" value="4"/>
+            <column name="ICONURL" value="mx.vw.swf.security.controller.mx.vw.swf.security.controller.AdministrarFuncionesPerfilController"/>
+            <column name="URL" value="security/AdministrarFuncionesPerfil"/>
+            <column name="PARENT_ID" value="1"/>
+        </insert>
+
+        <!-- Catálogos -->
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="5"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Catalogos"/>
+            <column name="URL" value="catalogos/Catalogos"/>
+            <column name="ORDERHINT" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="6"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Catalogos.ClienteProveedor"/>
+            <column name="ORDERHINT" value="2"/>
+            <column name="ICONURL" value="mx.vw.swf.sms.controller.ClienteProveedorController"/>
+            <column name="URL" value="catalogos/ClienteProveedor"/>
+            <column name="PARENT_ID" value="5"/>
+        </insert>
+
+        <!-- Configuración -->
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="7"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Configuracion"/>
+            <column name="ORDERHINT" value="1"/>
+            <column name="URL" value="configuration/Configuration"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="8"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Configuracion.ConfigPuerto"/>
+            <column name="ORDERHINT" value="2"/>
+            <column name="ICONURL" value="mx.vw.swf.sms.controller.ConfigurarPuertoController"/>
+            <column name="URL" value="configuration/ConfigurarPuerto"/>
+            <column name="PARENT_ID" value="7"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="9"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Configuracion.PerfilEmpresa"/>
+            <column name="ORDERHINT" value="3"/>
+            <column name="ICONURL" value="mx.vw.swf.sms.controller.PerfilDeEmpresaController"/>
+            <column name="URL" value="configuration/PerfilEmpresa"/>
+            <column name="PARENT_ID" value="7"/>
+        </insert>
+
+        <!-- Operación -->
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="10"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Operacion"/>
+            <column name="ORDERHINT" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="11"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Operacion.MovProveedor"/>
+            <column name="ORDERHINT" value="2"/>
+            <column name="ICONURL" value="mx.vw.swf.sms.controller.MovimientosProveedoresController"/>
+            <column name="URL" value="functionality/Movimientos"/>
+            <column name="PARENT_ID" value="10"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="12"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Operacion.MovCliente"/>
+            <column name="ORDERHINT" value="3"/>
+            <column name="ICONURL" value="mx.vw.swf.sms.controller.MovimientosClientesController"/>
+            <column name="URL" value="configuration/Movimientos"/>
+            <column name="PARENT_ID" value="10"/>
+        </insert>
+
+        <!-- Reportes -->
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="13"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Reportes"/>
+            <column name="URL" value="report/Reports"/>
+            <column name="ORDERHINT" value="1"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="14"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Reportes.Movimientos"/>
+            <column name="ORDERHINT" value="2"/>
+            <column name="ICONURL" value="mx.vw.swf.sms.controller.ReporteMovimientosController"/>
+            <column name="PARENT_ID" value="13"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="15"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Reportes.GenerarEntrada"/>
+            <column name="ORDERHINT" value="3"/>
+            <column name="ICONURL" value="mx.vw.swf.sms.controller.GenerarTicketEntradaController"/>
+            <column name="URL" value="configuration/Movimientos"/>
+            <column name="PARENT_ID" value="13"/>
+        </insert>
+        <insert tableName="FWK_ACTION_ITEM">
+            <column name="ID" value="16"/>
+            <column name="ENABLED" value="1"/>
+            <column name="LABEL" value="Menu.Reportes.GenerarSalida"/>
+            <column name="ORDERHINT" value="4"/>
+            <column name="ICONURL" value="mx.vw.swf.sms.controller.MovimientosClientesController"/>
+            <column name="URL" value="configuration/Movimientos"/>
+            <column name="PARENT_ID" value="13"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

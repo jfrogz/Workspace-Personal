@@ -1,0 +1,213 @@
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import javafx.application.Application;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.control.Control;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import mx.vw.swf.fwk.dao.FwkCatAdminDAO;
+import mx.vw.swf.fwk.dao.FwkCatContentDAO;
+import mx.vw.swf.fwk.model.FwkCatAdmin;
+import mx.vw.swf.fwk.model.FwkCatContent;
+import mx.vw.swf.sms.utilerias.ValidatorHandler;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
+
+import javax.annotation.PreDestroy;
+import java.util.Arrays;
+import java.util.List;
+
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.fwk.Utilerias;
+import org.controlsfx.dialog.Dialogs;
+
+/**
+ * Created by dzm152z on 05/03/2015.
+ */
+public abstract class Controller extends Application {
+    public static final String FXML_BASE_PATH = "fxml";
+    public static final String FXML_FILE_EXTENSION = "fxml";
+    public static final String DOC_VIEW_EXTENSION = "html";
+    @FXML
+    private Label errorMessageLabel;
+
+    protected ValidationSupport validationSupport = new ValidationSupport();
+
+    private ValidatorHandler validatorHandler = new ValidatorHandler();
+
+    {
+        validatorHandler.setErrorDisplayControl(errorMessageLabel);
+        validatorHandler.setValidationSupport(validationSupport);
+    }
+
+    /**
+     * <p>
+     * Retrieves the value of the referenced FXML file of the given contoller.
+     * Of course this will not work for controllers with no view file specified.
+     * </p>
+     *
+     * @return
+     */
+    public String getFXMLViewName() {
+        ViewController annotation = this.getClass().getAnnotation(ViewController.class);
+        return null == annotation ? null : annotation.value();
+    }
+
+    /**
+     * <p>
+     * Simply executes the validationSupport.getValidationResult() and displays (if any)
+     * all messages in the global error message Label
+     * </p>
+     *
+     * @return
+     */
+    public boolean displayValidationResult(boolean muestraMensaje) {
+        return validatorHandler.displayValidationResult(getErrorMessageDisplayControl(), muestraMensaje);
+    }
+
+    /**
+     * <p>
+     * Wrapper for validationSupport.registerValidator
+     * </p>
+     *
+     * @param control
+     * @param validator
+     */
+    public void registerValidator(Control control, Validator... validator) {
+        Arrays.asList(validator).stream().forEach((val) ->
+        validationSupport.registerValidator(control, val)               
+        );
+    }
+
+  
+   
+    /**
+     * <p>
+     * <p/>
+     * </p>
+     *
+     * @param message
+     */
+    protected void displayErrorMessage(String message) {
+        errorMessageLabel.setText(message);
+    }
+
+    public Control getErrorMessageDisplayControl() {
+        return this.errorMessageLabel;
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // Nothing to do
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        Utilerias.consoleMsg("@Controller.preDestroy()", null, this);
+        validatorHandler.clear();
+    }
+
+    public void viewHelp(Event event) {
+        List<FwkCatAdmin> catAdmins = new FwkCatAdminDAO().findByDescription("PropiedadesSistema");
+        List<FwkCatContent> fwkCatContents = new FwkCatContentDAO().findByProperty(FwkCatContentDAO.ID_ADMIN, catAdmins.iterator().next().getIdAdmin());
+        String baseUrl = null, helpFileExtension = null, fullHelpFile = null;
+
+        for (FwkCatContent catContent : fwkCatContents) {
+            if ("FULLHELP.FILE".equals(catContent.getValue())) {
+                fullHelpFile = catContent.getDescription();
+            }
+            if ("HOST.BASEURL".equals(catContent.getValue())) {
+                baseUrl = catContent.getDescription();
+            }
+            if ("HELPFILE.EXTENSION".equals(catContent.getValue())) {
+                helpFileExtension = catContent.getDescription();
+            }
+        }
+
+        if (null == baseUrl || null == helpFileExtension) {
+            return;
+        }
+
+        baseUrl = baseUrl.endsWith("/") ? baseUrl : baseUrl.concat("/");
+        String view = getFXMLViewName();
+
+        view = view.startsWith("/") ? view.substring(1) : view;
+
+        int firstIndexOf = view.indexOf(FXML_BASE_PATH);
+        String viewNoBase = view.substring(firstIndexOf + FXML_BASE_PATH.length());
+        int lastIndexOf = viewNoBase.lastIndexOf("." + FXML_FILE_EXTENSION);
+        String viewNoBaseNoExtension = viewNoBase.substring(0, lastIndexOf);
+        viewNoBaseNoExtension = viewNoBaseNoExtension.startsWith("/") ? viewNoBaseNoExtension.substring(1) : viewNoBaseNoExtension;
+        String finalDocUrl = baseUrl.concat(viewNoBaseNoExtension);
+        finalDocUrl = finalDocUrl.concat("." + helpFileExtension);
+        getHostServices().showDocument(finalDocUrl);
+    }
+
+    public void viewFullHelp(Event event) {
+        List<FwkCatAdmin> catAdmins = new FwkCatAdminDAO().findByDescription("PropiedadesSistema");
+        List<FwkCatContent> fwkCatContents = new FwkCatContentDAO().findByProperty(FwkCatContentDAO.ID_ADMIN, catAdmins.iterator().next().getIdAdmin());
+
+        String baseUrl = null, helpFileExtension = null, fullHelpFile = null;
+
+        for (FwkCatContent catContent : fwkCatContents) {
+            if ("FULLHELP.FILE".equals(catContent.getValue())) {
+                fullHelpFile = catContent.getDescription();
+            }
+            if ("HOST.BASEURL".equals(catContent.getValue())) {
+                baseUrl = catContent.getDescription();
+            }
+            if ("HELPFILE.EXTENSION".equals(catContent.getValue())) {
+                helpFileExtension = catContent.getDescription();
+            }
+        }
+
+        if (null == baseUrl || null == helpFileExtension) {
+            return;
+        }
+
+        baseUrl = baseUrl.endsWith("/") ? baseUrl : baseUrl.concat("/");
+        baseUrl = baseUrl.concat(fullHelpFile).concat(".").concat(helpFileExtension);
+        getHostServices().showDocument(baseUrl);
+    }
+    
+    public void showInfo(String title, String message){
+       this.showInfo(DataFXLauncher.getProperty("Sistema.Nombre"), message, title);
+    }
+    
+    public void showInfo(String title, String message, String mastHead) {
+      Dialogs.create()
+              .owner(DataFXLauncher.primary)
+              .title(title)
+              .masthead(mastHead)
+              .message(message)
+              .showInformation();
+   }
+
+    public void showWarn(String title, String message){
+       this.showWarn(DataFXLauncher.getProperty("Sistema.Nombre"), message, title);
+    }
+    
+   public void showWarn(String title, String message, String mastHead) {
+      Dialogs.create()
+              .owner(DataFXLauncher.primary)
+              .title(title)
+              .masthead(mastHead)
+              .message(message)
+              .showWarning();
+   }
+
+    public void showError(String title, String message){
+       this.showInfo(DataFXLauncher.getProperty("Sistema.Nombre"), message, title);
+    }
+    
+   public void showError(String title, String message, String mastHead) {
+      Dialogs.create()
+              .owner(DataFXLauncher.primary)
+              .title(title)
+              .masthead(mastHead)
+              .message(message)
+              .showError();
+   }
+}

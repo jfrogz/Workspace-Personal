@@ -1,0 +1,60 @@
+package mx.vw.swf.cdi;
+
+import io.datafx.controller.flow.Flow;
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.FlowHandler;
+import io.datafx.controller.util.VetoException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import mx.vw.swf.security.controller.MenuController;
+import mx.vw.swf.security.controller.WelcomeController;
+import mx.vw.swf.sms.controller.RegistroDeClientesYProveedoresController;
+import mx.vw.swf.sms.utilerias.ArchivoPropiedades;
+
+import javax.persistence.EntityManagerFactory;
+import java.util.Properties;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+public class DataFXLauncher extends Application {
+    
+    
+    static Flow mainFlow;
+    public static EntityManagerFactory emf;
+    public static Stage primary;
+    public static Properties mensajesProperties;
+    public static Properties mensajesPropertiesSeg;
+
+
+    
+    public static void main(String[] args) throws FlowException {
+        launch(args);
+    }
+
+
+    @Override
+    public void start(Stage primaryStage) throws FlowException, VetoException {
+        ArchivoPropiedades Ap = new ArchivoPropiedades();
+        mensajesProperties =Ap.getProperties();
+        mensajesPropertiesSeg=Ap.getPropertiesSeguridad();
+<<<<<<< .mine
+        primary=primaryStage;
+        
+        ViewConfiguration viewConfiguration = new SMSViewConfiguration();             
+        //mainFlow= new SWFFlow(LoginController.class, viewConfiguration);
+        //mainFlow= new SWFFlow(AdministrarUsuariosController.class, viewConfiguration);
+        mainFlow= new SWFFlow(RegistroDeClientesYProveedoresController.class, viewConfiguration);
+        //mainFlow= new SWFFlow(ConfigurarPuertoController.class, viewConfiguration);  
+        mainFlow.startInStage(primaryStage);        
+=======
+        Flow flow = new Flow(MenuController.class);
+        FlowHandler flowHandler = flow.createHandler();
+        StackPane stackPane = flowHandler.start();
+        primaryStage.setScene(new Scene(stackPane));
+        primaryStage.show();
+>>>>>>> .r3635
+    }
+}

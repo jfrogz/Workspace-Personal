@@ -1,0 +1,53 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.io.Serializable;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+public class SegPermisoPerfilEntityPK implements Serializable {
+    private int idPerfil;
+    private int idPermiso;
+
+    @Column(name = "IdPerfil")
+    @Id
+    public int getIdPerfil() {
+        return idPerfil;
+    }
+
+    public void setIdPerfil(int idPerfil) {
+        this.idPerfil = idPerfil;
+    }
+
+    @Column(name = "IdPermiso")
+    @Id
+    public int getIdPermiso() {
+        return idPermiso;
+    }
+
+    public void setIdPermiso(int idPermiso) {
+        this.idPermiso = idPermiso;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SegPermisoPerfilEntityPK that = (SegPermisoPerfilEntityPK) o;
+
+        if (idPerfil != that.idPerfil) return false;
+        if (idPermiso != that.idPermiso) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = idPerfil;
+        result = 31 * result + idPermiso;
+        return result;
+    }
+}

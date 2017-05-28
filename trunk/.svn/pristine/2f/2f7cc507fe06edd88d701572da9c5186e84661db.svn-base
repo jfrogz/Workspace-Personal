@@ -1,0 +1,64 @@
+package mx.vw.swf.security.event;
+
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.context.FlowActionHandler;
+import io.datafx.controller.util.VetoException;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.MenuItem;
+import mx.vw.swf.security.controller.AdministrarFuncionesPerfilController;
+import mx.vw.swf.security.controller.AdministrarPerfilesController;
+import mx.vw.swf.security.controller.AdministrarUsuariosController;
+import mx.vw.swf.sms.controller.*;
+
+/**
+ * Created by dzm152z on 16/02/2015.
+ */
+public class SMSMenuItemEventHandler implements EventHandler<ActionEvent> {
+    private final FlowActionHandler actionHandler;
+
+    public SMSMenuItemEventHandler(FlowActionHandler actionHandler) {
+        this.actionHandler = actionHandler;
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+        MenuItem menuItem = (MenuItem) event.getSource();
+        try {
+            switch (menuItem.getText()) {
+                case "Usuarios":
+                    actionHandler.navigate(AdministrarUsuariosController.class);
+                    break;
+                case "Perfiles":
+                    actionHandler.navigate(AdministrarPerfilesController.class);
+                    break;
+                case "Funciones por Perfil":
+                    actionHandler.navigate(AdministrarFuncionesPerfilController.class);
+                    break;
+                case "Clientes y proveedores":
+                    actionHandler.navigate(ClienteProveedorController.class);
+                    break;
+                case "Configurar Puerto":
+                    actionHandler.navigate(ConfigurarPuertoController.class);
+                    break;
+                case "Perfil de la empresa":
+                    actionHandler.navigate(PerfilDeEmpresaController.class);
+                    break;
+                case "Movimientos Proveedores":
+                    actionHandler.navigate(MovimientosProveedoresController.class);
+                    break;
+                case "Movimientos Clientes":
+                    actionHandler.navigate(MovimientosClientesController.class);
+                    break;
+                case "Reporte de movimientos":
+                    actionHandler.navigate(ReporteMovimientosController.class);
+                    break;
+                case "Generar Ticket de Entrada":
+                    actionHandler.navigate(GenerarTicketEntradaController.class);
+                    break;
+            }
+        } catch (VetoException | FlowException e) {
+            e.printStackTrace();
+        }
+    }
+}

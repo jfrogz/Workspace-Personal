@@ -1,0 +1,126 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.utilerias;
+
+import java.io.IOException;
+import java.io.InputStream;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+<<<<<<< .mine
+import javafx.collections.transformation.SortedList;
+=======
+import javafx.collections.transformation.SortedList;
+import javafx.fxml.FXMLLoader;
+>>>>>>> .r3608
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+
+/**
+ *
+ * @author fox1x0d
+ */
+public class Utilerias {
+
+    private static Pagination pagination;
+    
+<<<<<<< .mine
+    public static Pagination creaPaginacionTableView(int tablasPorPagina, int renglonesMostrar, SortedList<?> lista, TableView<?> tabla) {
+        int tamLista=lista.size();
+=======
+    public static Pagination creaPaginacionTableView(int renglonesMostrar, SortedList<?> lista, TableView<?> tabla) {
+        
+        int tamLista = lista.size();
+>>>>>>> .r3608
+        int totalPaginas = tamLista/ renglonesMostrar;  
+        int modulo=tamLista % renglonesMostrar;
+
+          if(modulo>0)
+           {
+            totalPaginas = totalPaginas + 1; 
+           }
+        pagination = new Pagination(totalPaginas, 0);         
+        pagination.setPageFactory(new Callback<Integer, Node>() {
+          @Override
+            public Node call(Integer pageIndex) {
+             if ((pageIndex > tamLista / renglonesMostrar)) {
+                 
+                 return null;
+             } else {
+                 return createPage(tamLista,pageIndex,lista,tabla,renglonesMostrar);
+                }
+            }
+        });
+       //pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+       return pagination;
+    }
+   
+<<<<<<< .mine
+    public static VBox createPage(int tamLista,int pageIndex, SortedList<?> list,TableView tabla,int tablasPorPagina,int renglonesMostrar) {
+        int ultimaPagina = 0;        
+        int ultimosRenglones = tamLista % renglonesMostrar;
+        if (ultimosRenglones > 0) {
+            ultimaPagina = tamLista / renglonesMostrar;
+        } else {
+            ultimaPagina = tamLista / renglonesMostrar- 1;
+        }
+        
+        VBox box = new VBox(5);
+        int page   = pageIndex * tablasPorPagina;
+        int inicio = pageIndex * renglonesMostrar;
+=======
+    public static VBox createPage(int tamLista,int pageIndex, SortedList<?> list,TableView tabla,int renglonesMostrar) {
+          VBox box = new VBox(5);
+           int inicio = pageIndex * renglonesMostrar;
+           tabla.getItems().clear();
+           tabla.setItems(FXCollections.observableArrayList(list.subList(inicio, Math.min(inicio + renglonesMostrar, tamLista))));
+           box.getChildren().clear();                   
+           box.getChildren().add(tabla);
+>>>>>>> .r3608
+
+           
+           return box;
+   }
+    
+  public static VBox creaFiltro(String etiqueta){
+      
+         TextField text= new TextField();
+         Label label = new Label(etiqueta);
+         VBox filtro = new VBox();
+         filtro.setAlignment(Pos.CENTER);
+         filtro.getChildren().addAll(label, text);
+         filtro.setPadding(new Insets(5.0,5.0,5.0,5.0));
+         
+         return filtro;
+  }
+ 
+  
+    public static Stage nuevaVentana(String nombreFxml, Object controlador, String titulo) throws IOException{
+         InputStream is = null;
+         Node node = null;
+         Stage stage = new Stage();          
+         is = Utilerias.class.getResourceAsStream(nombreFxml);
+         FXMLLoader fxmlLoader=new FXMLLoader();
+         fxmlLoader.setController(controlador); 
+         node=(Parent) fxmlLoader.load(is);
+         Scene scene = new Scene((Parent) node);
+         scene.getStylesheets().setAll(Utilerias.class.getResource("/css/estilos.css").toExternalForm());
+         stage.setTitle(titulo);
+         stage.setScene(scene);
+         return stage;
+            
+    }
+}

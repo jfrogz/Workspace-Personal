@@ -1,0 +1,38 @@
+package mx.vw.swf.sms.model;
+
+import mx.vw.swf.security.model.SegUsuario;
+import java.sql.Timestamp;
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * SmsProducto entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "SMS_PRODUCTO", schema = "dbo", catalog = "SMS")
+public class SmsProducto extends AbstractSmsProducto implements
+        java.io.Serializable {
+
+    // Constructors
+
+    /** default constructor */
+    public SmsProducto() {
+    }
+
+    /** minimal constructor */
+    public SmsProducto(Long id, SegUsuario segUsuarioByCreatedBy, String clave,
+            String nombre, Short estatus, Timestamp createdOn) {
+        super(id, segUsuarioByCreatedBy, clave, nombre, estatus, createdOn);
+    }
+
+    /** full constructor */
+    public SmsProducto(Long id, SegUsuario segUsuarioByCreatedBy,
+            SegUsuario segUsuarioByUpdatedBy, String clave, String nombre,
+            String idSap, Short estatus, Timestamp createdOn,
+            Timestamp updatedOn, Set<SmsProdCteprov> smsProdCteprovs) {
+        super(id, segUsuarioByCreatedBy, segUsuarioByUpdatedBy, clave, nombre,
+                idSap, estatus, createdOn, updatedOn, smsProdCteprovs);
+    }
+
+}

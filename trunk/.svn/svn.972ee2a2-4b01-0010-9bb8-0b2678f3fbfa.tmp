@@ -1,0 +1,51 @@
+package mx.vw.swf.sms.controller;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import io.datafx.controller.ViewController;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.input.MouseEvent;
+import javax.swing.JOptionPane;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1yij
+ */
+
+@ViewController("/fxml/configuration/HeaderTemplate.fxml")
+public class HeaderTemplateController implements Initializable {
+
+    @FXML    private Hyperlink linkVolkswagen;
+    @Override
+    
+    public void initialize(URL url, ResourceBundle rb) {
+        linkVolkswagen.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                try {
+                    JOptionPane.showMessageDialog(null, "hola");
+                    java.awt.Desktop.getDesktop().browse(new URI("http://portalvwm.vwm.na.vwg"));
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(TemplateController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(TemplateController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });        
+    }    
+    
+}

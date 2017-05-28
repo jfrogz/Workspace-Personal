@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="244.0" prefWidth="591.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <GridPane prefHeight="209.0" prefWidth="329.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="96.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="83.0" minWidth="4.0" prefWidth="4.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="197.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="lblFolio_Salida" text="lblFolio_Salida" GridPane.rowIndex="1" />
+            <Label fx:id="lblFechaEntrada_Salida" text="fecha entrada:" GridPane.rowIndex="2" />
+            <Label fx:id="lblIdentidad_Salida" text="identidad" GridPane.rowIndex="3" />
+            <Label fx:id="lblProducto_Salida" text="producto:" GridPane.rowIndex="4" />
+            <Label fx:id="lblPlacas_Salida" text="placas:" GridPane.rowIndex="5" />
+            <TextField fx:id="txtFolio" alignment="CENTER" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="txtNombreIdentidad" alignment="CENTER" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="txtNombreProducto" alignment="CENTER" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="txtPlaca" alignment="CENTER" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label fx:id="lblDestino_Salida" text="destino:" GridPane.rowIndex="6" />
+            <TextField fx:id="txtDestino" alignment="CENTER" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <TextField fx:id="txtFecha" alignment="CENTER" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+   </left>
+   <right>
+      <BorderPane prefHeight="400.0" prefWidth="239.0" BorderPane.alignment="CENTER">
+         <center>
+            <GridPane prefHeight="155.0" prefWidth="239.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="88.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="55.0" minWidth="10.0" prefWidth="14.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="129.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="74.0" minWidth="10.0" prefWidth="28.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="25.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="38.0" minHeight="30.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="lblPesoTara_Salida" text="peso tara:" GridPane.rowIndex="2" />
+                  <Label fx:id="lblPesoBruto_Salida" text="peso bruto:" GridPane.rowIndex="1" />
+                  <Label fx:id="lblPesoNeto_Salida" text="peso neto:" GridPane.rowIndex="3" />
+                  <TextField fx:id="txtPesoBruto" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtPesoTara" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtPesoNeto" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+         </center>
+         <top>
+            <Pane prefHeight="85.0" prefWidth="239.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="txtPesoBascula" alignment="CENTER_RIGHT" editable="false" layoutY="33.0" prefHeight="63.0" prefWidth="218.0" text="0.0 K.g">
+                     <effect>
+                        <ColorAdjust>
+                           <input>
+                              <InnerShadow color="#07dbfc" />
+                           </input>
+                        </ColorAdjust>
+                     </effect>
+                     <font>
+                        <Font size="23.0" />
+                     </font></TextField>
+               </children>
+            </Pane>
+         </top>
+      </BorderPane>
+   </right>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="508.0" spacing="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnGuardar" mnemonicParsing="false" text="guardar" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" text="cancelar" />
+         </children>
+         <BorderPane.margin>
+            <Insets right="15.0" />
+         </BorderPane.margin>
+        
+      </HBox>
+   </bottom>
+</BorderPane>

@@ -1,0 +1,109 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+import com.google.common.io.Closeables;
+import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.action.LinkAction;
+import java.io.Serializable;
+import java.text.CollationElementIterator;
+import java.util.List;
+import java.util.Properties;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import javax.annotation.PostConstruct;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.sms.dataacess.FwkActionItemDAO;
+import mx.vw.swf.sms.model.FwkActionItem;
+import mx.vw.swf.sms.model.FwkCatContent;
+import mx.vw.swf.sms.model.FwkCatContentDAO;
+import mx.vw.swf.sms.model.SmsMovimientoDAO;
+
+
+/**
+ *
+ * @author fox1yij
+ */
+public class MenuController extends Application {
+   // @FXML @LinkAction(HelpController.class) Button btnAyuda;
+    @FXML   Hyperlink linkVolkswagen1;
+    @FXML   MenuBar welcomeMenuBar;    
+    @FXML   Hyperlink linkManualUsuario;
+    @FXML   Label labelMovimientoActual;
+    @FXML   Label labelIdentificadorUsuario;
+    @FXML   Label encabezadoPrincipal;
+    @FXML   Image imagenSalida;
+    @FXML   ImageView imgAyuda;
+    @FXML   Hyperlink   labelSalida;
+    @FXML   Hyperlink lblSoftwareFactory;
+    @FXML   Label lbVersion;
+    
+    public void irAIntranet(Event event) {
+        FwkCatContentDAO actionItemDAO = new FwkCatContentDAO();
+        FwkCatContent catContent = actionItemDAO.findById(Long.parseLong("18"));
+        
+        System.out.println("Redirecting");
+        getHostServices().showDocument(catContent.getDescription());
+        
+    }
+    
+    public void irASoftwareFactory(Event event) {
+        FwkCatContentDAO actionItemDAO = new FwkCatContentDAO();
+        FwkCatContent catContent = actionItemDAO.findById(Long.parseLong("19"));
+        System.out.println("Redirecting");
+        getHostServices().showDocument(catContent.getDescription());
+    }
+    
+    public void salirDelprogramaEvent (Event event)
+    {
+        DataFXLauncher.primary.close();   
+    }
+    
+    @PostConstruct
+    public void postConstruct() {
+        
+        
+        welcomeMenuBar.getMenus().clear();
+        List<FwkActionItem> items = new FwkActionItemDAO().findAllForRendering();
+        System.out.println(items.size());
+        items.stream().map((item) -> {
+            Menu menu = new Menu(item.getLabel());
+            item.getChildren().stream().forEach((child) -> {
+                menu.getItems().add(new MenuItem(child.getLabel()));
+            });
+            return menu;
+        }).forEach((menu) -> {
+            welcomeMenuBar.getMenus().add(menu);
+        });
+       encabezadoPrincipal.setText(DataFXLauncher.mensajesProperties.getProperty("Titulo")); 
+       labelSalida.setText(DataFXLauncher.mensajesProperties.getProperty("Salir"));
+       linkManualUsuario.setText(DataFXLauncher.mensajesProperties.getProperty("manualUsuario"));
+       lblSoftwareFactory.setText(DataFXLauncher.mensajesProperties.getProperty("softwareFactory"));
+       
+       //Se actualiza la versión del sistema
+        FwkCatContentDAO actionItemDAO = new FwkCatContentDAO();
+        FwkCatContent catContent = actionItemDAO.findById(Long.parseLong("17"));
+        lbVersion.setText("Versión " + catContent.getDescription());
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+    }
+}

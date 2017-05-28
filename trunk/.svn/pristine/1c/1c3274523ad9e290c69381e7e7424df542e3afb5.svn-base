@@ -1,0 +1,328 @@
+package mx.vw.swf.security.dao;
+
+
+import java.util.List;
+import java.util.logging.Level;
+import javax.persistence.EntityManager;
+import mx.vw.swf.fwk.model.EntityManagerHelper;
+
+import javax.persistence.Query;
+import mx.vw.swf.security.model.SegUsuario;
+
+/**
+ * A data access object (DAO) providing persistence and search support for
+ * SegUsuario entities. Transaction control of the save(), update() and delete()
+ * operations must be handled externally by senders of these methods or must be
+ * manually added to each of these methods for data to be persisted to the JPA
+ * datastore.
+ * 
+ * @see SegUsuario
+ * @author MyEclipse Persistence Tools
+ */
+public class SegUsuarioDAO implements ISegUsuarioDAO {
+    // property constants
+    public static final String USER_ID = "userId";
+    public static final String NOMBRE_USUARIO = "nombreUsuario";
+    public static final String AP_PATERNO = "apPaterno";
+    public static final String AP_MATERNO = "apMaterno";
+    public static final String CORREO_E = "correoE";
+    public static final String ESTATUS = "estatus";
+
+    private EntityManager getEntityManager() {
+        return EntityManagerHelper.getEntityManager();
+    }
+
+    /**
+     * Perform an initial save of a previously unsaved SegUsuario entity. All
+     * subsequent persist actions of this entity should use the #update()
+     * method. This operation must be performed within the a database
+     * transaction context for the entity's data to be permanently saved to the
+     * persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#persist(Object)
+     * EntityManager#persist} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * SegUsuarioDAO.save(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            SegUsuario entity to persist
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void save(SegUsuario entity) {
+        EntityManagerHelper.log("saving SegUsuario instance", Level.INFO, null);
+        try { 
+            //EntityManagerHelper.beginTransaction();
+            getEntityManager().persist(entity);  
+            EntityManagerHelper.log("save successful", Level.INFO, null);
+            //EntityManagerHelper.commit();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("save failed", Level.SEVERE, re);
+            throw re;
+        } catch(Exception re){
+            EntityManagerHelper.log("Fallo", Level.SEVERE, re);
+
+        }
+    }
+
+    /**
+     * Delete a persistent SegUsuario entity. This operation must be performed
+     * within the a database transaction context for the entity's data to be
+     * permanently deleted from the persistence store, i.e., database. This
+     * method uses the {@link javax.persistence.EntityManager#remove(Object)
+     * EntityManager#delete} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * SegUsuarioDAO.delete(entity);
+     * EntityManagerHelper.commit();
+     * entity = null;
+     * </pre>
+     * 
+     * @param entity
+     *            SegUsuario entity to delete
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void delete(SegUsuario entity) {
+        EntityManagerHelper.log("deleting SegUsuario instance", Level.INFO,
+                null);
+        try {
+            entity = getEntityManager().getReference(SegUsuario.class,
+                    entity.getId());
+            getEntityManager().remove(entity);
+            EntityManagerHelper.log("delete successful", Level.INFO, null);
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("delete failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Persist a previously saved SegUsuario entity and return it or a copy of
+     * it to the sender. A copy of the SegUsuario entity parameter is returned
+     * when the JPA persistence mechanism has not previously been tracking the
+     * updated entity. This operation must be performed within the a database
+     * transaction context for the entity's data to be permanently saved to the
+     * persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
+     * operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * entity = SegUsuarioDAO.update(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            SegUsuario entity to update
+     * @return SegUsuario the persisted SegUsuario entity instance, may not be
+     *         the same
+     * @throws RuntimeException
+     *             if the operation fails
+     */
+    public SegUsuario update(SegUsuario entity) {
+            
+        EntityManagerHelper.log("updating SegUsuario instance", Level.INFO,
+                null);
+        try {
+            //EntityManagerHelper.beginTransaction();
+            SegUsuario result = getEntityManager().merge(entity);
+            EntityManagerHelper.log("update successful", Level.INFO, null);
+            //EntityManagerHelper.commit();
+            return result;
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("update failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    public SegUsuario findById(Long id) {
+        EntityManagerHelper.log("finding SegUsuario instance with id: " + id,
+                Level.INFO, null);
+        try {
+            SegUsuario instance = getEntityManager().find(SegUsuario.class, id);
+            return instance;
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Find all SegUsuario entities with a specific property value.
+     * 
+     * @param propertyName
+     *            the name of the SegUsuario property to query
+     * @param value
+     *            the property value to match
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            number of results to return.
+     * @return List<SegUsuario> found by query
+     */
+    @SuppressWarnings("unchecked")
+    public List<SegUsuario> findByProperty(String propertyName,
+            final Object value, final int... rowStartIdxAndCount) {
+        EntityManagerHelper.log("finding SegUsuario instance with property: "
+                + propertyName + ", value: " + value, Level.INFO, null);
+        try {
+            final String queryString = "select model from SegUsuario model where model."
+                    + propertyName + "= :propertyValue";
+            Query query = getEntityManager().createQuery(queryString);
+            query.setParameter("propertyValue", value);
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find by property name failed",
+                    Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    public List<SegUsuario> findByNombreUsuario(Object nombreUsuario,
+            int... rowStartIdxAndCount) {
+        return findByProperty(NOMBRE_USUARIO, nombreUsuario,
+                rowStartIdxAndCount);
+    }
+
+    public List<SegUsuario> findByApPaterno(Object apPaterno,
+            int... rowStartIdxAndCount) {
+        return findByProperty(AP_PATERNO, apPaterno, rowStartIdxAndCount);
+    }
+
+    public List<SegUsuario> findByApMaterno(Object apMaterno,
+            int... rowStartIdxAndCount) {
+        return findByProperty(AP_MATERNO, apMaterno, rowStartIdxAndCount);
+    }
+
+    public List<SegUsuario> findByCorreoE(Object correoE,
+            int... rowStartIdxAndCount) {
+        return findByProperty(CORREO_E, correoE, rowStartIdxAndCount);
+    }
+
+    public List<SegUsuario> findByEstatus(Object estatus,
+            int... rowStartIdxAndCount) {
+        return findByProperty(ESTATUS, estatus, rowStartIdxAndCount);
+    }
+
+    /**
+     * Find all SegUsuario entities.
+     * 
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            count of results to return.
+     * @return List<SegUsuario> all SegUsuario entities
+     */
+    @SuppressWarnings("unchecked")
+    public List<SegUsuario> findAll(final int... rowStartIdxAndCount) {
+
+        EntityManagerHelper.log("finding all SegUsuario instances", Level.INFO,
+                null);
+        try {           
+
+            final String queryString = "select model from SegUsuario model";
+            Query query = getEntityManager().createQuery(queryString);
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            
+            return query.getResultList();
+          
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find all failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<SegUsuario> findByPropertyFilter(String userID, String nombreUsuario, final int... rowStartIdxAndCount) {
+        EntityManagerHelper.log("finding SegUsuario instance with property: UserId, value: " + userID + "  nombreUsuario, value: "+nombreUsuario, Level.INFO, null);
+        try {
+            final String queryString = "select model from SegUsuario model where"+
+                                       " (:propertyValueUserID = '1' "+
+                                       " OR UPPER(model.userId) LIKE UPPER(:propertyValueUserID))"+
+                                       " AND (:propertyValueNameUser = '1'  OR UPPER(model.nombreUsuario) LIKE UPPER(:propertyValueNameUser) "+
+                                       " OR UPPER(model.apPaterno) LIKE UPPER(:propertyValueNameUser)  "+
+                                       " OR UPPER(model.apMaterno) LIKE UPPER(:propertyValueNameUser))  ";
+                    
+            Query query = getEntityManager().createQuery(queryString);
+            query.setParameter("propertyValueUserID", userID.isEmpty()?"1":""+userID+"%");
+            query.setParameter("propertyValueNameUser", nombreUsuario.isEmpty()?"1":""+nombreUsuario+"%");
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find by property name failed",
+                    Level.SEVERE, re);
+            throw re;
+        }
+    }
+    
+    public List<SegUsuario> findByUserId(Object userId,
+            int... rowStartIdxAndCount) {
+            try {
+            final String queryString = "select model from SegUsuario model where UPPER(model.userId) =  UPPER(:propertyValueUserID))";                                       
+                    
+            Query query = getEntityManager().createQuery(queryString);
+            query.setParameter("propertyValueUserID", userId);
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find by property name failed",
+                    Level.SEVERE, re);
+            throw re;
+        }    }
+}

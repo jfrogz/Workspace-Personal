@@ -1,0 +1,127 @@
+#Especificos del Sistema
+Sistema.Nombre=Scale Management System (SMS)
+
+#Generales del Sistema
+General.Logout=Salir
+General.ManualUsr=Manual Usuario
+General.VersionLabel=Versi\u00f3n 
+General.SWF=Software Factory
+
+General.btnAceptar=Aceptar
+General.btnCancelar=Cancelar
+General.btnLimpiar=Limpiar
+
+#Pantalla Acceso
+Login.Header=Acceso al Sistema
+Login.UsrLabel=Usuario:
+Login.PwdLabel=Contrase\u00f1a:
+
+#Pantalla Acceso Validaciones
+Login.Valid.IncompleteData.Header=Datos faltantes
+Login.Valid.IncompleteData.Message=Debe proporcionar todos los datos marcados con rojo.
+Login.Valid.NoAccess.Header=No tiene acceso
+Login.Valid.NoAccess.Message=El usuario no tiene acceso al sistema, contacte al administrador para que le otorgue acceso.
+Login.Valid.Credentials.Header=Datos Incorrectos
+Login.Valid.Credentials.Message=Los datos proporcionados son incorrectos, por favor intente nuevamente.
+Login.Valid.ActiveDir.Header=No Disponible
+Login.Valid.ActiveDir.Message=Ocurri\u00f3 un error al autenticar en Active Directory.
+
+
+
+
+
+#Sistema General
+btnAceptar = Aceptar
+btnCancelar = Cancelar
+<<<<<<< .mine
+msgActualizarMasthead=Actualizar datos
+msgActualizarMessage=Los datos fuer\u00f3n actualizados correctamente
+
+msgGuardarMasthead=Guardar datos
+msgGuardarMessage=Los datos fuer\u00f3n guardados correctamente
+=======
+btnLimpiar = Limpiar
+>>>>>>> .r3647
+
+# ----------Mesajes de validaci\u00f3n ---------
+msValidationMasthead=Datos faltantes
+msValidationMessage=No se puede continuar, se requiere que ingrese todos los datos marcados con rojo.
+
+msLogginMasthead=El usuario no tiene acceso
+msLogginMessage=El suario No tiene acceso al sistema, para tener acceso es necesario que acudas con el administrador del sistema 
+
+msLogginSinCoincidenciaMasthead=Sin coincidencias
+msLogginSinCoincidenciaMessage=Los datos proporcionados son incorrectos, por favor de interntarlo nuevamente
+
+msLogginErrorMasthead=Sin Acceso
+msLoggiErronMessage=Se gener\u00f3 un error al autenticar en ActiveDirectory
+
+
+# Template
+#Template - Header
+Titulo=Scale Management System
+Salir=Salir
+manualUsuario = Manual de usuario
+#Template - Footer
+softwareFactory = Software Factory 
+
+#Template - Header - movimientos
+Login=Acceso al Sistema
+
+#--------------Loggin------------
+nombreUsuario = Nombre de usuario
+password = Contrase\u00f1a
+#--------------Loggin Mensajes ------------
+
+
+
+#------------Configuraci\u00f3n de puerto--------------
+confPuertoNomMovimiento=Configuraci\u00f3n del puerto
+puerto=Puerto
+baudaje=Baudaje
+bitsDeDatos=Bits de datos
+bitsDeParada=Bits de parada
+paridadDePuerto=Paridad de puerto
+
+#--------------Configuraci\u00f3n de puerto - mesanjes------------------
+msActualizacionCorrectaMasthead=Operaci\u00f3n de actualizaci\u00f3n
+msActualizacionCorrectaMastheadMessage=Los datos fuer\u00f3n actualizados correctamente
+
+
+#------------Configuraci\u00f3n de puerto--------------
+#Movimiento Proveedor
+movimientosProveedorNomMovimiento =Movimientos Proveedores
+
+
+#-----------MAIN------------
+mgsTituloMain =Bienvenido
+
+#------Catalogo de Clientes y Proveedores
+lblClave=Clave
+lblNombreEmpresa=Empresa
+btnNuevo=Nuevo
+
+#------Catalogo de Clientes y Proveedores - tabla(columnas)
+colId=Id
+colEsProveedor=Cliente/Proveedor
+colClave=Clave
+colNombreEmpresa=Nombre
+colRazonSocial=Raz\u00f3n Social
+colIdSAP=Id SAP
+colStatus=Status
+colSalidaContingencia=Salida Contingencia
+colAcciones=Acciones
+
+
+#------Crear Clientes y Proveedores 
+NECPlblTipo=Tipo
+NECPlblID=ID
+NECPlblIdSAP=ID SAP
+NECPlblRazonSocial=Raz\u00f3n Social
+NECPlblNombreEmpresa=Nombre Empresa
+NECPlblClave=Clave
+NECPlblStatus=Activo
+NECPlblPermisoContingencia=Permiso Contingencia
+necpBtnAceptar=Aceptar
+necpBtnCancelar=Cancelar
+

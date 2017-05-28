@@ -1,0 +1,16 @@
+package mx.vw.swf.sms.service;
+
+import mx.vw.fwk.core.intf.JPADataRepository;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+
+/**
+ * Created by dzm152z on 06/02/2015.
+ */
+public class SMSProveedorService extends JPADataRepository {
+    @Inject
+    public void setEntityManager(EntityManager entityManager) {
+        super.setEntityManager(entityManager);
+    }
+}

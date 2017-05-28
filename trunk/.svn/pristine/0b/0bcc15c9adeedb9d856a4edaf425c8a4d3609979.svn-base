@@ -1,0 +1,132 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.flow.context.ActionHandler;
+import io.datafx.controller.flow.context.FlowActionHandler;
+import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.fwk.dao.FwkActionItemDAO;
+import mx.vw.swf.fwk.dao.FwkCatContentDAO;
+import mx.vw.swf.fwk.model.FwkActionItem;
+import mx.vw.swf.fwk.model.FwkCatContent;
+import mx.vw.swf.security.event.SMSMenuItemEventHandler;
+
+import javax.annotation.PostConstruct;
+import java.util.List;
+
+/**
+ *
+ * @author fox1yij
+ */
+public class MenuController extends Application {
+
+    // @FXML @LinkAction(HelpController.class) Button btnAyuda;
+    @FXML
+    Hyperlink linkVolkswagen1;
+    @FXML
+    MenuBar welcomeMenuBar;
+    @FXML
+    Hyperlink linkManualUsuario;
+    @FXML
+    Label labelMovimientoActual;
+    @FXML
+    Label labelIdentificadorUsuario;
+    @FXML
+    Label encabezadoPrincipal;
+    @FXML
+    Image imagenSalida;
+    @FXML
+    ImageView imgAyuda;
+    @FXML
+    Hyperlink labelSalida;
+    @FXML
+    Hyperlink lblSoftwareFactory;
+    @FXML
+    Label lbVersion;
+    @ActionHandler
+    FlowActionHandler actionHandler;
+
+    public void irAIntranet(Event event) {
+        FwkCatContentDAO actionItemDAO = new FwkCatContentDAO();
+        FwkCatContent catContent = actionItemDAO.findById(Long.parseLong("18"));
+
+        System.out.println("Redirecting");
+        getHostServices().showDocument(catContent.getDescription());
+
+    }
+
+    public void irASoftwareFactory(Event event) {
+        FwkCatContentDAO actionItemDAO = new FwkCatContentDAO();
+        FwkCatContent catContent = actionItemDAO.findById(Long.parseLong("19"));
+        System.out.println("Redirecting");
+        getHostServices().showDocument(catContent.getDescription());
+    }
+
+    public void salirDelprogramaEvent(Event event) {
+        DataFXLauncher.primary.close();
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+
+        //Se generan los menus de acuerdo al permiso
+        welcomeMenuBar.getMenus().clear();
+        List<FwkActionItem> items = new FwkActionItemDAO().findAllForRendering();
+        System.out.println(items.size());
+        items.stream().map((item) -> {
+            Menu menu = new Menu(item.getLabel());
+            item.getChildren().stream().forEach((child) -> {
+                MenuItem menuItem = new MenuItem(child.getLabel());
+                menuItem.setOnAction(new SMSMenuItemEventHandler(actionHandler));
+                menu.getItems().add(menuItem);
+            });
+            return menu;
+        }).forEach((menu) -> {
+            welcomeMenuBar.getMenus().add(menu);
+        });
+        encabezadoPrincipal.setText(DataFXLauncher.mensajesProperties.getProperty("Titulo"));
+        labelSalida.setText(DataFXLauncher.mensajesProperties.getProperty("Salir"));
+        linkManualUsuario.setText(DataFXLauncher.mensajesProperties.getProperty("manualUsuario"));
+        lblSoftwareFactory.setText(DataFXLauncher.mensajesProperties.getProperty("softwareFactory"));
+
+        ObservableList<Menu> menus = welcomeMenuBar.getMenus();
+
+        for (Menu menu : menus) {
+            if (menu.getText().equals("Configuración")) {
+                ObservableList<MenuItem> items1 = menu.getItems();
+                for (MenuItem items11 : items1) {
+                    if (items11.getText().equals("Configurar Puerto")) {
+                        MenuItem item = items11;
+                        //item.setOnAction((EventHandler event) -> {}));
+                    }
+                }
+            }
+        }
+
+        //Se actualiza la versión del sistema
+        FwkCatContentDAO actionItemDAO = new FwkCatContentDAO();
+        FwkCatContent catContent = actionItemDAO.findById(Long.parseLong("17"));
+        lbVersion.setText("Versión " + catContent.getDescription());
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    }
+
+    public void setMovimiento(String movimientoActual) {
+        labelMovimientoActual.setText(movimientoActual);
+    }
+}

@@ -1,0 +1,104 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.utilerias;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableCell;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.model.SegPerfil;
+import mx.vw.swf.security.model.SegPermiso;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
+
+/**
+ *
+ * @author fox1x0d
+ */
+public class CheckBoxTableCell<S, T> extends TableCell<S, T> {
+
+    private final CheckBox checkBox;
+    private final boolean seleccionar;
+
+    public CheckBoxTableCell(boolean seleccionar) {
+
+        this.checkBox = new CheckBox();
+        this.checkBox.setAlignment(Pos.CENTER);
+        this.seleccionar = seleccionar;
+        setAlignment(Pos.CENTER);
+        setGraphic(checkBox);
+
+    }
+
+    @Override
+    public void updateItem(T item, boolean empty) {
+
+        super.updateItem(item, empty);
+        if (item == null) {
+            setText(null);
+            setGraphic(null);
+
+        } else {
+
+            setGraphic(checkBox);
+            boolean d = false;
+            if (item instanceof SegPerfil) {
+                SegPerfil s = (SegPerfil) item;
+                d = s.getSelected();
+
+            }
+            if (item instanceof SegPermiso) {
+                SegPermiso s = (SegPermiso) item;
+                d = s.getSelected();
+            }
+
+            BooleanProperty b = new SimpleBooleanProperty(d);
+            checkBox.selectedProperty().bindBidirectional(b);
+
+            checkBox.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                     
+                    if (item instanceof SegPerfil) {
+                        SegPerfil s = (SegPerfil) item;
+                        if (checkBox.isSelected()) {
+                            s.setSelected(Boolean.TRUE);
+                        } else {
+                            if(s.getPerfil().toLowerCase().contains("management".toLowerCase()) && (seleccionar)){
+                                System.out.println("ENTRA MENSAJE");
+                                checkBox.setSelected(true);
+                                Dialogs.create()
+                                            .title(DataFXLauncher.getProperty("Sistema.Nombre"))
+                                            .masthead(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosVacios"))
+                                            .message("No se puede quitar este perfil al Usuario porque no hay otro User Management")                                            
+                                            .showInformation();
+                            }else{
+                            s.setSelected(Boolean.FALSE);
+                            }
+                        }
+                    } else if (item instanceof SegPermiso) {
+                        SegPermiso s = (SegPermiso) item;
+                        if (checkBox.isSelected()) {
+                            s.setSelected(Boolean.TRUE);
+                        } else {
+                            s.setSelected(Boolean.FALSE);
+                        }
+
+                    }
+
+                }
+            });
+
+        }
+
+    }
+
+}

@@ -1,0 +1,158 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@Entity
+@Table(name = "FWK_LOGGER", schema = "dbo", catalog = "SMS")
+public class FwkLoggerEntity {
+    private int id;
+    private Timestamp tsevento;
+    private Timestamp tsbasedatos;
+    private String nivel;
+    private String clase;
+    private String metodo;
+    private Integer linea;
+    private String mensaje;
+    private String stacktrace;
+    private String userid;
+
+    @Id
+    @Column(name = "ID")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Basic
+    @Column(name = "TSEVENTO")
+    public Timestamp getTsevento() {
+        return tsevento;
+    }
+
+    public void setTsevento(Timestamp tsevento) {
+        this.tsevento = tsevento;
+    }
+
+    @Basic
+    @Column(name = "TSBASEDATOS")
+    public Timestamp getTsbasedatos() {
+        return tsbasedatos;
+    }
+
+    public void setTsbasedatos(Timestamp tsbasedatos) {
+        this.tsbasedatos = tsbasedatos;
+    }
+
+    @Basic
+    @Column(name = "NIVEL")
+    public String getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(String nivel) {
+        this.nivel = nivel;
+    }
+
+    @Basic
+    @Column(name = "CLASE")
+    public String getClase() {
+        return clase;
+    }
+
+    public void setClase(String clase) {
+        this.clase = clase;
+    }
+
+    @Basic
+    @Column(name = "METODO")
+    public String getMetodo() {
+        return metodo;
+    }
+
+    public void setMetodo(String metodo) {
+        this.metodo = metodo;
+    }
+
+    @Basic
+    @Column(name = "LINEA")
+    public Integer getLinea() {
+        return linea;
+    }
+
+    public void setLinea(Integer linea) {
+        this.linea = linea;
+    }
+
+    @Basic
+    @Column(name = "MENSAJE")
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    @Basic
+    @Column(name = "STACKTRACE")
+    public String getStacktrace() {
+        return stacktrace;
+    }
+
+    public void setStacktrace(String stacktrace) {
+        this.stacktrace = stacktrace;
+    }
+
+    @Basic
+    @Column(name = "USERID")
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FwkLoggerEntity that = (FwkLoggerEntity) o;
+
+        if (id != that.id) return false;
+        if (clase != null ? !clase.equals(that.clase) : that.clase != null) return false;
+        if (linea != null ? !linea.equals(that.linea) : that.linea != null) return false;
+        if (mensaje != null ? !mensaje.equals(that.mensaje) : that.mensaje != null) return false;
+        if (metodo != null ? !metodo.equals(that.metodo) : that.metodo != null) return false;
+        if (nivel != null ? !nivel.equals(that.nivel) : that.nivel != null) return false;
+        if (stacktrace != null ? !stacktrace.equals(that.stacktrace) : that.stacktrace != null) return false;
+        if (tsbasedatos != null ? !tsbasedatos.equals(that.tsbasedatos) : that.tsbasedatos != null) return false;
+        if (tsevento != null ? !tsevento.equals(that.tsevento) : that.tsevento != null) return false;
+        if (userid != null ? !userid.equals(that.userid) : that.userid != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (tsevento != null ? tsevento.hashCode() : 0);
+        result = 31 * result + (tsbasedatos != null ? tsbasedatos.hashCode() : 0);
+        result = 31 * result + (nivel != null ? nivel.hashCode() : 0);
+        result = 31 * result + (clase != null ? clase.hashCode() : 0);
+        result = 31 * result + (metodo != null ? metodo.hashCode() : 0);
+        result = 31 * result + (linea != null ? linea.hashCode() : 0);
+        result = 31 * result + (mensaje != null ? mensaje.hashCode() : 0);
+        result = 31 * result + (stacktrace != null ? stacktrace.hashCode() : 0);
+        result = 31 * result + (userid != null ? userid.hashCode() : 0);
+        return result;
+    }
+}

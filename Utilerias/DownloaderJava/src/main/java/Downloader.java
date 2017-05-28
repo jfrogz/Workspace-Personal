@@ -12,8 +12,8 @@ public class Downloader {
     public static void main(String[] args) {
 //        String url = "http://i.imgur.com/HZ1hq.jpg";
 //        String name = "lineaDeCodigo.jpg";
-        String url = "https://wallpapersite.com/images/pages/pic_w/6227.jpg";
-        String name = "Widowmaker.jpg";
+        String url = "https://wallpapersite.com/images/wallpapers/justice-league-3840x2160-ben-affleck-henry-cavill-jason-momoa-gal-7120.jpg";
+        String name = "wallpaper.jpg";
         String folder = "descargas/";
 
         File dir = new File(folder);

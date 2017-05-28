@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import mx.vw.swf.fwk.model.EntityManagerHelper;
+import mx.vw.swf.security.dao.SegPerfilUsrDAO;
+import mx.vw.swf.security.model.SegPerfilUsr;
+
+/**
+ *
+ * @author fox1x0d
+ */
+public class SegPerfilUsrService {
+
+    SegPerfilUsrDAO segPerfilUsrDAO = new SegPerfilUsrDAO();
+    List<SegPerfilUsr> perfilesUsuarioEliminar = new ArrayList<>();
+
+    public void guardaPerfilUsuario(List<SegPerfilUsr> perfilesUsuario) {
+        EntityManagerHelper.log("saving SegPerfilUsr instance", Level.INFO, null);
+        try {
+            EntityManagerHelper.beginTransaction();
+            perfilesUsuarioEliminar = segPerfilUsrDAO.findByProperty("segUsuario",perfilesUsuario.size()>0?perfilesUsuario.get(0).getSegUsuario():"");
+            
+            for(SegPerfilUsr perfilUsuarioEliminar:perfilesUsuarioEliminar){
+                segPerfilUsrDAO.delete(perfilUsuarioEliminar);
+            }
+            
+            for (SegPerfilUsr perfilUsuario : perfilesUsuario) {
+                segPerfilUsrDAO.save(perfilUsuario);
+            }
+            EntityManagerHelper.commit();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.rollback();
+            EntityManagerHelper.log("save failed", Level.SEVERE, re);
+            throw re;
+        } catch (Exception re) {
+            EntityManagerHelper.log("Fallo", Level.SEVERE, re);
+
+        }
+    }
+}

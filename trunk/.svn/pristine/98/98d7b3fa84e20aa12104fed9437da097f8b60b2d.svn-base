@@ -1,0 +1,218 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.ViewFlowContext;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.dao.SegUsuarioDAO;
+import mx.vw.swf.security.service.CrearEditarUsuariosService;
+import mx.vw.swf.security.model.SegUsuario;
+import mx.vw.swf.sms.utilerias.Utilerias;
+import org.controlsfx.dialog.Dialogs;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1x0d
+ */
+public class CrearEditarUsuariosController implements Initializable {
+
+    @FXML
+    private TextField txtUsuario, txtNombreUsuario, txtApellidoPat, txtApellidoMat, txtCorreo;
+    @FXML
+    private CheckBox chxEstatusUsuario;
+    @FXML
+    private Label id, idEtiqueta, lbUsuario, lbNombre, lbApPaterno, lbApMaterno, lbCorreo, lbEstatus, lbUsuarioEdicion;
+    @FXML
+    private Button btnGuardarUsuario, btnCerrarUsuario;
+    private Short status = 1;
+    private SegUsuario usuario;
+    private AdministrarUsuariosController administrarUsuarios;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        txtUsuario.addEventFilter(KeyEvent.KEY_TYPED, Utilerias.permiteLetrasNumeros(20));
+        txtNombreUsuario.addEventFilter(KeyEvent.KEY_TYPED, Utilerias.permiteLetras(75));
+        txtApellidoPat.addEventFilter(KeyEvent.KEY_TYPED, Utilerias.permiteLetras(75));
+        txtApellidoMat.addEventFilter(KeyEvent.KEY_TYPED, Utilerias.permiteLetras(75));
+        txtCorreo.addEventFilter(KeyEvent.KEY_TYPED, Utilerias.permiteCualquierCaracter(100));
+
+        if (this.getUsuario() != null) {
+
+            id.setVisible(true);
+            idEtiqueta.setVisible(true);
+            idEtiqueta.setText(this.getUsuario().getId().toString());
+            lbUsuarioEdicion.setText(this.getUsuario().getUserId());
+            txtUsuario.setText(this.getUsuario().getUserId());
+            txtNombreUsuario.setText(this.getUsuario().getNombreUsuario());
+            txtApellidoPat.setText(this.getUsuario().getApPaterno());
+            txtApellidoMat.setText(this.getUsuario().getApMaterno());
+            txtCorreo.setText(this.getUsuario().getCorreoE());
+            chxEstatusUsuario.setSelected(this.getUsuario().getEstatus() != 1 ? false : true);
+            txtUsuario.setVisible(false);
+            lbUsuarioEdicion.setVisible(true);
+
+        } else {
+            id.setVisible(false);
+            idEtiqueta.setVisible(false);
+            idEtiqueta.setText("");
+            txtUsuario.setVisible(true);
+            lbUsuarioEdicion.setVisible(false);
+        }
+
+        btnGuardarUsuario.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonGuardar"));
+        btnCerrarUsuario.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonCerrar"));
+        lbUsuario.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaUsuario") + ":");
+        lbNombre.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaNombre") + ":");
+        lbApPaterno.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaApPaterno") + ":");
+        lbApMaterno.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaApMaterno") + ":");
+        lbCorreo.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaCorreo") + ":");
+        lbEstatus.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaEstatus") + ":");
+        id.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaId") + ":");
+    }
+
+    public void guardarUsuario(ActionEvent event) {
+
+        boolean insert = false;
+        boolean bandera = true;
+        boolean emailCorrecto = true;
+        String usuario = txtUsuario.getText().trim();
+        String nombre = txtNombreUsuario.getText().trim();
+        String apellidoPat = txtApellidoPat.getText().trim();
+        String apellidoMat = txtApellidoMat.getText().trim();
+        String email = txtCorreo.getText().trim();
+
+        SegUsuario seg;
+
+        if (this.getUsuario() != null) {
+            seg = this.getUsuario();
+            insert = false;
+        } else {
+            seg = new SegUsuario();
+            insert = true;
+        }
+
+        if (usuario.isEmpty()) {
+            lbUsuario.setTextFill(Color.RED);
+            bandera &= false;
+        } else {
+            lbUsuario.setTextFill(Color.BLACK);
+        }
+        if (nombre.isEmpty()) {
+            lbNombre.setTextFill(Color.RED);
+            bandera &= false;
+        } else {
+            lbNombre.setTextFill(Color.BLACK);
+        }
+        if (apellidoPat.isEmpty() && apellidoMat.isEmpty()) {
+            lbApPaterno.setTextFill(Color.RED);
+            lbApMaterno.setTextFill(Color.RED);
+            bandera &= false;
+        } else {
+            lbApPaterno.setTextFill(Color.BLACK);
+            lbApMaterno.setTextFill(Color.BLACK);
+        }
+        if (!email.isEmpty()) {
+            emailCorrecto = Utilerias.formatoEmail(email);
+        }
+        if (!bandera) {
+
+            Dialogs.create()
+                    .title(DataFXLauncher.mensajesProperties.getProperty("Sistema.Nombre"))
+                    .masthead(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosVacios"))
+                    .message(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosVaciosMessage"))
+                    .showInformation();
+            lbCorreo.setTextFill(Color.BLACK);
+
+        } else if (!emailCorrecto) {
+            Dialogs.create()
+                    .title(DataFXLauncher.mensajesProperties.getProperty("Sistema.Nombre"))
+                    .masthead(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosVacios"))
+                    .message(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosCorreo"))
+                    .showInformation();
+            lbCorreo.setTextFill(Color.RED);
+
+        } else {
+            lbCorreo.setTextFill(Color.BLACK);
+
+            seg.setUserId(txtUsuario.getText().trim());
+            seg.setNombreUsuario(txtNombreUsuario.getText().trim());
+            seg.setApMaterno(txtApellidoMat.getText().trim());
+            seg.setApPaterno(txtApellidoPat.getText().trim());
+            seg.setCorreoE(txtCorreo.getText().trim());
+            seg.setEstatus(chxEstatusUsuario.isSelected() == true ? status : 0);
+
+            if (insert == true) {
+                List<SegUsuario> lista = new SegUsuarioDAO().findByUserId(txtUsuario.getText().trim());
+                if (lista.size() > 0) {
+                    Dialogs.create()
+                            .title(DataFXLauncher.mensajesProperties.getProperty("Sistema.Nombre"))
+                            .masthead(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosVacios"))
+                            .message(DataFXLauncher.mensajesPropertiesSeg.getProperty("msUsuarioExistenteMessage"))
+                            .showInformation();
+                } else {
+                    crearEditarUsuario(seg, insert, event);
+
+                }
+            } else {
+                crearEditarUsuario(seg, insert, event);
+            }
+
+        }
+
+    }
+
+    public void crearEditarUsuario(SegUsuario seg, boolean opcion, ActionEvent event) {
+        if (opcion) {
+            new CrearEditarUsuariosService().guardaUsuario(seg);
+        } else {
+            new CrearEditarUsuariosService().actualizaUsuario(seg);
+        }
+        this.getAdministrarUsuarios().inicializaUsuarios();
+        cerrar(event);
+
+    }
+
+    public SegUsuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(SegUsuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public AdministrarUsuariosController getAdministrarUsuarios() {
+        return administrarUsuarios;
+    }
+
+    public void setAdministrarUsuarios(AdministrarUsuariosController administrarUsuarios) {
+        this.administrarUsuarios = administrarUsuarios;
+    }
+
+    public void cerrar(ActionEvent event) {
+        Utilerias.cerrar(event);
+    }
+
+}

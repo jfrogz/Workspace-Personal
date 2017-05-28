@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <fx:include source="../configuration/HeaderTemplate.fxml" />
+    </top>
+
+    <bottom>
+        <fx:include source="../configuration/FooterTemplate.fxml" />
+    </bottom>
+    
+    <center>
+        <BorderPane fx:id="borderAdminUusarios" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+            <top>
+                <GridPane layoutX="33.0" layoutY="44.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="524.0" minWidth="10.0" prefWidth="75.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="10.0" prefWidth="162.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="462.0" minWidth="10.0" prefWidth="84.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="675.0" minWidth="10.0" prefWidth="205.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="517.0" minWidth="10.0" prefWidth="286.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="flUsuario" GridPane.columnIndex="1" />
+                        <TextField fx:id="flNombre" prefHeight="22.0" prefWidth="507.0" GridPane.columnIndex="3" />
+                        <Label fx:id="lbEtiquetaUsuario" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                            <padding>
+                                <Insets right="10.0" />
+                            </padding>
+                        </Label>
+                        <Label fx:id="lbEtiquetaNombre" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                            <padding>
+                                <Insets right="10.0" />
+                            </padding>
+                        </Label>
+                        <Button fx:id="btnNuevoUsuario" layoutX="42.0"  layoutY="100.0" mnemonicParsing="false" onAction="#nuevoUsuario" prefHeight="22.0" prefWidth="71.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                            <GridPane.margin>
+                                <Insets />
+                            </GridPane.margin>
+                        </Button>
+
+                    </children>
+                    <BorderPane.margin>
+                        <Insets left="15.0" right="15.0" />
+                    </BorderPane.margin>
+                </GridPane>
+
+            </top>
+            <padding>
+                <Insets bottom="10.0" top="10.0" />
+            </padding>
+            <center>
+                <BorderPane fx:id="borderUsuarios" BorderPane.alignment="CENTER">
+                    <center>
+                        <TableView id="tablaUsuario" fx:id="tablaUsuarios">
+                            <columns>
+                                <TableColumn fx:id="colId" minWidth="-1.0" prefWidth="50.0" resizable="false" text="" />                   
+                                <TableColumn fx:id="colUsuario" minWidth="0.0" prefWidth="150.0" resizable="false" text="" />
+                                <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="180.0" resizable="false" text="" />
+                                <TableColumn fx:id="colCorreoElectronico" minWidth="0.0" prefWidth="130.0" resizable="false" text="" />
+                                <TableColumn fx:id="colEstatus" minWidth="0.0" prefWidth="90.0" resizable="false" text="" />
+                                <TableColumn fx:id="colAcciones" minWidth="0.0" resizable="true" text="" />
+                            </columns>                              
+                        </TableView>               
+                    </center>
+                    <padding>
+                      <Insets left="15.0" right="15.0" />
+                    </padding>  
+                </BorderPane>
+            </center>
+         <bottom>
+            <GridPane fx:id="gridBotones" prefHeight="23.0" prefWidth="842.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox fx:id="hBoxPaginaUsuarios" nodeOrientation="RIGHT_TO_LEFT" prefHeight="23.0" prefWidth="370.0" GridPane.columnIndex="1">
+                     <children>
+                        <ComboBox fx:id="comboPaginacion" nodeOrientation="LEFT_TO_RIGHT" />
+                     </children>
+                 </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="15.0" right="15.0" top="6.0" />
+               </BorderPane.margin>
+               <padding>
+                  <Insets top="6.0" />
+               </padding>
+            </GridPane>
+         </bottom>
+        </BorderPane>
+    </center>
+</BorderPane>

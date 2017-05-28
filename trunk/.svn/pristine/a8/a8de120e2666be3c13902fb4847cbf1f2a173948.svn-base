@@ -1,0 +1,308 @@
+package mx.vw.swf.sms.controller;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.context.ActionHandler;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.FlowActionHandler;
+import io.datafx.controller.flow.context.ViewFlowContext;
+import io.datafx.controller.util.VetoException;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Callback;
+import javax.annotation.PostConstruct;
+import static mx.vw.swf.cdi.DataFXLauncher.getProperty;
+import mx.vw.swf.security.controller.MenuController;
+import mx.vw.swf.security.model.SegUsuario;
+import mx.vw.swf.sms.dao.SmsCteProvDAO;
+import mx.vw.swf.sms.model.SmsCteProv;
+import mx.vw.swf.sms.service.CrearEditarClienteProveedorService;
+import mx.vw.swf.sms.utilerias.Pantallas;
+import mx.vw.swf.sms.utilerias.Utilerias;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1yij
+ */
+@ViewController("/fxml/catalogos/RegistroDeClientesYProveedores.fxml")
+public class RegistroDeClientesYProveedoresController extends MenuController{
+
+    @FXML
+    private TableView<SmsCteProv> tablaDatos;
+    @FXML
+    private Button btnNuevo;
+    @FXML
+    private Label lblClave, lblEmpresa, lbPaginacion;
+    @FXML
+    private TableColumn<SmsCteProv, String> colClave, colNombreEmpresa, colRazonSocial, colIdSAP;
+    @FXML
+    private TableColumn<SmsCteProv, Long> colId;
+    @FXML
+    private TableColumn<SmsCteProv, Short> colCliePro, colEstatus, colContingencia;
+    @FXML
+    private TableColumn<SmsCteProv, SmsCteProv> colAcciones;
+    @FXML
+    private BorderPane borderTabla;
+    @FXML
+    private TextField flClave, flEmpresa;
+    @FXML
+    private ComboBox comboPaginacion;
+    @FXML
+    private GridPane gridBotones; 
+    @FXMLViewFlowContext
+    ViewFlowContext viewFlowContext;    
+    @ActionHandler
+    private FlowActionHandler actionHandlerPerfil;    
+    private ObservableList<SmsCteProv> listaClientesProveedores;    
+    private FilteredList<SmsCteProv> filteredData;
+    private SortedList<SmsCteProv> sortedData;
+    private Pagination pagination;
+    private int renglonesMostrar = 5;
+    private SegUsuario segUsuario;
+
+    @PostConstruct
+    public void postConstruct() {
+        super.postConstruct();
+        super.setEncabezado(getProperty("Catalogos.CltsPrvs.Header"));
+        inicializaControles();        
+        inicializaColumnasTabla();
+        inicializaPatalla();
+        inicializaEventos();
+       
+    }
+
+    public void inicializaControles() {        
+        segUsuario = (SegUsuario) viewFlowContext.getRegisteredObject("USERPRINCIPAL");
+        comboPaginacion.setItems(Utilerias.comboPaginacion());
+        comboPaginacion.getSelectionModel().select(0);
+        lbPaginacion.setText(getProperty("General.Paginacion.lbRegistros"));
+        btnNuevo.setText(getProperty("General.btnNuevo"));
+        lblClave.setText(getProperty("Catalogos.CltsPrvs.lbClave") + ":");
+        lblEmpresa.setText(getProperty("Catalogos.CltsPrvs.lbEmpresa") + ":");
+        
+    }
+    public void inicializaColumnasTabla() {
+        
+        String nombresHeader[]={getProperty("General.lbID"),
+                                getProperty("Catalogos.CltsPrvs.NuevoEditar.lblIdSAP"),
+                                getProperty("Catalogos.CltsPrvs.NuevoEditar.lblClave"),
+                                getProperty("Catalogos.CltsPrvs.NuevoEditar.lblNombreEmpresa"),
+                                getProperty("Catalogos.CltsPrvs.NuevoEditar.lblRazonSocial"),
+                                getProperty("Catalogos.CltsPrvs.lbClienteProveedor"),
+                                getProperty("General.lbEstatus"),
+                                getProperty("Catalogos.CltsPrvs.lbSalidaContingencia"),
+                                getProperty("General.lbAcciones")};
+        String valoresHeader[]={"id","idSap","clave","nombre","razonSocial","esClienteProveedor","etiquetaEstatus","esSalidaContingencia"};                        
+        Utilerias.headerValuesColumnTableView(nombresHeader, valoresHeader, tablaDatos, false);
+        inicializaColumnasControles();
+       
+
+    }
+    public void inicializaColumnasControles() {
+        colAcciones.setSortable(false);
+        colAcciones.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SmsCteProv, SmsCteProv>, ObservableValue<SmsCteProv>>() {
+            public ObservableValue<SmsCteProv> call(TableColumn.CellDataFeatures<SmsCteProv, SmsCteProv> p) {
+                return new ReadOnlyObjectWrapper(p.getValue());
+            }
+        });
+
+        colAcciones.setCellFactory(new Callback<TableColumn<SmsCteProv, SmsCteProv>, TableCell<SmsCteProv, SmsCteProv>>() {
+            @Override
+            public TableCell<SmsCteProv, SmsCteProv> call(TableColumn<SmsCteProv, SmsCteProv> param) {
+                TableCell<SmsCteProv, SmsCteProv> cell = new TableCell<SmsCteProv, SmsCteProv>() {
+
+                    FlowActionHandler actionHandler = actionHandlerPerfil;
+                    Button editar = new Button(getProperty("General.btnEditar"));
+                    Button productos = new Button(getProperty("Catalogos.CltsPrvs.btnProductos"));
+                    Button desactivar = new Button();
+
+                    Short desactiva = 0;
+
+                    @Override
+                    public void updateItem(SmsCteProv item, boolean empty) {
+                        if (null != item) {
+                            editar.getStyleClass().add("botones");
+                            productos.getStyleClass().add("botones");
+                            desactivar.getStyleClass().add("botones");
+                            HBox botones = new HBox(editar, desactivar, productos);
+                            botones.setSpacing(10);
+                            setGraphic(botones);
+
+                            if (item.getEstatus() == 0) {
+                                desactivar.setText(getProperty("General.btnActivar"));
+                                desactiva = 1;
+                            } else {
+                                desactivar.setText(getProperty("General.btnDesactivar"));
+                                desactiva = 0;
+                            }
+
+                            editar.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+                                    creaEditaCteProv(item, t);
+                                }
+                            });
+                            desactivar.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+                                    Action response = Utilerias.dialogConfirm(getProperty("Catalogos.CltsPrvs.Valid.Estatus.Header"),
+                                            getProperty("Catalogos.CltsPrvs.Valid.Estatus.Message"));
+                                    if (response == Dialog.ACTION_YES) {
+                                        item.setEstatus(desactiva);
+                                        desactivarCteProv(item);                                        
+                                    }
+
+                                }
+                            });
+                            productos.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+                                    try {
+                                   viewFlowContext.register("CTEPROVPRODUCTOS", item);
+                                   actionHandler.navigate(AdministrarProductosController.class);
+                                   } catch (VetoException | FlowException e) {
+                                        
+                                    }
+                                }
+                            });
+                        } else {
+                            setGraphic(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+
+    }
+    public void inicializaPatalla(){        
+        setListaClientesProveedores(FXCollections.observableArrayList(obtieneListaClientesProveedores()));
+        filteredData = new FilteredList<>(getListaClientesProveedores(), p -> true);        
+        sortedData=(SortedList<SmsCteProv>) Utilerias.creaFiltro(filteredData,tablaDatos); 
+        inicializaTablaClientesProveedores(sortedData);
+    }
+    public ObservableList<SmsCteProv> obtieneListaClientesProveedores() {
+        List<SmsCteProv> lista = new SmsCteProvDAO().findAll();
+        ObservableList<SmsCteProv> listaol = FXCollections.observableArrayList();
+        for (SmsCteProv item : lista) {
+            listaol.add(item);
+        }
+        return listaol;
+    }
+     public void inicializaTablaClientesProveedores(SortedList<SmsCteProv> lista) {
+        renglonesMostrar = Integer.parseInt(comboPaginacion.getValue().toString());
+        borderTabla.setCenter(null);
+        if (!lista.isEmpty()) {
+            pagination = Utilerias.creaPaginacionTableView(renglonesMostrar, lista, tablaDatos, gridBotones);
+            borderTabla.setCenter(pagination);
+        } else {            
+            tablaDatos.getItems().clear();            
+            borderTabla.setCenter(tablaDatos);
+
+        }
+    }
+    
+    public void inicializaEventos(){
+        btnNuevo.setOnAction((event) -> nuevoCteProv(event));           
+        
+        comboPaginacion.setOnAction((event) -> {
+            renglonesMostrar = Integer.parseInt(comboPaginacion.getValue().toString());
+            inicializaTablaClientesProveedores(sortedData);
+        });
+        flClave.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(clieProv -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (clieProv.getClave().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+            inicializaTablaClientesProveedores(sortedData);
+        });
+        flEmpresa.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(usuer -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (usuer.getNombre().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+            inicializaTablaClientesProveedores(sortedData);
+        });
+    }  
+    public void nuevoCteProv(ActionEvent event){
+        creaEditaCteProv(null, event);
+    }
+    public void desactivarCteProv(SmsCteProv cteProv) {
+        new CrearEditarClienteProveedorService().actualizaClienteProveedor(cteProv);
+        inicializaPatalla();
+    }
+    
+    public void creaEditaCteProv(SmsCteProv cteProv, ActionEvent ev) {
+         String titulo = null !=cteProv? getProperty("Catalogos.CltsPrvs.NuevoEditar.Header.Update") :  getProperty("Catalogos.CltsPrvs.NuevoEditar.Header.New");
+        Stage stage;
+        try {
+            CrearEditarClienteProveedorController controller = new CrearEditarClienteProveedorController(segUsuario, cteProv,this);
+            stage = Utilerias.nuevaVentana(Pantallas.FXML_CREAR_EDITAR_CLIENTES_PROVEEDORES, controller, titulo);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setResizable(false);
+            stage.initOwner(((Node) ev.getSource()).getScene().getWindow());
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(RegistroDeClientesYProveedoresController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void setListaClientesProveedores(ObservableList<SmsCteProv> listaClPr) {
+        this.listaClientesProveedores = listaClPr;
+    }
+
+    public ObservableList<SmsCteProv> getListaClientesProveedores() {
+        return listaClientesProveedores;
+    }
+
+   
+}

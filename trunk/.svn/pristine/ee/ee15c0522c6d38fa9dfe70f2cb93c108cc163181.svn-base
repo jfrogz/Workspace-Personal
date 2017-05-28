@@ -1,0 +1,48 @@
+package mx.vw.swf.security.model;
+
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+/**
+ * SegPerfil entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "SEG_PERFIL", schema = "dbo", catalog = "SMS")
+public class SegPerfil extends AbstractSegPerfil implements
+        java.io.Serializable {
+
+    private String etiquetaEstatus;
+    private Boolean perfilUsuario;
+    // Constructors
+
+    /** default constructor */
+    public SegPerfil() {
+    }
+
+    /** minimal constructor */
+    public SegPerfil(Integer id, String perfil, Short estatus) {
+        super(id, perfil, estatus);
+    }
+
+    /** full constructor */
+    public SegPerfil(Integer id, String perfil, Short estatus,
+            Set<SegPerfilUsr> segPerfilUsrs,
+            Set<SegPermisoPerfil> segPermisoPerfils) {
+        super(id, perfil, estatus, segPerfilUsrs, segPermisoPerfils);
+    }
+
+    @Transient
+    public String getEtiquetaEstatus(){        
+        if(this.getEstatus()!=null){
+           etiquetaEstatus= this.getEstatus()==1?"Activo":"Inactivo";
+        }
+          return etiquetaEstatus; 
+    }
+    
+    @Transient
+    public Boolean getPerfilUsuario(){
+        return true;
+    }
+}

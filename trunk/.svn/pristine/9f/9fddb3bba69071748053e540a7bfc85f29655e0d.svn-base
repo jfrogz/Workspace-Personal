@@ -1,0 +1,85 @@
+package mx.vw.swf.security.event;
+
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.FlowActionHandler;
+import io.datafx.controller.flow.context.ViewFlowContext;
+import io.datafx.controller.util.VetoException;
+import java.util.HashMap;
+import java.util.Map;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.MenuItem;
+import mx.vw.swf.security.controller.AdministrarFuncionesPerfilController;
+import mx.vw.swf.security.controller.AdministrarPerfilesController;
+import mx.vw.swf.security.controller.AdministrarUsuariosController;
+import mx.vw.swf.sms.controller.*;
+
+/**
+ * Created by dzm152z on 16/02/2015.
+ */
+public class SMSMenuItemEventHandler implements EventHandler<ActionEvent> {
+    private final FlowActionHandler actionHandler; 
+    @FXMLViewFlowContext
+    ViewFlowContext viewFlowContext;
+    
+    
+
+    public SMSMenuItemEventHandler(FlowActionHandler actionHandler, ViewFlowContext viewFlowContext) {
+        this.actionHandler = actionHandler;
+        this.viewFlowContext=viewFlowContext;
+    }
+       
+    @Override
+    public void handle(ActionEvent event) {
+        MenuItem menuItem = (MenuItem) event.getSource();
+        /* Map<Object, Object> appMap = (Map<Object, Object>) viewFlowContext.getRegisteredObject("AppMap");
+                     appMap.put("USUARIOPERFIL", new SegUsuario());
+                     appMap.clear();*/
+        try {
+            switch (menuItem.getText()) { 
+                case "Usuarios":                    
+                    actionHandler.navigate(AdministrarUsuariosController.class);
+                    break;
+                case "Perfiles":
+                    viewFlowContext.register("AppMap", new HashMap<Object, Object>());
+                     // 
+                     //Map<Object, Object> appMap = (Map<Object, Object>) viewFlowContext.getRegisteredObject("AppMap");
+                     //appMap.put("USUARIOPERFIL", new SegUsuario());
+                     
+                     viewFlowContext.register("USUARIOPERFIL",(Object)null);
+                    actionHandler.navigate(AdministrarPerfilesController.class);
+                    break;
+                case "Funciones por Perfil":
+                     viewFlowContext.register("PERFILPERMISO",(Object)null);
+                    actionHandler.navigate(AdministrarFuncionesPerfilController.class);
+                    break;
+                case "Clientes y proveedores":
+                    actionHandler.navigate(ClienteProveedorController.class);
+                    break;
+                case "Configurar Puerto":
+                    //actionHandler.navigate(ConfigurarPuertoController.class);
+                    break;
+                case "Perfil de la empresa":
+                    //actionHandler.navigate(PerfilDeEmpresaController.class);
+                    break;
+                case "Movimientos Proveedores":
+                    //actionHandler.navigate(MovimientosProveedoresController.class);
+                    break;
+                case "Movimientos Clientes":
+                    //actionHandler.navigate(MovimientosClientesController.class);
+                    break;
+                case "Reporte de movimientos":
+                    //actionHandler.navigate(ReporteMovimientosController.class);
+                    break;
+                case "Generar Ticket de Entrada":
+                    //actionHandler.navigate(GenerarTicketEntradaController.class);
+                    break;
+            }
+        } catch (VetoException | FlowException e) {
+            e.printStackTrace();
+        }
+        
+      
+    }
+}

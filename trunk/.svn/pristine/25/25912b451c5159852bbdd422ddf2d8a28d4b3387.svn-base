@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="borde" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" styleClass="fondo" stylesheets="@../../css/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <AnchorPane prefHeight="556.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="txtUsuario" layoutX="519.0" layoutY="170.0" prefHeight="22.0" prefWidth="166.0" promptText="Usuario" />
+            <TextField fx:id="txtPassword" layoutX="519.0" layoutY="208.0" prefHeight="22.0" prefWidth="165.0" promptText="Contraseña" />
+            <Button fx:id="btnInicioUsuario" layoutX="519.0" layoutY="262.0" mnemonicParsing="false" styleClass="botones" text="Aceptar" />
+            <Button fx:id="btnCancelar" layoutX="593.0" layoutY="262.0" mnemonicParsing="false" styleClass="botones" text="Cancelar" />
+            <Label layoutX="453.0" layoutY="174.0" styleClass="txtEtiquetas" text="Usuario:" />
+            <Label layoutX="439.0" layoutY="212.0" styleClass="txtEtiquetas" text="Contraseña:" />
+         </children>
+      </AnchorPane>
+   </center>
+   <top>
+      <AnchorPane prefHeight="96.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="70.0" layoutY="10.0" prefHeight="23.0" prefWidth="165.0" styleClass="txtVolkswawen" text="VOLKSWAGEN" />
+            <Label layoutX="91.0" layoutY="33.0" prefHeight="18.0" prefWidth="171.0" styleClass="txtVolkswawenMexico" text="DE MEXICO" />
+            <Label layoutX="450.0" layoutY="18.0" styleClass="txtSMS" text="Sacale Management System" />
+            <Label layoutX="524.0" layoutY="43.0" styleClass="txtTitulosSecciones" text="Acceso al Sistema" />
+            <HBox fx:id="hbMenu" layoutY="84.0" prefHeight="26.0" prefWidth="1200.0" />
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="46.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lbVersion" layoutX="39.0" layoutY="27.0" text="Label">
+               <styleClass>
+                  <String fx:value="txtTitulosSecciones" />
+                  <String fx:value="txtPie" />
+               </styleClass>
+            </Label>
+            <Label layoutX="1025.0" layoutY="29.0" styleClass="txtPie" text="Software Factory" />
+            <Line endX="120.0" layoutX="554.0" layoutY="24.0" startX="-60.0" stroke="#666161fc" strokeType="OUTSIDE" styleClass="linea" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   
+</BorderPane>

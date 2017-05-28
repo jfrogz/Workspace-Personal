@@ -1,0 +1,200 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.context.ActionHandler;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.FlowActionHandler;
+import io.datafx.controller.flow.context.ViewFlowContext;
+import io.datafx.controller.util.VetoException;
+import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.fwk.dao.FwkActionItemDAO;
+import mx.vw.swf.fwk.dao.FwkCatContentDAO;
+import mx.vw.swf.fwk.model.FwkActionItem;
+import mx.vw.swf.fwk.model.FwkCatContent;
+import mx.vw.swf.security.event.SMSMenuItemEventHandler;
+
+import javax.annotation.PostConstruct;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javax.annotation.PreDestroy;
+import mx.vw.swf.fwk.model.EntityManagerHelper;
+import mx.vw.swf.security.model.SegUsuario;
+import mx.vw.swf.sms.utilerias.Utilerias;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialogs;
+
+/**
+ *
+ * @author fox1yij
+ */
+public class MenuController extends Application {
+
+    // @FXML @LinkAction(HelpController.class) Button btnAyuda;
+    @FXML
+    Hyperlink linkVolkswagen1;
+    @FXML
+    MenuBar welcomeMenuBar;
+    @FXML
+    Hyperlink linkManualUsuario;
+    @FXML
+    Label labelMovimientoActual;
+    @FXML
+    Label labelIdentificadorUsuario;
+    @FXML
+    Label encabezadoPrincipal;
+    @FXML
+    ImageView imagenSalida;
+    @FXML
+    ImageView imgAyuda;
+    @FXML
+    Hyperlink labelSalida;
+    @FXML
+    Hyperlink lblSoftwareFactory;
+    @FXML
+    Label lbVersion;
+    @ActionHandler FlowActionHandler actionHandler;
+
+    @FXML
+    VBox errorMessages;
+    
+    @FXMLViewFlowContext
+    ViewFlowContext viewFlowContext;
+    
+    public void irAIntranet(Event event) {
+        FwkCatContentDAO actionItemDAO = new FwkCatContentDAO();
+        FwkCatContent catContent = actionItemDAO.findById(Long.parseLong("18"));
+
+        System.out.println("Redirecting");
+        getHostServices().showDocument(catContent.getDescription());
+
+    }
+
+    public void irASoftwareFactory(Event event) {
+        FwkCatContentDAO actionItemDAO = new FwkCatContentDAO();
+        FwkCatContent catContent = actionItemDAO.findById(Long.parseLong("19"));
+        System.out.println("Redirecting");
+        getHostServices().showDocument(catContent.getDescription());
+    }
+
+    public void salirDelprogramaEvent(ActionEvent event) {
+        cerrarSesion();
+    }
+
+    public void iniciarEventos ()
+    {
+        imagenSalida.setOnMouseClicked((event)->cerrarSesion());
+    }
+    
+    private void cerrarSesion ()
+    {
+        try {
+            Action showConfirm = Dialogs.create()
+                    .owner(DataFXLauncher.primary)
+                    .title(DataFXLauncher.getProperty("Sistema.Nombre"))
+                    .masthead(DataFXLauncher.getProperty("General.Logout.Header"))
+                    .message(DataFXLauncher.getProperty("General.Logout.Message"))
+                    .showConfirm();
+            
+            if(showConfirm == org.controlsfx.dialog.Dialog.ACTION_YES){            
+            actionHandler.navigate(LoginController.class);
+            }
+        } catch (VetoException ex) {
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FlowException ex) {
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @PostConstruct
+    public void postConstruct() {
+        System.out.println("@MenuController.postConstruct() " + viewFlowContext.getCurrentViewContext());
+        iniciarEventos();
+        //Se generan los menus de acuerdo al permiso
+        welcomeMenuBar.getMenus().clear();
+        List<FwkActionItem> items = new FwkActionItemDAO().findAllForRendering();
+        System.out.println(items.size());
+        items.stream().map((item) -> {
+            Menu menu = new Menu(item.getLabel());
+            item.getChildren().stream().forEach((child) -> {
+                MenuItem menuItem = new MenuItem(child.getLabel());
+                menuItem.setOnAction(new SMSMenuItemEventHandler(actionHandler, viewFlowContext));
+                menu.getItems().add(menuItem);
+            });
+            return menu;
+        }).forEach((menu) -> {
+            welcomeMenuBar.getMenus().add(menu);
+        });
+      
+        encabezadoPrincipal.setText(DataFXLauncher.getProperty("Sistema.Nombre"));
+        labelSalida.setText(DataFXLauncher.getProperty("General.Logout"));
+        linkManualUsuario.setText(DataFXLauncher.getProperty("General.ManualUsr"));
+        lblSoftwareFactory.setText(DataFXLauncher.getProperty("General.SWF"));
+        
+        SegUsuario usuario  = (SegUsuario) viewFlowContext.getRegisteredObject("USERPRINCIPAL");
+        if(usuario !=null)
+        labelIdentificadorUsuario.setText("("+
+                usuario.getUserId()+ ") " + usuario.getNombreCompleto());
+        
+
+        //Se actualiza la versión del sistema
+        FwkCatContentDAO actionItemDAO = new FwkCatContentDAO();
+        FwkCatContent catContent = actionItemDAO.findById(Long.parseLong("17"));
+        lbVersion.setText("Versión " + catContent.getDescription());
+       
+
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    }
+
+    
+    public void setEncabezado(String encabezado) {
+        labelMovimientoActual.setText(encabezado);
+    }
+    
+    @PreDestroy
+    public void preDestroy() {
+        EntityManagerHelper.closeEntityManager();
+       
+    }
+
+    public void searchHelp(Event event) {
+        String viewName = getFXMLViewName();
+        if (null == viewName) {
+            // TODO
+        }
+    }
+
+    /**
+     * <p>
+     *     Retrieves the value of the referenced FXML file of the given contoller.
+     *     Of course this will not work for controllers with no view file specified.
+     * </p>
+     * @return
+     */
+    public String getFXMLViewName() {
+        ViewController annotation = this.getClass().getAnnotation(ViewController.class);
+        return null == annotation ? null : annotation.value();
+    }
+}

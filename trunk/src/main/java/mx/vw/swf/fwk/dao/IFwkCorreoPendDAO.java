@@ -1,0 +1,115 @@
+package mx.vw.swf.fwk.dao;
+
+import mx.vw.swf.fwk.model.FwkCorreoPend;
+import java.util.List;
+
+/**
+ * Interface for FwkCorreoPendDAO.
+ * 
+ * @author MyEclipse Persistence Tools
+ */
+
+public interface IFwkCorreoPendDAO {
+    /**
+     * Perform an initial save of a previously unsaved FwkCorreoPend entity. All
+     * subsequent persist actions of this entity should use the #update()
+     * method. This operation must be performed within the a database
+     * transaction context for the entity's data to be permanently saved to the
+     * persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#persist(Object)
+     * EntityManager#persist} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * IFwkCorreoPendDAO.save(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            FwkCorreoPend entity to persist
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void save(FwkCorreoPend entity);
+
+    /**
+     * Delete a persistent FwkCorreoPend entity. This operation must be
+     * performed within the a database transaction context for the entity's data
+     * to be permanently deleted from the persistence store, i.e., database.
+     * This method uses the
+     * {@link javax.persistence.EntityManager#remove(Object)
+     * EntityManager#delete} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * IFwkCorreoPendDAO.delete(entity);
+     * EntityManagerHelper.commit();
+     * entity = null;
+     * </pre>
+     * 
+     * @param entity
+     *            FwkCorreoPend entity to delete
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void delete(FwkCorreoPend entity);
+
+    /**
+     * Persist a previously saved FwkCorreoPend entity and return it or a copy
+     * of it to the sender. A copy of the FwkCorreoPend entity parameter is
+     * returned when the JPA persistence mechanism has not previously been
+     * tracking the updated entity. This operation must be performed within the
+     * a database transaction context for the entity's data to be permanently
+     * saved to the persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
+     * operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * entity = IFwkCorreoPendDAO.update(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            FwkCorreoPend entity to update
+     * @return FwkCorreoPend the persisted FwkCorreoPend entity instance, may
+     *         not be the same
+     * @throws RuntimeException
+     *             if the operation fails
+     */
+    public FwkCorreoPend update(FwkCorreoPend entity);
+
+    public FwkCorreoPend findById(Long id);
+
+    /**
+     * Find all FwkCorreoPend entities with a specific property value.
+     * 
+     * @param propertyName
+     *            the name of the FwkCorreoPend property to query
+     * @param value
+     *            the property value to match
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            count of results to return.
+     * @return List<FwkCorreoPend> found by query
+     */
+    public List<FwkCorreoPend> findByProperty(String propertyName,
+            Object value, int... rowStartIdxAndCount);
+
+    public List<FwkCorreoPend> findByLenviado(Object lenviado,
+            int... rowStartIdxAndCount);
+
+    /**
+     * Find all FwkCorreoPend entities.
+     * 
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            count of results to return.
+     * @return List<FwkCorreoPend> all FwkCorreoPend entities
+     */
+    public List<FwkCorreoPend> findAll(int... rowStartIdxAndCount);
+}

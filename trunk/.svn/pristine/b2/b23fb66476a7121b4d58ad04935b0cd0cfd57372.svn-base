@@ -1,0 +1,54 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.*;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@Entity
+@Table(name = "SEG_PERFIL_USR", schema = "dbo", catalog = "SMS")
+@IdClass(SegPerfilUsrEntityPK.class)
+public class SegPerfilUsrEntity {
+    private int idUsuario;
+    private int idPerfil;
+
+    @Id
+    @Column(name = "IdUsuario")
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    @Id
+    @Column(name = "IdPerfil")
+    public int getIdPerfil() {
+        return idPerfil;
+    }
+
+    public void setIdPerfil(int idPerfil) {
+        this.idPerfil = idPerfil;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SegPerfilUsrEntity that = (SegPerfilUsrEntity) o;
+
+        if (idPerfil != that.idPerfil) return false;
+        if (idUsuario != that.idUsuario) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = idUsuario;
+        result = 31 * result + idPerfil;
+        return result;
+    }
+}

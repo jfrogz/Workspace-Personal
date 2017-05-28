@@ -1,0 +1,280 @@
+package mx.vw.swf.fwk.dao;
+
+import mx.vw.swf.fwk.model.EntityManagerHelper;
+import mx.vw.swf.fwk.model.FwkActionItem;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
+import java.util.logging.Level;
+
+/**
+ * A data access object (DAO) providing persistence and search support for
+ * FwkActionItem entities. Transaction control of the save(), update() and
+ * delete() operations must be handled externally by senders of these methods or
+ * must be manually added to each of these methods for data to be persisted to
+ * the JPA datastore.
+ * 
+ * @see FwkActionItem
+ * @author MyEclipse Persistence Tools
+ */
+public class FwkActionItemDAO implements IFwkActionItemDAO {
+    // property constants
+    public static final String ENABLED = "enabled";
+    public static final String ICONURL = "iconurl";
+    public static final String LABEL = "label";
+    public static final String URL = "url";
+    public static final String PARENT_ID = "parentId";
+    public static final String ORDERHINT = "orderhint";
+
+    private EntityManager getEntityManager() {
+        return EntityManagerHelper.getEntityManager();
+    }
+
+    /**
+     * Perform an initial save of a previously unsaved FwkActionItem entity. All
+     * subsequent persist actions of this entity should use the #update()
+     * method. This operation must be performed within the a database
+     * transaction context for the entity's data to be permanently saved to the
+     * persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#persist(Object)
+     * EntityManager#persist} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * FwkActionItemDAO.save(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            FwkActionItem entity to persist
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void save(FwkActionItem entity) {
+        EntityManagerHelper.log("saving FwkActionItem instance", Level.INFO,
+                null);
+        try {
+            getEntityManager().persist(entity);
+            EntityManagerHelper.log("save successful", Level.INFO, null);
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("save failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Delete a persistent FwkActionItem entity. This operation must be
+     * performed within the a database transaction context for the entity's data
+     * to be permanently deleted from the persistence store, i.e., database.
+     * This method uses the
+     * {@link javax.persistence.EntityManager#remove(Object)
+     * EntityManager#delete} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * FwkActionItemDAO.delete(entity);
+     * EntityManagerHelper.commit();
+     * entity = null;
+     * </pre>
+     * 
+     * @param entity
+     *            FwkActionItem entity to delete
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void delete(FwkActionItem entity) {
+        EntityManagerHelper.log("deleting FwkActionItem instance", Level.INFO,
+                null);
+        try {
+            entity = getEntityManager().getReference(FwkActionItem.class,
+                    entity.getId());
+            getEntityManager().remove(entity);
+            EntityManagerHelper.log("delete successful", Level.INFO, null);
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("delete failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Persist a previously saved FwkActionItem entity and return it or a copy
+     * of it to the sender. A copy of the FwkActionItem entity parameter is
+     * returned when the JPA persistence mechanism has not previously been
+     * tracking the updated entity. This operation must be performed within the
+     * a database transaction context for the entity's data to be permanently
+     * saved to the persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
+     * operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * entity = FwkActionItemDAO.update(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            FwkActionItem entity to update
+     * @return FwkActionItem the persisted FwkActionItem entity instance, may
+     *         not be the same
+     * @throws RuntimeException
+     *             if the operation fails
+     */
+    public FwkActionItem update(FwkActionItem entity) {
+        EntityManagerHelper.log("updating FwkActionItem instance", Level.INFO,
+                null);
+        try {
+            FwkActionItem result = getEntityManager().merge(entity);
+            EntityManagerHelper.log("update successful", Level.INFO, null);
+            return result;
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("update failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    public FwkActionItem findById(Integer id) {
+        EntityManagerHelper.log(
+                "finding FwkActionItem instance with id: " + id, Level.INFO,
+                null);
+        try {
+            FwkActionItem instance = getEntityManager().find(
+                    FwkActionItem.class, id);
+            return instance;
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Find all FwkActionItem entities with a specific property value.
+     * 
+     * @param propertyName
+     *            the name of the FwkActionItem property to query
+     * @param value
+     *            the property value to match
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            number of results to return.
+     * @return List<FwkActionItem> found by query
+     */
+    @SuppressWarnings("unchecked")
+    public List<FwkActionItem> findByProperty(String propertyName,
+            final Object value, final int... rowStartIdxAndCount) {
+        EntityManagerHelper.log(
+                "finding FwkActionItem instance with property: " + propertyName
+                        + ", value: " + value, Level.INFO, null);
+        try {
+            final String queryString = "select model from FwkActionItem model where model."
+                    + propertyName + "= :propertyValue";
+            Query query = getEntityManager().createQuery(queryString);
+            query.setParameter("propertyValue", value);
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find by property name failed",
+                    Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    public List<FwkActionItem> findByEnabled(Object enabled,
+            int... rowStartIdxAndCount) {
+        return findByProperty(ENABLED, enabled, rowStartIdxAndCount);
+    }
+
+    public List<FwkActionItem> findByIconurl(Object iconurl,
+            int... rowStartIdxAndCount) {
+        return findByProperty(ICONURL, iconurl, rowStartIdxAndCount);
+    }
+
+    public List<FwkActionItem> findByLabel(Object label,
+            int... rowStartIdxAndCount) {
+        return findByProperty(LABEL, label, rowStartIdxAndCount);
+    }
+
+    public List<FwkActionItem> findByUrl(Object url, int... rowStartIdxAndCount) {
+        return findByProperty(URL, url, rowStartIdxAndCount);
+    }
+
+    public List<FwkActionItem> findByParentId(Object parentId,
+            int... rowStartIdxAndCount) {
+        return findByProperty(PARENT_ID, parentId, rowStartIdxAndCount);
+    }
+
+    public List<FwkActionItem> findByOrderhint(Object orderhint,
+            int... rowStartIdxAndCount) {
+        return findByProperty(ORDERHINT, orderhint, rowStartIdxAndCount);
+    }
+
+    /**
+     * Find all FwkActionItem entities.
+     * 
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            count of results to return.
+     * @return List<FwkActionItem> all FwkActionItem entities
+     */
+    @SuppressWarnings("unchecked")
+    public List<FwkActionItem> findAll(final int... rowStartIdxAndCount) {
+        EntityManagerHelper.log("finding all FwkActionItem instances",
+                Level.INFO, null);
+        try {
+            final String queryString = "select model from FwkActionItem model";
+            Query query = getEntityManager().createQuery(queryString);
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find all failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+    
+    /**
+     * Find all FwkActionItem entities.
+     * 
+     * @return List<FwkActionItem> all FwkActionItem entities for menu rendering
+     */
+    @SuppressWarnings("unchecked")
+    public List<FwkActionItem> findAllForRendering() {
+        EntityManagerHelper.log("finding all FwkActionItem instances",
+                Level.INFO, null);
+        try {
+            final String queryString = "select distinct i from FwkActionItem i left join fetch i.children where i.parent is null";
+            Query query = getEntityManager().createQuery(queryString);
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find all failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+}

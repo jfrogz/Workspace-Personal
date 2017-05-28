@@ -1,0 +1,108 @@
+package mx.vw.swf.sms.controller;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import io.datafx.controller.ViewController;
+import io.datafx.core.DataFXConfiguration;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javax.annotation.PostConstruct;
+import mx.vw.swf.cdi.DataFXLauncher;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1yij
+ */
+@ViewController("/fxml/catalogos/CrearEditarClienteProveedor.fxml")
+public class CrearEditarClienteProveedorController implements Initializable {
+    
+    //labels
+    @FXML   private Label lblTipo;
+    @FXML   private Label lblID;
+    @FXML   private Label lblIdSAP;
+    @FXML   private Label lblRazonSocial;
+    @FXML   private Label lblNombreEmpresa;
+    @FXML   private Label lblClave;
+    @FXML   private Label lblStatus;
+    @FXML   private Label lblPermisoContingencia;
+    //Componentes
+    @FXML   private Label lblValorID;    
+    @FXML   private TextField txtIdSap;
+    @FXML   private TextField txtRazonSocial;
+    @FXML   private TextField txtNombreEmpresa;
+    @FXML   private TextField txtClave;
+    @FXML   private CheckBox chxPermisoContingencia;
+    @FXML   private CheckBox chxEstatuseEntidad;
+    @FXML   private RadioButton rbtnCliente;
+    @FXML   private RadioButton rbtnProveedor;
+    @FXML   private Button btnAceptar;
+    @FXML   private Button btnCancelar;
+    
+    
+    
+    
+    
+    @PostConstruct
+    public void postContruct ()
+    {
+       
+    }
+    
+    private void inicializarControles ()
+    {
+        lblTipo.setText(DataFXLauncher.mensajesProperties.getProperty("NECPlblTipo") + ":");
+        lblID.setText(DataFXLauncher.mensajesProperties.getProperty("NECPlblID") + ":");
+        lblIdSAP.setText(DataFXLauncher.mensajesProperties.getProperty("NECPlblIdSAP") + ":");
+        lblRazonSocial.setText(DataFXLauncher.mensajesProperties.getProperty("NECPlblRazonSocial") + ":");
+        lblNombreEmpresa.setText(DataFXLauncher.mensajesProperties.getProperty("NECPlblNombreEmpresa") + ":");
+        lblClave.setText(DataFXLauncher.mensajesProperties.getProperty("NECPlblClave") + ":");
+        lblStatus.setText(DataFXLauncher.mensajesProperties.getProperty("NECPlblStatus") + ":");
+        lblPermisoContingencia.setText(DataFXLauncher.mensajesProperties.getProperty("NECPlblPermisoContingencia") + ":");
+        btnAceptar.setText(DataFXLauncher.mensajesProperties.getProperty("necpBtnAceptar"));
+        btnCancelar.setText(DataFXLauncher.mensajesProperties.getProperty("necpBtnCancelar"));
+        
+        ToggleGroup group = new ToggleGroup();
+        group.getToggles().add(rbtnCliente);
+        group.getToggles().add(rbtnProveedor);
+        group.selectToggle(rbtnCliente);
+        
+    }
+    
+    private void inicializarEventos ()
+    {
+        chxPermisoContingencia.setSelected(false);
+        rbtnCliente.setOnAction((event)->{
+            lblPermisoContingencia.setVisible(true);
+            chxPermisoContingencia.setVisible(true);
+            chxPermisoContingencia.setSelected(false);
+        });
+        
+        rbtnProveedor.setOnAction((event)->{
+            lblPermisoContingencia.setVisible(false);
+            chxPermisoContingencia.setVisible(false);
+        });
+    }
+    
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
+        inicializarEventos();
+        inicializarControles();
+    }    
+    
+}

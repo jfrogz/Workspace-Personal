@@ -1,0 +1,161 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javax.swing.JOptionPane;
+import mx.vw.swf.security.dao.SegUsuarioDAO;
+import mx.vw.swf.security.service.CrearEditarUsuariosService;
+import mx.vw.swf.security.model.SegUsuario;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1x0d
+ */
+
+public class CrearEditarUsuariosController implements Initializable{
+    
+    @FXML private TextField txtUsuario, txtNombreUsuario, txtApellidoPat, txtApellidoMat, txtCorreo;
+    @FXML private CheckBox  chxEstatusUsuario;
+    @FXML private Label     id,idEtiqueta, etiquetaError;
+    @FXML private Button    btnGuardarUsuario;
+    private Short status=1;    
+    private SegUsuario usuario;
+    private AdministrarUsuariosController administrarUsuarios; 
+    private ObservableList<SegUsuario> listaUsuarios = FXCollections.observableArrayList();
+
+
+
+   @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if(this.getUsuario()!=null){
+                  
+
+            id.setVisible(true);
+            idEtiqueta.setVisible(true);
+            idEtiqueta.setText(this.getUsuario().getId().toString());
+            txtUsuario.setText(this.getUsuario().getUserId());
+            txtNombreUsuario.setText(this.getUsuario().getNombreUsuario());
+            txtApellidoPat.setText(this.getUsuario().getApPaterno());
+            txtApellidoMat.setText(this.getUsuario().getApMaterno());
+            txtCorreo.setText(this.getUsuario().getCorreoE());
+            chxEstatusUsuario.setSelected(this.getUsuario().getEstatus()!=1?false:true);
+            btnGuardarUsuario.setText("Actualizar");
+                
+        }
+        else{
+            id.setVisible(false);
+            idEtiqueta.setVisible(false);
+            idEtiqueta.setText("");
+            btnGuardarUsuario.setText("Guardar");
+        }
+    }
+
+    public void guardarUsuario(ActionEvent event){
+      
+            boolean insert=false;           
+            
+            SegUsuario seg;
+            
+            if(this.getUsuario()!=null){
+                seg= this.getUsuario();
+                insert=false;
+             }
+             else{
+                seg= new SegUsuario();
+                insert=true;
+             }
+                
+             if(txtUsuario.getText().length()==0 || txtNombreUsuario.getText().length()==0 || txtApellidoPat.getText().length()==0 || txtApellidoMat.getText().length()==0|| txtCorreo.getText().length()==0 ){
+              etiquetaError.setText("Todos los campos son obligatorios.");
+             }else{
+                 
+                etiquetaError.setText("");
+                seg.setUserId(txtUsuario.getText().trim());
+                seg.setNombreUsuario(txtNombreUsuario.getText().trim());
+                seg.setApMaterno(txtApellidoMat.getText().trim());
+                seg.setApPaterno(txtApellidoPat.getText().trim());       
+                seg.setCorreoE(txtCorreo.getText().trim());
+                seg.setEstatus(chxEstatusUsuario.isSelected()==true?status:0);  
+                
+                    if(insert==true){
+                        List<SegUsuario> lista = new SegUsuarioDAO().findByUserId(txtUsuario.getText().trim());
+                        if(lista.size()>0){
+                          etiquetaError.setText("Ya existe un registro con el mismo Usuario, intente nuevamente.");
+                        }
+                        else{
+                          etiquetaError.setText("");
+                          System.out.println("INSERT: "+insert);
+                          crearEditarUsuario(seg, insert, event);
+
+                        }
+                    }else{
+                        crearEditarUsuario(seg, insert, event); 
+                    }
+                
+            }
+      
+        
+    }
+ 
+
+   public void crearEditarUsuario(SegUsuario seg, boolean opcion, ActionEvent event){
+        if(opcion==true){
+          new CrearEditarUsuariosService().guardaUsuario(seg);
+        }else{
+          new CrearEditarUsuariosService().actualizaUsuario(seg);  
+        }        
+<<<<<<< .mine
+        this.getAdministrarUsuarios().setListaUsuarios(this.getAdministrarUsuarios().obtieneListaUsuarios());            
+       // this.getAdministrarUsuarios().inicializaTablaUsuario(this.getAdministrarUsuarios().getListaUsuarios(), this.getAdministrarUsuarios().getListaUsuarios().size());
+=======
+        this.getAdministrarUsuarios().inicializaUsuarios();
+>>>>>>> .r3608
+        cerrar(event);
+       
+   }
+    public SegUsuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(SegUsuario usuario) {
+        this.usuario = usuario;
+    }
+   
+   
+    public AdministrarUsuariosController getAdministrarUsuarios() {
+        return administrarUsuarios;
+    }
+
+    public void setAdministrarUsuarios(AdministrarUsuariosController administrarUsuarios) {
+        this.administrarUsuarios = administrarUsuarios;
+    }
+    public void cerrar(ActionEvent event){
+         Node node = (Node) event.getSource();
+             Stage st = (Stage) node.getScene().getWindow();        
+             st.close();
+    }
+      
+    
+}

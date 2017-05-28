@@ -1,0 +1,86 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.utilerias;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import javax.inject.Inject;
+import mx.vw.swf.security.controller.AdministrarFuncionesPerfilController;
+import mx.vw.swf.security.controller.AdministrarPerfilesController;
+import mx.vw.swf.security.controller.AdministrarUsuariosController;
+import mx.vw.swf.security.controller.LoginController;
+
+
+/**
+ *
+ * @author fox1x0d
+ */
+public class CargaPantallas{
+    
+   
+    @Inject
+    LoginController loginController;
+    @Inject
+    AdministrarUsuariosController administrarUsuariosController;
+    @Inject
+    AdministrarPerfilesController administrarPerfilesController;
+    @Inject
+    AdministrarFuncionesPerfilController administrarFuncionesPerfilController;
+   
+      
+        List<NodosFxml> lista=null;
+
+        public void  cargaFxml()throws IOException{               
+             
+            lista=new ArrayList<NodosFxml>();
+            for(int i=0;i<=listaPantallas().length-1;i++){
+                 
+                FXMLLoader fxmlLoader=new FXMLLoader();                     
+                InputStream is = null;
+                is = getClass().getResourceAsStream(listaPantallas()[i]);
+                fxmlLoader.setController(listaControladores()[i]);            
+                Parent ap = (Parent) fxmlLoader.load(is);
+                lista.add(new NodosFxml(listaPantallas()[i],listaControladores()[i],ap));
+                
+            }
+       }
+
+        public List<NodosFxml> getLista(){
+            return lista;
+        }
+        public String[] listaPantallas(){
+            String lista[]={Pantallas.FXML_LOGIN,
+                            Pantallas.FXML_ADMIN_USUARIOS,
+                            Pantallas.FXML_ADMIN_PERFILES,
+                            Pantallas.FXML_ADMIN_FUNCIONES_PERFIL};
+            return lista; 
+        }
+        public Object[] listaControladores(){
+            Object lista[]={loginController,
+                            administrarUsuariosController,
+                            administrarPerfilesController,
+                            administrarFuncionesPerfilController};
+            return lista; 
+        }
+        public Node cargaNodo(String pantalla){
+            Node nodo=null;
+            for(NodosFxml n:getLista()){
+                if(pantalla.equals(n.getPantalla()))
+                {
+                    nodo=n.getNodo();
+                    return nodo;
+                }
+            }            
+            return nodo;
+        }
+      
+   }

@@ -1,0 +1,138 @@
+# To change this license header, choose License Headers in Project Properties.
+# To change this template file, choose Tools | Templates
+# and open the template in the editor.
+
+
+#Header
+AdmininstraUsuario.Header=Administraci\u00f3n de Usuarios
+AdministraPerfiles.Header=Administraci\u00f3n de Perfiles
+AdministraFuncionesPerfil.Header=Administaci\u00f3n de Funciones por Perfil
+
+#Administracion de Usuarios
+AdmininstraUsuario.lbNombre=Nombre
+AdmininstraUsuario.lbCorreo=Correo
+AdmininstraUsuario.lbApPaterno=Apellido Paterno
+AdmininstraUsuario.lbApMaterno=Apellido Materno
+AdmininstraUsuario.btnAsignarPerfiles=Asignar Perfiles
+AdmininstraUsuario.Valid.Estatus.Header=Estatus de Usuario
+AdmininstraUsuario.Valid.Estatus.Message=\u00bfEsta seguro de cambiar el estatus del usuario ?
+AdmininstraUsuario.Valid.DesactivaUser.Header=Mensaje User Management
+AdmininstraUsuario.Valid.DesactivaUser.Message=No se puede desactivar el usuario porque no existe otro con el Perfil de User Managements
+AdmininstraUsuario.UserExistente.Header=Usuario Existente
+AdmininstraUsuario.UserExistente.Message=Ya existe un registro con el mismo Usuario, intente nuevamente
+
+
+#Nuevo Actualiza Usuario
+CreaEditaUsuario.Header.Nuevo= Nuevo Usuario
+CreaEditaUsuario.Header.Editar= Editar Usuario
+
+#Header Perfiles
+AdmininstraPerfiles.Header=Administraci\u00f3n de Perfiles
+AdmininstraPerfiles.lbPerfil=Perfil
+AdmininstraPerfiles.lbDesPerfil=Descripci\u00f3n del Perfil
+AdmininstraPerfiles.btnAsignarPerfiles=Asignar Perfiles
+AdmininstraPerfiles.Valid.UserMng.Header=Mensaje User Management
+AdmininstraPerfiles.Valid.UserMng.Message=No se puede quitar este perfil al Usuario porque no hay otro User Management
+AdmininstraPerfiles.Valid.DesAct.Header=Estatus de Perfil
+AdmininstraPerfiles.Valid.DesAct.Message=\u00bfEsta seguro de cambiar el estatus del perfil ?
+AdmininstraPerfiles.PerfilExistente.Header=Perfil Existente
+AdmininstraPerfiles.PerfilExistente.Message=Ya existe un registro con el mismo Perfil, intente nuevamente
+
+#Nuevo Actualiza Perfil
+CreaEditaPerfil.Header.Nuevo= Nuevo Perfil
+CreaEditaPerfil.Header.Editar= Editar Perfil
+
+#Administracion de Funciones por Perfil
+AdministraFuncionesPerfil.btnAsignarFunciones=Asignar Funciones
+AdministraFuncionesPerfil.lbFuncion=Funci\u00f3n
+AdministraFuncionesPerfil.lbDesFuncion=Descripci\u00f3n de la Funci\u00f3n
+AdministraFuncionesPerfil.Valid.Estatus.Header=Estatus de Funci\u00f3n
+AdministraFuncionesPerfil.Valid.Estatus.Message=\u00bf Esta seguro de cambiar el estatus de la funci\u00f3n ?
+AdministraFuncionesPerfil.FuncionExistente.Header=Funcion Existente
+AdministraFuncionesPerfil.FuncionExistente.Message=Ya existe un registro con la misma Funcion, intente nuevamente
+
+
+#Nuevo Actualiza Funciones por Perfil
+CreaEditaFuncion.Header.Nuevo= Nuevo Funci\u00f3n
+CreaEditaFuncion.Header.Editar= Editar Funci\u00f3n
+
+
+#Etiquetas
+etiquetaId=ID
+etiquetaUsuario=Usuario
+etiquetaNombre=Nombre
+etiquetaCorreo=Correo Electr\u00f3nico
+etiquetaEstatus=Estatus
+etiquetaAcciones=Acciones
+etiquetaPerfil=Perfil
+etiquetaFuncion=Funci\u00f3n
+etiquetaSeleccione=Seleccione
+etiquetaApPaterno= Apellido Paterno
+etiquetaApMaterno= Apellido Materno
+etiquetaNuevoUsuario= Nuevo Usuario
+etiquetaEditarUsuario= Editar Usuario
+etiquetaDescripcionPerfil=Descripci\u00f3n del Perfil
+etiquetaNuevoPerfil= Nuevo Perfil
+etiquetaEditarPerfil= Editar Perfil
+etiquetaDescripcionPermiso=Descripci\u00f3n de la Funci\u00f3n
+etiquetaNuevoPermiso= Nuevo Permiso
+etiquetaEditarPermiso= Editar Permiso
+
+
+#Botones
+botonNuevo=Nuevo
+botonEditar=Editar
+botonActivar=Activar
+botonDesactivar=Desactivar
+botonAsignarPerfiles=Asignar Perfiles
+botonAsignarFunciones=Asignar Funciones
+botonGuardar=Guardar
+botonActualizar=Actualizar
+botonCerrar=Cancelar
+botonRegresarAtras=Regresar
+botonEliminarPermisos=Eliminar Permisos
+
+#Mensajes 
+msDatosVaciosMasthead=Datos vacios
+msDatosVaciosMessage=Debe completar los campos obligatorios 
+msUsuarioExistenteMasthead=Usuario existente
+msUsuarioExistenteMessage=Ya existe un registro con el mismo Usuario, intente nuevamente
+msPerfilExistenteMessage= Ya existe un registro con el mismo Perfil, intente nuevamente
+msPermisoExistenteMessage=Ya existe un registro con el mismo Permiso, intente nuevamente
+msDatosPerfilSeleccionadoMessage= No selecciono ning\u00fan perfil para asignar al usuario
+msDatosPermisoSeleccionadoMessage= No selecciono ning\u00fan permiso para asignar al perfil
+msDatosDesactivaUsuario= \u00bfEsta seguro de cambiar el estatus del usuario ?
+msDatosDesactivaPerfil= \u00bfEsta seguro de cambiar el estatus del perfil ?
+msDatosDesactivaPermiso= \u00bfEsta seguro de cambiar el estatus del permiso ?
+msDatosCorreo=Debe escribir el correo electr\u00f3nico con formato correcto
+msUsuarioDesactivar= No se puede desactivar el usuario porque no existe otro con el Perfil de User Management
+
+#Paginacion
+paginas=5,10,15,20
+
+
+
+errorAuthLDAP=Error en autenticaci\u00f3n LDAP
+usuarioInexistente=El usuario no ha sido creado
+multiplesUsuarios=Se ha encontrado m\u00e1s de un usuario activo con el mismo user ID
+
+Menu.Seguridad=Seguridad
+Menu.Seguridad.Usuarios=Usuarios
+Menu.Seguridad.Perfiles=Perfiles
+Menu.Seguridad.Funciones=Funciones por Perfil
+
+Menu.Catalogos=Cat\u00e1logos
+Menu.Catalogos.ClienteProveedor=Clientes y proveedores
+Menu.Catalogos.Productos=Productos
+
+Menu.Configuracion=Configuraci\u00f3n
+Menu.Configuracion.ConfigPuerto=Configurar Puerto
+Menu.Configuracion.PerfilEmpresa=Perfil de la empresa
+Menu.Operacion=Operaci\u00f3n
+Menu.Operacion.MovProveedor=Movimientos Proveedores
+Menu.Operacion.MovCliente=Movimientos Clientes
+
+Menu.Reportes=Reportes
+Menu.Reportes.Movimientos=Reporte de movimientos
+Menu.Reportes.GenerarEntrada=Generar Ticket de Entrada
+Menu.Reportes.GenerarSalida=Generar Ticket de Salida

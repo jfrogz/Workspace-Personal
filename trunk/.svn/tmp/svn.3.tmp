@@ -1,0 +1,43 @@
+package mx.vw.swf.cdi;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import mx.vw.swf.security.controller.LoginController;
+
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * Created by dzm152z on 08/01/2015.
+ */
+public class LoginApplicationStarter {
+    // Let's have a FXMLLoader injected automatically
+    @Inject
+    FXMLLoader fxmlLoader;
+
+    @Inject
+    LoginController loginController;
+
+    // Our CDI entry point, we just listen to an event providing the startup scene
+    public void launchJavaFXApplication(@Observes @StartupScene Stage s) {
+        InputStream is = null;
+
+        try {
+            is = getClass().getResourceAsStream("/fxml/auth/login.fxml");
+            fxmlLoader.setController(loginController);
+            // we just load our FXML form (including controler and so on)
+            Parent root = (Parent) fxmlLoader.load(is);
+            Scene scene = new Scene(root, 300, 275);
+            s.setScene(scene);
+            s.show(); // let's show the scene
+        } catch (IOException e) {
+            throw new IllegalStateException("cannot load FXML login screen", e);
+        } finally {
+            // cleanup is omitted
+        }
+    }
+}

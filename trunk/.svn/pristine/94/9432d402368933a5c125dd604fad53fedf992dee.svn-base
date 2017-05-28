@@ -1,0 +1,139 @@
+package mx.vw.swf.cdi;
+
+import jssc.*;
+
+/**
+ * Created by dzm152z on 25/02/2015.
+ */
+public class TestPortWrite {
+    /**
+     * The name of the port we'll be writing to.
+     */
+    public static final String PORT_IN_NAME = "COM20";
+    /**
+     * The name of the port we'll be reading from.
+     */
+    public static final String PORT_OUT_NAME = "COM21";
+    /**
+     * The serial port reference we'll be writing to.
+     */
+    private static SerialPort PORT_IN;
+    /**
+     * The serial port reference we'll be reading from.
+     */
+    private static SerialPort PORT_OUT;
+
+    public static void main(String[] args) throws SerialPortException {
+        // Listing discovered ports
+        String[] ports = SerialPortList.getPortNames();
+        for (String port : ports)
+            System.out.format("Discovered serial port with name: %S", port);
+
+        PORT_IN = new SerialPort(PORT_IN_NAME);
+        PORT_IN.openPort();
+        System.out.format("Is port %S open ? %B\n", PORT_IN_NAME, PORT_IN.isOpened());
+        setPortParams(PORT_IN);
+        PORT_IN.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN);
+
+        PORT_OUT = new SerialPort(PORT_OUT_NAME);
+        PORT_OUT.openPort();
+        System.out.format("Is port %S open ? %B\n" , PORT_OUT_NAME , PORT_OUT.isOpened());
+        setPortParams(PORT_OUT);
+        PORT_OUT.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_OUT);
+        // Register event listener
+        PortReader portReader = new PortReader();
+        PORT_OUT.addEventListener(portReader);
+
+        new SerialDataProducer(PORT_IN, PORT_OUT, portReader)
+                .start();
+    }
+
+    /**
+     * <p>
+     *     Configure the given port, setting the BAUDRATE, DATABITS, STOPBITS & PARITY BITS.
+     * </p>
+     * @param serialPort
+     * @throws SerialPortException
+     */
+    public static void setPortParams(SerialPort serialPort) throws SerialPortException {
+        serialPort.setParams(SerialPort.BAUDRATE_9600,
+                SerialPort.DATABITS_8,
+                SerialPort.STOPBITS_1,
+                SerialPort.PARITY_NONE);
+    }
+
+    /**
+     * Dumb thread class that simulates continuous writing to serial port. Once
+     */
+    private static class SerialDataProducer extends Thread {
+        private static final int SLEEP_DUR = 500;
+        private final SerialPort outSerialPort;
+        private final String data = "When around one everything has become silent, solemn as a clear, starlit night,\n" +
+                                    " when the soul comes to be alone in the whole world, then before one there appears,\n" +
+                                    " not an extraordinary human being, but the eternal power itself, then the heavens open,\n" +
+                                    " and the I chooses itself or, more correctly, receives itself. Then the personality receives \n" +
+                                    "the accolade of knighthood that ennobles it for an eternity.\n " +
+                                    "The knight of faith is the only happy man, the heir to the finite\n" +
+                                    " while the knight of resignation is a stranger and an alien";
+        private final PortReader portReader;
+        SerialPort serialPort;
+
+        SerialDataProducer(SerialPort serialPort, SerialPort outSerialPort, PortReader portReader) {
+            this.serialPort = serialPort;
+            this.outSerialPort = outSerialPort;
+            this.portReader = portReader;
+        }
+
+        @Override
+        public void run() {
+            String [] lines = data.split("\n");
+            for (String line : lines) {
+                try {
+                    Thread.sleep(SLEEP_DUR);
+                    serialPort.writeString(line);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (SerialPortException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                serialPort.closePort();
+                outSerialPort.removeEventListener();
+                outSerialPort.closePort();
+                System.out.println(portReader.getFulldata());
+            } catch (SerialPortException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * <p>
+     *     Dumb event listener that listens for data being written.
+     * </p>
+     */
+    private static class PortReader implements SerialPortEventListener {
+        public StringBuilder getFulldata() {
+            return fulldata;
+        }
+
+        public void setFulldata(StringBuilder fulldata) {
+            this.fulldata = fulldata;
+        }
+
+        private StringBuilder fulldata = new StringBuilder();
+        @Override
+        public void serialEvent(SerialPortEvent event) {
+            if (event.isRXCHAR() && event.getEventValue() > 0) {
+                try {
+                    String receivedData = PORT_OUT.readString(event.getEventValue());
+                    System.out.format("[reading data] : %S\n", receivedData);
+                    fulldata.append(receivedData);
+                } catch (SerialPortException ex) {
+                    System.out.println("Error in receiving string from COM-port: " + ex);
+                }
+            }
+        }
+    }
+}

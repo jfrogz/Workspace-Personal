@@ -1,0 +1,75 @@
+package mx.vw.swf.security.model;
+
+import mx.vw.swf.security.model.SegPerfil;
+import mx.vw.swf.security.model.SegPerfilUsrId;
+import mx.vw.swf.security.model.SegUsuario;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+
+/**
+ * AbstractSegPerfilUsr entity provides the base persistence definition of the
+ * SegPerfilUsr entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractSegPerfilUsr implements java.io.Serializable {
+
+    // Fields
+
+    private SegPerfilUsrId id;
+    private SegPerfil segPerfil;
+    private SegUsuario segUsuario;
+
+    // Constructors
+
+    /** default constructor */
+    public AbstractSegPerfilUsr() {
+    }
+
+    /** full constructor */
+    public AbstractSegPerfilUsr(SegPerfilUsrId id, SegPerfil segPerfil,
+            SegUsuario segUsuario) {
+        this.id = id;
+        this.segPerfil = segPerfil;
+        this.segUsuario = segUsuario;
+    }
+
+    // Property accessors
+    @EmbeddedId
+    @AttributeOverrides({
+            @AttributeOverride(name = "idUsuario", column = @Column(name = "IdUsuario", nullable = false, precision = 10, scale = 0)),
+            @AttributeOverride(name = "idPerfil", column = @Column(name = "IdPerfil", nullable = false, precision = 5, scale = 0)) })
+    public SegPerfilUsrId getId() {
+        return this.id;
+    }
+
+    public void setId(SegPerfilUsrId id) {
+        this.id = id;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "IdPerfil", nullable = false, insertable = false, updatable = false)
+    public SegPerfil getSegPerfil() {
+        return this.segPerfil;
+    }
+
+    public void setSegPerfil(SegPerfil segPerfil) {
+        this.segPerfil = segPerfil;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "IdUsuario", nullable = false, insertable = false, updatable = false)
+    public SegUsuario getSegUsuario() {
+        return this.segUsuario;
+    }
+
+    public void setSegUsuario(SegUsuario segUsuario) {
+        this.segUsuario = segUsuario;
+    }
+
+}

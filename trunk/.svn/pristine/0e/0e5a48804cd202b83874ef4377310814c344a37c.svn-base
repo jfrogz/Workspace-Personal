@@ -1,0 +1,48 @@
+package mx.vw.swf.cdi;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+import java.io.IOException;
+import java.io.InputStream;
+import mx.vw.swf.security.controller.AdministrarUsuariosController;
+
+
+/**
+ * Created by dzm152z on 08/01/2015.
+ */
+public class LoginApplicationStarter {
+    // Let's have a FXMLLoader injected automatically
+    @Inject
+    FXMLLoader fxmlLoader;      
+    @Inject
+    AdministrarUsuariosController administrarUsuariosController;
+    
+
+    // Our CDI entry point, we just listen to an event providing the startup scene
+    public void launchJavaFXApplication(@Observes @StartupScene Stage s) {
+        InputStream is = null;
+        
+        try {
+            is = getClass().getResourceAsStream("/fxml/security/AdministrarUsuarios.fxml");
+            fxmlLoader.setController(administrarUsuariosController); 
+            //fxmlLoader.setController(templateController); 
+            // we just load our FXML form (including controler and so on)
+            BorderPane root = (BorderPane) fxmlLoader.load(is);             
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/estilos.css").toExternalForm());
+            s.setTitle("SCALE MANAGMENT SYSTEM");                  
+            s.setScene(scene);
+            s.show();// let's show the scene            
+         } catch (IOException e) {
+            throw new IllegalStateException("cannot load FXML login screen", e);
+        } finally {
+            
+        }
+    }
+}

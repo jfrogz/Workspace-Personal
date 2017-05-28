@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0"
+      prefWidth="328.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+        >
+   <children>
+      <Label layoutX="34.0" layoutY="30.0" text="User" />
+      <Label layoutX="34.0" layoutY="83.0" text="Password" />
+      <TextField fx:id="inputUser" layoutX="137.0" layoutY="26.0" />
+      <PasswordField fx:id="inputPassword" layoutX="137.0" layoutY="71.0" />
+      <Button layoutX="137.0" layoutY="116.0" mnemonicParsing="false" onAction="#login" text="Ok" />
+      <Button layoutX="179.0" layoutY="116.0" mnemonicParsing="false" text="Cancel" />
+   </children>
+</Pane>

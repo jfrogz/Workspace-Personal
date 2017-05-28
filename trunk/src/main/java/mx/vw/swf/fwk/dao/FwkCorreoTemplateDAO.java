@@ -1,0 +1,288 @@
+package mx.vw.swf.fwk.dao;
+
+import mx.vw.swf.fwk.dao.IFwkCorreoTemplateDAO;
+import mx.vw.swf.fwk.model.FwkCorreoTemplate;
+import java.util.List;
+import java.util.logging.Level;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import mx.vw.swf.fwk.model.EntityManagerHelper;
+
+/**
+ * A data access object (DAO) providing persistence and search support for
+ * FwkCorreoTemplate entities. Transaction control of the save(), update() and
+ * delete() operations must be handled externally by senders of these methods or
+ * must be manually added to each of these methods for data to be persisted to
+ * the JPA datastore.
+ * 
+ * @see FwkCorreoTemplate
+ * @author MyEclipse Persistence Tools
+ */
+public class FwkCorreoTemplateDAO implements IFwkCorreoTemplateDAO {
+    // property constants
+    public static final String MAILTO = "mailto";
+    public static final String MAILCC = "mailcc";
+    public static final String MAILBCC = "mailbcc";
+    public static final String MAILSUBJECT = "mailsubject";
+    public static final String MAILBODY = "mailbody";
+    public static final String MAILATTACH = "mailattach";
+    public static final String MAILIMAGES = "mailimages";
+    public static final String USUARIOCREACION = "usuariocreacion";
+    public static final String USUARIOACTUALIZA = "usuarioactualiza";
+    public static final String ESTATUS = "estatus";
+
+    private EntityManager getEntityManager() {
+        return EntityManagerHelper.getEntityManager();
+    }
+
+    /**
+     * Perform an initial save of a previously unsaved FwkCorreoTemplate entity.
+     * All subsequent persist actions of this entity should use the #update()
+     * method. This operation must be performed within the a database
+     * transaction context for the entity's data to be permanently saved to the
+     * persistence store, i.e., database. This method uses the
+     * {@link javax.persistence.EntityManager#persist(Object)
+     * EntityManager#persist} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * FwkCorreoTemplateDAO.save(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            FwkCorreoTemplate entity to persist
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void save(FwkCorreoTemplate entity) {
+        EntityManagerHelper.log("saving FwkCorreoTemplate instance",
+                Level.INFO, null);
+        try {
+            getEntityManager().persist(entity);
+            EntityManagerHelper.log("save successful", Level.INFO, null);
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("save failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Delete a persistent FwkCorreoTemplate entity. This operation must be
+     * performed within the a database transaction context for the entity's data
+     * to be permanently deleted from the persistence store, i.e., database.
+     * This method uses the
+     * {@link javax.persistence.EntityManager#remove(Object)
+     * EntityManager#delete} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * FwkCorreoTemplateDAO.delete(entity);
+     * EntityManagerHelper.commit();
+     * entity = null;
+     * </pre>
+     * 
+     * @param entity
+     *            FwkCorreoTemplate entity to delete
+     * @throws RuntimeException
+     *             when the operation fails
+     */
+    public void delete(FwkCorreoTemplate entity) {
+        EntityManagerHelper.log("deleting FwkCorreoTemplate instance",
+                Level.INFO, null);
+        try {
+            entity = getEntityManager().getReference(FwkCorreoTemplate.class,
+                    entity.getId());
+            getEntityManager().remove(entity);
+            EntityManagerHelper.log("delete successful", Level.INFO, null);
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("delete failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Persist a previously saved FwkCorreoTemplate entity and return it or a
+     * copy of it to the sender. A copy of the FwkCorreoTemplate entity
+     * parameter is returned when the JPA persistence mechanism has not
+     * previously been tracking the updated entity. This operation must be
+     * performed within the a database transaction context for the entity's data
+     * to be permanently saved to the persistence store, i.e., database. This
+     * method uses the {@link javax.persistence.EntityManager#merge(Object)
+     * EntityManager#merge} operation.
+     * 
+     * <pre>
+     * EntityManagerHelper.beginTransaction();
+     * entity = FwkCorreoTemplateDAO.update(entity);
+     * EntityManagerHelper.commit();
+     * </pre>
+     * 
+     * @param entity
+     *            FwkCorreoTemplate entity to update
+     * @return FwkCorreoTemplate the persisted FwkCorreoTemplate entity
+     *         instance, may not be the same
+     * @throws RuntimeException
+     *             if the operation fails
+     */
+    public FwkCorreoTemplate update(FwkCorreoTemplate entity) {
+        EntityManagerHelper.log("updating FwkCorreoTemplate instance",
+                Level.INFO, null);
+        try {
+            FwkCorreoTemplate result = getEntityManager().merge(entity);
+            EntityManagerHelper.log("update successful", Level.INFO, null);
+            return result;
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("update failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    public FwkCorreoTemplate findById(String id) {
+        EntityManagerHelper.log("finding FwkCorreoTemplate instance with id: "
+                + id, Level.INFO, null);
+        try {
+            FwkCorreoTemplate instance = getEntityManager().find(
+                    FwkCorreoTemplate.class, id);
+            return instance;
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    /**
+     * Find all FwkCorreoTemplate entities with a specific property value.
+     * 
+     * @param propertyName
+     *            the name of the FwkCorreoTemplate property to query
+     * @param value
+     *            the property value to match
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            number of results to return.
+     * @return List<FwkCorreoTemplate> found by query
+     */
+    @SuppressWarnings("unchecked")
+    public List<FwkCorreoTemplate> findByProperty(String propertyName,
+            final Object value, final int... rowStartIdxAndCount) {
+        EntityManagerHelper.log(
+                "finding FwkCorreoTemplate instance with property: "
+                        + propertyName + ", value: " + value, Level.INFO, null);
+        try {
+            final String queryString = "select model from FwkCorreoTemplate model where model."
+                    + propertyName + "= :propertyValue";
+            Query query = getEntityManager().createQuery(queryString);
+            query.setParameter("propertyValue", value);
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find by property name failed",
+                    Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+    public List<FwkCorreoTemplate> findByMailto(Object mailto,
+            int... rowStartIdxAndCount) {
+        return findByProperty(MAILTO, mailto, rowStartIdxAndCount);
+    }
+
+    public List<FwkCorreoTemplate> findByMailcc(Object mailcc,
+            int... rowStartIdxAndCount) {
+        return findByProperty(MAILCC, mailcc, rowStartIdxAndCount);
+    }
+
+    public List<FwkCorreoTemplate> findByMailbcc(Object mailbcc,
+            int... rowStartIdxAndCount) {
+        return findByProperty(MAILBCC, mailbcc, rowStartIdxAndCount);
+    }
+
+    public List<FwkCorreoTemplate> findByMailsubject(Object mailsubject,
+            int... rowStartIdxAndCount) {
+        return findByProperty(MAILSUBJECT, mailsubject, rowStartIdxAndCount);
+    }
+
+    public List<FwkCorreoTemplate> findByMailbody(Object mailbody,
+            int... rowStartIdxAndCount) {
+        return findByProperty(MAILBODY, mailbody, rowStartIdxAndCount);
+    }
+
+    public List<FwkCorreoTemplate> findByMailattach(Object mailattach,
+            int... rowStartIdxAndCount) {
+        return findByProperty(MAILATTACH, mailattach, rowStartIdxAndCount);
+    }
+
+    public List<FwkCorreoTemplate> findByMailimages(Object mailimages,
+            int... rowStartIdxAndCount) {
+        return findByProperty(MAILIMAGES, mailimages, rowStartIdxAndCount);
+    }
+
+    public List<FwkCorreoTemplate> findByUsuariocreacion(
+            Object usuariocreacion, int... rowStartIdxAndCount) {
+        return findByProperty(USUARIOCREACION, usuariocreacion,
+                rowStartIdxAndCount);
+    }
+
+    public List<FwkCorreoTemplate> findByUsuarioactualiza(
+            Object usuarioactualiza, int... rowStartIdxAndCount) {
+        return findByProperty(USUARIOACTUALIZA, usuarioactualiza,
+                rowStartIdxAndCount);
+    }
+
+    public List<FwkCorreoTemplate> findByEstatus(Object estatus,
+            int... rowStartIdxAndCount) {
+        return findByProperty(ESTATUS, estatus, rowStartIdxAndCount);
+    }
+
+    /**
+     * Find all FwkCorreoTemplate entities.
+     * 
+     * @param rowStartIdxAndCount
+     *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+     *            row index in the query result-set to begin collecting the
+     *            results. rowStartIdxAndCount[1] specifies the the maximum
+     *            count of results to return.
+     * @return List<FwkCorreoTemplate> all FwkCorreoTemplate entities
+     */
+    @SuppressWarnings("unchecked")
+    public List<FwkCorreoTemplate> findAll(final int... rowStartIdxAndCount) {
+        EntityManagerHelper.log("finding all FwkCorreoTemplate instances",
+                Level.INFO, null);
+        try {
+            final String queryString = "select model from FwkCorreoTemplate model";
+            Query query = getEntityManager().createQuery(queryString);
+            if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+                int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+                if (rowStartIdx > 0) {
+                    query.setFirstResult(rowStartIdx);
+                }
+
+                if (rowStartIdxAndCount.length > 1) {
+                    int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+                    if (rowCount > 0) {
+                        query.setMaxResults(rowCount);
+                    }
+                }
+            }
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("find all failed", Level.SEVERE, re);
+            throw re;
+        }
+    }
+
+}

@@ -1,0 +1,58 @@
+package mx.vw.swf.sms.utilerias;
+
+import javafx.animation.FadeTransition;
+import javafx.scene.control.Control;
+import javafx.scene.control.Label;
+import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
+import org.controlsfx.validation.ValidationMessage;
+import org.controlsfx.validation.ValidationResult;
+import org.controlsfx.validation.ValidationSupport;
+
+import java.util.Collection;
+
+/**
+ * Created by dzm152z on 05/03/2015.
+ */
+public class ValidatorHandler {
+    private Control errorDisplayControl;
+    private ValidationSupport validationSupport;
+
+    public ValidationSupport getValidationSupport() {
+        return validationSupport;
+    }
+
+    public void setValidationSupport(ValidationSupport validationSupport) {
+        this.validationSupport = validationSupport;
+    }
+
+    public Control getErrorDisplayControl() {
+        return errorDisplayControl;
+    }
+
+    public void setErrorDisplayControl(Control errorDisplayControl) {
+        this.errorDisplayControl = errorDisplayControl;
+    }
+
+    public void clear() {
+        validationSupport = new ValidationSupport();
+        errorDisplayControl = null;
+    }
+
+    public boolean displayValidationResult(Control control) {
+        ValidationResult result = validationSupport.getValidationResult();
+        Collection<ValidationMessage> errors = result.getErrors();
+        for (ValidationMessage validationMessage : errors) {
+            ((Label) control).setText(validationMessage.getText());
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1));
+            fadeTransition.setNode(control);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+            fadeTransition.setCycleCount(1);
+            fadeTransition.setAutoReverse(true);
+            fadeTransition.playFromStart();
+            break;
+        }
+        return null == errors || errors.isEmpty();
+    }
+}

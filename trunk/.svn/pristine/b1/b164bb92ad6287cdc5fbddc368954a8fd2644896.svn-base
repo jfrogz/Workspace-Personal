@@ -1,0 +1,114 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import mx.vw.swf.security.service.CrearEditarUsuariosService;
+import mx.vw.swf.sms.model.SegUsuario;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1x0d
+ */
+
+public class CrearEditarUsuariosController implements Initializable{
+    
+    @FXML private TextField txtUsuario, txtNombreUsuario, txtApellidoPat, txtApellidoMat, txtCorreo;
+    @FXML private CheckBox  chxEstatusUsuario;
+    @FXML private Label     id,idEtiqueta;
+    @FXML private Button    btnGuardarUsuario;
+    private Short status=1;    
+    private SegUsuario usuario;
+
+   @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if(this.getUsuario()!=null){
+                  
+
+            id.setVisible(true);
+            idEtiqueta.setVisible(true);
+            idEtiqueta.setText(this.getUsuario().getId().toString());
+            txtUsuario.setText(this.getUsuario().getUserId());
+            txtNombreUsuario.setText(this.getUsuario().getNombreUsuario());
+            txtApellidoPat.setText(this.getUsuario().getApPaterno());
+            txtApellidoMat.setText(this.getUsuario().getApMaterno());
+            txtCorreo.setText(this.getUsuario().getCorreoE());
+            chxEstatusUsuario.setSelected(this.getUsuario().getEstatus()!=1?false:true);
+            btnGuardarUsuario.setText("Actualizar");
+                
+        }
+        else{
+            id.setVisible(false);
+            idEtiqueta.setVisible(false);
+            idEtiqueta.setText("");
+            btnGuardarUsuario.setText("Guardar");
+        }
+    }
+
+    public void guardarUsuario(ActionEvent event){
+      
+            boolean insert=false;
+            SegUsuario seg;
+                    
+            if(this.getUsuario()!=null){
+                seg= this.getUsuario();
+                insert=false;
+            }else{
+                seg= new SegUsuario();
+                insert=true;
+            }
+            seg.setUserId(txtUsuario.getText().trim());
+            seg.setNombreUsuario(txtNombreUsuario.getText().trim());
+            seg.setApMaterno(txtApellidoMat.getText().trim());
+            seg.setApPaterno(txtApellidoPat.getText().trim());       
+            seg.setCorreoE(txtCorreo.getText().trim());
+            seg.setEstatus(chxEstatusUsuario.isSelected()==true?status:0); 
+            
+            crearEditarUsuario(seg, insert);
+             Node node = (Node) event.getSource();
+             Stage st = (Stage) node.getScene().getWindow();        
+             st.close();
+            
+      
+        
+    }
+  
+
+   public void crearEditarUsuario(SegUsuario seg, boolean opcion){
+        if(opcion==true){
+          new CrearEditarUsuariosService().guardaUsuario(seg);
+        }else{
+          new CrearEditarUsuariosService().actualizaUsuario(seg);  
+        }
+       
+   }
+    public SegUsuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(SegUsuario usuario) {
+        this.usuario = usuario;
+    }
+   
+   
+      
+    
+}

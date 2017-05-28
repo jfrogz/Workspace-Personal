@@ -1,0 +1,164 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.dao.SegPerfilDAO;
+import mx.vw.swf.security.model.SegPerfil;
+import mx.vw.swf.security.service.CrearEditarPerfilService;
+import mx.vw.swf.sms.utilerias.Utilerias;
+import org.controlsfx.dialog.Dialogs;
+import org.controlsfx.validation.Validator;
+
+import static mx.vw.swf.cdi.DataFXLauncher.getProperty;
+import mx.vw.swf.sms.utilerias.MaxLengthValidator;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1x0d
+ */
+public class CrearEditarPerfilController extends Controller implements Initializable {
+
+    private SegPerfil perfil;
+    private AdministrarPerfilesController administrarPerfilesController;
+    @FXML
+    private TextField txtDesPerfil;
+    @FXML
+    private CheckBox chxEstatusPerfil;
+    @FXML
+    private Label id, idEtiqueta, lbDesPerfil, lbEstatus;
+    @FXML
+    private Button btnGuardarPerfil, btnCerrarPerfil;
+    private Short status = 1;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        txtDesPerfil.addEventFilter(KeyEvent.KEY_TYPED, Utilerias.permiteLetrasNumeros(50));
+        if (null != this.getPerfil()) {
+
+            id.setVisible(true);
+            idEtiqueta.setVisible(true);
+            idEtiqueta.setText(this.getPerfil().getId().toString());
+            txtDesPerfil.setText(this.getPerfil().getPerfil());
+            chxEstatusPerfil.setSelected(this.getPerfil().getEstatus() != 1 ? false : true);
+            btnGuardarPerfil.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonActualizar"));
+
+        } else {
+            id.setVisible(false);
+            idEtiqueta.setVisible(false);
+            idEtiqueta.setText("");
+            btnGuardarPerfil.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonGuardar"));
+
+        }
+        lbDesPerfil.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaDescripcionPerfil") + ":");
+        lbEstatus.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaEstatus") + ":");
+        id.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaId") + ":");
+        btnCerrarPerfil.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonCerrar"));
+        txtDesPerfil.getProperties().put("fieldName" , getProperty("Catalogos.Perfil.Label.Perfil"));
+        registerValidator(txtDesPerfil, Validator.createEmptyValidator(getProperty("General.Campo.Requerido", getProperty("Catalogos.Perfil.Label.Perfil"))), new MaxLengthValidator(50));
+    }
+
+    public void guardarPerfil(ActionEvent event) {
+        System.out.println("@CrearEditarPerfilController.guardarPerfil");
+        System.out.println("txtDesPerfil.text() " + txtDesPerfil.getText());
+        if (!displayValidationResult())
+            return;
+        boolean insert = false;
+        boolean bandera = true;
+        String perfil = txtDesPerfil.getText().trim();
+
+        SegPerfil seg;
+
+        if (null != this.getPerfil()) {
+            seg = this.getPerfil();
+            insert = false;
+        } else {
+            seg = new SegPerfil();
+            insert = true;
+        }
+
+        if (perfil.isEmpty()) {
+            lbDesPerfil.setTextFill(Color.RED);
+            bandera &= false;
+        } else {
+            lbDesPerfil.setTextFill(Color.BLACK);
+        }
+
+        if (!bandera) {
+            Dialogs.create()
+                    .title(getProperty("Sistema.Nombre"))
+                    .masthead(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosVacios"))
+                    .message(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosVaciosMessage"))
+                    .showInformation();
+        } else {
+
+            seg.setPerfil(txtDesPerfil.getText().trim());
+            seg.setEstatus(chxEstatusPerfil.isSelected() == true ? status : 0);
+
+            if (insert == true) {
+                List<SegPerfil> lista = new SegPerfilDAO().findByPerfil(txtDesPerfil.getText().trim());
+                if (!lista.isEmpty()) {
+                    Dialogs.create()
+                            .title(getProperty("Sistema.Nombre"))
+                            .masthead(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosVacios"))
+                            .message(DataFXLauncher.mensajesPropertiesSeg.getProperty("msPerfilExistenteMessage"))
+                            .showInformation();
+                } else {
+                    crearEditarPerfil(seg, insert, event);
+
+                }
+            } else {
+                crearEditarPerfil(seg, insert, event);
+            }
+
+        }
+
+    }
+
+    public void crearEditarPerfil(SegPerfil seg, boolean opcion, ActionEvent event) {
+        if (opcion == true) {
+            new CrearEditarPerfilService().guardarPerfil(seg);
+        } else {
+            new CrearEditarPerfilService().actualizarPerfil(seg);
+        }
+        this.getAdministrarPerfilesController().inicializaPantalla();
+        cerrar(event);
+
+    }
+
+    public SegPerfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(SegPerfil perfil) {
+        this.perfil = perfil;
+    }
+
+    public AdministrarPerfilesController getAdministrarPerfilesController() {
+        return administrarPerfilesController;
+    }
+
+    public void setAdministrarPerfilesController(AdministrarPerfilesController administrarPerfilesController) {
+        this.administrarPerfilesController = administrarPerfilesController;
+    }
+
+    public void cerrar(ActionEvent event) {
+        Utilerias.cerrar(event);
+    }
+}

@@ -1,0 +1,54 @@
+package mx.vw.swf.sms.model;
+
+import java.sql.Timestamp;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * SmsMovimiento entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "SMS_MOVIMIENTO", schema = "dbo", catalog = "SMS")
+public class SmsMovimiento extends AbstractSmsMovimiento implements
+        java.io.Serializable {
+
+    // Constructors
+
+    /** default constructor */
+    public SmsMovimiento() {
+    }
+
+    /** minimal constructor */
+    public SmsMovimiento(Long id, SmsCteProv smsCteProv,
+            SegUsuario segUsuarioByIdUsrPesoEntrada, Short esMovCliente,
+            Long idProducto, String placaVehiculo, Timestamp fechaEntrada,
+            Double pesoEntrada, Short basculaContingencia, Short enviarSap,
+            Short enviadoSap, Short cancelado) {
+        super(id, smsCteProv, segUsuarioByIdUsrPesoEntrada, esMovCliente,
+                idProducto, placaVehiculo, fechaEntrada, pesoEntrada,
+                basculaContingencia, enviarSap, enviadoSap, cancelado);
+    }
+
+    /** full constructor */
+    public SmsMovimiento(Long id, SegUsuario segUsuarioByIdUsrCancela,
+            SegUsuario segUsuarioByIdUsrEnvioSap, SmsCteProv smsCteProv,
+            SegUsuario segUsuarioByIdUsrPesoSalida,
+            SegUsuario segUsuarioByIdUsrPesoEntrada, Short esMovCliente,
+            Long idProducto, String idCteProvSap, String idProductoSap,
+            String placaVehiculo, String destino, String factura,
+            Timestamp fechaEntrada, Double pesoEntrada, Timestamp fechaSalida,
+            Double pesoSalida, Short basculaContingencia,
+            String guardiaContingencia, Double pesoNeto, Double pesoTara,
+            Short enviarSap, Short enviadoSap, Timestamp fechaEnviadoSap,
+            Short cancelado, String motivoCancela) {
+        super(id, segUsuarioByIdUsrCancela, segUsuarioByIdUsrEnvioSap,
+                smsCteProv, segUsuarioByIdUsrPesoSalida,
+                segUsuarioByIdUsrPesoEntrada, esMovCliente, idProducto,
+                idCteProvSap, idProductoSap, placaVehiculo, destino, factura,
+                fechaEntrada, pesoEntrada, fechaSalida, pesoSalida,
+                basculaContingencia, guardiaContingencia, pesoNeto, pesoTara,
+                enviarSap, enviadoSap, fechaEnviadoSap, cancelado,
+                motivoCancela);
+    }
+
+}

@@ -1,0 +1,32 @@
+package mx.vw.swf.security.model;
+
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * SegPermiso entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "SEG_PERMISO", schema = "dbo", catalog = "SMS")
+public class SegPermiso extends AbstractSegPermiso implements
+        java.io.Serializable {
+
+    // Constructors
+
+    /** default constructor */
+    public SegPermiso() {
+    }
+
+    /** minimal constructor */
+    public SegPermiso(Integer id, Short estatus) {
+        super(id, estatus);
+    }
+
+    /** full constructor */
+    public SegPermiso(Integer id, String permiso, Short estatus,
+            Set<SegPermisoPerfil> segPermisoPerfils) {
+        super(id, permiso, estatus, segPermisoPerfils);
+    }
+
+}

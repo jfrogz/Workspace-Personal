@@ -1,0 +1,37 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.fwk;
+
+import jssc.SerialPort;
+import jssc.SerialPortException;
+
+/**
+ *
+ * @author dzmppdw
+ */
+public class SerialPortWriter {
+
+   private final SerialPort portOut;
+   
+   public SerialPortWriter(SerialPort portOut){
+      this.portOut = portOut;
+   }
+
+   public void writeData(String data) {
+      if (portOut.isOpened()) {
+         if (null != data) {
+            try {
+               portOut.writeString(data);
+            } catch (SerialPortException e) {
+               Utilerias.consoleMsg(String.format("Error al escribir al puerto serial %S. Excepcion %S " + portOut.getPortName(), e.getMessage()), e, this);
+            }
+         }
+      } else {
+         Utilerias.consoleMsg(String.format("\nPort %S is not opened.", portOut.getPortName()), null, this);
+      }
+   }
+
+}

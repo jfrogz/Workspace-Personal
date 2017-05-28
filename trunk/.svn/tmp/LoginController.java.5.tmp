@@ -1,0 +1,230 @@
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.context.ActionHandler;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.FlowActionHandler;
+import io.datafx.controller.flow.context.ViewFlowContext;
+import io.datafx.controller.util.VetoException;
+
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javax.annotation.PostConstruct;
+import mx.com.vw.swf.exception.SWFLoginException;
+import mx.vw.swf.security.service.LoginService;
+
+import javax.naming.NamingException;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.dao.SegUsuarioDAO;
+import mx.vw.swf.security.model.SegUsuario;
+import mx.vw.swf.sms.utilerias.DefaultValidatorResultListener;
+import mx.vw.swf.sms.utilerias.LengthValidator;
+import org.controlsfx.dialog.Dialogs;
+import org.controlsfx.validation.*;
+
+/**
+ * Created by dzm152z on 08/01/2015.
+ */
+//@FXMLController("/fxml/security/Login.fxml")
+@ViewController("/fxml/security/Login.fxml")
+public class LoginController extends MenuController {
+
+   @FXML
+   private TextField txtUsuario;
+   @FXML
+   private PasswordField txtPassword;
+
+   @FXML
+   private Label lblUsuario;
+   @FXML
+   private Label lblPassword;
+
+   @FXML
+   private Button btnInicioUsuario;
+   @FXML
+   private Button btnLimpiar;
+
+   @ActionHandler
+   FlowActionHandler actionHandler;
+
+   LoginService loginService = new LoginService();
+
+   @FXMLViewFlowContext
+   ViewFlowContext viewFlowContext;
+
+    ValidationSupport validationSupport = new ValidationSupport();
+
+   @PostConstruct
+   public void postConstruct() {
+      super.postConstruct();
+      welcomeMenuBar.setVisible(false);
+      imgAyuda.setVisible(false);
+      linkManualUsuario.setVisible(false);
+      labelIdentificadorUsuario.setVisible(false);
+<<<<<<< .mine
+      labelMovimientoActual.setText(DataFXLauncher.mensajesProperties.getProperty("Login.Header"));
+      lblUsuario.setText(DataFXLauncher.mensajesProperties.getProperty("Login.UsrLabel")+":");
+      lblPassword.setText(DataFXLauncher.mensajesProperties.getProperty("Login.PwdLabel")+ ":");
+      btnInicioUsuario.setText(DataFXLauncher.mensajesProperties.getProperty("General.btnAceptar"));
+      btnLimpiar.setText(DataFXLauncher.getProperty("General.btnLimpiar"));
+=======
+      labelMovimientoActual.setText(DataFXLauncher.getProperty("Login.Header"));
+      lblUsuario.setText(DataFXLauncher.getProperty("Login.UsrLabel")+":");
+      lblPassword.setText(DataFXLauncher.getProperty("Login.PwdLabel")+ ":");
+      btnInicioUsuario.setText(DataFXLauncher.getProperty("General.btnAceptar"));
+      btnLimpiar.setText(DataFXLauncher.getProperty("General.btnLimpiar"));
+>>>>>>> .r3663
+
+      txtUsuario.setOnKeyPressed((event) -> {
+         if (event.getCode() == KeyCode.ENTER) {
+            txtPassword.requestFocus();
+         }
+      }
+      );
+      txtPassword.setOnKeyPressed((event) -> {
+         if (event.getCode() == KeyCode.ENTER) {
+            login(event);
+         }
+      }
+      );
+      btnLimpiar.setOnAction((ActionEvent)->{
+          txtPassword.clear();
+          txtUsuario.clear();
+      });
+
+
+       validationSupport.registerValidator(txtUsuario, Validator.createEmptyValidator("El usuario no puede ser vacío"));
+       validationSupport.registerValidator(txtUsuario, new LengthValidator(1,10));
+       //validationSupport.validationResultProperty().addListener(new DefaultValidatorResultListener(errorMessages));
+   }
+
+    private boolean validations() {
+      boolean bandera = true;
+      SegUsuario segUsuario = null;
+      String username = txtUsuario.getText().trim();
+      String password = txtPassword.getText().trim();
+
+      // <editor-fold defaultstate="collapsed" desc="Comprobar Campos vacios">
+      if (username.isEmpty()) {
+         lblUsuario.setTextFill(Color.RED);
+         bandera &= false;
+      } else {
+         lblUsuario.setTextFill(Color.BLACK);
+      }
+
+      if (password.isEmpty()) {
+         lblPassword.setTextFill(Color.RED);
+         bandera &= false;
+      } else {
+         lblPassword.setTextFill(Color.BLACK);
+      }
+    // </editor-fold>
+
+      //<editor-fold defaultstate="collapsed" desc="Se lanzan avisos">
+      if (!bandera) {
+         Dialogs.create()
+                 .owner(DataFXLauncher.primary)
+                 .title(DataFXLauncher.getProperty("Sistema.Nombre"))
+                 .masthead(DataFXLauncher.getProperty("Login.Valid.IncompleteData.Header"))
+                 .message(DataFXLauncher.getProperty("Login.Valid.IncompleteData.Message"))
+                 .showWarning();
+         return bandera;
+      }
+        //</editor-fold>
+
+      //<editor-fold defaultstate="collapsed" desc="Comprobar Usuario en base del sistema">
+      if (bandera) {
+
+         SegUsuarioDAO sudao = new SegUsuarioDAO();
+
+         List<SegUsuario> findByUserId = sudao.findByUserId(username);
+         if (!findByUserId.isEmpty()) {
+            segUsuario = findByUserId.get(0);
+         } else {
+            Dialogs.create()
+                    .owner(DataFXLauncher.primary)
+                    .title(DataFXLauncher.getProperty("Sistema.Nombre"))
+                    .masthead(DataFXLauncher.getProperty("Login.Valid.NoAccess.Header"))
+                    .message(DataFXLauncher.getProperty("Login.Valid.NoAccess.Message"))
+                    .showError();
+            bandera = false;
+         }
+      }
+        //</editor-fold>
+
+      //<editor-fold defaultstate="collapsed" desc="Comprobar Usuario base de datos ActiveDirectory">
+      if (bandera & segUsuario != null) {
+         boolean success = false;
+         try {//ActiveDirectory
+            success = loginService.tryLogin(username, password);
+            if (!success) {
+               Dialogs.create()
+                       .owner(DataFXLauncher.primary)
+                       .title(DataFXLauncher.getProperty("Sistema.Nombre"))
+                       .masthead(DataFXLauncher.getProperty("Login.Valid.Credentials.Header"))
+                       .message(DataFXLauncher.getProperty("Login.Valid.Credentials.Message"))
+                       .showError();
+            }
+         } catch (NamingException ex) {
+            //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            if (!success) {
+               Dialogs.create()
+                       .owner(DataFXLauncher.primary)
+                       .title(DataFXLauncher.getProperty("Sistema.Nombre"))
+                       .masthead(DataFXLauncher.getProperty("Login.Valid.Credentials.Header"))
+                       .message(DataFXLauncher.getProperty("Login.Valid.Credentials.Message"))
+                       .showWarning();
+            }
+            bandera = success;
+         } catch (SWFLoginException ex) {
+           // Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            if (!success) {
+               Dialogs.create()
+                       .owner(DataFXLauncher.primary)
+                       .title(DataFXLauncher.getProperty("Sistema.Nombre"))
+                       .masthead(DataFXLauncher.getProperty("Login.Valid.ActiveDir.Header"))
+                       .message(DataFXLauncher.getProperty("Login.Valid.ActiveDir.Message"))
+                       .showError();
+            }
+            bandera = success;
+         }
+         viewFlowContext.register("USERPRINCIPAL", segUsuario);
+         //super.usuario = segUsuario;
+      }
+ //</editor-fold>
+
+      //es necesario podker mandar el usuario por parametros al headerTemplate.fxml para usar su nombre y poder obtener permisos
+      return bandera;
+   }
+   
+   public void login(Event event) {
+       ValidationResult result = validationSupport.getValidationResult();
+       Collection<ValidationMessage> errors = result.getErrors();
+       for (ValidationMessage validationMessage : errors) {
+           System.out.println(validationMessage);
+       }
+      if (validations()) {
+         try {
+            actionHandler.navigate(WelcomeController.class);
+         } catch (VetoException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (FlowException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+         }
+      }
+   }
+}

@@ -1,0 +1,401 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import io.datafx.controller.context.ViewContext;
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.ViewFlowContext;
+import io.datafx.controller.util.VetoException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Callback;
+import javax.annotation.PostConstruct;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.dao.SegPerfilDAO;
+import mx.vw.swf.security.model.SegPerfil;
+import mx.vw.swf.security.model.SegPerfilUsr;
+import mx.vw.swf.security.model.SegPerfilUsrId;
+import mx.vw.swf.security.model.SegUsuario;
+import mx.vw.swf.security.service.CrearEditarPerfilService;
+import mx.vw.swf.security.service.SegPerfilUsrService;
+import mx.vw.swf.sms.utilerias.CheckBoxTableCell;
+import mx.vw.swf.sms.utilerias.Pantallas;
+import mx.vw.swf.sms.utilerias.Utilerias;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1x0d
+ */
+@ViewController("/fxml/security/AdministrarPerfiles.fxml")
+public class AdministrarPerfilesController extends MenuController {
+
+    @FXML
+    private TableView<SegPerfil> tablaPerfiles;
+    @FXML
+    private TableColumn<SegPerfil, String> colPerfil, colEstatus;
+    @FXML
+    private TableColumn<SegPerfil, Long> colId;
+    @FXML
+    private TableColumn<SegPerfil, SegPerfil> colSecleccione;
+    @FXML
+    private TableColumn<SegPerfil, SegPerfil> colAcciones;
+    @FXML
+    private BorderPane borderPerfiles;
+    @FXML
+    private TextField flPerfil;
+    @FXML
+    private Label lbUsuario, lbPerfil, lbClaveNombreUsuario;
+    @FXML
+    private Button btnNuevoPerfil, btnAsignarPerfiles, btnRegresarAtras;
+    @FXML
+    private GridPane gridBotones;
+    @FXML
+    private ComboBox comboPaginacion;
+    @FXMLViewFlowContext
+    ViewFlowContext viewFlowContext;
+    public SegUsuario segUsuario;
+    private ObservableList<SegPerfil> listaPerfiles;
+    private FilteredList<SegPerfil> filteredData;
+    private SortedList<SegPerfil> sortedData;
+    private Pagination pagination;
+    private String claveNombreUsuario;
+
+    private int renglonesMostrar = 5;
+
+    @PostConstruct
+    public void postConstruct() {
+
+        super.postConstruct();
+        inicializaControles();
+        inicializaColumnasTabla();
+        inicializaColumnaAccion();
+        inicializaPerfiles();
+        inicializaAccionesFiltros();
+
+    }
+
+    public void inicializaControles() {
+        if (viewFlowContext.getRegisteredObject("USUARIOPERFIL") != null) {
+            segUsuario = (SegUsuario) viewFlowContext.getRegisteredObject("USUARIOPERFIL");
+        } else {
+            segUsuario = null;
+        }
+        if (segUsuario != null) {
+            lbClaveNombreUsuario.setVisible(true);
+            lbClaveNombreUsuario.setText(segUsuario.getUserId() + " - " + segUsuario.getNombreCompleto());
+            lbUsuario.setVisible(true);
+            colSecleccione.setVisible(true);
+            btnAsignarPerfiles.setVisible(true);
+            btnRegresarAtras.setVisible(true);
+        } else {
+            lbClaveNombreUsuario.setVisible(false);
+            lbClaveNombreUsuario.setText("");
+            lbUsuario.setVisible(false);
+            colSecleccione.setVisible(false);
+            btnAsignarPerfiles.setVisible(false);
+            btnRegresarAtras.setVisible(false);
+
+        }
+
+        comboPaginacion.setItems(Utilerias.comboPaginacion());
+        comboPaginacion.getSelectionModel().select(0);
+        btnNuevoPerfil.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonNuevo"));
+        btnAsignarPerfiles.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonAsignarPerfiles"));
+        btnRegresarAtras.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonRegresarAtras"));
+        lbUsuario.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaUsuario") + ":");
+        lbPerfil.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaPerfil") + ":");
+        comboPaginacion.setOnAction((event) -> {
+            renglonesMostrar = Integer.parseInt(comboPaginacion.getValue().toString());
+            inicializaPerfiles();
+        });
+    }
+
+    public void inicializaColumnasTabla() {
+
+        colSecleccione.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaSeleccione"));
+        colId.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaId"));
+        colPerfil.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaPerfil"));
+        colEstatus.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaEstatus"));
+        colAcciones.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaAcciones"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colPerfil.setCellValueFactory(new PropertyValueFactory<>("perfil"));
+        colEstatus.setCellValueFactory(new PropertyValueFactory<>("etiquetaEstatus"));
+        colAcciones.setSortable(false);
+        colSecleccione.setSortable(false);
+
+    }
+
+    public void inicializaColumnaAccion() {
+        colSecleccione.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SegPerfil, SegPerfil>, ObservableValue<SegPerfil>>() {
+            public ObservableValue<SegPerfil> call(TableColumn.CellDataFeatures<SegPerfil, SegPerfil> p) {
+                return new ReadOnlyObjectWrapper(p.getValue());
+            }
+        });
+        colSecleccione.setCellFactory(new Callback<TableColumn<SegPerfil, SegPerfil>, TableCell<SegPerfil, SegPerfil>>() {
+            public TableCell<SegPerfil, SegPerfil> call(TableColumn<SegPerfil, SegPerfil> p) {
+                return new CheckBoxTableCell<SegPerfil, SegPerfil>();
+            }
+
+        });
+        colAcciones.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SegPerfil, SegPerfil>, ObservableValue<SegPerfil>>() {
+            public ObservableValue<SegPerfil> call(TableColumn.CellDataFeatures<SegPerfil, SegPerfil> p) {
+                return new ReadOnlyObjectWrapper(p.getValue());
+
+            }
+        });
+
+        colAcciones.setCellFactory(new Callback<TableColumn<SegPerfil, SegPerfil>, TableCell<SegPerfil, SegPerfil>>() {
+            @Override
+            public TableCell<SegPerfil, SegPerfil> call(TableColumn<SegPerfil, SegPerfil> param) {
+                TableCell<SegPerfil, SegPerfil> cell = new TableCell<SegPerfil, SegPerfil>() {
+
+                    Button editar = new Button(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonEditar"));
+                    Button funciones = new Button(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonAsignarFunciones"));
+                    Button desactivar = new Button();
+                    Short desactiva = 0;
+
+                    @Override
+                    public void updateItem(SegPerfil item, boolean empty) {
+                        if (item != null) {
+                            editar.getStyleClass().add("botones");
+                            funciones.getStyleClass().add("botones");
+                            desactivar.getStyleClass().add("botones");
+                            HBox botones = new HBox(editar, desactivar, funciones);
+                            botones.setSpacing(10);
+                            setGraphic(botones);
+
+                            if (item.getEstatus() == 0) {
+                                desactivar.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonActivar"));
+                                desactiva = 1;
+                            } else {
+                                desactivar.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonDesactivar"));
+                                desactiva = 0;
+                            }
+
+                            editar.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+                                    creaEditaPerfil(item, t);
+
+                                }
+                            });
+                            desactivar.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+                                    Action response = Dialogs.create()
+                                            .title(DataFXLauncher.getProperty("Sistema.Nombre"))
+                                            .masthead(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosVacios"))
+                                            .message(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosDesactivaPerfil"))
+                                            .actions(Dialog.ACTION_YES, Dialog.ACTION_CANCEL)
+                                            .showConfirm();
+                                    if (response == Dialog.ACTION_YES) {
+                                        item.setEstatus(desactiva);
+                                        desactivarPerfil(item);
+                                        inicializaPerfiles();
+                                    }
+
+                                }
+                            });
+                            funciones.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+                                    try {
+                                        viewFlowContext.register("PERFILPERMISO", item);
+                                        actionHandler.navigate(AdministrarFuncionesPerfilController.class);
+                                    } catch (VetoException | FlowException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
+                        } else {
+                            setGraphic(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+
+    }
+
+    public void inicializaPerfiles() {
+        setListaPerfiles(FXCollections.observableArrayList(obtieneListaPerfiles()));
+        filteredData = new FilteredList<>(getListaPerfiles(), p -> true);
+        sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tablaPerfiles.comparatorProperty());
+        inicializaTablaPerfil(sortedData);
+    }
+
+    public void inicializaTablaPerfil(SortedList<SegPerfil> lista) {
+        renglonesMostrar = Integer.parseInt(comboPaginacion.getValue().toString());
+        borderPerfiles.setCenter(null);
+        if (lista.size() > 0) {
+            pagination = Utilerias.creaPaginacionTableView(renglonesMostrar, lista, tablaPerfiles, gridBotones);
+            borderPerfiles.setCenter(pagination);
+
+        } else {
+            tablaPerfiles.getItems().clear();
+            borderPerfiles.setCenter(tablaPerfiles);
+
+        }
+    }
+
+    public ObservableList<SegPerfil> obtieneListaPerfiles() {
+        List<SegPerfil> lista = new SegPerfilDAO().findAll();
+        ObservableList<SegPerfil> listaol = FXCollections.observableArrayList();
+        for (SegPerfil item : lista) {
+            item.setSelected(false);
+            if (segUsuario != null) {
+                Iterator iter = item.getSegPerfilUsrs().iterator();
+                while (iter.hasNext()) {
+                    SegPerfilUsr h = (SegPerfilUsr) iter.next();
+                    if (segUsuario.getId() == h.getSegUsuario().getId()) {
+                        item.setSelected(true);
+                    }
+
+                }
+            }
+            listaol.add(item);
+        }
+
+        return listaol;
+    }
+
+    public ObservableList<SegPerfil> getListaPerfiles() {
+        return listaPerfiles;
+    }
+
+    public void setListaPerfiles(ObservableList<SegPerfil> listaPerfiles) {
+        this.listaPerfiles = listaPerfiles;
+    }
+
+    public void inicializaAccionesFiltros() {
+        flPerfil.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(perfil -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (perfil.getPerfil().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+            inicializaTablaPerfil(sortedData);
+        });
+
+    }
+
+    public void creaEditaPerfil(SegPerfil perfil, ActionEvent ev) {
+        String titulo = perfil != null ? DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaEditarPerfil") : DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaNuevoPerfil");
+        Stage stage;
+        try {
+
+            CrearEditarPerfilController controller = new CrearEditarPerfilController();
+            controller.setPerfil(perfil);
+            controller.setAdministrarPerfilesController(this);
+            stage = Utilerias.nuevaVentana(Pantallas.FXML_CREAR_EDITAR_PERFILES, controller, titulo);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setResizable(false);
+            stage.initOwner(((Node) ev.getSource()).getScene().getWindow());
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(AdministrarPerfilesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void desactivarPerfil(SegPerfil perfil) {
+        new CrearEditarPerfilService().actualizarPerfil(perfil);
+    }
+
+    public void nuevoPerfil(ActionEvent event) {
+        creaEditaPerfil(null, event);
+    }
+
+    public void regresa(ActionEvent event) {
+        try {
+            actionHandler.navigate(AdministrarUsuariosController.class);
+        } catch (VetoException | FlowException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void asignarPerfiles(ActionEvent event) {
+        ObservableList<SegPerfil> lista = sortedData;
+        boolean bandera = false;
+        if (lista.size() > 0) {
+            List<SegPerfilUsr> perfilesUsuario = new ArrayList<>();
+            for (SegPerfil segPerfil : lista) {
+                if (segPerfil.getSelected()) {
+                    bandera = true;
+                    SegPerfilUsrId segPerfilUsrId = new SegPerfilUsrId();
+                    segPerfilUsrId.setIdUsuario(segUsuario.getId());
+                    segPerfilUsrId.setIdPerfil(segPerfil.getId());
+                    SegPerfilUsr segPerfilUsr = new SegPerfilUsr();
+                    segPerfilUsr.setId(segPerfilUsrId);
+                    segPerfilUsr.setSegPerfil(segPerfil);
+                    segPerfilUsr.setSegUsuario(segUsuario);
+                    perfilesUsuario.add(segPerfilUsr);
+
+                }
+            }
+            if (bandera == true) {
+                new SegPerfilUsrService().guardaPerfilesUsuario(perfilesUsuario, segUsuario);                
+            } else {
+                new SegPerfilUsrService().eliminaPerfilesUsuario(segUsuario);
+            }
+            inicializaPerfiles();
+
+        }
+    }
+
+    public String getClaveNombreUsuario() {
+        return claveNombreUsuario;
+    }
+
+    public void setClaveNombreUsuario(String claveNombreUsuario) {
+        this.claveNombreUsuario = claveNombreUsuario;
+    }
+
+}

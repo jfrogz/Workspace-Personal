@@ -1,0 +1,94 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Arrays;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@Entity
+@Table(name = "FWK_CORREO_PEND", schema = "dbo", catalog = "SMS")
+public class FwkCorreoPendEntity {
+    private int id;
+    private Timestamp tsmensaje;
+    private int lenviado;
+    private byte[] bmensaje;
+    private Timestamp tsenviado;
+
+    @Id
+    @Column(name = "ID")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Basic
+    @Column(name = "TSMENSAJE")
+    public Timestamp getTsmensaje() {
+        return tsmensaje;
+    }
+
+    public void setTsmensaje(Timestamp tsmensaje) {
+        this.tsmensaje = tsmensaje;
+    }
+
+    @Basic
+    @Column(name = "LENVIADO")
+    public int getLenviado() {
+        return lenviado;
+    }
+
+    public void setLenviado(int lenviado) {
+        this.lenviado = lenviado;
+    }
+
+    @Basic
+    @Column(name = "BMENSAJE")
+    public byte[] getBmensaje() {
+        return bmensaje;
+    }
+
+    public void setBmensaje(byte[] bmensaje) {
+        this.bmensaje = bmensaje;
+    }
+
+    @Basic
+    @Column(name = "TSENVIADO")
+    public Timestamp getTsenviado() {
+        return tsenviado;
+    }
+
+    public void setTsenviado(Timestamp tsenviado) {
+        this.tsenviado = tsenviado;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FwkCorreoPendEntity that = (FwkCorreoPendEntity) o;
+
+        if (id != that.id) return false;
+        if (lenviado != that.lenviado) return false;
+        if (!Arrays.equals(bmensaje, that.bmensaje)) return false;
+        if (tsenviado != null ? !tsenviado.equals(that.tsenviado) : that.tsenviado != null) return false;
+        if (tsmensaje != null ? !tsmensaje.equals(that.tsmensaje) : that.tsmensaje != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (tsmensaje != null ? tsmensaje.hashCode() : 0);
+        result = 31 * result + lenviado;
+        result = 31 * result + (bmensaje != null ? Arrays.hashCode(bmensaje) : 0);
+        result = 31 * result + (tsenviado != null ? tsenviado.hashCode() : 0);
+        return result;
+    }
+}

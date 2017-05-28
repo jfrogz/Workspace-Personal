@@ -1,0 +1,95 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.controller;
+
+import io.datafx.controller.ViewController;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javax.annotation.PostConstruct;
+import javax.swing.JOptionPane;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.sms.model.FwkCatContent;
+import mx.vw.swf.sms.model.FwkCatContentDAO;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1yij
+ */
+@ViewController("/fxml/configuration/ConfigurarPuerto.fxml")
+public class ConfigurarPuertoController implements Initializable {
+
+    /**
+     * Initializes the controller class.
+     */
+    @FXML
+    private ComboBox cbbBaudaje;
+    @FXML
+    private ComboBox cbbPuerto;
+    @FXML
+    private ComboBox cbbParidad;
+    @FXML
+    private ComboBox cbbBistDeDatos;
+    @FXML
+    private ComboBox cbbParidadDelPuerto;
+    
+    @FXML   private Label puerto; 
+    @FXML   private Label baudaje;
+    @FXML   private Label bitsDeDatos;
+    @FXML   private Label bitsDeParada;
+    @FXML   private Label paridadDePuerto;
+    
+    @FXML   private Button btnAceptar;
+    @FXML   private Button btnCancelar;
+    
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        
+        ObservableList<String> options = FXCollections.observableArrayList(        
+        "50", "100", "110", "300", "600", "1200", "2400", "4800", "9600", "14400", "19200", "28800");
+        cbbBaudaje.setItems(options);
+        
+        ObservableList<String> opcionesPuertos = FXCollections.observableArrayList("COM","","");
+        cbbPuerto.setItems(opcionesPuertos);
+        
+        ObservableList<String> opcionesParidad = FXCollections.observableArrayList("1","2");
+        cbbParidad.setItems(opcionesParidad);
+        
+        ObservableList<String> opcionesBitsD = FXCollections.observableArrayList("7","8");
+        cbbBistDeDatos.setItems(opcionesBitsD);
+        
+        ObservableList<String> opcionesParidadDePuerto = FXCollections.observableArrayList("Even", "Odd", "Mark", "Space", "None");
+        cbbParidadDelPuerto.setItems(opcionesParidadDePuerto);
+    }    
+    @FXML
+    private void handleButtonAction_boton1 (ActionEvent event) {        
+        JOptionPane.showMessageDialog(null,"No ha seleccionado ningún valor para el baudaje", "Aviso",1);       
+    }
+    
+    @PostConstruct
+    public void PostContruct ()
+    {
+       puerto.setText(DataFXLauncher.mensajesProperties.getProperty("puerto")+":");
+       baudaje.setText(DataFXLauncher.mensajesProperties.getProperty("baudaje")+":");
+       bitsDeParada.setText(DataFXLauncher.mensajesProperties.getProperty("bitsDeParada")+":");
+       bitsDeDatos.setText(DataFXLauncher.mensajesProperties.getProperty("bitsDeDatos")+":");
+       paridadDePuerto.setText(DataFXLauncher.mensajesProperties.getProperty("paridadDePuerto")+":");
+       btnAceptar.setText(DataFXLauncher.mensajesProperties.getProperty("btnAceptar"));
+       btnCancelar.setText(DataFXLauncher.mensajesProperties.getProperty("btnCancelar"));
+       
+       
+    }
+}

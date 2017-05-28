@@ -1,0 +1,50 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.utilerias;
+
+import javafx.scene.Node;
+
+/**
+ *
+ * @author fox1x0d
+ */
+public class NodosFxml {
+    
+    private String pantalla;
+    private Object clase;
+    private Node nodo;
+
+    public NodosFxml(String pantalla, Object clase,Node nodo){
+        this.pantalla=pantalla;
+        this.clase=clase;
+        this.nodo=nodo;
+    }
+    public String getPantalla() {
+        return pantalla;
+    }
+
+    public void setPantalla(String pantalla) {
+        this.pantalla = pantalla;
+    }
+
+    public Object getClase() {
+        return clase;
+    }
+
+    public void setClase(Object clase) {
+        this.clase = clase;
+    }
+
+    public Node getNodo() {
+        return nodo;
+    }
+
+    public void setNodo(Node nodo) {
+        this.nodo = nodo;
+    }
+    
+    
+}

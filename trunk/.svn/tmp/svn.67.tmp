@@ -1,0 +1,54 @@
+package mx.vw.swf.cdi;
+
+import io.datafx.controller.ViewConfiguration;
+import io.datafx.controller.flow.Flow;
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.util.VetoException;
+import java.util.Properties;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import mx.vw.swf.security.controller.LoginController;
+import javax.persistence.EntityManagerFactory;
+import mx.vw.swf.security.controller.AdministrarUsuariosController;
+import mx.vw.swf.security.controller.WelcomeController;
+import mx.vw.swf.sms.controller.RegistroDeClientesYProveedoresController;
+import mx.vw.swf.sms.utilerias.ArchivoPropiedades;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+public class DataFXLauncher extends Application {
+    
+    
+    public static Flow mainFlow;
+    public static EntityManagerFactory emf;
+    public static Stage primary;
+    public static Properties mensajesProperties;
+    public static Properties mensajesPropertiesSeg;
+
+
+    
+    public static void main(String[] args) {
+        launch(args);
+        
+    }
+
+
+    @Override
+    public void start(Stage primaryStage) throws FlowException, VetoException {
+        //primaryStage.setMaximized(true);
+        ArchivoPropiedades Ap = new ArchivoPropiedades();
+        mensajesProperties =Ap.getProperties(); 
+        mensajesPropertiesSeg=Ap.getPropertiesSeguridad();
+        primary=primaryStage;
+        
+        ViewConfiguration viewConfiguration = new SMSViewConfiguration();             
+        //mainFlow= new SWFFlow(LoginController.class, viewConfiguration);
+        //mainFlow= new SWFFlow(AdministrarUsuariosController.class, viewConfiguration);
+        mainFlow= new SWFFlow(RegistroDeClientesYProveedoresController.class, viewConfiguration);
+        //mainFlow= new SWFFlow(ConfigurarPuertoController.class, viewConfiguration);  
+        mainFlow.startInStage(primaryStage);        
+    }
+    
+    
+}

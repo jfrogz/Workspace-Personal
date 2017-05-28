@@ -1,0 +1,201 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@Entity
+@Table(name = "FWK_CORREO_TEMPLATE", schema = "dbo", catalog = "SMS")
+public class FwkCorreoTemplateEntity {
+    private String id;
+    private String mailto;
+    private String mailcc;
+    private String mailbcc;
+    private String mailsubject;
+    private String mailbody;
+    private String mailattach;
+    private String mailimages;
+    private Timestamp fechacreacion;
+    private String usuariocreacion;
+    private Timestamp fechaactualiza;
+    private String usuarioactualiza;
+    private Short estatus;
+
+    @Id
+    @Column(name = "ID")
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Basic
+    @Column(name = "MAILTO")
+    public String getMailto() {
+        return mailto;
+    }
+
+    public void setMailto(String mailto) {
+        this.mailto = mailto;
+    }
+
+    @Basic
+    @Column(name = "MAILCC")
+    public String getMailcc() {
+        return mailcc;
+    }
+
+    public void setMailcc(String mailcc) {
+        this.mailcc = mailcc;
+    }
+
+    @Basic
+    @Column(name = "MAILBCC")
+    public String getMailbcc() {
+        return mailbcc;
+    }
+
+    public void setMailbcc(String mailbcc) {
+        this.mailbcc = mailbcc;
+    }
+
+    @Basic
+    @Column(name = "MAILSUBJECT")
+    public String getMailsubject() {
+        return mailsubject;
+    }
+
+    public void setMailsubject(String mailsubject) {
+        this.mailsubject = mailsubject;
+    }
+
+    @Basic
+    @Column(name = "MAILBODY")
+    public String getMailbody() {
+        return mailbody;
+    }
+
+    public void setMailbody(String mailbody) {
+        this.mailbody = mailbody;
+    }
+
+    @Basic
+    @Column(name = "MAILATTACH")
+    public String getMailattach() {
+        return mailattach;
+    }
+
+    public void setMailattach(String mailattach) {
+        this.mailattach = mailattach;
+    }
+
+    @Basic
+    @Column(name = "MAILIMAGES")
+    public String getMailimages() {
+        return mailimages;
+    }
+
+    public void setMailimages(String mailimages) {
+        this.mailimages = mailimages;
+    }
+
+    @Basic
+    @Column(name = "FECHACREACION")
+    public Timestamp getFechacreacion() {
+        return fechacreacion;
+    }
+
+    public void setFechacreacion(Timestamp fechacreacion) {
+        this.fechacreacion = fechacreacion;
+    }
+
+    @Basic
+    @Column(name = "USUARIOCREACION")
+    public String getUsuariocreacion() {
+        return usuariocreacion;
+    }
+
+    public void setUsuariocreacion(String usuariocreacion) {
+        this.usuariocreacion = usuariocreacion;
+    }
+
+    @Basic
+    @Column(name = "FECHAACTUALIZA")
+    public Timestamp getFechaactualiza() {
+        return fechaactualiza;
+    }
+
+    public void setFechaactualiza(Timestamp fechaactualiza) {
+        this.fechaactualiza = fechaactualiza;
+    }
+
+    @Basic
+    @Column(name = "USUARIOACTUALIZA")
+    public String getUsuarioactualiza() {
+        return usuarioactualiza;
+    }
+
+    public void setUsuarioactualiza(String usuarioactualiza) {
+        this.usuarioactualiza = usuarioactualiza;
+    }
+
+    @Basic
+    @Column(name = "ESTATUS")
+    public Short getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(Short estatus) {
+        this.estatus = estatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FwkCorreoTemplateEntity that = (FwkCorreoTemplateEntity) o;
+
+        if (estatus != null ? !estatus.equals(that.estatus) : that.estatus != null) return false;
+        if (fechaactualiza != null ? !fechaactualiza.equals(that.fechaactualiza) : that.fechaactualiza != null)
+            return false;
+        if (fechacreacion != null ? !fechacreacion.equals(that.fechacreacion) : that.fechacreacion != null)
+            return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (mailattach != null ? !mailattach.equals(that.mailattach) : that.mailattach != null) return false;
+        if (mailbcc != null ? !mailbcc.equals(that.mailbcc) : that.mailbcc != null) return false;
+        if (mailbody != null ? !mailbody.equals(that.mailbody) : that.mailbody != null) return false;
+        if (mailcc != null ? !mailcc.equals(that.mailcc) : that.mailcc != null) return false;
+        if (mailimages != null ? !mailimages.equals(that.mailimages) : that.mailimages != null) return false;
+        if (mailsubject != null ? !mailsubject.equals(that.mailsubject) : that.mailsubject != null) return false;
+        if (mailto != null ? !mailto.equals(that.mailto) : that.mailto != null) return false;
+        if (usuarioactualiza != null ? !usuarioactualiza.equals(that.usuarioactualiza) : that.usuarioactualiza != null)
+            return false;
+        if (usuariocreacion != null ? !usuariocreacion.equals(that.usuariocreacion) : that.usuariocreacion != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (mailto != null ? mailto.hashCode() : 0);
+        result = 31 * result + (mailcc != null ? mailcc.hashCode() : 0);
+        result = 31 * result + (mailbcc != null ? mailbcc.hashCode() : 0);
+        result = 31 * result + (mailsubject != null ? mailsubject.hashCode() : 0);
+        result = 31 * result + (mailbody != null ? mailbody.hashCode() : 0);
+        result = 31 * result + (mailattach != null ? mailattach.hashCode() : 0);
+        result = 31 * result + (mailimages != null ? mailimages.hashCode() : 0);
+        result = 31 * result + (fechacreacion != null ? fechacreacion.hashCode() : 0);
+        result = 31 * result + (usuariocreacion != null ? usuariocreacion.hashCode() : 0);
+        result = 31 * result + (fechaactualiza != null ? fechaactualiza.hashCode() : 0);
+        result = 31 * result + (usuarioactualiza != null ? usuarioactualiza.hashCode() : 0);
+        result = 31 * result + (estatus != null ? estatus.hashCode() : 0);
+        return result;
+    }
+}

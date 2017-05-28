@@ -1,0 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.utilerias;
+
+import java.util.Properties;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author fox1yij
+ */
+public class ArchivoPropiedades {
+     public ArchivoPropiedades() {
+          
+    }
+
+    public Properties getProperties() {
+        try {
+            //se crea una instancia a la clase Properties
+            Properties propiedades = new Properties();
+            //se leen el archivo .properties
+            propiedades.load(getClass().getResourceAsStream("/properties/ES.properties"));
+            
+            //si el archivo de propiedades NO esta vacio retornan las propiedes leidas
+            if (!propiedades.isEmpty()) {
+                return propiedades;
+            } else {//sino  retornara NULL                 
+                return null;
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            return null;
+        }
+    }
+    
+    public Properties getPropertiesSeguridad() {
+        try {
+            //se crea una instancia a la clase Properties
+            Properties propiedades = new Properties();
+            //se leen el archivo .properties
+            propiedades.load(getClass().getResourceAsStream("/properties/seguridad.properties"));
+            
+            //si el archivo de propiedades NO esta vacio retornan las propiedes leidas
+            if (!propiedades.isEmpty()) {
+                return propiedades;
+            } else {//sino  retornara NULL                 
+                return null;
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            return null;
+        }
+    }
+   
+}

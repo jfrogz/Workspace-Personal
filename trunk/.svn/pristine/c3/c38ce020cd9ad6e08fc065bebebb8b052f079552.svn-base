@@ -1,0 +1,66 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.*;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@Entity
+@Table(name = "SEG_PERFIL", schema = "dbo", catalog = "SMS")
+public class SegPerfilEntity {
+    private int id;
+    private String perfil;
+    private short estatus;
+
+    @Id
+    @Column(name = "Id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Basic
+    @Column(name = "Perfil")
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
+    }
+
+    @Basic
+    @Column(name = "Estatus")
+    public short getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(short estatus) {
+        this.estatus = estatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SegPerfilEntity that = (SegPerfilEntity) o;
+
+        if (estatus != that.estatus) return false;
+        if (id != that.id) return false;
+        if (perfil != null ? !perfil.equals(that.perfil) : that.perfil != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (perfil != null ? perfil.hashCode() : 0);
+        result = 31 * result + (int) estatus;
+        return result;
+    }
+}

@@ -1,0 +1,389 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.context.ActionHandler;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.FlowActionHandler;
+import io.datafx.controller.flow.context.ViewFlowContext;
+import io.datafx.controller.util.VetoException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Callback;
+import javax.annotation.PostConstruct;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.security.dao.SegPermisoDAO;
+import mx.vw.swf.security.model.SegPerfil;
+import mx.vw.swf.security.model.SegPermiso;
+import mx.vw.swf.security.model.SegPermisoPerfil;
+import mx.vw.swf.security.model.SegPermisoPerfilId;
+import mx.vw.swf.security.service.CrearEditarFuncionesService;
+import mx.vw.swf.security.service.SegPermisoPerfilService;
+import mx.vw.swf.sms.utilerias.CheckBoxTableCell;
+import mx.vw.swf.sms.utilerias.Pantallas;
+import mx.vw.swf.sms.utilerias.Utilerias;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1x0d
+ */
+@ViewController("/fxml/security/AdministrarFuncionesPerfil.fxml")
+public class AdministrarFuncionesPerfilController extends MenuController {
+
+    @FXML
+    private TableView<SegPermiso> tablaPermisosPerfil;
+    @FXML
+    private TableColumn<SegPermiso, String> colPermiso, colEstatus;
+    @FXML
+    private TableColumn<SegPermiso, Long> colId;
+    @FXML
+    private TableColumn<SegPermiso, SegPermiso> colSelccione;
+    @FXML
+    private TableColumn<SegPermiso, SegPermiso> colAcciones;
+    @FXML
+    private BorderPane borderPermisosPerfil;
+    @FXML
+    private TextField flFuncion;
+    @FXML
+    private Label lbPerfil, lbFuncion, lbClaveNombrePerfil;
+    @FXML
+    private Button btnNuevoPermiso, btnAsignarFuncionesPerfil, btnRegresarAtras;
+    @FXML
+    private ComboBox comboPaginacion;
+    @FXML
+    private GridPane gridBotonesPermisos;
+    @ActionHandler
+    private FlowActionHandler actionHandlerPermiso;
+    @FXMLViewFlowContext
+    ViewFlowContext viewFlowContext;
+    private ObservableList<SegPermiso> listaPermisos;
+    private FilteredList<SegPermiso> filteredData;
+    private SortedList<SegPermiso> sortedData;
+    private Pagination pagination;
+    private String claveDescripcionPermiso;
+
+    private int renglonesMostrar = 5;
+    private Boolean eliminarPermisos = false;
+    public SegPerfil segPerfil;
+
+    @PostConstruct
+    public void postConstruct() {
+
+        super.postConstruct();
+        inicializaControles();
+        inicializaColumnasTabla();
+        inicializaColumnaAccion();
+        inicializaPermisos();
+        inicializaAccionesFiltros();
+
+    }
+
+    public void inicializaControles() {
+        if (viewFlowContext.getRegisteredObject("PERFILPERMISO") != null) {
+            segPerfil = (SegPerfil) viewFlowContext.getRegisteredObject("PERFILPERMISO");
+        }
+
+        if (segPerfil != null) {
+            lbClaveNombrePerfil.setVisible(true);
+            lbClaveNombrePerfil.setText(segPerfil.getPerfil());
+            lbPerfil.setVisible(true);
+            colSelccione.setVisible(true);
+            btnAsignarFuncionesPerfil.setVisible(true);
+            btnRegresarAtras.setVisible(true);
+        } else {
+            lbClaveNombrePerfil.setVisible(false);
+            lbClaveNombrePerfil.setText("");
+            lbPerfil.setVisible(false);
+            colSelccione.setVisible(false);
+            btnAsignarFuncionesPerfil.setVisible(false);
+            btnRegresarAtras.setVisible(false);
+        }
+
+        comboPaginacion.setItems(Utilerias.comboPaginacion());
+        comboPaginacion.getSelectionModel().select(0);
+        btnNuevoPermiso.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonNuevo"));
+        btnAsignarFuncionesPerfil.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonAsignarFunciones"));
+        btnRegresarAtras.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonRegresarAtras"));
+        lbPerfil.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaPerfil"));
+        lbFuncion.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaFuncion"));
+        comboPaginacion.setOnAction((event) -> {
+            renglonesMostrar = Integer.parseInt(comboPaginacion.getValue().toString());
+            inicializaPermisos();
+        });
+    }
+
+    public void inicializaColumnasTabla() {
+
+        colSelccione.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaSeleccione"));
+        colId.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaId"));
+        colPermiso.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaFuncion"));
+        colEstatus.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaEstatus"));
+        colAcciones.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaAcciones"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colPermiso.setCellValueFactory(new PropertyValueFactory<>("permiso"));
+        colEstatus.setCellValueFactory(new PropertyValueFactory<>("etiquetaEstatus"));
+
+    }
+
+    public void inicializaColumnaAccion() {
+        colAcciones.setSortable(false);
+        colSelccione.setSortable(false);
+        colSelccione.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SegPermiso, SegPermiso>, ObservableValue<SegPermiso>>() {
+            public ObservableValue<SegPermiso> call(TableColumn.CellDataFeatures<SegPermiso, SegPermiso> p) {
+                return new ReadOnlyObjectWrapper(p.getValue());
+            }
+        });
+
+        colSelccione.setCellFactory(new Callback<TableColumn<SegPermiso, SegPermiso>, TableCell<SegPermiso, SegPermiso>>() {
+            public TableCell<SegPermiso, SegPermiso> call(TableColumn<SegPermiso, SegPermiso> p) {
+                return new CheckBoxTableCell<SegPermiso, SegPermiso>();
+            }
+        });
+
+        colAcciones.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SegPermiso, SegPermiso>, ObservableValue<SegPermiso>>() {
+            public ObservableValue<SegPermiso> call(TableColumn.CellDataFeatures<SegPermiso, SegPermiso> p) {
+                return new ReadOnlyObjectWrapper(p.getValue());
+            }
+        });
+
+        colAcciones.setCellFactory(new Callback<TableColumn<SegPermiso, SegPermiso>, TableCell<SegPermiso, SegPermiso>>() {
+            @Override
+            public TableCell<SegPermiso, SegPermiso> call(TableColumn<SegPermiso, SegPermiso> param) {
+                TableCell<SegPermiso, SegPermiso> cell = new TableCell<SegPermiso, SegPermiso>() {
+                    FlowActionHandler actionHandler = actionHandlerPermiso;
+                    Button editar = new Button(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonEditar"));
+                    Button desactivar = new Button();
+                    Short desactiva = 0;
+
+                    @Override
+                    public void updateItem(SegPermiso item, boolean empty) {
+
+                        if (item != null) {
+                            editar.getStyleClass().add("botones");
+                            desactivar.getStyleClass().add("botones");
+                            HBox botones = new HBox(editar, desactivar);
+                            botones.setSpacing(10);
+                            setGraphic(botones);
+
+                            if (item.getEstatus() == 0) {
+                                desactivar.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonActivar"));
+                                desactiva = 1;
+                            } else {
+                                desactivar.setText(DataFXLauncher.mensajesPropertiesSeg.getProperty("botonDesactivar"));
+                                desactiva = 0;
+                            }
+
+                            editar.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+                                    creaEditaPermiso(item, t);
+                                }
+                            });
+                            desactivar.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+
+                                    Action response = Dialogs.create()
+                                            .title(DataFXLauncher.getProperty("Sistema.Nombre"))
+                                            .masthead(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosVacios"))
+                                            .message(DataFXLauncher.mensajesPropertiesSeg.getProperty("msDatosDesactivaPermiso"))
+                                            .actions(Dialog.ACTION_YES, Dialog.ACTION_CANCEL)
+                                            .showConfirm();
+                                    if (response == Dialog.ACTION_YES) {
+                                        item.setEstatus(desactiva);
+                                        desactivarFuncion(item);
+                                        inicializaPermisos();
+                                    }
+
+                                }
+                            });
+                        } else {
+                            setGraphic(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+
+    }
+
+    public void inicializaPermisos() {
+        setListaPermisos(FXCollections.observableArrayList(obtieneListaPermisos()));
+        filteredData = new FilteredList<>(getListaPermisos(), p -> true);
+        sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tablaPermisosPerfil.comparatorProperty());
+        inicializaTablaPermisos(sortedData);
+
+    }
+
+    public void inicializaTablaPermisos(SortedList<SegPermiso> lista) {
+        renglonesMostrar = Integer.parseInt(comboPaginacion.getValue().toString());
+        borderPermisosPerfil.setCenter(null);
+        if (lista.size() > 0) {
+            pagination = Utilerias.creaPaginacionTableView(renglonesMostrar, lista, tablaPermisosPerfil, gridBotonesPermisos);
+            borderPermisosPerfil.setCenter(pagination);
+        } else {
+            tablaPermisosPerfil.getItems().clear();
+            borderPermisosPerfil.setCenter(tablaPermisosPerfil);
+
+        }
+    }
+
+    public void inicializaAccionesFiltros() {
+        flFuncion.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(permiso -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (permiso.getPermiso().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+            inicializaTablaPermisos(sortedData);
+        });
+
+    }
+
+    public ObservableList<SegPermiso> obtieneListaPermisos() {
+        List<SegPermiso> lista = new SegPermisoDAO().findAll();
+        ObservableList<SegPermiso> listaol = FXCollections.observableArrayList();
+        for (SegPermiso item : lista) {
+            item.setSelected(false);
+            if (segPerfil != null) {
+                Iterator iter = item.getSegPermisoPerfils().iterator();
+                while (iter.hasNext()) {
+                    SegPermisoPerfil h = (SegPermisoPerfil) iter.next();
+                    if (segPerfil.getId() == h.getSegPerfil().getId()) {
+                        item.setSelected(true);
+                    }
+
+                }
+            }
+            listaol.add(item);
+        }
+        return listaol;
+    }
+
+    public void regresa(ActionEvent event) {
+        try {
+            actionHandler.navigate(AdministrarPerfilesController.class);
+        } catch (VetoException | FlowException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void desactivarFuncion(SegPermiso permiso) {
+        new CrearEditarFuncionesService().actualizarPermiso(permiso);
+    }
+
+    public void creaEditaPermiso(SegPermiso permiso, ActionEvent ev) {
+        String titulo = permiso != null ? DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaEditarPermiso") : DataFXLauncher.mensajesPropertiesSeg.getProperty("etiquetaNuevoPermiso");
+        Stage stage;
+        try {
+
+            CrearEditarFuncionesController controller = new CrearEditarFuncionesController();
+            controller.setPermiso(permiso);
+            controller.setAdministrarFuncionesPerfilController(this);
+            stage = Utilerias.nuevaVentana(Pantallas.FXML_CREAR_EDITAR_PERMISOS, controller, titulo);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setResizable(false);
+            stage.initOwner(((Node) ev.getSource()).getScene().getWindow());
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(AdministrarFuncionesPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void asignarFunciones(ActionEvent event) {
+        ObservableList<SegPermiso> lista = sortedData;
+        boolean bandera = false;
+        if (lista.size() > 0) {
+            List<SegPermisoPerfil> permisosPerfiles = new ArrayList<>();
+            for (SegPermiso segPermiso : lista) {
+                if (segPermiso.getSelected()) {
+                    bandera = true;
+                    SegPermisoPerfilId segPermisoPerfilId = new SegPermisoPerfilId();
+                    segPermisoPerfilId.setIdPerfil(segPerfil.getId());
+                    segPermisoPerfilId.setIdPermiso(segPermiso.getId());
+                    SegPermisoPerfil segPermisoPerfil = new SegPermisoPerfil();
+                    segPermisoPerfil.setId(segPermisoPerfilId);
+                    segPermisoPerfil.setSegPermiso(segPermiso);
+                    segPermisoPerfil.setSegPerfil(segPerfil);
+                    permisosPerfiles.add(segPermisoPerfil);
+
+                }
+            }
+            if (bandera == true) {
+                new SegPermisoPerfilService().guardaPermisoPerfil(permisosPerfiles, segPerfil);
+            } else {
+                new SegPermisoPerfilService().eliminarPermisosPerfil(segPerfil);
+            }
+            inicializaPermisos();
+        }
+
+    }
+
+    public void nuevoPermiso(ActionEvent event) {
+        creaEditaPermiso(null, event);
+    }
+
+    public String getClaveDescripcionPermiso() {
+        return claveDescripcionPermiso;
+    }
+
+    public void setClaveDescripcionPermiso(String claveDescripcionPermiso) {
+        this.claveDescripcionPermiso = claveDescripcionPermiso;
+    }
+
+    public ObservableList<SegPermiso> getListaPermisos() {
+        return listaPermisos;
+    }
+
+    public void setListaPermisos(ObservableList<SegPermiso> listaPermisos) {
+        this.listaPermisos = listaPermisos;
+    }
+
+}

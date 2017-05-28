@@ -1,0 +1,136 @@
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import javafx.animation.FadeTransition;
+import javafx.application.Application;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.control.Control;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import mx.vw.swf.fwk.dao.FwkCatContentDAO;
+import mx.vw.swf.fwk.model.FwkCatContent;
+import mx.vw.swf.sms.utilerias.ValidatorHandler;
+import org.controlsfx.validation.ValidationMessage;
+import org.controlsfx.validation.ValidationResult;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
+
+import javax.annotation.PreDestroy;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+import javafx.scene.control.TextInputControl;
+
+/**
+ * Created by dzm152z on 05/03/2015.
+ */
+public abstract class Controller extends Application {
+    public static final String FXML_BASE_PATH = "fxml";
+    public static final String FXML_FILE_EXTENSION = "fxml";
+    public static final String DOC_VIEW_EXTENSION = "html";
+    @FXML
+    private Label errorMessageLabel;
+
+    protected ValidationSupport validationSupport = new ValidationSupport();
+
+    private ValidatorHandler validatorHandler = new ValidatorHandler();
+    {
+        validatorHandler.setErrorDisplayControl(errorMessageLabel);
+        validatorHandler.setValidationSupport(validationSupport);
+    }
+
+    /**
+     * <p>
+     *     Retrieves the value of the referenced FXML file of the given contoller.
+     *     Of course this will not work for controllers with no view file specified.
+     * </p>
+     * @return
+     */
+    public String getFXMLViewName() {
+        ViewController annotation = this.getClass().getAnnotation(ViewController.class);
+        return null == annotation ? null : annotation.value();
+    }
+
+    /**
+     * <p>
+     *     Simply executes the validationSupport.getValidationResult() and displays (if any)
+     *     all messages in the global error message Label
+     * </p>
+     * @return
+     */
+    public boolean displayValidationResult(boolean muestraMensaje) {
+        return validatorHandler.displayValidationResult(getErrorMessageDisplayControl(), muestraMensaje);
+    }
+
+    /**
+     * <p>
+     *     Wrapper for validationSupport.registerValidator
+     * </p>
+     * @param control
+     * @param validator
+     */
+    public void registerValidator(Control control, Validator...validator) {        
+        Arrays.asList(validator).stream().forEach((val) ->
+            validationSupport.registerValidator(control, val)
+            
+                
+        );
+    }
+    public void unregisterValidator(Control control, Validator...validator) { 
+       
+        Arrays.asList(validator).stream().forEach((val) ->
+            validationSupport.registerValidator(null, null)
+            
+                
+        );
+    }
+
+    /**
+     * <p>
+     *
+     * </p>
+     * @param message
+     */
+    protected void displayErrorMessage(String message) {
+        errorMessageLabel.setText(message);
+    }
+
+    public Control getErrorMessageDisplayControl() {
+        return this.errorMessageLabel;
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // Nothing to do
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        System.out.println("@Controller.preDestroy()");
+        validatorHandler.clear();
+    }
+
+    public void viewHelp(Event event) {
+        System.out.println("@Controller.viewHelp()");
+        List<FwkCatContent> fwkCatContents = new FwkCatContentDAO().findByProperty(FwkCatContentDAO.VALUE, "HOST.BASEURL");
+        if (null != fwkCatContents && !fwkCatContents.isEmpty()) {
+            String baseUrl = fwkCatContents.iterator().next().getDescription();
+            baseUrl = baseUrl.endsWith("/") ? baseUrl : baseUrl.concat("/");
+            String view = getFXMLViewName();
+
+            view = view.startsWith("/") ? view.substring(1) : view;
+
+            int firstIndexOf = view.indexOf(FXML_BASE_PATH);
+            String viewNoBase = view.substring(firstIndexOf + FXML_BASE_PATH.length());
+            int lastIndexOf = viewNoBase.lastIndexOf("." + FXML_FILE_EXTENSION);
+            String viewNoBaseNoExtension = viewNoBase.substring(0, lastIndexOf);
+            viewNoBaseNoExtension = viewNoBaseNoExtension.startsWith("/") ? viewNoBaseNoExtension.substring(1) : viewNoBaseNoExtension;
+            String finalDocUrl = baseUrl.concat(viewNoBaseNoExtension);
+            finalDocUrl = finalDocUrl.concat("." + DOC_VIEW_EXTENSION);
+            getHostServices().showDocument(finalDocUrl);
+        }
+    }
+}

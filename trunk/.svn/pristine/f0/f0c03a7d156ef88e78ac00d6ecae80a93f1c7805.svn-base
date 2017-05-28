@@ -1,0 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.service;
+
+import mx.vw.swf.fwk.model.EntityManagerHelper;
+import mx.vw.swf.sms.dao.SmsMovimientoDAO;
+import mx.vw.swf.sms.model.SmsMovimiento;
+
+/**
+ *
+ * @author fox1yij
+ */
+public class SmsMovimientoService {
+
+    private SmsMovimientoDAO smdao = new SmsMovimientoDAO();
+
+    public void save(SmsMovimiento entity) {
+        EntityManagerHelper.beginTransaction();
+        smdao.save(entity);
+        EntityManagerHelper.commit();
+        EntityManagerHelper.closeEntityManager();        
+    }
+}

@@ -1,0 +1,69 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.service;
+
+import java.util.List;
+import java.util.logging.Level;
+import javax.persistence.EntityManager;
+import mx.vw.swf.fwk.model.EntityManagerHelper;
+import mx.vw.swf.security.dao.SegPerfilUsrDAO;
+import mx.vw.swf.security.model.SegPerfilUsr;
+import mx.vw.swf.security.model.SegUsuario;
+
+/**
+ *
+ * @author fox1x0d
+ */
+public class SegPerfilUsrService {
+
+    SegPerfilUsrDAO segPerfilUsrDAO = new SegPerfilUsrDAO();
+
+    public void guardaPerfilesUsuario(List<SegPerfilUsr> perfilesUsuario,SegUsuario segUsuario) {
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.log("saving SegPerfilUsr instance", Level.INFO, null);
+        try {
+            List<SegPerfilUsr> perfilesUsuarioEliminar = segPerfilUsrDAO.findByProperty("segUsuario",segUsuario);
+           
+            for(SegPerfilUsr segPerfilUsr:perfilesUsuarioEliminar){
+                segPerfilUsrDAO.delete(segPerfilUsr);
+            }
+              /*  if(perfilesUsuarioEliminar.size()>0){
+                segPerfilUsrDAO.deleteQuery(segUsuario.getId());
+                }*/
+                
+            EntityManagerHelper.getEntityManager().flush();
+            
+            for (SegPerfilUsr perfilUsuario : perfilesUsuario) {
+                segPerfilUsrDAO.save(perfilUsuario);
+            }
+            EntityManagerHelper.commit();
+            EntityManagerHelper.getEntityManager().clear();
+        } catch (RuntimeException re) {
+            EntityManagerHelper.log("save failed", Level.SEVERE, re);
+            throw re;
+        } catch (Exception re) {
+            EntityManagerHelper.log("Fallo", Level.SEVERE, re);
+
+        }
+    }
+    
+    public void eliminaPerfilesUsuario(SegUsuario segUsuario) {
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.log("saving SegPerfilUsr instance", Level.INFO, null);
+        try {
+        segPerfilUsrDAO.deleteQuery(segUsuario.getId());
+        EntityManagerHelper.commit();
+        EntityManagerHelper.closeEntityManager();
+         } catch (RuntimeException re) {
+            EntityManagerHelper.log("save failed", Level.SEVERE, re);
+            throw re;
+        } catch (Exception re) {
+            EntityManagerHelper.log("Fallo", Level.SEVERE, re);
+
+        }
+    }
+    
+}

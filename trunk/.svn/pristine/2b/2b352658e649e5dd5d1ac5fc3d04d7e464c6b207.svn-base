@@ -1,0 +1,96 @@
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import javafx.animation.FadeTransition;
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.scene.control.Control;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import mx.vw.swf.sms.utilerias.ValidatorHandler;
+import org.controlsfx.validation.ValidationMessage;
+import org.controlsfx.validation.ValidationResult;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
+
+import javax.annotation.PreDestroy;
+import java.util.Arrays;
+import java.util.Collection;
+
+/**
+ * Created by dzm152z on 05/03/2015.
+ */
+public abstract class Controller extends Application {
+    @FXML
+    private Label errorMessageLabel;
+
+    protected ValidationSupport validationSupport = new ValidationSupport();
+
+    private ValidatorHandler validatorHandler = new ValidatorHandler();
+    {
+        validatorHandler.setErrorDisplayControl(errorMessageLabel);
+        validatorHandler.setValidationSupport(validationSupport);
+    }
+
+    /**
+     * <p>
+     *     Retrieves the value of the referenced FXML file of the given contoller.
+     *     Of course this will not work for controllers with no view file specified.
+     * </p>
+     * @return
+     */
+    public String getFXMLViewName() {
+        ViewController annotation = this.getClass().getAnnotation(ViewController.class);
+        return null == annotation ? null : annotation.value();
+    }
+
+    /**
+     * <p>
+     *     Simply executes the validationSupport.getValidationResult() and displays (if any)
+     *     all messages in the global error message Label
+     * </p>
+     * @return
+     */
+    public boolean displayValidationResult() {
+        return validatorHandler.displayValidationResult(getErrorMessageDisplayControl());
+    }
+
+    /**
+     * <p>
+     *     Wrapper for validationSupport.registerValidator
+     * </p>
+     * @param control
+     * @param validator
+     */
+    public void registerValidator(Control control, Validator...validator) {
+        Arrays.asList(validator).stream().forEach((val) ->
+            validationSupport.registerValidator(control, val)
+        );
+    }
+
+    /**
+     * <p>
+     *
+     * </p>
+     * @param message
+     */
+    protected void displayErrorMessage(String message) {
+        errorMessageLabel.setText(message);
+    }
+
+    public Control getErrorMessageDisplayControl() {
+        return this.errorMessageLabel;
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // Nothing to do
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        System.out.println("@Controller.preDestroy()");
+        validatorHandler.clear();
+    }
+}

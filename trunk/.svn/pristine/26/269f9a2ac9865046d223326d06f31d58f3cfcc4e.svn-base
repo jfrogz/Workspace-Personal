@@ -1,0 +1,21 @@
+package mx.vw.swf.security.controller;
+
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+
+import java.io.IOException;
+
+/**
+ * Created by dzm152z on 08/01/2015.
+ */
+public class LoginController {
+    @FXML private TextField inputUser;
+    @FXML private PasswordField inputPassword;
+
+    public void login(Event event) throws IOException {
+        System.out.println(inputUser.getText());
+        System.out.println(inputPassword.getText());
+    }
+}

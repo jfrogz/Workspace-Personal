@@ -1,0 +1,43 @@
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import javafx.fxml.FXML;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.StackPane;
+import mx.vw.swf.sms.dataacess.FwkActionItemDAO;
+import mx.vw.swf.sms.model.FwkActionItem;
+
+import javax.annotation.PostConstruct;
+import java.util.List;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+//@FXMLController("/fxml/security/Main.fxml")
+@ViewController("/fxml/security/Main.fxml")
+public class WelcomeController {
+
+    @FXML
+    StackPane mainStack;
+
+    @FXML
+    MenuBar welcomeMenuBar;
+
+    @PostConstruct
+    public void postConstruct() {
+        welcomeMenuBar.getMenus().clear();
+        List<FwkActionItem> items = new FwkActionItemDAO().findAllForRendering();
+        System.out.println(items.size());
+        items.stream().map((item) -> {
+            Menu menu = new Menu(item.getLabel());
+            item.getChildren().stream().forEach((child) -> {
+                menu.getItems().add(new MenuItem(child.getLabel()));
+            });
+            return menu;
+        }).forEach((menu) -> {
+            welcomeMenuBar.getMenus().add(menu);
+        });
+    }
+}

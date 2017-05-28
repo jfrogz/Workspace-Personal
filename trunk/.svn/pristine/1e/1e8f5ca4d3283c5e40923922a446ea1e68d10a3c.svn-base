@@ -1,0 +1,86 @@
+package mx.vw.swf.sms.model;
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+/**
+ * AbstractSegPermiso entity provides the base persistence definition of the
+ * SegPermiso entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractSegPermiso implements java.io.Serializable {
+
+    // Fields
+
+    private Integer id;
+    private String permiso;
+    private Short estatus;
+    private Set<SegPermisoPerfil> segPermisoPerfils = new HashSet<SegPermisoPerfil>(
+            0);
+
+    // Constructors
+
+    /** default constructor */
+    public AbstractSegPermiso() {
+    }
+
+    /** minimal constructor */
+    public AbstractSegPermiso(Integer id, Short estatus) {
+        this.id = id;
+        this.estatus = estatus;
+    }
+
+    /** full constructor */
+    public AbstractSegPermiso(Integer id, String permiso, Short estatus,
+            Set<SegPermisoPerfil> segPermisoPerfils) {
+        this.id = id;
+        this.permiso = permiso;
+        this.estatus = estatus;
+        this.segPermisoPerfils = segPermisoPerfils;
+    }
+
+    // Property accessors
+    @Id
+    @Column(name = "Id", unique = true, nullable = false, precision = 5, scale = 0)
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Column(name = "Permiso", unique = true, length = 150)
+    public String getPermiso() {
+        return this.permiso;
+    }
+
+    public void setPermiso(String permiso) {
+        this.permiso = permiso;
+    }
+
+    @Column(name = "Estatus", nullable = false)
+    public Short getEstatus() {
+        return this.estatus;
+    }
+
+    public void setEstatus(Short estatus) {
+        this.estatus = estatus;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "segPermiso")
+    public Set<SegPermisoPerfil> getSegPermisoPerfils() {
+        return this.segPermisoPerfils;
+    }
+
+    public void setSegPermisoPerfils(Set<SegPermisoPerfil> segPermisoPerfils) {
+        this.segPermisoPerfils = segPermisoPerfils;
+    }
+
+}

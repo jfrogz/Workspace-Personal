@@ -1,0 +1,31 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.sms.utilerias;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+/**
+ *
+ * @author fox1x0d
+ */
+public class PropertiesSeguridad {
+    public Properties propiedadesSeguridad(){
+        Properties prop = new Properties();
+        InputStream is = null;
+ 
+        try {
+            is = new FileInputStream("seguridad.properties");
+            prop.load(is);
+        } catch(IOException e) {
+            System.out.println(e.toString());
+        }
+        return prop;
+    }    
+    
+}

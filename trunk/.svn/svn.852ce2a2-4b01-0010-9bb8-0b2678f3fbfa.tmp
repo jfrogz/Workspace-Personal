@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="20.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.vw.swf.sms.controller.FooterTemplateController">
+    <bottom>
+      <BorderPane prefHeight="25.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <right>
+            <Hyperlink text="Software Factory" BorderPane.alignment="CENTER" />
+         </right>
+         <left>
+            <Label fx:id="lbVersion" text="Version 1.0." BorderPane.alignment="CENTER" />
+         </left>
+      </BorderPane>
+   </bottom>
+</BorderPane>

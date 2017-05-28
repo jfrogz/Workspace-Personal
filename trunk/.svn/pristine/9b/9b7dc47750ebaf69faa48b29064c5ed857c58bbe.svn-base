@@ -1,0 +1,329 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@Entity
+@javax.persistence.Table(name = "SMS_MOVIMIENTO", schema = "dbo", catalog = "SMS")
+public class SmsMovimientoEntity {
+    private long id;
+
+    @Id
+    @javax.persistence.Column(name = "Id")
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    private short esMovCliente;
+
+    @Basic
+    @javax.persistence.Column(name = "EsMovCliente")
+    public short getEsMovCliente() {
+        return esMovCliente;
+    }
+
+    public void setEsMovCliente(short esMovCliente) {
+        this.esMovCliente = esMovCliente;
+    }
+
+    private int idProducto;
+
+    @Basic
+    @javax.persistence.Column(name = "IdProducto")
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    private String idCteProvSap;
+
+    @Basic
+    @javax.persistence.Column(name = "IdCteProvSAP")
+    public String getIdCteProvSap() {
+        return idCteProvSap;
+    }
+
+    public void setIdCteProvSap(String idCteProvSap) {
+        this.idCteProvSap = idCteProvSap;
+    }
+
+    private String idProductoSap;
+
+    @Basic
+    @javax.persistence.Column(name = "IdProductoSAP")
+    public String getIdProductoSap() {
+        return idProductoSap;
+    }
+
+    public void setIdProductoSap(String idProductoSap) {
+        this.idProductoSap = idProductoSap;
+    }
+
+    private String placaVehiculo;
+
+    @Basic
+    @javax.persistence.Column(name = "PlacaVehiculo")
+    public String getPlacaVehiculo() {
+        return placaVehiculo;
+    }
+
+    public void setPlacaVehiculo(String placaVehiculo) {
+        this.placaVehiculo = placaVehiculo;
+    }
+
+    private String destino;
+
+    @Basic
+    @javax.persistence.Column(name = "Destino")
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    private String factura;
+
+    @Basic
+    @javax.persistence.Column(name = "Factura")
+    public String getFactura() {
+        return factura;
+    }
+
+    public void setFactura(String factura) {
+        this.factura = factura;
+    }
+
+    private Timestamp fechaEntrada;
+
+    @Basic
+    @javax.persistence.Column(name = "FechaEntrada")
+    public Timestamp getFechaEntrada() {
+        return fechaEntrada;
+    }
+
+    public void setFechaEntrada(Timestamp fechaEntrada) {
+        this.fechaEntrada = fechaEntrada;
+    }
+
+    private BigDecimal pesoEntrada;
+
+    @Basic
+    @javax.persistence.Column(name = "PesoEntrada")
+    public BigDecimal getPesoEntrada() {
+        return pesoEntrada;
+    }
+
+    public void setPesoEntrada(BigDecimal pesoEntrada) {
+        this.pesoEntrada = pesoEntrada;
+    }
+
+    private Timestamp fechaSalida;
+
+    @Basic
+    @javax.persistence.Column(name = "FechaSalida")
+    public Timestamp getFechaSalida() {
+        return fechaSalida;
+    }
+
+    public void setFechaSalida(Timestamp fechaSalida) {
+        this.fechaSalida = fechaSalida;
+    }
+
+    private BigDecimal pesoSalida;
+
+    @Basic
+    @javax.persistence.Column(name = "PesoSalida")
+    public BigDecimal getPesoSalida() {
+        return pesoSalida;
+    }
+
+    public void setPesoSalida(BigDecimal pesoSalida) {
+        this.pesoSalida = pesoSalida;
+    }
+
+    private short basculaContingencia;
+
+    @Basic
+    @javax.persistence.Column(name = "BasculaContingencia")
+    public short getBasculaContingencia() {
+        return basculaContingencia;
+    }
+
+    public void setBasculaContingencia(short basculaContingencia) {
+        this.basculaContingencia = basculaContingencia;
+    }
+
+    private String guardiaContingencia;
+
+    @Basic
+    @javax.persistence.Column(name = "GuardiaContingencia")
+    public String getGuardiaContingencia() {
+        return guardiaContingencia;
+    }
+
+    public void setGuardiaContingencia(String guardiaContingencia) {
+        this.guardiaContingencia = guardiaContingencia;
+    }
+
+    private BigDecimal pesoNeto;
+
+    @Basic
+    @javax.persistence.Column(name = "PesoNeto")
+    public BigDecimal getPesoNeto() {
+        return pesoNeto;
+    }
+
+    public void setPesoNeto(BigDecimal pesoNeto) {
+        this.pesoNeto = pesoNeto;
+    }
+
+    private BigDecimal pesoTara;
+
+    @Basic
+    @javax.persistence.Column(name = "PesoTara")
+    public BigDecimal getPesoTara() {
+        return pesoTara;
+    }
+
+    public void setPesoTara(BigDecimal pesoTara) {
+        this.pesoTara = pesoTara;
+    }
+
+    private short enviarSap;
+
+    @Basic
+    @javax.persistence.Column(name = "EnviarSAP")
+    public short getEnviarSap() {
+        return enviarSap;
+    }
+
+    public void setEnviarSap(short enviarSap) {
+        this.enviarSap = enviarSap;
+    }
+
+    private short enviadoSap;
+
+    @Basic
+    @javax.persistence.Column(name = "EnviadoSAP")
+    public short getEnviadoSap() {
+        return enviadoSap;
+    }
+
+    public void setEnviadoSap(short enviadoSap) {
+        this.enviadoSap = enviadoSap;
+    }
+
+    private Timestamp fechaEnviadoSap;
+
+    @Basic
+    @javax.persistence.Column(name = "FechaEnviadoSAP")
+    public Timestamp getFechaEnviadoSap() {
+        return fechaEnviadoSap;
+    }
+
+    public void setFechaEnviadoSap(Timestamp fechaEnviadoSap) {
+        this.fechaEnviadoSap = fechaEnviadoSap;
+    }
+
+    private short cancelado;
+
+    @Basic
+    @javax.persistence.Column(name = "Cancelado")
+    public short getCancelado() {
+        return cancelado;
+    }
+
+    public void setCancelado(short cancelado) {
+        this.cancelado = cancelado;
+    }
+
+    private String motivoCancela;
+
+    @Basic
+    @javax.persistence.Column(name = "MotivoCancela")
+    public String getMotivoCancela() {
+        return motivoCancela;
+    }
+
+    public void setMotivoCancela(String motivoCancela) {
+        this.motivoCancela = motivoCancela;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SmsMovimientoEntity that = (SmsMovimientoEntity) o;
+
+        if (basculaContingencia != that.basculaContingencia) return false;
+        if (cancelado != that.cancelado) return false;
+        if (enviadoSap != that.enviadoSap) return false;
+        if (enviarSap != that.enviarSap) return false;
+        if (esMovCliente != that.esMovCliente) return false;
+        if (id != that.id) return false;
+        if (idProducto != that.idProducto) return false;
+        if (destino != null ? !destino.equals(that.destino) : that.destino != null) return false;
+        if (factura != null ? !factura.equals(that.factura) : that.factura != null) return false;
+        if (fechaEntrada != null ? !fechaEntrada.equals(that.fechaEntrada) : that.fechaEntrada != null) return false;
+        if (fechaEnviadoSap != null ? !fechaEnviadoSap.equals(that.fechaEnviadoSap) : that.fechaEnviadoSap != null)
+            return false;
+        if (fechaSalida != null ? !fechaSalida.equals(that.fechaSalida) : that.fechaSalida != null) return false;
+        if (guardiaContingencia != null ? !guardiaContingencia.equals(that.guardiaContingencia) : that.guardiaContingencia != null)
+            return false;
+        if (idCteProvSap != null ? !idCteProvSap.equals(that.idCteProvSap) : that.idCteProvSap != null) return false;
+        if (idProductoSap != null ? !idProductoSap.equals(that.idProductoSap) : that.idProductoSap != null)
+            return false;
+        if (motivoCancela != null ? !motivoCancela.equals(that.motivoCancela) : that.motivoCancela != null)
+            return false;
+        if (pesoEntrada != null ? !pesoEntrada.equals(that.pesoEntrada) : that.pesoEntrada != null) return false;
+        if (pesoNeto != null ? !pesoNeto.equals(that.pesoNeto) : that.pesoNeto != null) return false;
+        if (pesoSalida != null ? !pesoSalida.equals(that.pesoSalida) : that.pesoSalida != null) return false;
+        if (pesoTara != null ? !pesoTara.equals(that.pesoTara) : that.pesoTara != null) return false;
+        if (placaVehiculo != null ? !placaVehiculo.equals(that.placaVehiculo) : that.placaVehiculo != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) esMovCliente;
+        result = 31 * result + idProducto;
+        result = 31 * result + (idCteProvSap != null ? idCteProvSap.hashCode() : 0);
+        result = 31 * result + (idProductoSap != null ? idProductoSap.hashCode() : 0);
+        result = 31 * result + (placaVehiculo != null ? placaVehiculo.hashCode() : 0);
+        result = 31 * result + (destino != null ? destino.hashCode() : 0);
+        result = 31 * result + (factura != null ? factura.hashCode() : 0);
+        result = 31 * result + (fechaEntrada != null ? fechaEntrada.hashCode() : 0);
+        result = 31 * result + (pesoEntrada != null ? pesoEntrada.hashCode() : 0);
+        result = 31 * result + (fechaSalida != null ? fechaSalida.hashCode() : 0);
+        result = 31 * result + (pesoSalida != null ? pesoSalida.hashCode() : 0);
+        result = 31 * result + (int) basculaContingencia;
+        result = 31 * result + (guardiaContingencia != null ? guardiaContingencia.hashCode() : 0);
+        result = 31 * result + (pesoNeto != null ? pesoNeto.hashCode() : 0);
+        result = 31 * result + (pesoTara != null ? pesoTara.hashCode() : 0);
+        result = 31 * result + (int) enviarSap;
+        result = 31 * result + (int) enviadoSap;
+        result = 31 * result + (fechaEnviadoSap != null ? fechaEnviadoSap.hashCode() : 0);
+        result = 31 * result + (int) cancelado;
+        result = 31 * result + (motivoCancela != null ? motivoCancela.hashCode() : 0);
+        return result;
+    }
+}

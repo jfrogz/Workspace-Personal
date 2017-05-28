@@ -1,0 +1,28 @@
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.ViewController;
+import io.datafx.controller.context.FXMLViewContext;
+import io.datafx.controller.context.ViewContext;
+import java.io.Serializable;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
+import javax.annotation.PostConstruct;
+import mx.vw.swf.security.model.SegUsuario;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+//@FXMLController("/fxml/security/Main.fxml")
+@ViewController("/fxml/security/Main.fxml")
+public class WelcomeController extends MenuController implements Serializable{
+    
+    @PostConstruct
+    public void postContruct ()
+    {
+        super.postConstruct();  
+        setMovimiento("");
+    }
+
+    
+}

@@ -1,0 +1,27 @@
+package mx.vw.swf.security.service;
+
+import mx.com.vw.swf.exception.SWFLoginException;
+import mx.vw.fwk.security.ldap.AutenticacionActiveDirectory;
+
+import javax.naming.NamingException;
+
+/**
+ * Created by dzm152z on 16/02/2015.
+ */
+public class LoginService extends SWFStandaloneService {
+
+    String ldapdomain = "NA.VWG";
+
+    /**
+     * <p>
+     * Will attempt to perform a LDAP login
+     * </p>
+     *
+     * @param username
+     * @param password
+     */
+    public boolean tryLogin(String username, String password) throws NamingException, SWFLoginException {
+        AutenticacionActiveDirectory aad = new AutenticacionActiveDirectory(ldapdomain);
+        return aad.autenticar(username, password);
+    }
+}

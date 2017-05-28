@@ -1,0 +1,128 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mx.vw.swf.security.controller;
+
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import mx.vw.swf.security.dao.SegPerfilDAO;
+import mx.vw.swf.security.model.SegPerfil;
+import mx.vw.swf.security.service.CrearEditarPerfilService;
+import mx.vw.swf.sms.utilerias.Utilerias;
+
+/**
+ * FXML Controller class
+ *
+ * @author fox1x0d
+ */
+public class CrearEditarPerfilController implements Initializable {
+
+    private SegPerfil perfil;
+    private AdministrarPerfilesController administrarPerfilesController;
+    @FXML private TextField txtDesPerfil;
+    @FXML private CheckBox  chxEstatusPerfil;
+    @FXML private Label     id,idEtiqueta;
+    @FXML private Button    btnGuardarPerfil;
+    private Short status=1;
+
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        if(this.getPerfil()!=null){
+            
+            id.setVisible(true);
+            idEtiqueta.setVisible(true);
+            idEtiqueta.setText(this.getPerfil().getId().toString());
+            txtDesPerfil.setText(this.getPerfil().getPerfil());            
+            chxEstatusPerfil.setSelected(this.getPerfil().getEstatus()!=1?false:true);
+            btnGuardarPerfil.setText("Actualizar");
+                
+        }
+        else{
+            id.setVisible(false);
+            idEtiqueta.setVisible(false);
+            idEtiqueta.setText("");
+            btnGuardarPerfil.setText("Guardar");
+        }
+    }
+    public void guardarPerfil(ActionEvent event){
+      
+            boolean insert=false;           
+            
+            SegPerfil seg;
+            
+            if(this.getPerfil()!=null){
+                seg= this.getPerfil();
+                insert=false;
+             }
+             else{
+                seg= new SegPerfil();
+                insert=true;
+             }
+                
+             if(txtDesPerfil.getText().length()==0){
+              //etiquetaError.setText("Todos los campos son obligatorios.");
+             }else{
+                 
+                //etiquetaError.setText("");
+                seg.setPerfil(txtDesPerfil.getText().trim());                
+                seg.setEstatus(chxEstatusPerfil.isSelected()==true?status:0);  
+                
+                    if(insert==true){
+                        List<SegPerfil> lista = new SegPerfilDAO().findByPerfil(txtDesPerfil.getText().trim());
+                        if(lista.size()>0){
+                          //etiquetaError.setText("Ya existe un registro con el mismo Usuario, intente nuevamente.");
+                        }
+                        else{
+                          //etiquetaError.setText("");
+                          System.out.println("INSERT: "+insert);
+                          crearEditarPerfil(seg, insert, event);
+
+                        }
+                    }else{
+                        crearEditarPerfil(seg, insert, event); 
+                    }
+                
+            }
+      
+        
+    }
+    public void crearEditarPerfil(SegPerfil seg, boolean opcion, ActionEvent event){
+        if(opcion==true){
+          new CrearEditarPerfilService().guardarPerfil(seg);
+        }else{
+          new CrearEditarPerfilService().actualizarPerfil(seg);
+        }        
+        this.getAdministrarPerfilesController().inicializaPerfiles();
+           cerrar(event);
+       
+   }
+    public SegPerfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(SegPerfil perfil) {
+        this.perfil = perfil;
+    }
+    public AdministrarPerfilesController getAdministrarPerfilesController() {
+        return administrarPerfilesController;
+    }
+
+    public void setAdministrarPerfilesController(AdministrarPerfilesController administrarPerfilesController) {
+        this.administrarPerfilesController = administrarPerfilesController;
+    }
+    public void cerrar(ActionEvent event){
+         Utilerias.cerrar(event);
+    }
+}

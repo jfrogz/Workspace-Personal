@@ -1,0 +1,45 @@
+package mx.vw.swf.security.controller;
+
+import io.datafx.controller.FXMLController;
+import javafx.fxml.FXML;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.StackPane;
+import mx.vw.swf.cdi.DataFXLauncher;
+import mx.vw.swf.sms.model.FwkActionItemEntity;
+
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import java.util.List;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@FXMLController("/fxml/security/Contenedor.fxml")
+public class WelcomeController {
+
+    @FXML
+    StackPane mainStack;
+
+    @FXML
+    MenuBar welcomeMenuBar;
+
+    @PostConstruct
+    public void postConstruct() {
+        welcomeMenuBar.getMenus().clear();
+        EntityManager em = DataFXLauncher.emf.createEntityManager();
+        List<FwkActionItemEntity> items = em.createQuery("select distinct i from FwkActionItemEntity i left join fetch i.children where i.parent is null")
+                                            .getResultList();
+        System.out.println(items.size());
+        for (FwkActionItemEntity item : items) {
+            Menu menu = new Menu(item.getLabel());
+            for (FwkActionItemEntity child : item.getChildren()) {
+                menu.getItems().add(new MenuItem(child.getLabel()));
+            }
+            welcomeMenuBar.getMenus().add(menu);
+        }
+        em.clear();
+        em.close();
+    }
+}

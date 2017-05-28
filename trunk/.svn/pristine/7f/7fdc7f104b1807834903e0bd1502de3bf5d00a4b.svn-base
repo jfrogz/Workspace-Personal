@@ -1,0 +1,25 @@
+# To change this license header, choose License Headers in Project Properties.
+# To change this template file, choose Tools | Templates
+# and open the template in the editor.
+
+#Etiquetas
+etiquetaId=ID
+etiquetaUsuario=Usuario
+etiquetaNombre=Nombre
+etiquetaCorreo=Correo Electr\u00f3nico
+etiquetaEstatus=Estatus
+etiquetaAcciones=Acciones
+etiquetaPerfil=Perfil
+etiquetaFuncion=Funci\u00f3n
+etiquetaSeleccione=Seleccione
+
+#Botones
+botonNuevo=Nuevo
+botonEditar=Editar
+botonActivar=Activar
+botonDesactivar=Desactivar
+botonAsignarPerfiles=Asignar Perfiles
+botonAsignarFunciones=Asignar Funciones
+
+
+

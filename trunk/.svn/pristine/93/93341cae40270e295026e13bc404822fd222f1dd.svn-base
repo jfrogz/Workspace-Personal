@@ -1,0 +1,53 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.io.Serializable;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+public class SegPerfilUsrEntityPK implements Serializable {
+    private int idUsuario;
+    private int idPerfil;
+
+    @Column(name = "IdUsuario")
+    @Id
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    @Column(name = "IdPerfil")
+    @Id
+    public int getIdPerfil() {
+        return idPerfil;
+    }
+
+    public void setIdPerfil(int idPerfil) {
+        this.idPerfil = idPerfil;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SegPerfilUsrEntityPK that = (SegPerfilUsrEntityPK) o;
+
+        if (idPerfil != that.idPerfil) return false;
+        if (idUsuario != that.idUsuario) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = idUsuario;
+        result = 31 * result + idPerfil;
+        return result;
+    }
+}

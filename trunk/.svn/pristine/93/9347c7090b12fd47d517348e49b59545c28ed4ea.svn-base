@@ -1,0 +1,54 @@
+package mx.vw.swf.sms.model;
+
+import javax.persistence.*;
+
+/**
+ * Created by dzm152z on 12/02/2015.
+ */
+@Entity
+@Table(name = "SMS_PROD_CTEPROV", schema = "dbo", catalog = "SMS")
+@IdClass(SmsProdCteprovEntityPK.class)
+public class SmsProdCteprovEntity {
+    private int idCteProv;
+    private int idProducto;
+
+    @Id
+    @Column(name = "IdCteProv")
+    public int getIdCteProv() {
+        return idCteProv;
+    }
+
+    public void setIdCteProv(int idCteProv) {
+        this.idCteProv = idCteProv;
+    }
+
+    @Id
+    @Column(name = "IdProducto")
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SmsProdCteprovEntity that = (SmsProdCteprovEntity) o;
+
+        if (idCteProv != that.idCteProv) return false;
+        if (idProducto != that.idProducto) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = idCteProv;
+        result = 31 * result + idProducto;
+        return result;
+    }
+}

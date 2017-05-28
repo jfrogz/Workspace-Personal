@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <fx:include source="../configuration/HeaderTemplate.fxml" />
+    </top>
+
+    <bottom>
+        <fx:include source="../configuration/FooterTemplate.fxml" />
+    </bottom>
+    
+    <center>
+
+        <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+            <top>
+                <GridPane fx:id="gridInformacion" prefHeight="86.0" prefWidth="800.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="6.0" minHeight="6.0" prefHeight="6.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="6.0" minHeight="6.0" prefHeight="6.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="6.0" minHeight="6.0" prefHeight="6.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="6.0" minHeight="6.0" prefHeight="6.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <HBox GridPane.rowIndex="4">
+                            <children>
+                                <Label fx:id="lbPerfil" minWidth="38.0" prefHeight="14.0" prefWidth="38.0" styleClass="FieldLabel,AlignCenterLeft" text="Perfil:">
+                                    <HBox.margin>
+                                        <Insets top="4.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <Separator orientation="VERTICAL" prefHeight="5.0" visible="false" />
+                                <TextField fx:id="flPerfil" prefHeight="22.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            </children>
+                        </HBox>
+                        <Button fx:id="btnNuevo" mnemonicParsing="false" prefHeight="22.0" prefWidth="70.0" styleClass="botones" GridPane.rowIndex="6" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                            <children>
+                                <Label fx:id="lbUsuario" styleClass="FieldLabel,AlignCenterLeft" />
+                                <Separator orientation="VERTICAL" prefHeight="5.0" visible="false" />
+                                <Label fx:id="lbClaveNombreUsuario" styleClass="FieldLabel,AlignCenterLeft" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="101.0" prefWidth="306.0" styleClass="AlignCenterRight" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                            <children>
+                                <fx:include source="../fwk/Exporter.fxml" />
+                            </children>
+                            <GridPane.margin>
+                                <Insets bottom="55.0" />
+                            </GridPane.margin>
+                        </HBox>
+                        <Label fx:id="filtrarLabel" styleClass="FieldLabel,AlignCenterLeft" />
+                    </children>
+                    <BorderPane.margin>
+                        <Insets left="15.0" right="15.0" />
+                    </BorderPane.margin>
+                </GridPane>
+      
+            </top>
+            <padding>
+                <Insets bottom="10.0" top="10.0" />
+            </padding>
+            <center>
+                <BorderPane fx:id="borderPerfiles" BorderPane.alignment="CENTER">
+                    <padding>
+                        <Insets left="15.0" right="15.0" />
+                    </padding>
+                    <center>
+                        <TableView id="tablaDatos" fx:id="tablaDatos" BorderPane.alignment="CENTER">
+                            <columns>
+                                <TableColumn fx:id="colSecleccione" minWidth="0.0" prefWidth="75.0" />
+                                <TableColumn fx:id="colId" minWidth="0.0" prefWidth="75.0" />
+                                <TableColumn fx:id="colPerfil" prefWidth="250.0" />                 
+                                <TableColumn fx:id="colEstatus" minWidth="0.0" prefWidth="150.0" />                
+                                <TableColumn fx:id="colAcciones" minWidth="0.0" prefWidth="350">
+                                </TableColumn>
+                            </columns>
+                            <BorderPane.margin>
+                                <Insets />
+                            </BorderPane.margin>       
+                        </TableView>
+                    </center>  
+                </BorderPane>
+            </center>
+            <bottom>
+                <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                    <center>
+                        <Pagination fx:id="paginador" prefHeight="200.0" styleClass="AlignCenterCenter" BorderPane.alignment="CENTER" />
+                    </center>
+                    <left>
+                        <HBox prefHeight="200.0" prefWidth="286.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <Button fx:id="btnAsignarPerfiles" mnemonicParsing="false" prefHeight="22.0" prefWidth="127.0" styleClass="botones, buttonAccept" />
+                                <Separator orientation="VERTICAL" prefHeight="5.0" visible="false" />
+                                <Button fx:id="btnRegresarAtras" mnemonicParsing="false" prefHeight="22.0" prefWidth="97.0" styleClass="botones, buttonDiscard" />
+                            </children>
+                        </HBox>
+                    </left>
+                    <right>
+                        <HBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="286.0" BorderPane.alignment="CENTER">
+                            <children>
+
+                                <Label fx:id="lbPaginacion" styleClass="FieldLabel" text="Label">
+                                    <HBox.margin>
+                                        <Insets top="4.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <Separator orientation="VERTICAL" prefHeight="5.0" visible="false" />
+                                <ComboBox fx:id="comboPaginacion" nodeOrientation="LEFT_TO_RIGHT" />
+
+                            </children>
+                        </HBox>
+                    </right>
+                    <BorderPane.margin>
+                        <Insets left="15.0" right="15.0" top="6.0" />
+                    </BorderPane.margin>
+                </BorderPane>
+            </bottom>
+        </BorderPane>
+    </center>
+</BorderPane>

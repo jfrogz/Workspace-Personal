@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="borderAdminUusarios" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../css/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TableView id="tablaUsuario" fx:id="tablaUsuarios" prefHeight="370.0" prefWidth="800.0">
+               <columns>
+                <TableColumn fx:id="usuario" minWidth="0.0" prefWidth="75.0" text="Seleccione" />
+                <TableColumn fx:id="id" prefWidth="250.0" text="ID" />                 
+                <TableColumn fx:id="nombre" minWidth="0.0" prefWidth="150.0" text="Función" />                
+                <TableColumn fx:id="estatus" minWidth="0.0" prefWidth="151.0" text="Status" />
+              </columns>       
+       </TableView>
+   </center>
+   <top>
+    <GridPane prefHeight="95.0" prefWidth="800.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="0.0" prefWidth="27.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="484.0" minWidth="10.0" prefWidth="225.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="524.0" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="27.0" minHeight="2.0" prefHeight="5.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="flIdFuncion" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="fltFuncion" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label styleClass="txtEtiquetas" text="ID:" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label styleClass="txtEtiquetas" text="Función" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label styleClass="txtEtiquetas" text="Perfil:" />
+            <TextField fx:id="txtIdNombrePerfil" disable="true" editable="false" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+            <Button fx:id="btnNuevoFuncion" mnemonicParsing="false" styleClass="botones" text="Nuevo" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+      </GridPane>
+      
+   </top>
+   <padding>
+      <Insets bottom="10.0" top="10.0" />
+   </padding>
+   <bottom>
+      <GridPane prefHeight="19.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+      <Button fx:id="btnAsignarFuncionesPerfil" mnemonicParsing="false" styleClass="botones" text="Asignar Funciones" />         </children>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </bottom>
+</BorderPane>

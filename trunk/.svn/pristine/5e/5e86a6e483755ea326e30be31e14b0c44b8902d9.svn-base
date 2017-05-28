@@ -1,0 +1,263 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 6/02/2015, 12:16:48 PM
+    Author     : fox1x0d
+*/
+
+.LogoWaterMark { 
+   -fx-background-image: '../img/logoEmpresaWM.png';
+   -fx-background-size: 800, 600;
+   -fx-background-repeat: no-repeat;
+}
+
+.BackgroundClass{
+   -fx-background-color: #ffffff;
+   -fx-background-image: '../img/body-bg.jpg';
+   -fx-background-repeat: true;
+}
+
+.HeaderLabel { 
+   -fx-font-family: VW Headline Black,Verdana,Arial,sans-serif; 
+   -fx-font-size:18pt; 
+   -fx-font-weight: bold; 
+   -fx-text-fill:#004666; 
+   -fx-text-align:center; 
+}
+
+.TitleLabel  { 
+   -fx-font-family: VW Headline Black,Verdana,Arial,sans-serif; 
+   -fx-font-size:15pt; 
+   -fx-font-weight: bold; 
+   -fx-text-fill:#004666; 
+   -fx-text-align:center; 
+}
+
+.Title2Label { 
+   -fx-font-family: VW Headline Black,Verdana,Arial,sans-serif; 
+   -fx-font-size:12pt; 
+   -fx-font-weight: bold; 
+   -fx-text-fill:#004666; 
+   -fx-text-align:center; 
+}
+
+.MenuLabel { 
+   -fx-font-family: VW Headline Black,Verdana,Arial,sans-serif; 
+   -fx-font-size:9pt; 
+   -fx-font-weight: bold; 
+   -fx-text-fill:#004666; 
+   -fx-text-align:left; 
+}
+
+.errorMessage{
+   -fx-text-fill: red;
+   -fx-font-size:9pt;  
+}
+
+.FooterLabel { 
+   -fx-font-family: VW Headline Black,Verdana,Arial,sans-serif; 
+   -fx-font-size:12pt; 
+   -fx-font-weight: bold; 
+   -fx-text-fill:#004666; 
+   -fx-text-align:left; 
+}
+
+.FooterLabelSmall { 
+   -fx-font-family: VW Headline Black,Verdana,Arial,sans-serif; 
+   -fx-font-size:10pt; 
+   -fx-font-weight: bold; 
+   -fx-text-fill:#004666; 
+   -fx-text-align:left;
+}
+
+.FieldLabel, .FieldLabelBig, .FieldLabelCenter, .FieldLabelBigCenter, .FieldLabelRight, .FieldLabelBigRight, .FieldLabelReq,
+.FieldLabelSmall, .FieldLabelSmallLeft, .FieldLabelSmallCenter, .FieldLabelSmallRight,
+.FieldLabelMedium, .FieldLabelMediumLeft, .FieldLabelMediumCenter, .FieldLabelMediumRight, .FieldLabelMediumReq { 
+   -fx-font-weight: bold; 
+   -fx-text-fill:#004666; 
+}
+
+.FieldLabelBig, .FieldLabelBigRight, .FieldLabelBigCenter { 
+   -fx-font-size:12pt; 
+}
+.FieldLabelMedium, .FieldLabelMediumLeft, .FieldLabelMediumCenter, .FieldLabelMediumRight, .FieldLabelMediumReq { 
+   -fx-font-size: 10pt; 
+}
+.FieldLabel, .FieldLabelLeft, .FieldLabelCenter, .FieldLabelRight, .FieldLabelReq { 
+   -fx-font-size: 8pt; 
+}
+.FieldLabelSmall, .FieldLabelSmallCenter, .FieldLabelSmallRight { 
+   -fx-font-size: 7pt; 
+}
+
+.FieldData, .FieldDataRight, .FieldDataCenter { 
+   -fx-font-size: 8pt; 
+   -fx-font-weight:normal; 
+   -fx-fill-text:#004666; 
+}
+.FieldDataBig, .FieldDataBigRight, .FieldDataBigCenter { 
+   -fx-font-size:10pt; 
+   -fx-font-weight:normal; 
+   -fx-fill-text:#004666;
+   
+}
+
+.FieldLabelReq { 
+   -fx-fill-text:#006384; 
+   -fx-display: inline-block; 
+   -fx-position: relative; 
+   -fx-margin-left: .4em; 
+   -fx-text-fill: red;
+}
+.FieldLabelReq:before { 
+   -fx-content:"* "; 
+   -fx-display: block; 
+   -fx-position: absolute; 
+   -fx-left: -.8em; 
+   -fx-top: -.1em; 
+}
+
+.botones {
+    -fx-border-radius: 2px;   
+    -fx-font-size: 12px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-cursor:pointer; 
+    -fx-background-position:3px 3px; 
+    -fx-background-repeat:no-repeat; 
+    -fx-display:inline-block; 
+    -fx-padding:2px 2px 2px 21px; 
+    -fx-margin:0px 5px 0px 5px;
+    -fx-text-alignment:left;
+}
+.botones:hover {
+   -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
+.buttonAccept { -fx-background-image:url(../img/aceptar.png); }
+.buttonAdd { -fx-background-image:url(../img/agregar.png); }
+.buttonEdit { -fx-background-image:url(../img/editar.png); }
+.buttonSave { -fx-background-image:url(../img/guardar.png); }
+.buttonDiscard { -fx-background-image:url(../img/deshacer.png); }
+.ui.buttonDelete { -fx-background-image:url(../img/eliminar.png); }
+.ui-.buttonFind { -fx-background-image:url(../img/buscar.png); }
+.buttonCancel { -fx-background-image:url(../img/cancelar.png); }
+.buttonXLS { -fx-background-image: url(../img/excel.png); }
+.buttonPDF { -fx-background-image: url(../img/pdf.png); }
+.buttonExport { -fx-background-image: url(../img/export.png); }
+.buttonDetail { -fx-background-image: url(../img/detalle.png); }
+.buttonZoom { -fx-background-image: url(../img/zoom.png); }
+.buttonImage { -fx-background-image: url(../img/image.png); }
+.buttonPrint { -fx-background-image: url(../img/print.png); }
+.buttonInactiva { -fx-background-image:url(../img/cancelar-dis.png); }
+.buttonResizing { -fx-background-image:url(../img/resize.png); }
+.buttonFolder { -fx-background-image:url(../img/folder.png); }
+.btnCancelar { -fx-background-image:url(../img/cancelar.png); }
+
+#btnNuevoUsuario, #btnNuevoPermiso, #btnNuevoPerfil,#btnNuevo{          
+    -fx-background-image: url("../img/agregar.png");
+    -fx-background-size: 18 18;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left;   
+}
+#btnGuardar { -fx-background-image:url(../img/guardar.png); }
+#btnCancelar, #btnCerrar{ -fx-background-image:url(../img/cancelar.png); }
+
+.AlignTopLeft { -fx-alignment: TOP_LEFT; }
+.AlignTopCenter { -fx-alignment: TOP_CENTER; }
+.AlignTopRight { -fx-alignment: TOP_RIGHT; }
+.AlignCenterLeft { -fx-alignment: CENTER_LEFT; }
+.AlignCenterCenter { -fx-alignment: CENTER; }
+.AlignCenterRight { -fx-alignment: CENTER_RIGHT; }
+.AlignBottomLeft { -fx-alignment: BOTTOM_LEFT; }
+.AlignBottomCenter { -fx-alignment: BOTTOM_CENTER; }
+.AlignBottomRight { -fx-alignment: BOTTOM_RIGHT; }
+
+.LoginTable {
+   -fx-background-color: linear-gradient(#FAFAFA, #61a2b1);
+   -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+   -fx-background-insets: 0, 10;
+   -fx-background-radius: 10px, 0px;
+}
+
+
+
+
+
+     
+     
+
+
+
+
+
+.txtEtiquetas{
+    -fx-text-fill: #1859a7;
+    -fx-font-size: 12px;
+    -fx-font-family: Arial; 
+    
+}
+.fondo{
+    -fx-background-color: rgb(245,245,245);
+}
+.txtVolkswawen{
+    -fx-text-fill: #000000;
+    -fx-font-size: 18px;
+    -fx-font-family: Arial; 
+    
+    
+}
+
+.txtVolkswawenMexico{
+    -fx-text-fill: #000000;
+    -fx-font-size: 12px;
+    -fx-font-family: Arial; 
+}
+.txtSMS{
+    -fx-text-fill: #1859a7;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-font-family: Arial; 
+}
+.txtTitulosSecciones{
+    -fx-text-fill: #1859a7;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-font-family: Arial;
+}
+.txtPie{
+    -fx-text-fill: #1859a7;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-font-family: Arial;
+}
+.linea{
+    -fx-scale-x: 6px;
+    -fx-alignment: CENTER;
+    
+}
+
+.table-view {
+    -fx-background-color: -fx-box-border, -fx-control-inner-background;
+    -fx-background-insets: 0,1;
+
+    /* There is some oddness if padding is in em values rather than pixels,
+       in particular, the left border of the control doesn't show. */
+    -fx-padding: 1; /* 0.083333em; */
+
+    /* Constants used throughout the tableview.
+     * TODO: Should these be derived from the palette in .scene?
+     */
+    -fx-table-header-border-color: #959595;
+/*    -fx-table-header-background-color: linear (0%,0%) to (0%,100%) stops (80%, #bbbbbb) (10%, #f6f6f6);*/
+    -fx-table-cell-border-color: #bbbbbb;
+}
+
+.txtEtiquetaError{
+    -fx-text-fill: #ff3333;
+}
