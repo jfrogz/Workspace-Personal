@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <GridPane maxWidth="500.0" prefHeight="304.0" prefWidth="491.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="338.0" minWidth="10.0" prefWidth="338.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="132.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="237.0" minHeight="10.0" prefHeight="199.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="227.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="lblResponsables" text="responsables:" GridPane.valignment="BOTTOM" />
+            <ComboBox fx:id="cbbResponsables" prefHeight="25.0" prefWidth="330.0" GridPane.rowIndex="1" />
+            <Button fx:id="btnAgnadir" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="añadir" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TableView fx:id="tvUsuarios" prefHeight="195.0" prefWidth="470.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+              <columns>
+                <TableColumn fx:id="col_Nombre" maxWidth="400.0" minWidth="400.0" prefWidth="400.0" text="nombre" />
+              </columns>
+               <GridPane.margin>
+                  <Insets top="7.0" />
+               </GridPane.margin>
+            </TableView>
+            <Button fx:id="btnBusqueda" mnemonicParsing="false" prefHeight="27.0" prefWidth="153.0" text="realizar busquedas" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="3">
+               <children>
+                  <Button fx:id="btnQuitarusuario" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="quitar usuario" />
+                  <Button fx:id="btnLimpiarLista" mnemonicParsing="false" text="Limpiar lista de responsables" />
+               </children>
+               <padding>
+                  <Insets left="10.0" top="7.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
+      </GridPane>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu fx:id="mnHerramientas" mnemonicParsing="false" text="herramientas">
+            <items>
+              <MenuItem fx:id="mniPreferencias" mnemonicParsing="false" text="Preferencias" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="información">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Licencia" />
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <Label fx:id="lblMensajeInferior" text="esta aplicación no se encuentra activada... Su uso es limitado" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

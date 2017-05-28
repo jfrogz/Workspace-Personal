@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="540" leftMargin="36" rightMargin="36" topMargin="36" bottomMargin="36" >
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ImgPlaneta" class="java.io.InputStream"/>
+	<parameter name="ImgPlanta" class="java.io.InputStream"/>
+	<field name="_instrumento" class="java.lang.Integer"/>
+	<field name="_volumen" class="java.lang.Integer"/>
+	<field name="_otorgante" class="java.lang.String"/>
+	<field name="_responsable" class="java.lang.String"/>
+	<field name="_consecutivo" class="java.lang.Integer"/>
+	<field name="_operacion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="171" y="0" width="193" height="46" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Giddyup Std" size="37"/>
+				</textElement>
+				<text><![CDATA[Protocolos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="29" width="166" height="60" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Giddyup Std" size="30"/>
+				</textElement>
+				<text><![CDATA[Faltantes]]></text>
+			</staticText>
+			<image>
+				<reportElement x="47" y="0" width="65" height="90" />
+				<imageExpression class="java.io.InputStream"><![CDATA[$P{ImgPlaneta}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="440" y="0" width="100" height="11" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="26" y="0" width="59" height="33" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Instrumento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="0" width="43" height="33" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Volumen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="0" width="218" height="33" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsable]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="26" height="33" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="178" height="17" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Otorgante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="17" width="178" height="17" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operación]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="33" width="540" height="1" forecolor="#009900" />
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="29" width="540" height="1" />
+			</line>
+			<textField>
+				<reportElement x="26" y="0" width="55" height="29" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{_instrumento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="0" width="184" height="14" />
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{_otorgante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="323" y="0" width="217" height="29" />
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{_responsable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="26" height="29" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{_consecutivo}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="1" width="43" height="28" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{_volumen}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="14" width="184" height="15" forecolor="#999999" />
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{_operacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="3" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="540" height="10" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de " +$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="120" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="24" width="540" height="93" forecolor="#009900" />
+			</rectangle>
+			<staticText>
+				<reportElement x="12" y="24" width="100" height="20" forecolor="#999999" />
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[OBSERVACIONES:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
