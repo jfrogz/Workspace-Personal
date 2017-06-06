@@ -18,7 +18,7 @@ import static org.junit.Assert.fail;
 public class PruebasIndividuales {
 
     public String host = "http://localhost:8080";
-    //public String host = "http://189.164.224.31:8080";
+    //public String host = "http://189.164.171.151:8080";
     public ClienteServer clienteServer = new ClienteServer();
     public final String valEsperado = "valEsperado";
 
@@ -174,7 +174,7 @@ public class PruebasIndividuales {
             ejecucion1.put(parametro1, "null");
             ejecucion1.put(parametro2, "null");
             ejecucion1.put(parametro3, "null");
-            ejecucion1.put(valEsperado, "1");
+            ejecucion1.put(valEsperado, "0");
             listParametros.add(ejecucion1);
             //</editor-fold>
 
@@ -206,7 +206,7 @@ public class PruebasIndividuales {
             Map<String, String> ejecucion1 = new HashMap<String, String>();
             ejecucion1.put(parametro1, "null");
             ejecucion1.put(parametro2, "null");
-            ejecucion1.put(valEsperado, "1");
+            ejecucion1.put(valEsperado, "0");
             listParametros.add(ejecucion1);
             //</editor-fold>
 
@@ -304,7 +304,7 @@ public class PruebasIndividuales {
                 String mensaje = clienteServer.ejecucionDeCliente(url);
                 System.out.println("\"Esperado\":\"" + temp.get(valEsperado) + "\"");
                 Assert.assertTrue(!mensaje.contains("Exception"));
-                Assert.assertTrue(mensaje.contains("\"resultado\":\"" + temp.get(valEsperado) + "\"\n"));
+                Assert.assertTrue(mensaje.contains("\"resultado\":\"" + temp.get(valEsperado) + "\""));
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -320,7 +320,7 @@ public class PruebasIndividuales {
             //<editor-fold desc="Ejecucion de valor 'mull'">
             Map<String, String> ejecucion1 = new HashMap<String, String>();
             ejecucion1.put(parametro1, "null");
-            ejecucion1.put(valEsperado, "1");
+            ejecucion1.put(valEsperado, "0");
             listParametros.add(ejecucion1);
             //</editor-fold>
 
@@ -737,6 +737,159 @@ public class PruebasIndividuales {
                 Assert.assertTrue(!mensaje.contains("Exception"));
                 Assert.assertTrue(mensaje.contains("\"resultado\":\"" + temp.get(valEsperado) + "\""));
             }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+    @Test
+    public void val_impuestos_retenidos_test (){
+        try {
+            List<Map<String, String>> listParametros = new ArrayList<Map<String, String>>();
+            final String parametro1 = "total_impuestos_retenidos";
+            final String parametro2 = "moneda";
+            final String nomPrueba = "val_impuestos_retenidos";
+            //<editor-fold desc="Ejecucion de valor 'mull'">
+            Map<String, String> ejecucion1 = new HashMap<String, String>();
+            ejecucion1.put(parametro1, "null");
+            ejecucion1.put(parametro2, "null");
+            ejecucion1.put(valEsperado, "1");
+            listParametros.add(ejecucion1);
+            //</editor-fold>
+
+            //<editor-fold desc="Funcion iterativa que ejecuta el cliente">
+            for (Map<String, String> temp : listParametros) {
+                String datos = "{\"" +
+                        parametro1 + "\": " + temp.get(parametro1) + ", "
+                        + "\"" + parametro2 + "\": " + temp.get(parametro2)+ "}";
+                String datos64 = clienteServer.obtenerBase64(datos);
+                String url = host + "/validacionUnitaria/"+ nomPrueba + "/datos/" + datos64;
+                System.out.println(url + "\nDatos enviados: " + datos);
+                String mensaje = clienteServer.ejecucionDeCliente(url);
+                System.out.println("\"Esperado\":\"" + temp.get(valEsperado) + "\"");
+                Assert.assertTrue(!mensaje.contains("Exception"));
+                Assert.assertTrue(mensaje.contains("\"resultado\":\"" + temp.get(valEsperado) + "\""));
+            }
+            //</editor-fold>
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+    @Test
+    public void val_impuestos_trasladados_test (){
+        try {
+            List<Map<String, String>> listParametros = new ArrayList<Map<String, String>>();
+            final String parametro1 = "total_impuestos_trasladados";
+            final String parametro2 = "moneda";
+            final String nomPrueba = "val_impuestos_trasladados";
+            //<editor-fold desc="Ejecucion de valor 'mull'">
+            Map<String, String> ejecucion1 = new HashMap<String, String>();
+            ejecucion1.put(parametro1, "null");
+            ejecucion1.put(parametro2, "null");
+            ejecucion1.put(valEsperado, "1");
+            listParametros.add(ejecucion1);
+            //</editor-fold>
+
+            //<editor-fold desc="Funcion iterativa que ejecuta el cliente">
+            for (Map<String, String> temp : listParametros) {
+                String datos = "{\"" +
+                        parametro1 + "\": " + temp.get(parametro1) + ", "
+                        + "\"" + parametro2 + "\": " + temp.get(parametro2)+ "}";
+                String datos64 = clienteServer.obtenerBase64(datos);
+                String url = host + "/validacionUnitaria/"+ nomPrueba + "/datos/" + datos64;
+                System.out.println(url + "\nDatos enviados: " + datos);
+                String mensaje = clienteServer.ejecucionDeCliente(url);
+                System.out.println("\"Esperado\":\"" + temp.get(valEsperado) + "\"");
+                Assert.assertTrue(!mensaje.contains("Exception"));
+                Assert.assertTrue(mensaje.contains("\"resultado\":\"" + temp.get(valEsperado) + "\""));
+            }
+            //</editor-fold>
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+    @Test
+    public void val_tasa_cuota_json_test (){
+        try {
+            List<Map<String, String>> listParametros = new ArrayList<Map<String, String>>();
+            final String parametro1 = "tasacuotaconcepto";
+            final String parametro2 = "tasacuotatraslado";
+            final String parametro3 = "tasacuotaretencion";
+            final String nomPrueba = "val_tasa_cuota_json";
+            //<editor-fold desc="Ejecucion de valor 'mull'">
+            Map<String, String> ejecucion1 = new HashMap<String, String>();
+            ejecucion1.put(parametro1, "{\"tasacuota\": \"null\", \"impuesto\": \"null\", \"tipofactor\": \"null\"}");
+            ejecucion1.put(parametro2, "{\"tasacuota\": \"null\", \"impuesto\": \"null\", \"tipofactor\": \"null\"}");
+            ejecucion1.put(parametro3, "{\"tasacuota\": \"null\", \"impuesto\": \"null\", \"tipofactor\": \"null\"}");
+            ejecucion1.put(valEsperado, "1");
+            listParametros.add(ejecucion1);
+            //</editor-fold>
+
+            //<editor-fold desc="Funcion iterativa que ejecuta el cliente">
+            for (Map<String, String> temp : listParametros) {
+                String datos = "{\"" +
+                        parametro1 + "\": " + temp.get(parametro1) + ", "
+                        + "\"" + parametro2 + "\": " + temp.get(parametro2) + ", "
+                        + "\"" + parametro3 + "\": " + temp.get(parametro3) + "}";
+                String datos64 = clienteServer.obtenerBase64(datos);
+                String url = host + "/validacionUnitaria/"+ nomPrueba + "/datos/" + datos64;
+                System.out.println(url + "\nDatos enviados: " + datos);
+                String mensaje = clienteServer.ejecucionDeCliente(url);
+                System.out.println("\"Esperado\":\"" + temp.get(valEsperado) + "\"");
+                Assert.assertTrue(!mensaje.contains("Exception"));
+                Assert.assertTrue(mensaje.contains("\"resultado\":\"" + temp.get(valEsperado) + "\""));
+            }
+            //</editor-fold>
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+    @Test
+    public void val_importes_test (){
+        try {
+            List<Map<String, String>> listParametros = new ArrayList<Map<String, String>>();
+            final String parametroMoneda = "moneda";
+            final String parametro1 = "importe1";
+            final String parametro2 = "importe2";
+            final String parametro3 = "importe3";
+            final String parametro4 = "importe4";
+            final String parametro5 = "importe5";
+            final String parametro6 = "importe6";
+            final String nomPrueba = "val_importes";
+            //<editor-fold desc="Ejecucion de valor 'mull'">
+            Map<String, String> ejecucion1 = new HashMap<String, String>();
+            ejecucion1.put(parametroMoneda, "null");
+            ejecucion1.put(parametro1, "{\"importe\": \"null\", \"cantidad\": \"null\", \"valor_unitario\": \"null\"}");
+            ejecucion1.put(parametro2, "{\"importes\": \"null\",  \"impuestos\":\"null\", \"tasas_cuota\":\"null\", \"tipos_factor\":\"null\", \"bases\": \"null\"}");
+            ejecucion1.put(parametro3, "{\"importes\": \"null\",  \"impuestos\":\"null\", \"bases\": \"null\", \"tasas_cuota\": \"null\"}");
+            ejecucion1.put(parametro4, "{\"importe\": \"null\", \"cantidad\": \"null\", \"valor_unitario\": \"null\"}");
+            ejecucion1.put(parametro5, "{\"importes\": \"null\", \"impuestos\":\"null\"}");
+            ejecucion1.put(parametro6, "{\"importes\": \"null\", \"impuestos\":\"null\", \"tasas_cuota\":\"null\", \"tipos_factor\":\"null\"}");
+            ejecucion1.put(valEsperado, "1");
+            listParametros.add(ejecucion1);
+            //</editor-fold>
+
+            //<editor-fold desc="Funcion iterativa que ejecuta el cliente">
+            for (Map<String, String> temp : listParametros) {
+                String datos = "{\"" + parametroMoneda + "\": \"" + temp.get(parametroMoneda) + "\", "
+                        + "\"" + parametro1 + "\": " + temp.get(parametro1) + ", "
+                        + "\"" + parametro2 + "\": " + temp.get(parametro2) + ", "
+                        + "\"" + parametro3 + "\": " + temp.get(parametro3) + ", "
+                        + "\"" + parametro4 + "\": " + temp.get(parametro4) + ", "
+                        + "\"" + parametro5 + "\": " + temp.get(parametro5) + ", "
+                        + "\"" + parametro6 + "\": " + temp.get(parametro6) + "}";
+                String datos64 = clienteServer.obtenerBase64(datos);
+                String url = host + "/validacionUnitaria/"+ nomPrueba + "/datos/" + datos64;
+                System.out.println(url + "\nDatos enviados: " + datos);
+                String mensaje = clienteServer.ejecucionDeCliente(url);
+                System.out.println("\"Esperado\":\"" + temp.get(valEsperado) + "\"");
+                Assert.assertTrue(!mensaje.contains("Exception"));
+                Assert.assertTrue(mensaje.contains("\"resultado\":\"" + temp.get(valEsperado) + "\""));
+            }
+            //</editor-fold>
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             fail();
