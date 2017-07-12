@@ -12,3 +12,8 @@ README.md
 artifacts/
 prueba_integracion/prueba_integracion.war
 ProtocolSearch/dist.zip
+*.class
+*.iml
+PruebaConTonio/.idea/misc.xml
+PruebaConTonio/.idea/workspace.xml
+PruebaConTonio/PruebaConTonio.iml
